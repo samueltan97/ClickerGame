@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "dom", "es5", "es6", "es7" ],
+    "module": "es6",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "removeComments": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es5"
+  }
+}

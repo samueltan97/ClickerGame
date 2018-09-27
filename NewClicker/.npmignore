@@ -1,0 +1,8 @@
+*.njsproj
+*.njsproj.user
+node_modules/
+obj/
+bin/
+tsconfig.json
+webpack.config.js
+test/

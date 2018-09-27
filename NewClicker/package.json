@@ -1,0 +1,52 @@
+{
+  "name": "@kirin/core",
+  "version": "0.0.0",
+  "description": "Library description here",
+  "main": "index.js",
+  "directories": {
+    "test": "test",
+    "src": "source folder",
+    "dist": "final build output"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.3.9",
+    "jquery": "^3.3.1",
+    "jquery-ui": "^1.12.1"
+  },
+  "devDependencies": {
+    "babel-register": "^6.26.0",
+    "ts-loader": "^5.0.0",
+    "typescript": "^3.0.3",
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.9.4",
+    "chai": "^4.1.2",
+    "jsdom": "11.11.0",
+    "jsdom-global": "3.0.2",
+    "mocha": "^4.0.1",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8",
+    "yargs": "^10.0.3"
+  },
+  "scripts": {
+    "build": "webpack --env test && npm run test && webpack --env dev && webpack --env dev && webpack --env build",
+    "dev": "webpack --watch --colors --progress --env test",
+    "test": "webpack --env test && mocha --require babel-register --colors ./test/*.spec.js",
+    "test:w": "mocha --require babel-register --colors -w ./test/*.spec.js"
+  },
+  "keywords": [
+    "typescript",
+    "library",
+    "javascript"
+  ],
+  "author": {
+    "name": "Samuel",
+    "email": "samueltan97@hotmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://...."
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,539 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Clicker Engine</title>
+
+    <link href="style/resource-units.css" rel="stylesheet" />
+    <link href="style/sophie-combat.css" rel="stylesheet" />
+    <link href="style/map-profile-hero.css" rel="stylesheet" />
+    <link href="style/refiner-trainer.css" rel="stylesheet" />
+    <link href="style/side-panel-news.css" rel="stylesheet" />
+    <link href="style/side-panel.css" rel="stylesheet" />
+    <link href="style/tooltip.css" rel="stylesheet" />
+    <!--Dependency-->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/jquery-mousewheel/jquery.mousewheel.js"></script>
+
+    <!--Custom Scripts-->
+    <script src="engine/fabricate.js"></script>
+
+
+</head>
+<body>
+    <div id="clickable-screen"></div>
+    <div id="backdrop">
+        <div id="sophie">
+            <img id="sophie-click" style="max-height:120%; max-width:120%;" src="style/images/Layout/Sophie/sophie.png" />
+        </div>
+        <div id="fight-div">
+            <div id="combat-area">
+                <div id="village-zone-div">
+                    <div id="village-zone-content">
+                        <div class="tooltip" id="village-zone-arrow-left">
+                            <span class="tooltiptext-left">Previous Tyrannosaurus Tyrannosaurus</span>
+                        </div>
+                        <div id="village-zone-text">Kroigren - Zone 1</div>
+                        <div class="tooltip" id="village-zone-arrow-right">
+                            <span class="tooltiptext-right">Next Zone</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="monster-hp-div">
+                    <div id="monster-hp-bar-background">
+                        <div id="monster-hp-bar">
+                            <div id="monster-hp-text">
+                                <div class="text-left">Slime LVL: 10</div>
+                                <div class="text-right">HP: 1000/1000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="combat-text-div">
+                    <div class="text-left">Zone Status: 0/10</div>
+                    <div class="text-right">Time Left: 00:30</div>
+                </div>
+                <div id="monster-div">
+                    <div id="monster-normal">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Monster_Solid.png" />
+                    </div>
+                    <div id="monster-hurt">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Monster_Faint.png" />
+                    </div>
+                </div>
+                <div id="fighter-div">
+                    <div id="fighter">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Fighter.png" />
+                    </div>
+                </div>
+                <div id="fighter-description-text">
+                    Current Unit: Warrior
+                </div>
+                <div id="fighter-hp-div">
+                    <div id="fighter-hp-bar-background">
+                        <div id="fighter-hp-bar">
+                            <div id="fighter-hp-text">
+                                HP: 1000/1000
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="resource-unit-div">
+            <div id="resource-unit-area">
+                <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Board.png" />
+                <div id="toggle-track">
+                    <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/ToggleTrack.png" />
+                    <img style="position:absolute;right:75%; transform: scaleX(-1);max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/ToggleTrack.png" />
+                </div>
+                <div id="toggle-button">
+                    <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/ToggleSwitch.png" />
+                </div>
+                <div id="resource-unit-title">
+                    <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/UnitResourceTitle.png" />
+                    <div id="resource-unit-title-text">
+                        Resources
+                    </div>
+                </div>
+                <div id="unit-area">
+                    <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Units/UnitBackground.png" />
+                    <div id="unit-repo">
+                        <div class="unit-cell">
+                            <div class="unit-desc">Warriors<br />X 23</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Sample/UnitResource/Unit/Warrior.png" />
+                        </div>
+                    </div>
+                </div>
+                <div id="resource-area">
+                    <div id="primary-resource">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/ResourceStrip.png" />
+                        <div id="primary-resource-logo">
+                            <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/PrimaryWindow.png" />
+                            <div id="primary-resource-logo-text">
+                                I
+                            </div>
+                        </div>
+                        <div style='overflow:hidden; height:100%;'>
+                            <div style="overflow-x:scroll; height: 108%;" id="primary-resource-repo">
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                                <div class="tooltip resource-cell ">
+                                    <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
+                                    <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
+                                    <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Sample/UnitResource/Resource/Wood.png" />
+                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="secondary-resource">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/ResourceStrip.png" />
+                        <div id="secondary-resource-logo">
+                            <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/SecondaryWindow.png" />
+                            <div id="secondary-resource-logo-text">
+                                II
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tertiary-resource">
+                        <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/ResourceStrip.png" />
+                        <div id="tertiary-resource-logo">
+                            <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/TertiaryWindow.png" />
+                            <div id="tertiary-resource-logo-text">
+                                III
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="map-div">
+            <div id="map-div-area">
+                <div id="map-selected">
+                    <div style="position: absolute;width: 450%;height: 700%;left: -175%;top:-300%;" id="map-container"></div>
+                    <img id="map-image" style="position: absolute; max-height:400%; max-width:400%;" src="style/images/Sample/Player/Map/map.jpg" />
+                </div>
+                <div id="stats-selected">
+                    <div id="stats-axe"></div>
+                    <div id="stats-desc">
+                        <div id="stats-desc-name">Samuel</div>
+                        <div id="stats-desc-lvl">LVL: 21</div>
+                        <div id="player-exp-div">
+                            <div id="player-exp-bar-background">
+                                <div id="player-exp-bar"></div>
+                                <div id="player-exp-text">EXP: 450/500 (90%)</div>
+                            </div>
+                        </div>
+                        <div id="player-class">Class: Adventurer</div>
+                        <div id="player-army-vitality">Army Vitality: 123</div>
+                        <div id="player-click-damage">Click Damage: 234</div>
+                        <div id="player-avg-dps">Average DPS: 358</div>
+                    </div>
+                </div>
+                <div id="skills-selected">
+                    <div id="skill-points-div">
+                        <div id="skill-points-repo">Skill Points: 21</div>
+                    </div>
+                    <div id="skills-separator"></div>
+                    <div id="skills-repo">
+                        <div class="skills-block">
+                            <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            <div class="skills-icon"></div>
+                            <div class="skills-stats">
+                                <div class="skills-stats-name">Mirror Blades</div>
+                                <div class="skills-stats-lvl">Level 35</div>
+                            </div>
+                            <div class="skills-level-up-button-frame">
+                                <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                        </div>
+                        <div class="skills-block">
+                            <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            <div class="skills-icon"></div>
+                            <div class="skills-stats">
+                                <div class="skills-stats-name">Mirror Blades</div>
+                                <div class="skills-stats-lvl">Level 35</div>
+                            </div>
+                            <div class="skills-level-up-button-frame">
+                                <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                        </div>
+                        <div class="skills-block">
+                            <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            <div class="skills-icon"></div>
+                            <div class="skills-stats">
+                                <div class="skills-stats-name">Mirror Blades</div>
+                                <div class="skills-stats-lvl">Level 35</div>
+                            </div>
+                            <div class="skills-level-up-button-frame">
+                                <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                        </div>
+                        <div class="skills-block">
+                            <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            <div class="skills-icon"></div>
+                            <div class="skills-stats">
+                                <div class="skills-stats-name">Mirror Blades</div>
+                                <div class="skills-stats-lvl">Level 35</div>
+                            </div>
+                            <div class="skills-level-up-button-frame">
+                                <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="heroes-selected">
+                    <div class="heroes-block">
+                        <div class="heroes-background">
+                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                        </div>
+                        <div class="heroes-name">Helmuth</div>
+                        <div class="heroes-lvl">LVL: 32</div>
+                        <div class="heroes-dps">DPS: 320</div>
+                        <div class="heroes-hp-div">
+                            <div class="heroes-hp-bar-background">
+                                <div class="heroes-hp-text">HP: 450/500 (90%)</div>
+                                <div class="heroes-hp-bar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-exp-div">
+                            <div class="heroes-exp-bar-background">
+                                <div class="heroes-exp-text">EXP: 450/500 (90%)</div>
+                                <div class="heroes-exp-bar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-skills-repo">
+                            <div class="hero-skills">
+                                <img style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heroes-block">
+                        <div class="heroes-background">
+                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                        </div>
+                        <div class="heroes-name">Helmuth</div>
+                        <div class="heroes-lvl">LVL: 32</div>
+                        <div class="heroes-dps">DPS: 320</div>
+                        <div class="heroes-hp-div">
+                            <div class="heroes-hp-bar-background">
+                                <div class="heroes-hp-bar">
+                                    <div class="heroes-hp-text">HP: 450/500 (90%)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-exp-div">
+                            <div class="heroes-exp-bar-background">
+                                <div class="heroes-exp-bar">
+                                    <div class="heroes-exp-text">EXP: 450/500 (90%)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-skills-repo">
+                            <div class="hero-skills">
+                                <img style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="map-div-title">
+                <div id="map-title-text">
+                    Stats
+                </div>
+            </div>
+            <div id="map-div-selector">
+                <div class="map-stats-skills-heroes-button" id="stats-button" name="stats-selected"></div>
+                <div class="map-stats-skills-heroes-button" id="skills-button" name="skills-selected"></div>
+                <div class="map-stats-skills-heroes-button" id="heroes-button" name="heroes-selected"></div>
+                <div class="map-stats-skills-heroes-button" id="map-button" name="map-selected"></div>
+            </div>
+        </div>
+        <div id="refiner-trainer-div">
+            <div id="refiner-trainer-title">
+                <div id="refiner-trainer-title-text">Refiners</div>
+            </div>
+            <div id="refiner-trainer-selector">
+                <div class="refiner-trainer-button" name="refiner-repo" id="refiner-button"></div>
+                <div class="refiner-trainer-button" name="trainer-repo" id="trainer-button"></div>
+            </div>
+            <div id="refiner-trainer-area">
+                <div id="refiner-repo">
+                    <div class="refiner-block">
+                        <div class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Courtiers</div>
+                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow"></div>
+                                <div class="refiner-calibrator-text">X 1000</div>
+                                <div class="refiner-calibrator-right-arrow"></div>
+                            </div>
+                            <div class="refiner-train">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="refiner-block">
+                        <div class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Courtiers</div>
+                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow"></div>
+                                <div class="refiner-calibrator-text">X 1000</div>
+                                <div class="refiner-calibrator-right-arrow"></div>
+                            </div>
+                            <div class="refiner-train">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="refiner-block">
+                        <div class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Courtiers</div>
+                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow"></div>
+                                <div class="refiner-calibrator-text">X 1000</div>
+                                <div class="refiner-calibrator-right-arrow"></div>
+                            </div>
+                            <div class="refiner-train">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="trainer-repo">
+                    <div class="trainer-block">
+                        <div class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Courtiers</div>
+                            <div class="trainer-count">X 4235</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow"></div>
+                                <div class="trainer-calibrator-text">X 1000</div>
+                                <div class="trainer-calibrator-right-arrow"></div>
+                            </div>
+                            <div class="trainer-train">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="side-panel-div">
+            <div id="side-panel-news-button" class="side-panel-button" name="news-info-card"></div>
+            <div id="side-panel-achievement-button" class="side-panel-button" name="achievement-info-card"></div>
+            <div id="side-panel-carofle-button" class="side-panel-button" name="carofle-info-card"></div>
+            <div id="side-panel-settings-button" class="side-panel-button" name="settings-info-card"></div>
+            <div id="side-panel-inventory-button" class="side-panel-button" name="inventory-info-card"></div>
+            <div id="news-info-card" class="side-panel-info-card">
+                <div class="side-panel-info-card-title">
+                    <div class="side-panel-info-card-title-text">News</div>
+                </div>
+                <div class="side-panel-info-card-separator"></div>
+                <div id="news-repo" class="side-panel-repo">
+                    <div class="side-panel-block" name="king-queen-death-news">
+                        <div class="king-queen-death-mini-news-block"></div>
+                    </div>
+                    <div class="side-panel-block">
+                        <div class="king-queen-death-mini-news-block"></div>
+                    </div>
+                    <div class="side-panel-block">
+                        <div class="king-queen-death-mini-news-block"></div>
+                    </div>
+                    <div class="side-panel-block">
+                        <div class="king-queen-death-mini-news-block"></div>
+                    </div>
+                    <div class="side-panel-block">
+                        <div class="king-queen-death-mini-news-block"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="achievement-info-card" class="side-panel-info-card">
+                <div class="side-panel-info-card-title">
+                    <div class="side-panel-info-card-title-text">Achievements</div>
+                </div>
+                <div class="side-panel-info-card-separator"></div>
+                <div id="achievements-repo" class="side-panel-repo">
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                </div>
+
+            </div>
+            <div id="carofle-info-card" class="side-panel-info-card">
+                <div class="side-panel-info-card-title">
+                    <div class="side-panel-info-card-title-text">Carofle</div>
+                </div>
+                <div class="side-panel-info-card-separator"></div>
+                <div id="carofle-repo" class="side-panel-repo">
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                    <div class="side-panel-block">
+                    </div>
+                </div>
+
+            </div>
+            <div id="inventory-info-card" class="side-panel-info-card">
+                <div class="side-panel-info-card-title">
+                    <div class="side-panel-info-card-title-text">Inventory</div>
+                </div>
+                <div class="side-panel-info-card-separator"></div>
+                <div id="inventory-repo" class="side-panel-repo">
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+                    <div class="inventory-cubicle"></div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="full-news-block" id="king-queen-death-news">
+            <div class="full-news-block-title"></div>
+            <div class="full-news-block-text"></div>
+        </div>
+        <div id="sophie-speech">
+            <div id="sophie-text-box"><div id="sophie-text-box-text">Hey Jude</div></div>
+            <div id="sophie-name-box"><div id="sophie-name-box-text">Sophie</div></div>
+        </div>
+        <div id="side-panel-black-overlay"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script src="javascript/index.js"></script>
+</body>
+</html>

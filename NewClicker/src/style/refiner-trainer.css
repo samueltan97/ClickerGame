@@ -1,0 +1,231 @@
+#refiner-trainer-div {
+  position: absolute;
+  left: 65%;
+  height: 50%;
+  top: 50%;
+  width: 30%;
+  background-image: url(images/Layout/Converters/Background.png);
+  background-size: 100% 100%; }
+  #refiner-trainer-div #refiner-trainer-title {
+    position: absolute;
+    left: 50%;
+    height: 18%;
+    top: 5%;
+    width: 60%;
+    transform: translateX(-50%);
+    background-image: url(images/Layout/Converters/Title.png);
+    background-size: 100% 100%; }
+    #refiner-trainer-div #refiner-trainer-title #refiner-trainer-title-text {
+      position: absolute;
+      font-size: 6vh;
+      font-weight: 800;
+      height: 7.12vh;
+      line-height: 7.12vh;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 10%; }
+  #refiner-trainer-div #refiner-trainer-selector {
+    position: absolute;
+    height: 18%;
+    width: 25%;
+    left: -25%;
+    top: 15%;
+    background-size: 100% 100%;
+    background-image: url(images/Layout/Converters/SideBoard.png); }
+    #refiner-trainer-div #refiner-trainer-selector #refiner-button {
+      position: relative;
+      height: 50%;
+      width: 100%; }
+    #refiner-trainer-div #refiner-trainer-selector #trainer-button {
+      position: relative;
+      height: 50%;
+      width: 100%; }
+  #refiner-trainer-div #refiner-trainer-area {
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    left: 10%;
+    overflow:hidden;
+    top: 20%; }
+    #refiner-trainer-div #refiner-trainer-area #trainer-repo {
+        position: absolute;
+        height: 100%;
+        left: 2.5%;
+        top: 4%;
+        width: 100%;
+        overflow-y: scroll;
+        display: none;
+    }
+      #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        height: 47%;
+        margin-bottom: 1%;
+        background-size: 100% 100%;
+        background-image: url(images/Layout/Converters/Cubicle.png); }
+        #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-sprite {
+          position: absolute;
+          width: 40%;
+          height: 82%;
+          top: 9%;
+          left: 5%;
+          background-size: 100% 100%;
+          background-image: url(images/Sample/Converter/Courtier.png); }
+        #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc {
+          position: absolute;
+          width: 55%;
+          left: 45%;
+          height: 100%; }
+          #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-name {
+            position: relative;
+            margin-top: 2%;
+            left: 45%;
+            transform: translateX(-50%);
+            font-size: 3.5vh;
+            font-weight: 800;
+            width: max-content; }
+          #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-count {
+            position: relative;
+            left: 45%;
+            transform: translateX(-50%);
+            font-size: 3vh;
+            width: max-content; }
+          #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator {
+            position: relative;
+            width: 100%;
+            height: 20%;
+            left: 45%;
+            transform: translateX(-50%); }
+            #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-left-arrow {
+              position: relative;
+              margin-left: 7%;
+              height: 100%;
+              width: 11%;
+              display: inline-block;
+              background-size: 100% 100%;
+              background-image: url(images/Layout/Converters/arrow_left.png); }
+            #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-text {
+              position: absolute;
+              height: 100%;
+              width: 55%;
+              text-align: center;
+              display: inline-block;
+              font-size: 1.5vw;
+              font-weight: 800;
+              text-overflow: ellipsis; }
+            #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-right-arrow {
+              position: relative;
+              margin-right: 7%;
+              left: 60%;
+              height: 100%;
+              width: 11%;
+              display: inline-block;
+              background-size: 100% 100%;
+              background-image: url(images/Layout/Converters/arrow_right.png); }
+          #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-train {
+            display: inline-block;
+            position: relative;
+            left: 20%;
+            height: 30%;
+            width: 22.15%;
+            margin-right: 25%;
+            background-size: 100% 100%;
+            background-image: url(images/Layout/Converters/ButtonFrame.png); }
+          #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-untrain {
+            position: relative;
+            display: inline-block;
+            height: 30%;
+            width: 22.15%;
+            background-size: 100% 100%;
+            background-image: url(images/Layout/Converters/ButtonFrame.png); }
+    #refiner-trainer-div #refiner-trainer-area #refiner-repo {
+      position: absolute;
+      width: 95%;
+      height: 100%;
+      left: 2.5%;
+      top: 4%;
+      overflow-y: scroll; }
+      #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        height: 47%;
+        margin-bottom: 1%;
+        background-size: 100% 100%;
+        background-image: url(images/Layout/Converters/Cubicle.png); }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-sprite {
+          position: absolute;
+          width: 40%;
+          height: 82%;
+          top: 9%;
+          left: 5%;
+          background-size: 100% 100%;
+          background-image: url(images/Sample/Converter/Courtier.png); }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc {
+          position: absolute;
+          width: 55%;
+          left: 45%;
+          height: 100%; }
+          #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-name {
+            position: relative;
+            margin-top: 2%;
+            left: 45%;
+            transform: translateX(-50%);
+            font-size: 3.5vh;
+            font-weight: 800;
+            width: max-content; }
+          #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-count {
+            position: relative;
+            left: 45%;
+            transform: translateX(-50%);
+            font-size: 3vh;
+            width: max-content; }
+          #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator {
+            position: relative;
+            width: 100%;
+            height: 20%;
+            left: 45%;
+            transform: translateX(-50%); }
+            #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator .refiner-calibrator-left-arrow {
+              position: relative;
+              margin-left: 7%;
+              height: 100%;
+              width: 11%;
+              display: inline-block;
+              background-size: 100% 100%;
+              background-image: url(images/Layout/Converters/arrow_left.png); }
+            #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator .refiner-calibrator-text {
+              position: absolute;
+              height: 100%;
+              width: 55%;
+              text-align: center;
+              display: inline-block;
+              font-size: 1.5vw;
+              font-weight: 800;
+              text-overflow: ellipsis; }
+            #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator .refiner-calibrator-right-arrow {
+              position: relative;
+              margin-right: 7%;
+              left: 60%;
+              height: 100%;
+              width: 11%;
+              display: inline-block;
+              background-size: 100% 100%;
+              background-image: url(images/Layout/Converters/arrow_right.png); }
+          #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-train {
+            display: inline-block;
+            position: relative;
+            left: 20%;
+            height: 30%;
+            width: 22.15%;
+            margin-right: 25%;
+            background-size: 100% 100%;
+            background-image: url(images/Layout/Converters/ButtonFrame.png); }
+          #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-untrain {
+            position: relative;
+            display: inline-block;
+            height: 30%;
+            width: 22.15%;
+            background-size: 100% 100%;
+            background-image: url(images/Layout/Converters/ButtonFrame.png); }

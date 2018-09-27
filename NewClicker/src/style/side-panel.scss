@@ -1,0 +1,84 @@
+﻿#side-panel-div {
+    position: absolute;
+    left: 95%;
+    top: 0%;
+    width: 5%;
+    height: 100%;
+
+    .side-panel-button {
+        position: relative;
+        width: 100%;
+        height: 20%;
+        background-size: 100% 100%;
+    }
+
+    #side-panel-achievement-button {
+        background-image: url(images/Layout/SidePanel/SidePlank_Achievement.png);
+    }
+
+    #side-panel-news-button {
+        background-image: url(images/Layout/SidePanel/SidePlank_News.png);
+    }
+
+    #side-panel-carofle-button {
+        background-image: url(images/Layout/SidePanel/SidePlank_Carofle.png);
+    }
+
+    #side-panel-settings-button {
+        background-image: url(images/Layout/SidePanel/SidePlank_Settings.png);
+    }
+
+    #side-panel-inventory-button {
+        background-image: url(images/Layout/SidePanel/SidePlank_Inventory.png);
+    }
+
+    .side-panel-info-card {
+        width: 600%;
+        top: 2%;
+        height: 100%;
+        position: absolute;
+        right: -600%;
+        background-image: url(images/Layout/SidePanel/Background.png);
+        background-size: 100% 100%;
+
+        .side-panel-info-card-title {
+            position: absolute;
+            top: -1.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            height: 10%;
+            background-image: url(images/Layout/SidePanel/Title.png);
+            background-size: 100% 100%;
+
+            .side-panel-info-card-title-text {
+                position: absolute;
+                left: 50%;
+                top: 35%;
+                transform: translate(-50%, -50%);
+                font-size: 5vh;
+                font-weight: 800;
+            }
+        }
+
+        .side-panel-info-card-separator {
+            position: absolute;
+            top: 5.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            height: 5%;
+            background-image: url(images/Layout/SidePanel/Separator.png);
+            background-size: 100% 100%;
+        }
+    }
+}
+
+#side-panel-black-overlay{
+    height:100vh;
+    width:178vh;
+    background-color:black;
+    opacity: 0.55;
+    display:none;
+    z-index:100;
+}

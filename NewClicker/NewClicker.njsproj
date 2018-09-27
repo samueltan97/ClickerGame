@@ -1,0 +1,247 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>NewClicker</Name>
+    <RootNamespace>NewClicker</RootNamespace>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <ToolsVersionPromptShown>3.0</ToolsVersionPromptShown>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>534a2634-d969-4a3e-8156-e126bdeceffa</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <StartWebBrowser>False</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>False</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include=".npmignore" />
+    <Content Include="CONTRIBUTING.MD" />
+    <Content Include="dist\.gitignore" />
+    <Content Include="LICENSE.MD" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="src\index.html" />
+    <Content Include="src\style\images\Layout\Converters\AddButton.png" />
+    <Content Include="src\style\images\Layout\Converters\arrow_left.png" />
+    <Content Include="src\style\images\Layout\Converters\arrow_right.png" />
+    <Content Include="src\style\images\Layout\Converters\Background.png" />
+    <Content Include="src\style\images\Layout\Converters\ButtonFrame.png" />
+    <Content Include="src\style\images\Layout\Converters\Cubicle.png" />
+    <Content Include="src\style\images\Layout\Converters\RemoveButton.png" />
+    <Content Include="src\style\images\Layout\Converters\SideBoard.png" />
+    <Content Include="src\style\images\Layout\Converters\Title.png" />
+    <Content Include="src\style\images\Layout\Fight\arrow_left.png" />
+    <Content Include="src\style\images\Layout\Fight\arrow_right.png" />
+    <Content Include="src\style\images\Layout\Fight\Damage.png" />
+    <Content Include="src\style\images\Layout\Fight\HPBar.png" />
+    <Content Include="src\style\images\Layout\Fight\HPBar_bkgd.png" />
+    <Content Include="src\style\images\Layout\Player\Background.png" />
+    <Content Include="src\style\images\Layout\Player\Heroes\BarBackground.png" />
+    <Content Include="src\style\images\Layout\Player\Heroes\EXP_Bar.png" />
+    <Content Include="src\style\images\Layout\Player\Heroes\HeroBackground.png" />
+    <Content Include="src\style\images\Layout\Player\Heroes\HP_Bar.png" />
+    <Content Include="src\style\images\Layout\Player\Heroes\SkillFrame.png" />
+    <Content Include="src\style\images\Layout\Player\SideBoard.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\AddSkillPointButton.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\AddSkillPointFrame.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\LeftSeparator.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\MidSeparator.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\RightSeparator.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\Separator.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\SkillFrame.png" />
+    <Content Include="src\style\images\Layout\Player\Skills\SkillPointBackground.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\Axe.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\Background.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\BarBackground.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\EXP_Bar.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\Flag.png" />
+    <Content Include="src\style\images\Layout\Player\Stats\Shield.png" />
+    <Content Include="src\style\images\Layout\Player\Title.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Background.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Cubicle.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Inventory\Cell.png" />
+    <Content Include="src\style\images\Layout\SidePanel\LeftSeparator.png" />
+    <Content Include="src\style\images\Layout\SidePanel\MidSeparator.png" />
+    <Content Include="src\style\images\Layout\SidePanel\news.jpg" />
+    <Content Include="src\style\images\Layout\SidePanel\news.png" />
+    <Content Include="src\style\images\Layout\SidePanel\paper.jpg" />
+    <Content Include="src\style\images\Layout\SidePanel\RightSeparator.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Separator.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\Button.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\ButtonExterior.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\ButtonInnerExterior.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\SaveSyncButton.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\SaveSyncFrame.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\SoundBarExterior.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Settings\SoundBarTrack.png" />
+    <Content Include="src\style\images\Layout\SidePanel\SidePlank.png" />
+    <Content Include="src\style\images\Layout\SidePanel\Title.png" />
+    <Content Include="src\style\images\Layout\Sophie\darkchocolate.png" />
+    <Content Include="src\style\images\Layout\Sophie\obj_04.png" />
+    <Content Include="src\style\images\Layout\Sophie\sophie.png" />
+    <Content Include="src\style\images\Layout\ToolTip.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Board.png" />
+    <Content Include="src\style\images\Layout\UnitResource\BotBoard.png" />
+    <Content Include="src\style\images\Layout\UnitResource\MidBoard.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Resource\PrimaryWindow.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Resource\ResourceCubicle.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Resource\ResourceStrip.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Resource\SecondaryWindow.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Resource\TertiaryWindow.png" />
+    <Content Include="src\style\images\Layout\UnitResource\ToggleSwitch.png" />
+    <Content Include="src\style\images\Layout\UnitResource\ToggleTrack.png" />
+    <Content Include="src\style\images\Layout\UnitResource\TopBoard.png" />
+    <Content Include="src\style\images\Layout\UnitResource\UnitResourceTitle.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Units\UnitBackground.png" />
+    <Content Include="src\style\images\Layout\UnitResource\Units\UnitCubicle.png" />
+    <Content Include="src\style\images\Sample\Converter\Courtier.png" />
+    <Content Include="src\style\images\Sample\Converter\ManaRefiner.png" />
+    <Content Include="src\style\images\Sample\Fight\Background.png" />
+    <Content Include="src\style\images\Sample\Fight\Fighter.png" />
+    <Content Include="src\style\images\Sample\Fight\Monster_Faint.png" />
+    <Content Include="src\style\images\Sample\Fight\Monster_Solid.png" />
+    <Content Include="src\style\images\Sample\Player\Heroes\Hero.png" />
+    <Content Include="src\style\images\Sample\Player\Heroes\HeroSkill.png" />
+    <Content Include="src\style\images\Sample\Player\Heroes\SkillRepo.png" />
+    <Content Include="src\style\images\Sample\Player\Map\map.jpg" />
+    <Content Include="src\style\images\Sample\Player\Map\Map.png" />
+    <Content Include="src\style\images\Sample\Player\Skills\Skill.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Arrow.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Bow.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Bullet.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Coin.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Crossbow.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\HolyLance.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\IronBar.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Manacyte.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Manashard.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\SteelPlate.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Sword.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Wand.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Resource\Wood.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Unit\Chanter.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Unit\Gunslinger.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Unit\Mage.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Unit\MysticRanger.png" />
+    <Content Include="src\style\images\Sample\UnitResource\Unit\Warrior.png" />
+    <Content Include="src\style\map-profile-hero.css" />
+    <Content Include="src\style\map-profile-hero.min.css" />
+    <Content Include="src\style\map-profile-hero.scss" />
+    <Content Include="src\style\refiner-trainer.css" />
+    <Content Include="src\style\refiner-trainer.scss" />
+    <Content Include="src\style\resource-units.css" />
+    <Content Include="src\style\resource-units.scss" />
+    <Content Include="src\style\side-panel-news.css" />
+    <Content Include="src\style\side-panel-news.scss" />
+    <Content Include="src\style\side-panel.css" />
+    <Content Include="src\style\side-panel.scss" />
+    <Content Include="src\style\sophie-combat.css" />
+    <Content Include="src\style\sophie-combat.scss" />
+    <Content Include="src\style\StyleSheet.css" />
+    <Content Include="src\style\tooltip.css" />
+    <Content Include="src\style\tooltip.scss" />
+    <Content Include="test\mocha.opts" />
+    <Content Include="tsconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="dist\" />
+    <Folder Include="src\" />
+    <Folder Include="src\javascript\" />
+    <Folder Include="src\style\" />
+    <Folder Include="src\style\images\" />
+    <Folder Include="src\style\images\Layout\" />
+    <Folder Include="src\style\images\Layout\Converters\" />
+    <Folder Include="src\style\images\Layout\Fight\" />
+    <Folder Include="src\style\images\Layout\Player\" />
+    <Folder Include="src\style\images\Layout\Player\Heroes\" />
+    <Folder Include="src\style\images\Layout\Player\Skills\" />
+    <Folder Include="src\style\images\Layout\Player\Stats\" />
+    <Folder Include="src\style\images\Layout\SidePanel\" />
+    <Folder Include="src\style\images\Layout\SidePanel\Inventory\" />
+    <Folder Include="src\style\images\Layout\SidePanel\Settings\" />
+    <Folder Include="src\style\images\Layout\Sophie\" />
+    <Folder Include="src\style\images\Layout\UnitResource\" />
+    <Folder Include="src\style\images\Layout\UnitResource\Resource\" />
+    <Folder Include="src\style\images\Layout\UnitResource\Units\" />
+    <Folder Include="src\style\images\Sample\" />
+    <Folder Include="src\style\images\Sample\Converter\" />
+    <Folder Include="src\style\images\Sample\Fight\" />
+    <Folder Include="src\style\images\Sample\Player\" />
+    <Folder Include="src\style\images\Sample\Player\Heroes\" />
+    <Folder Include="src\style\images\Sample\Player\Map\" />
+    <Folder Include="src\style\images\Sample\Player\Skills\" />
+    <Folder Include="src\style\images\Sample\UnitResource\" />
+    <Folder Include="src\style\images\Sample\UnitResource\Resource\" />
+    <Folder Include="src\style\images\Sample\UnitResource\Unit\" />
+    <Folder Include="test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\javascript\index.js" />
+    <Compile Include="src\javascript\jquery-3.3.1.min.js" />
+    <Compile Include="webpack.config.js" />
+  </ItemGroup>
+  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

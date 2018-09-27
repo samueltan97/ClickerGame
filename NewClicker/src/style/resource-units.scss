@@ -1,0 +1,185 @@
+﻿.resource-cell {
+    display: inline-block;
+    max-height: 6vh;
+    max-width: 12vh;
+}
+.resource-desc {
+    height: 6vh;
+    width: 6vh;
+    position: absolute;
+    transform: translate(110%, -100%);
+    font-size: 2vh;
+}
+#unit-repo {
+    top: 6%;
+    position: absolute;
+    left: 5%;
+    width: 90%;
+    height: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.unit-cell {
+    display:inline-block;
+    width: 20%;
+    height: 75%;
+}
+.unit-desc {
+    height: 30%;
+    font-size: 2vh;
+    position: relative;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+#resource-unit-div {
+    position: absolute;
+    width: 45%;
+    height: 27%;
+    left: 10%;
+    top: 71.5%;
+
+    #resource-unit-area {
+        position: absolute;
+        left: 65%;
+        top: -10%;
+        transform: translateX(-50%);
+        width: 100%;
+
+        #toggle-track {
+            position: absolute;
+            top: 7%;
+            right: -5%;
+            height: 11%;
+            width: 14%;
+        }
+
+        #toggle-button {
+            position: absolute;
+            top: 5.5%;
+            right: 7%;
+            height: 14%;
+        }
+
+        #resource-unit-title {
+            position: absolute;
+            width: 60%;
+            height: 100%;
+            top: 1%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+
+            #resource-unit-title-text {
+                position: absolute;
+                font-size: 4.5vh;
+                font-weight: 800;
+                height: 7.12vh;
+                line-height: 7.12vh;
+                left: 50%;
+                transform: translateX(-50%);
+                top: -2%;
+            }
+        }
+
+        #unit-area {
+            position: absolute;
+            width: 95%;
+            height: 75%;
+            top: 21%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        #primary-resource {
+            position: absolute;
+            width: 95%;
+            height: 25%;
+            top: 21%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            #primary-resource-logo {
+                position: absolute;
+                left: 4%;
+                height: 80%;
+                z-index: 1;
+                top: 10%;
+
+                #primary-resource-logo-text {
+                    position: absolute;
+                    font-size: 4vh;
+                    font-weight: 400;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    top: 50%;
+                }
+            }
+
+            #primary-resource-repo {
+                top: 10%;
+                position: absolute;
+                left: 10%;
+                width: 85%;
+                height: 100%;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                white-space: nowrap;
+            }
+        }
+
+        #secondary-resource {
+            position: absolute;
+            width: 95%;
+            height: 25%;
+            top: 46.5%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            #secondary-resource-logo {
+                position: absolute;
+                left: 3.5%;
+                height: 80%;
+                z-index: 1;
+                top: 10%;
+
+                #secondary-resource-logo-text {
+                    position: absolute;
+                    font-size: 4vh;
+                    font-weight: 400;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    top: 50%;
+                }
+            }
+        }
+
+        #tertiary-resource {
+            position: absolute;
+            width: 95%;
+            height: 25%;
+            top: 72%;
+            left: 50%;
+            transform: translateX(-50%);
+
+            #tertiary-resource-logo {
+                position: absolute;
+                left: 2.5%;
+                height: 80%;
+                z-index: 1;
+                top: 10%;
+
+                #tertiary-resource-logo-text {
+                    position: absolute;
+                    font-size: 4vh;
+                    font-weight: 400;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    top: 50%;
+                }
+            }
+        }
+    }
+}

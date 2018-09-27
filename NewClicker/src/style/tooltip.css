@@ -1,0 +1,92 @@
+.tooltip {
+  position: relative;
+  display: inline-block; }
+  .tooltip .tooltiptext-top {
+    visibility: hidden;
+    width: 10vw;
+    background-image: url(images/Layout/ToolTip.png);
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 115%;
+    left: 50%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s; }
+  .tooltip .tooltiptext-bottom {
+    visibility: hidden;
+    width: 10vw;
+    background-image: url(images/Layout/ToolTip.png);
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 100;
+    top: 115%;
+    left: 50%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    overflow-y: scroll; }
+  .tooltip .tooltiptext-left {
+    visibility: hidden;
+    width: 17vh;
+    max-height: 20vh;
+    background-image: url(images/Layout/ToolTip.png);
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 100;
+    right: 115%;
+    margin-left: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s; }
+  .tooltip .tooltiptext-right {
+    visibility: hidden;
+    width: 17vh;
+    max-height: 20vh;
+    background-image: url(images/Layout/ToolTip.png);
+    background-size: 100% 100%;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 100;
+    left: 115%;
+    margin-right: -60px;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    overflow-y: scroll; }
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent; }
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext-bottom, .tooltip:hover .tooltiptext-left, .tooltip:hover .tooltiptext-right, .tooltip:hover .tooltiptext-right {
+  visibility: visible;
+  opacity: 1; }
