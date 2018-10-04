@@ -7,6 +7,14 @@ import { IExistence } from "./Interfaces and Base Classes/IExistence";
 export var thePlayer = new Player(1);
 export var theStage = new StageLevel(1);
 let EnemyArr: Enemy[] = []; //Will be a pointer that points to 5 different arrays with 
+let RangeOneUnitArr: Unit[] = [];
+let RangeTwoUnitArr: Unit[] = [];
+let RangeThreeUnitArr: Unit[] = [];
+let RangeFourUnitArr: Unit[] = [];
+let RangeFiveUnitArr: Unit[] = [];
+let RangeSixUnitArr: Unit[] = [];
+let HeroArr: Unit[] = [];
+
 let UnitArr: Unit[][] = []; //will have arrays inside organised according to increasing range before Heroes and then finally the Player
 let counter: number = 0;
 
@@ -29,7 +37,7 @@ export function GetCurrentUnit(): Unit {
     return UnitArr[0][0];
 }
 
-export function RemoveFromArray(type:string, category:number): void {
+export function RemoveFromArray(type:string, category:number, className: string): void {
     if (type == "Unit") {
         UnitArr[category].splice(0);
         if (!UnitArr[category].length) {

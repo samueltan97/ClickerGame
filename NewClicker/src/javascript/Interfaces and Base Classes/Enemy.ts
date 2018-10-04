@@ -54,7 +54,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop {
 
     Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
-        RemoveFromArray("Enemy");
+        RemoveFromArray("Enemy", 0);
     }
 
     Hurt(): void {
