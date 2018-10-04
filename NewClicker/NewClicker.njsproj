@@ -170,8 +170,9 @@
     <Folder Include="dist\" />
     <Folder Include="src\" />
     <Folder Include="src\javascript\" />
-    <Folder Include="src\Classes\" />
-    <Folder Include="src\Interfaces\" />
+    <Folder Include="src\javascript\Classes\" />
+    <Folder Include="src\javascript\Interface\" />
+    <Folder Include="src\javascript\Interfaces and Base Classes\" />
     <Folder Include="src\style\" />
     <Folder Include="src\style\images\" />
     <Folder Include="src\style\images\Layout\" />
@@ -201,21 +202,80 @@
     <Folder Include="test\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\javascript\Classes\Achievements.js" />
+    <Compile Include="src\javascript\Classes\Carofles.js" />
+    <Compile Include="src\javascript\Classes\Converters.js" />
+    <Compile Include="src\javascript\Classes\Fighters.js" />
+    <Compile Include="src\javascript\Classes\Heroes.js" />
+    <Compile Include="src\javascript\Classes\HeroSkills.js" />
+    <Compile Include="src\javascript\Classes\Items.js" />
+    <Compile Include="src\javascript\Classes\Locations.js" />
+    <Compile Include="src\javascript\Classes\Monsters.js" />
+    <Compile Include="src\javascript\Classes\News.js" />
+    <Compile Include="src\javascript\Classes\Player.js" />
+    <Compile Include="src\javascript\Classes\PlayerSkills.js" />
+    <Compile Include="src\javascript\Classes\ResourceRepo.js" />
+    <Compile Include="src\javascript\Classes\Sophie.js" />
     <Compile Include="src\javascript\index.js" />
+    <Compile Include="src\javascript\Interface\ICombative.js" />
+    <Compile Include="src\javascript\Interface\IExistence.js" />
+    <Compile Include="src\javascript\Interface\ILevelUp.js" />
+    <Compile Include="src\javascript\Interface\IRegenerability.js" />
+    <Compile Include="src\javascript\Interface\IViewable.js" />
     <Compile Include="src\javascript\jquery-3.3.1.min.js" />
     <Compile Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\Classes\Dog.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\Database.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="src\index.ts" />
-    <TypeScriptCompile Include="src\Interfaces\IMortality.ts">
+    <TypeScriptCompile Include="src\javascript\Classes\Achievements.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Carofles.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Converters.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Fighters.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Heroes.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\HeroSkills.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Items.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Locations.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Monsters.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\News.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Player.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\PlayerSkills.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\ResourceRepo.ts" />
+    <TypeScriptCompile Include="src\javascript\Classes\Sophie.ts" />
+    <TypeScriptCompile Include="src\javascript\Database.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Enemy.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\ICombative.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\IFeedbackLoop.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\IMortality.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Player.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\StageLevel.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Unit.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interface\ICombative.ts" />
+    <TypeScriptCompile Include="src\javascript\Interface\IExistence.ts" />
+    <TypeScriptCompile Include="src\javascript\Interface\ILevelUp.ts" />
+    <TypeScriptCompile Include="src\javascript\Interface\IRegenerability.ts" />
+    <TypeScriptCompile Include="src\javascript\Interface\IUpdateArmyVitality.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interface\IUpdateStatus.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\Interface\IViewable.ts" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
