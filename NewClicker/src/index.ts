@@ -91,31 +91,16 @@ $(document).ready(function () {
         $("#" + type + "-quantity").text("X " + newQuantity.toString());
         console.log("happy");
     }
-    function adjustBarAnimation(type, percentage) {
-        $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);
-        if (percentage == 100) {
-            $("#" + type + "-bar").animate({ "width": ("0%") }, 100);
-        }
-        //Add in refreshing of exp to 0/300
-    }
-
-    let player = new Player("Samuel", "abc", 1, 1, 0, 0, 1, 12, "Adventurer", "Kroigren");
-
-    let counter: number = 0;
-
-    setInterval(
-        function () {
-            counter++;
-            MainGameCycle(counter);
-            addQuantityAnimation("courtier", 999999999);
-        },
-        50
-    );
-    let warriorOne = new Fighter(123, "Archer", "123", 56, 56, 2, {}, 5);
-    let fighterArr: Fighter[] = [warriorOne];
-
-    function MainGameCycle(currentTime: number) {
-        fighterArr.forEach(s => s.UpdateStatus(currentTime));
-        fighterArr.forEach(s => s.UpdateArmyVitality(player.ArmyVitality));
-    }
+    
+    
 });
+
+export function adjustBarAnimation(type:string, percentage:number):void {
+    $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);
+    if (percentage == 100) {
+        $("#" + type + "-bar").animate({ "width": ("0%") }, 100);
+    }
+    //Add in refreshing of exp to 0/300
+}
+
+

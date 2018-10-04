@@ -1,22 +1,23 @@
 ﻿import { IMortality } from "./IMortality";
 import { ICombative } from "./ICombative";
-import { theStage, CurrentUnit } from "../Database";
+import { theStage, GetCurrentUnit, RemoveFromArray } from "../Database";
 import { IFeedbackLoop } from "./IFeedbackLoop";
+import { adjustBarAnimation } from "../..";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop {
 
-    BaseHP: number;
-    MaxHP: number;
-    CurrentHP: number;
-    BaseDamage: number;
-    CurrentDamage: number;
+    private readonly baseHP: number;
+    private maxHP: number;
+    private currentHP: number;
+    private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
+    private currentDamage: number;
 
     constructor(baseHP: number, baseDamage: number) {
-        this.BaseHP = baseHP;
-        this.MaxHP = this.BaseHP * theStage.Level;
-        this.CurrentHP = this.MaxHP;
-        this.BaseDamage = baseDamage;
-        this.CurrentDamage = this.BaseDamage * theStage.Level;
+        this.baseHP = baseHP;
+        this.maxHP = this.baseHP * theStage.Level;
+        this.currentHP = this.MaxHP;
+        this.baseDamage = baseDamage;
+        this.currentDamage = this.baseDamage * theStage.Level;
     }
 
     UpdateFeedback(counter: number) {
@@ -25,28 +26,38 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop {
         }
     }
 
-    GetMaxHP(): number {
-        this.MaxHP = this.BaseHP * theStage.Level;
-        return this.MaxHP;
+    get MaxHP(): number {
+        this.maxHP = this.baseHP * theStage.Level;
+        return this.maxHP;
     }
 
-    GetCurrentHP(): number {
-        return this.CurrentHP;
+    get CurrentHP(): number {
+        return this.currentHP;
+    }
+
+    get CurrentDamage(): number {
+        return this.currentDamage;
     }
 
     ReceiveDamage(damage: number): void {
-        this.CurrentHP -= damage;
-        this.CurrentHP = Math.max(this.CurrentHP, 0);
-        if (this.CurrentHP == 0) {
+        this.currentHP -= damage;
+        this.currentHP = Math.max(this.currentHP, 0);
+        adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
+        if (this.currentHP == 0) {
             this.Die();
         }
     }
 
-    Die(): void {
+    Birth(): void {
 
     }
 
+    Die(): void {
+        //CSS animation for removing unit off the screen and reducing count of unit
+        RemoveFromArray("Enemy");
+    }
+
     Hurt(): void {
-        CurrentUnit().ReceiveDamage(this.CurrentDamage);
+        GetCurrentUnit().ReceiveDamage(this.CurrentDamage);
     }
 }
