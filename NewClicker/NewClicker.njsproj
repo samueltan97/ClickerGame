@@ -170,6 +170,8 @@
     <Folder Include="dist\" />
     <Folder Include="src\" />
     <Folder Include="src\javascript\" />
+    <Folder Include="src\Classes\" />
+    <Folder Include="src\Interfaces\" />
     <Folder Include="src\style\" />
     <Folder Include="src\style\images\" />
     <Folder Include="src\style\images\Layout\" />
@@ -202,6 +204,18 @@
     <Compile Include="src\javascript\index.js" />
     <Compile Include="src\javascript\jquery-3.3.1.min.js" />
     <Compile Include="webpack.config.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\Classes\Dog.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\Database.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\index.ts" />
+    <TypeScriptCompile Include="src\Interfaces\IMortality.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
