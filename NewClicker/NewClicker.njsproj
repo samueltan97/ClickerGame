@@ -172,7 +172,7 @@
     <Folder Include="src\javascript\" />
     <Folder Include="src\javascript\Classes\" />
     <Folder Include="src\javascript\Interface\" />
-    <Folder Include="src\javascript\Interfaces and Base Classes\" />
+    <Folder Include="src\javascript\InterfacesBaseClasses\" />
     <Folder Include="src\style\" />
     <Folder Include="src\style\images\" />
     <Folder Include="src\style\images\Layout\" />
@@ -217,6 +217,9 @@
     <Compile Include="src\javascript\Classes\ResourceRepo.js" />
     <Compile Include="src\javascript\Classes\Sophie.js" />
     <Compile Include="src\javascript\index.js" />
+    <Compile Include="src\javascript\InterfacesBaseClasses\IRegeneration.ts">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\javascript\Interface\ICombative.js" />
     <Compile Include="src\javascript\Interface\IExistence.js" />
     <Compile Include="src\javascript\Interface\ILevelUp.js" />
@@ -244,25 +247,31 @@
     <TypeScriptCompile Include="src\javascript\Database.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Enemy.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Enemy.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\ICombative.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICombative.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\IFeedbackLoop.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IConvertable.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\IMortality.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IExistence.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Player.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IFeedbackLoop.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\StageLevel.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IMortality.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\Interfaces and Base Classes\Unit.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Player.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\StageLevel.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Unit.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\ICombative.ts" />
@@ -276,6 +285,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\IViewable.ts" />
+    <TypeScriptCompile Include="test\Database.spec.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="test\index.spec.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

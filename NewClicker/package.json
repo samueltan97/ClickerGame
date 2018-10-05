@@ -9,6 +9,7 @@
     "dist": "final build output"
   },
   "dependencies": {
+    "@kirinnee/core": "^0.2.1",
     "@types/jquery": "^3.3.9",
     "jquery": "^3.3.1",
     "jquery-ui": "^1.12.1"

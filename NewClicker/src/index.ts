@@ -1,12 +1,15 @@
 ﻿import { Fighter } from "./javascript/Classes/Fighters"
 import { Player } from "./javascript/Classes/Player";
+import { Kore } from "@kirinnee/core";
+import $ from "jquery";
+let core: Core = new Kore();
+core.ExtendPrimitives();
 
 $(document).ready(function () {
     //$("#map-image").draggable({
     //    containment: "#map-container",
     //    cursor: "crosshair"
     //});
-    console.log("Yope!");
     $("#backdrop").fadeIn(0);
     $("#sophie").click(function () {
         $("#sophie").css("z-index", "101");
@@ -89,7 +92,6 @@ $(document).ready(function () {
         var oldQuantity = parseInt(old.substr(2));
         var newQuantity = oldQuantity + quantityAdd;
         $("#" + type + "-quantity").text("X " + newQuantity.toString());
-        console.log("happy");
     }
     
     

@@ -1,55 +1,78 @@
-﻿import { Enemy } from "./Interfaces and Base Classes/Enemy";
-import { Unit } from "./Interfaces and Base Classes/Unit";
-import { Player } from "./Interfaces and Base Classes/Player";
-import { StageLevel } from "./Interfaces and Base Classes/StageLevel";
-import { IExistence } from "./Interfaces and Base Classes/IExistence";
+﻿//import { Unit, Enemy } from "./InterfacesBaseClasses/Unit";
+import { Unit, Enemy } from "./InterfacesBaseClasses/Enemy";
+import { Player } from "./InterfacesBaseClasses/Player";
+import { StageLevel } from "./InterfacesBaseClasses/StageLevel";
+import { IExistence } from "./InterfacesBaseClasses/IExistence";
 
 export var thePlayer = new Player(1);
 export var theStage = new StageLevel(1);
-let EnemyArr: Enemy[] = []; //Will be a pointer that points to 5 different arrays with 
-let RangeOneUnitArr: Unit[] = [];
-let RangeTwoUnitArr: Unit[] = [];
-let RangeThreeUnitArr: Unit[] = [];
-let RangeFourUnitArr: Unit[] = [];
-let RangeFiveUnitArr: Unit[] = [];
-let RangeSixUnitArr: Unit[] = [];
-let HeroArr: Unit[] = [];
 
-let UnitArr: Unit[][] = []; //will have arrays inside organised according to increasing range before Heroes and then finally the Player
+console.log(Enemy);
+console.log(Unit);
+console.log(Player);
+
+let EnemyArrCounter: number = 1;
+let StageOneEnemyArr: Enemy[] = [new Enemy(5, 5)];
+let StageTwoEnemyArr: Enemy[] = [new Enemy(5, 5)];
+let StageThreeEnemyArr: Enemy[] = [new Enemy(5, 5)];
+let StageFourEnemyArr: Enemy[] = [new Enemy(5, 5)];
+let StageFiveEnemyArr: Enemy[] = [new Enemy(5, 5)];
+let EnemyArr: Enemy[][] = [StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr, StageFiveEnemyArr];
+let CurrentEnemyArr: Enemy[] = StageOneEnemyArr; //Will point to 5 different arrays with 
+
+let RangeOneUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let RangeTwoUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let RangeThreeUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let RangeFourUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let RangeFiveUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let RangeSixUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let HeroArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+let UnitArr: Unit[][] = [RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr]; //will have arrays inside organised according to increasing range before Heroes
+let CurrentUnit: Unit;
 let counter: number = 0;
 
 setInterval(function () {
-        counter++;
-        MainGameCycle(counter);
-    },50);
+    counter++;
+    MainGameCycle(counter);
+}, 50);
 
 function MainGameCycle(currentTime: number): void {
     //Interactions for Units and Enemies
     UnitArr.forEach(s => s.forEach(u => u.UpdateFeedback(currentTime)));
-    EnemyArr[0].UpdateFeedback(currentTime);
+    CurrentEnemyArr[0].UpdateFeedback(currentTime);
 }
 
 export function GetCurrentEnemy(): Enemy {
-    return EnemyArr[0];
+    return CurrentEnemyArr[0];
 }
 
 export function GetCurrentUnit(): Unit {
-    return UnitArr[0][0];
+    return CurrentUnit;
 }
 
-export function RemoveFromArray(type:string, category:number, className: string): void {
+export function RemoveByDeath(type: string): void {
     if (type == "Unit") {
-        UnitArr[category].splice(0);
-        if (!UnitArr[category].length) {
-            UnitArr[category + 1][0].Birth()
-        } else {
-            UnitArr[0][0].Birth();
+        let isEmpty: boolean = true;
+        for (let i = 0; i < UnitArr.length && isEmpty; i++) {
+            for (let j = 0; j < UnitArr[i].length && isEmpty; j++) {
+                if (UnitArr[i][j].Count > 0) {
+                    isEmpty = false;
+                    UnitArr[i][j].Birth();
+                    CurrentUnit = UnitArr[i][j];
+                }
+            }
         }
-        //Heroes and Player should be arrays in UnitArr?
+        if (isEmpty) {
+            thePlayer.Birth();
+            //include player as unit for enemy to face off
+        }
     } else if (type == "Enemy") {
-        EnemyArr.splice(0);
-        EnemyArr[0].Birth();
-        //if EnemyArr is empty, swap EnemyArr to next stage and increase level
+        CurrentEnemyArr.slice(1);
+        if (!CurrentEnemyArr.length) {
+            CurrentEnemyArr = EnemyArr[EnemyArrCounter % 5];
+            EnemyArrCounter++;
+        }
+        CurrentEnemyArr[0].Birth();
     }
 }
 
