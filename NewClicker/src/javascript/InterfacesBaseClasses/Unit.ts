@@ -6,6 +6,73 @@ import { IRegeneration } from "./IRegeneration";
 import { thePlayer, GetCurrentEnemy, RemoveByDeath, theStage, GetCurrentUnit } from "../Database";
 import $ from "jquery";
 
+export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
+
+    private readonly baseHP: number;
+    private maxHP: number;
+    private currentHP: number;
+    private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
+    private currentDamage: number;
+
+    constructor(baseHP: number, baseDamage: number) {
+        this.baseHP = baseHP;
+        this.maxHP = this.baseHP * theStage.Level;
+        this.currentHP = this.MaxHP;
+        this.baseDamage = baseDamage;
+        this.currentDamage = this.baseDamage * theStage.Level;
+    }
+
+    UpdateFeedback(counter: number) {
+        if (counter % 20) {
+            this.Hurt();
+            this.Regenerate(10 * theStage.Level); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
+        }
+    }
+
+    get MaxHP(): number {
+        this.maxHP = this.baseHP * theStage.Level; //Placeholder algorithm for maxhp value
+        return this.maxHP;
+    }
+
+    get CurrentHP(): number {
+        return this.currentHP;
+    }
+
+    get CurrentDamage(): number {
+        this.currentDamage = this.baseDamage * theStage.Level
+        return this.currentDamage; //Placeholder algorithm for damage value
+    }
+
+    ReceiveDamage(damage: number): void {
+        this.currentHP -= damage;
+        this.currentHP = Math.max(this.currentHP, 0);
+        adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
+        if (this.currentHP == 0) {
+            this.Die();
+        }
+    }
+
+    Birth(): void {
+        //CSS animation for appearance on screen, including refreshing of health and name bars
+        adjustBarAnimation("monster-hp", this.MaxHP);
+    }
+
+    Die(): void {
+        //CSS animation for removing unit off the screen and reducing count of unit
+        RemoveByDeath("Enemy");
+    }
+
+    Hurt(): void {
+        GetCurrentUnit().ReceiveDamage(this.CurrentDamage);
+    }
+
+    Regenerate(health: number) {
+        this.currentHP += health;
+        this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
+        adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
+    }
+}
+
 export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration {
 
     readonly id: number;
@@ -105,72 +172,6 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 }
 
-export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
-
-    private readonly baseHP: number;
-    private maxHP: number;
-    private currentHP: number;
-    private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    private currentDamage: number;
-
-    constructor(baseHP: number, baseDamage: number) {
-        this.baseHP = baseHP;
-        this.maxHP = this.baseHP * theStage.Level;
-        this.currentHP = this.MaxHP;
-        this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * theStage.Level;
-    }
-
-    UpdateFeedback(counter: number) {
-        if (counter % 20) {
-            this.Hurt();
-            this.Regenerate(10 * theStage.Level); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
-        }
-    }
-
-    get MaxHP(): number {
-        this.maxHP = this.baseHP * theStage.Level; //Placeholder algorithm for maxhp value
-        return this.maxHP;
-    }
-
-    get CurrentHP(): number {
-        return this.currentHP;
-    }
-
-    get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * theStage.Level
-        return this.currentDamage; //Placeholder algorithm for damage value
-    }
-
-    ReceiveDamage(damage: number): void {
-        this.currentHP -= damage;
-        this.currentHP = Math.max(this.currentHP, 0);
-        adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
-        if (this.currentHP == 0) {
-            this.Die();
-        }
-    }
-
-    Birth(): void {
-        //CSS animation for appearance on screen, including refreshing of health and name bars
-        adjustBarAnimation("monster-hp", this.MaxHP);
-    }
-
-    Die(): void {
-        //CSS animation for removing unit off the screen and reducing count of unit
-        RemoveByDeath("Enemy");
-    }
-
-    Hurt(): void {
-        GetCurrentUnit().ReceiveDamage(this.CurrentDamage);
-    }
-
-    Regenerate(health: number) {
-        this.currentHP += health;
-        this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
-        adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
-    }
-}
 
 function adjustBarAnimation(type: string, percentage: number): void {
     $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);

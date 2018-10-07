@@ -256,6 +256,9 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IConvertable.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IDatabase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IExistence.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -263,6 +266,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IMortality.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Player.ts">
@@ -285,6 +291,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\IViewable.ts" />
+    <TypeScriptCompile Include="src\javascript\Repository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="test\Database.spec.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

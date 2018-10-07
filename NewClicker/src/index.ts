@@ -2,6 +2,8 @@
 import { Player } from "./javascript/Classes/Player";
 import { Kore } from "@kirinnee/core";
 import $ from "jquery";
+import { Repository } from "./javascript/Repository";
+import { Database } from "./javascript/Database";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
@@ -93,6 +95,14 @@ $(document).ready(function () {
         var newQuantity = oldQuantity + quantityAdd;
         $("#" + type + "-quantity").text("X " + newQuantity.toString());
     }
+
+    let counter: number = 0;
+    let GameRepo = new Repository(new Database());
+
+    setInterval(function () {
+        counter++;
+        GameRepo.MainGameCycle(counter);
+    }, 50);
     
     
 });
