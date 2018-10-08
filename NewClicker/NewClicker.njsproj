@@ -247,9 +247,6 @@
     <TypeScriptCompile Include="src\javascript\Database.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Enemy.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICombative.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -277,7 +274,7 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\StageLevel.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Unit.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\BaseClass.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\ICombative.ts" />

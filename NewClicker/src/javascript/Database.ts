@@ -1,9 +1,9 @@
-﻿import { Unit, Enemy } from "./InterfacesBaseClasses/Unit";
-//import { Enemy } from "./InterfacesBaseClasses/Enemy";
+﻿import { Unit, Enemy } from "./InterfacesBaseClasses/BaseClass";
 import { Player } from "./InterfacesBaseClasses/Player";
 import { StageLevel } from "./InterfacesBaseClasses/StageLevel";
 import { IExistence } from "./InterfacesBaseClasses/IExistence";
 import { IDatabase } from "./InterfacesBaseClasses/IDatabase";
+import { GameRepo } from "..";
 
 export class Database implements IDatabase {
 
@@ -11,26 +11,26 @@ export class Database implements IDatabase {
     theStage: StageLevel = new StageLevel(1);
 
     EnemyArrCounter: number = 1;
-    StageOneEnemyArr: Enemy[] = [new Enemy(5, 5)];
-    StageTwoEnemyArr: Enemy[] = [new Enemy(5, 5)];
-    StageThreeEnemyArr: Enemy[] = [new Enemy(5, 5)];
-    StageFourEnemyArr: Enemy[] = [new Enemy(5, 5)];
-    StageFiveEnemyArr: Enemy[] = [new Enemy(5, 5)];
+    StageOneEnemyArr: Enemy[] = [new Enemy(5, 5, GameRepo)];
+    StageTwoEnemyArr: Enemy[] = [new Enemy(5, 5, GameRepo)];
+    StageThreeEnemyArr: Enemy[] = [new Enemy(5, 5, GameRepo)];
+    StageFourEnemyArr: Enemy[] = [new Enemy(5, 5, GameRepo)];
+    StageFiveEnemyArr: Enemy[] = [new Enemy(5, 5, GameRepo)];
     EnemyArr: Enemy[][] = [this.StageOneEnemyArr, this.StageTwoEnemyArr, this.StageThreeEnemyArr, this.StageFourEnemyArr, this.StageFiveEnemyArr];
     CurrentEnemyArr: Enemy[] = this.StageOneEnemyArr; //Will point to 5 different arrays with 
 
-    RangeOneUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    RangeTwoUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    RangeThreeUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    RangeFourUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    RangeFiveUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    RangeSixUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
-    HeroArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123)];
+    RangeOneUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    RangeTwoUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    RangeThreeUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    RangeFourUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    RangeFiveUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    RangeSixUnitArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
+    HeroArr: Unit[] = [new Unit(0, "abc", "abc", 123, 123, 123, GameRepo)];
     UnitArr: Unit[][] = [this.RangeOneUnitArr, this.RangeTwoUnitArr, this.RangeThreeUnitArr, this.RangeFourUnitArr, this.RangeFiveUnitArr, this.RangeSixUnitArr, this.HeroArr]; //will have arrays inside organised according to increasing range before Heroes
     CurrentUnit: Unit = this.UnitArr[0][0];
     counter: number = 0;
 
-    constructor() {
+    constructor(player: Player, stage: StageLevel, stageOneEnemyArr: Enemy[], stageTwoEnemyArr: Enemy[], stageOneEnemyArr: Enemy[], stageOneEnemyArr: Enemy[], stageOneEnemyArr: Enemy[],) {
 
     }
 

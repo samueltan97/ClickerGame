@@ -96,8 +96,7 @@ $(document).ready(function () {
         $("#" + type + "-quantity").text("X " + newQuantity.toString());
     }
 
-    let counter: number = 0;
-    let GameRepo = new Repository(new Database());
+    
 
     setInterval(function () {
         counter++;
@@ -106,6 +105,9 @@ $(document).ready(function () {
     
     
 });
+
+let counter: number = 0;
+export let GameRepo:Repository = new Repository(new Database());
 
 export function adjustBarAnimation(type:string, percentage:number):void {
     $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);

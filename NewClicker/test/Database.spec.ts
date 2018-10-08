@@ -1,5 +1,5 @@
-﻿import { Enemy } from "../src/javascript/InterfacesBaseClasses/Enemy";
-import { GetCurrentEnemy } from "../src/javascript/Database";
+﻿import { Enemy } from "../src/javascript/InterfacesBaseClasses/BaseClass";
+import { IDatabase } from "../src/javascript/InterfacesBaseClasses/IDatabase";
 import { should } from "chai";
 
 export function Database_Test() {

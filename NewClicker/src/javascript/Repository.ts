@@ -1,4 +1,4 @@
-﻿import { Unit, Enemy } from "./InterfacesBaseClasses/Unit";
+﻿import { Unit, Enemy } from "./InterfacesBaseClasses/BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { IExistence } from "./InterfacesBaseClasses/IExistence";
 import { IDatabase } from "./InterfacesBaseClasses/IDatabase";

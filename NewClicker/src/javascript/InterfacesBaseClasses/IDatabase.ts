@@ -1,6 +1,6 @@
 ﻿import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
-import { Enemy, Unit } from "./Unit";
+import { Enemy, Unit } from "./BaseClass";
 
 export interface IDatabase {
     thePlayer:Player;
