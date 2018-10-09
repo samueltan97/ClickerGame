@@ -3,8 +3,8 @@ import { StageLevel } from "./StageLevel";
 import { Enemy, Unit } from "./Unit";
 
 export interface IDatabase {
-    thePlayer:Player;
-    theStage:StageLevel;
+    readonly CurrentPlayer:Player;
+    readonly CurrentStage:StageLevel;
 
     EnemyArrCounter: number;
     StageOneEnemyArr: Enemy[];

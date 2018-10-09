@@ -1,30 +1,23 @@
-﻿import { Unit, Enemy } from "./InterfacesBaseClasses/Unit";
+﻿import { Unit, Enemy } from "./Unit";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
-import { IExistence } from "./InterfacesBaseClasses/IExistence";
-import { IDatabase } from "./InterfacesBaseClasses/IDatabase";
-import { IRepository } from "./InterfacesBaseClasses/IRepository";
+import { IExistence } from "./IExistence";
+import { IDatabase } from "./IDatabase";
+import { IRepository } from "./IRepository";
 
 export class Repository implements IRepository {
 
-    database: IDatabase;
-    MainGameCycle(currentTime: number): void {
-        //Interactions for Units and Enemies
-        this.database.UnitArr.forEach(s => s.forEach(u => u.UpdateFeedback(currentTime)));
-        this.database.CurrentEnemyArr[0].UpdateFeedback(currentTime);
-    }
-    
+    readonly database: IDatabase;   
 
     constructor(database:IDatabase) {
         this.database = database;
     }
 
-    
-    GetCurrentEnemy(): Enemy {
-    return this.database.CurrentEnemyArr[0];
-}
-
-    GetCurrentUnit(): Unit {
-        return this.database.CurrentUnit;
+    GetCurrentEntity(type: string):any {
+        if (type == "Enemy") {
+            return this.database.CurrentEnemyArr[0];
+        } else if (type == "Unit") {
+            return this.database.CurrentUnit;
+        }
     }
 
     RemoveByDeath(type: string): void {
@@ -40,7 +33,7 @@ export class Repository implements IRepository {
                 }
             }
             if (isEmpty) {
-                this.database.thePlayer.Birth();
+                this.database.CurrentPlayer.Birth();
                 //include player as unit for enemy to face off
             }
         } else if (type == "Enemy") {

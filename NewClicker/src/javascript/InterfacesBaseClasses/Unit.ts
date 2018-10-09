@@ -3,8 +3,11 @@ import { ICombative } from "./ICombative";
 import { IFeedbackLoop } from "./IFeedbackLoop";
 import { IExistence } from "./IExistence";
 import { IRegeneration } from "./IRegeneration";
-import { thePlayer, GetCurrentEnemy, RemoveByDeath, theStage, GetCurrentUnit } from "../Database";
 import $ from "jquery";
+import { IRepository } from "./IRepository";
+import { IStageLevel } from "./IStageLevel";
+import { IPlayer } from "./IPlayer";
+import { UpdateDeath, UpdateAttack, adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
@@ -13,24 +16,26 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
     private currentDamage: number;
+    private readonly stage;
 
-    constructor(baseHP: number, baseDamage: number) {
+    constructor(baseHP: number, baseDamage: number, stage: IStageLevel) {
         this.baseHP = baseHP;
-        this.maxHP = this.baseHP * theStage.Level;
+        this.stage = stage;
+        this.maxHP = this.baseHP * stage.CurrentLevel;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * theStage.Level;
+        this.currentDamage = this.baseDamage * stage.CurrentLevel;
     }
 
     UpdateFeedback(counter: number) {
         if (counter % 20) {
             this.Hurt();
-            this.Regenerate(10 * theStage.Level); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
+            this.Regenerate(10 * this.stage.CurrentLevel); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
         }
     }
 
     get MaxHP(): number {
-        this.maxHP = this.baseHP * theStage.Level; //Placeholder algorithm for maxhp value
+        this.maxHP = this.baseHP * this.stage.CurrentLevel; //Placeholder algorithm for maxhp value
         return this.maxHP;
     }
 
@@ -39,7 +44,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * theStage.Level
+        this.currentDamage = this.baseDamage * this.stage.CurrentLevel
         return this.currentDamage; //Placeholder algorithm for damage value
     }
 
@@ -58,12 +63,11 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Die(): void {
-        //CSS animation for removing unit off the screen and reducing count of unit
-        RemoveByDeath("Enemy");
+        UpdateDeath("Enemy");
     }
 
     Hurt(): void {
-        GetCurrentUnit().ReceiveDamage(this.CurrentDamage);
+        UpdateAttack("Unit").ReceiveDamage(this.CurrentDamage);
     }
 
     Regenerate(health: number) {
@@ -86,17 +90,19 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private readonly range: number;
     private count: number;
     private isUnlocked: boolean;
+    private readonly player;
 
 
-    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number) {
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, player:IPlayer) {
         this.id = id;
+        this.player = player;
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
-        this.maxHP = this.baseHP * thePlayer.ArmyVitality;
+        this.maxHP = this.baseHP * player.CurrentArmyVitality;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * thePlayer.ArmyVitality;
+        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
         this.range = range;
         this.count = 0;
         this.isUnlocked = false;
@@ -105,12 +111,12 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     UpdateFeedback(counter: number) {
         if (counter % 20) {
             this.Hurt();
-            this.Regenerate(10 * thePlayer.ArmyVitality); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
+            this.Regenerate(10 * this.player.ArmyVitality); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
         }
     }
 
     get MaxHP(): number {
-        this.maxHP = this.baseHP * thePlayer.ArmyVitality //Placeholder algorithm for maxhp value
+        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
         return this.maxHP;
     }
 
@@ -119,7 +125,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * thePlayer.ArmyVitality * this.Count; //Placeholder algorithm for damage value
+        this.currentDamage = this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
         return this.currentDamage;
     }
 
@@ -149,7 +155,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     Unexist(count: number): void {
         this.count -= count;
-        RemoveByDeath("Unit");
+        this.count = Math.max(this.count, 0);
     }
 
     Birth(): void {
@@ -162,7 +168,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Hurt(): void {
-        GetCurrentEnemy().ReceiveDamage(this.CurrentDamage);
+        UpdateAttack("Enemy").ReceiveDamage(this.CurrentDamage);
     }
 
     Regenerate(health: number) {
@@ -170,13 +176,4 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
     }
-}
-
-
-function adjustBarAnimation(type: string, percentage: number): void {
-    $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);
-    if (percentage == 100) {
-        $("#" + type + "-bar").animate({ "width": ("0%") }, 100);
-    }
-    //Add in refreshing of exp to 0/300
 }

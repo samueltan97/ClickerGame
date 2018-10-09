@@ -1,9 +1,12 @@
 ﻿import { Fighter } from "./javascript/Classes/Fighters"
-import { Player } from "./javascript/Classes/Player";
+import { Player } from "./javascript/InterfacesBaseClasses/Player";
 import { Kore } from "@kirinnee/core";
 import $ from "jquery";
-import { Repository } from "./javascript/Repository";
-import { Database } from "./javascript/Database";
+import { Repository } from "./javascript/InterfacesBaseClasses/Repository";
+import { Database } from "./javascript/InterfacesBaseClasses/Database";
+import { StageLevel } from "./javascript/InterfacesBaseClasses/StageLevel";
+import { Enemy, Unit } from "./javascript/InterfacesBaseClasses/Unit";
+import { IPlayer } from "./javascript/InterfacesBaseClasses/IPlayer";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
@@ -86,7 +89,6 @@ $(document).ready(function () {
             $("#unit-area").fadeOut(200);
             $("#resource-area").fadeIn(200);
         }
-        adjustBarAnimation("player-exp", 0);
     });
 
     function addQuantityAnimation(type, quantityAdd) {
@@ -95,24 +97,26 @@ $(document).ready(function () {
         var newQuantity = oldQuantity + quantityAdd;
         $("#" + type + "-quantity").text("X " + newQuantity.toString());
     }
-
-    let counter: number = 0;
-    let GameRepo = new Repository(new Database());
-
-    setInterval(function () {
-        counter++;
-        GameRepo.MainGameCycle(counter);
-    }, 50);
-    
-    
 });
 
-export function adjustBarAnimation(type:string, percentage:number):void {
-    $("#" + type + "-bar").animate({ "width": ("" + percentage.toString() + "%") }, 200);
-    if (percentage == 100) {
-        $("#" + type + "-bar").animate({ "width": ("0%") }, 100);
-    }
-    //Add in refreshing of exp to 0/300
-}
+let thePlayer: Player = new Player(1);
+let theStage: StageLevel = new StageLevel(1);
+let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
+let StageTwoEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
+let StageThreeEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
+let StageFourEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];;
+let StageFiveEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
+let RangeOneUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let RangeTwoUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let RangeThreeUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let RangeFourUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let RangeFiveUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let RangeSixUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let HeroArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, thePlayer)];
+let theDatabase = new Database(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
+    StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr);
+export let theRepo = new Repository(theDatabase);   
+
+
 
 

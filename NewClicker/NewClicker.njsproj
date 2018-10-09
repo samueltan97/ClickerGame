@@ -173,6 +173,7 @@
     <Folder Include="src\javascript\Classes\" />
     <Folder Include="src\javascript\Interface\" />
     <Folder Include="src\javascript\InterfacesBaseClasses\" />
+    <Folder Include="src\javascript\CSSAnimation\" />
     <Folder Include="src\style\" />
     <Folder Include="src\style\images\" />
     <Folder Include="src\style\images\Layout\" />
@@ -244,7 +245,10 @@
     <TypeScriptCompile Include="src\javascript\Classes\PlayerSkills.ts" />
     <TypeScriptCompile Include="src\javascript\Classes\ResourceRepo.ts" />
     <TypeScriptCompile Include="src\javascript\Classes\Sophie.ts" />
-    <TypeScriptCompile Include="src\javascript\Database.ts">
+    <TypeScriptCompile Include="src\javascript\CSSAnimation\CSSAnimation.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Database.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Enemy.ts">
@@ -268,7 +272,13 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IMortality.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IPlayer.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IStageLevel.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Player.ts">
@@ -291,7 +301,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\IViewable.ts" />
-    <TypeScriptCompile Include="src\javascript\Repository.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Repository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="test\Database.spec.ts">
