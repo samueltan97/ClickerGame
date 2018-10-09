@@ -106,6 +106,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.range = range;
         this.count = 0;
         this.isUnlocked = false;
+        this.repository = repository;
     }
 
     UpdateFeedback(counter: number) {
