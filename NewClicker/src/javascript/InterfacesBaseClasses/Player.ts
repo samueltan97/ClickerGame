@@ -9,6 +9,10 @@ export class Player implements IPlayer{
         this.ArmyVitality = armyVitality;
     }
 
+    Birth() {
+
+    }
+
     get CurrentArmyVitality() {
         return this.ArmyVitality;
     }

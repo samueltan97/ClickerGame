@@ -23,7 +23,9 @@
     "jsdom": "11.11.0",
     "jsdom-global": "3.0.2",
     "mocha": "^4.0.1",
+    "moq.ts": "^2.7.3",
     "ts-loader": "^5.0.0",
+    "ts-node": "^7.0.1",
     "typescript": "^3.0.3",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.12.2",
@@ -33,8 +35,8 @@
   "scripts": {
     "build": "webpack --env test && npm run test && webpack --env dev && webpack --env dev && webpack --env build",
     "dev": "webpack --watch --colors --progress --env test",
-    "test": "webpack --env test && mocha --require babel-register --colors ./test/*.spec.js",
-    "test:w": "mocha --require babel-register --colors -w ./test/*.spec.js"
+    "test": "mocha -r ts-node/register --recursive --colors ./test/*.spec.ts",
+    "test:w": "mocha -r ts-node/register --recursive ./test/*.spec.ts"
   },
   "keywords": [
     "typescript",

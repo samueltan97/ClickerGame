@@ -1,4 +1,4 @@
-﻿import { Unit, Enemy } from "./Unit";
+﻿import { Unit, Enemy } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";

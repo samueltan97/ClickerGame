@@ -8,6 +8,7 @@ import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
 import { UpdateDeath, UpdateAttack, adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
+import { ICountable } from "./ICountable";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
@@ -77,7 +78,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 }
 
-export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration {
+export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration, ICountable {
 
     readonly id: number;
     readonly image: string;
@@ -93,7 +94,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private readonly player;
 
 
-    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, player:IPlayer) {
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count:number, player:IPlayer) {
         this.id = id;
         this.player = player;
         this.image = image;
@@ -106,7 +107,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.range = range;
         this.count = 0;
         this.isUnlocked = false;
-        this.repository = repository;
+        this.count = count;
     }
 
     UpdateFeedback(counter: number) {
@@ -157,6 +158,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     Unexist(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
+        UpdateDeath("Unit");
     }
 
     Birth(): void {

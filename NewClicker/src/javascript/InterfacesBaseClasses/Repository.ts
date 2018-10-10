@@ -1,4 +1,4 @@
-﻿import { Unit, Enemy } from "./Unit";
+﻿import { Unit, Enemy } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { IExistence } from "./IExistence";
 import { IDatabase } from "./IDatabase";
@@ -43,12 +43,6 @@ export class Repository implements IRepository {
                 this.database.EnemyArrCounter++;
             }
             this.database.CurrentEnemyArr[0].Birth();
-        }
-    }
-
-    AddToArray(object: any, type: string, category: number): void {
-        if (type == "Unit") {
-            this.database.UnitArr[category].push(object);
         }
     }
 

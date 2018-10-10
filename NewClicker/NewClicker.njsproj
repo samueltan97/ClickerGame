@@ -163,7 +163,6 @@
     <Content Include="src\style\StyleSheet.css" />
     <Content Include="src\style\tooltip.css" />
     <Content Include="src\style\tooltip.scss" />
-    <Content Include="test\mocha.opts" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
@@ -217,7 +216,6 @@
     <Compile Include="src\javascript\Classes\PlayerSkills.js" />
     <Compile Include="src\javascript\Classes\ResourceRepo.js" />
     <Compile Include="src\javascript\Classes\Sophie.js" />
-    <Compile Include="src\javascript\index.js" />
     <Compile Include="src\javascript\InterfacesBaseClasses\IRegeneration.ts">
       <SubType>Code</SubType>
     </Compile>
@@ -226,7 +224,6 @@
     <Compile Include="src\javascript\Interface\ILevelUp.js" />
     <Compile Include="src\javascript\Interface\IRegenerability.js" />
     <Compile Include="src\javascript\Interface\IViewable.js" />
-    <Compile Include="src\javascript\jquery-3.3.1.min.js" />
     <Compile Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +252,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IConvertable.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICountable.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IDatabase.ts">
@@ -301,10 +301,7 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Repository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="test\Database.spec.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="test\index.spec.ts">
+    <TypeScriptCompile Include="test\Repository.spec.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>
