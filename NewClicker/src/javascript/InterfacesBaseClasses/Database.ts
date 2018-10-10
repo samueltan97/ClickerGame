@@ -76,9 +76,43 @@ export class Database implements IDatabase {
         return this.theStage;
     }
 
+    RemoveByDeath(type: string): void {
+        if (type == "Unit") {
+            let isEmpty: boolean = true;
+            for (let i = 0; i < this.UnitArr.length && isEmpty; i++) {
+                for (let j = 0; j < this.UnitArr[i].length && isEmpty; j++) {
+                    if (this.UnitArr[i][j].Count > 0) {
+                        isEmpty = false;
+                        this.UnitArr[i][j].Birth();
+                        this.CurrentUnit = this.UnitArr[i][j];
+                    }
+                }
+            }
+            if (isEmpty) {
+                this.CurrentPlayer.Birth();
+                //include player as unit for enemy to face off
+            }
+        } else if (type == "Enemy") {
+            this.CurrentEnemyArr.slice(1);
+            if (!this.CurrentEnemyArr.length) {
+                this.CurrentEnemyArr = this.EnemyArr[this.EnemyArrCounter % 5];
+                this.EnemyArrCounter++;
+            }
+            this.CurrentEnemyArr[0].Birth();
+        }
+    }
+
     MainGameCycle(currentTime: number): void {
         //Interactions for Units and Enemies
-        this.UnitArr.forEach(s => s.forEach(u => u.UpdateFeedback(currentTime)));
-        this.CurrentEnemyArr[0].UpdateFeedback(currentTime);
+        if (this.CurrentUnit.isDead) {
+            this.CurrentUnit.isDead = false;
+            this.RemoveByDeath("Unit");
+        }
+        if (this.CurrentEnemyArr[0].isDead) {
+            this.CurrentEnemyArr[0].isDead = false;
+            this.RemoveByDeath("Enemy");
+        }
+        this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
+        this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
     }
 }

@@ -287,6 +287,9 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\BaseClass.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\UnitArray.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\Interface\ICombative.ts" />
     <TypeScriptCompile Include="src\javascript\Interface\IExistence.ts" />
     <TypeScriptCompile Include="src\javascript\Interface\ILevelUp.ts" />

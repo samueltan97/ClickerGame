@@ -7,7 +7,7 @@ import $ from "jquery";
 import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
-import { UpdateDeath, UpdateAttack, adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
+import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { ICountable } from "./ICountable";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
@@ -18,6 +18,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
     private currentDamage: number;
     private readonly stage;
+    public isDead: boolean;
 
     constructor(baseHP: number, baseDamage: number, stage: IStageLevel) {
         this.baseHP = baseHP;
@@ -25,14 +26,16 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.maxHP = this.baseHP * stage.CurrentLevel;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
+        this.isDead = false;
         this.currentDamage = this.baseDamage * stage.CurrentLevel;
     }
 
-    UpdateFeedback(counter: number) {
+    UpdateFeedback(counter: number):number {
         if (counter % 20) {
-            this.Hurt();
             this.Regenerate(10 * this.stage.CurrentLevel); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
+            return this.Hurt();
         }
+        return 0;
     }
 
     get MaxHP(): number {
@@ -60,15 +63,15 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
-        adjustBarAnimation("monster-hp", this.MaxHP);
+        this.Regenerate(this.MaxHP);
     }
 
     Die(): void {
-        UpdateDeath("Enemy");
+        this.isDead = true;
     }
 
-    Hurt(): void {
-        UpdateAttack("Unit").ReceiveDamage(this.CurrentDamage);
+    Hurt(): number {
+        return this.CurrentDamage;
     }
 
     Regenerate(health: number) {
@@ -91,6 +94,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private readonly range: number;
     private count: number;
     private isUnlocked: boolean;
+    public isDead: boolean;
     private readonly player;
 
 
@@ -107,14 +111,16 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.range = range;
         this.count = 0;
         this.isUnlocked = false;
+        this.isDead = false;
         this.count = count;
     }
 
-    UpdateFeedback(counter: number) {
+    UpdateFeedback(counter: number):number {
         if (counter % 20) {
-            this.Hurt();
             this.Regenerate(10 * this.player.ArmyVitality); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
+            return this.Hurt();
         }
+        return 0;
     }
 
     get MaxHP(): number {
@@ -158,20 +164,20 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     Unexist(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
-        UpdateDeath("Unit");
     }
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
-        adjustBarAnimation("fighter-hp", this.MaxHP);
+        this.Regenerate(this.MaxHP);
     }
 
     Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
+        this.isDead = true;
     }
 
-    Hurt(): void {
-        UpdateAttack("Enemy").ReceiveDamage(this.CurrentDamage);
+    Hurt(): number {
+        return this.CurrentDamage;
     }
 
     Regenerate(health: number) {
