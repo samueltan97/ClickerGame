@@ -304,7 +304,7 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Repository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="test\Repository.spec.ts">
+    <TypeScriptCompile Include="test\Database.spec.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

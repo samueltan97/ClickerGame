@@ -103,10 +103,6 @@ core.ExtendPrimitives();
 
 let thePlayer: Player = new Player(1);
 let theStage: StageLevel = new StageLevel(1);
-console.log(thePlayer);
-console.log(Player);
-console.log(Enemy);
-console.log(Unit);
 
 let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
 let StageTwoEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];

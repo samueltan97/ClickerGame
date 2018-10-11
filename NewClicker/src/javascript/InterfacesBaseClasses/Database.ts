@@ -27,7 +27,7 @@ export class Database implements IDatabase {
     RangeSixUnitArr: Unit[];
     HeroArr: Unit[];
     UnitArr: Unit[][]; //will have arrays inside organised according to increasing range before Heroes
-    CurrentUnit: Unit = this.UnitArr[0][0];
+    CurrentUnit: Unit;;
     counter: number;
 
     constructor(player: Player,

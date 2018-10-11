@@ -152,7 +152,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Unlocked(): void {
-        alert("You have unlocked " + this.name);
+        //alert("You have unlocked " + this.name);
         this.isUnlocked = true;
     }
 
