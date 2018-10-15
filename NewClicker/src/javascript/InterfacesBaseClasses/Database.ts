@@ -104,13 +104,14 @@ export class Database implements IDatabase {
                 //include player as unit for enemy to face off
             }
         } else if (type == "Enemy") {
-            this.CurrentEnemyArr.splice(0);
-            if (!this.CurrentEnemyArr.length) {
+            this.CurrentEnemyArr.splice(0, 1);
+            if (this.CurrentEnemyArr.length == 0) {
                 this.PopulateEnemyArr((this.EnemyArrCounter - 1) % 5);
                 this.CurrentEnemyArr = this.EnemyArr[this.EnemyArrCounter % 5];
                 this.EnemyArrCounter++;
             }
             this.CurrentEnemyArr[0].Birth();
+
         }
     }
 

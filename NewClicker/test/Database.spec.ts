@@ -106,15 +106,26 @@ describe("Database", () => {
         theDatabase.RemoveByDeath("Unit");
         let expected1 = theDatabase.RangeOneUnitArr[1];
         let actual1 = theDatabase.CurrentUnit;
+        theDatabase.RangeTwoUnitArr[0].Exist(1);
         expected1.should.deep.equal(actual1);
-        expected1.Unexist(1);
+        theDatabase.CurrentUnit.ReceiveDamage(1000);
+        theDatabase.RemoveByDeath("Unit");
+        let expected2 = theDatabase.RangeTwoUnitArr[0];
+        let actual2 = theDatabase.CurrentUnit;
+        expected2.should.deep.equal(actual2);
+        theDatabase.RangeOneUnitArr[0].Exist(1);
+        theDatabase.RemoveByDeath("Unit");
+        let expected3 = theDatabase.RangeOneUnitArr[0];
+        let actual3 = theDatabase.CurrentUnit;
+        expected3.should.deep.equal(actual3);
+
     });
 
     it("should get correct Enemy on the screen", () => {
         let thePlayer: Player = new Player(1);
         let theStage: StageLevel = new StageLevel(1);
 
-        let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1000, theStage)];
+        let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1000, theStage), new Enemy(1, 1000, theStage)];
         let StageTwoEnemyArr: Enemy[] = [new Enemy(2000, 2000, theStage)];
         let StageThreeEnemyArr: Enemy[] = [new Enemy(5, 1, theStage)];
         let StageFourEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];;
@@ -131,9 +142,14 @@ describe("Database", () => {
         theDatabase.CurrentEnemyArr = theDatabase.StageOneEnemyArr;
         theDatabase.CurrentEnemyArr[0].ReceiveDamage(1000);
         theDatabase.RemoveByDeath("Enemy");
-        let expected = theDatabase.StageTwoEnemyArr[0];
+        let expected = theDatabase.CopyStageOneEnemyArr[1];
         let actual = theDatabase.CurrentEnemyArr[0];
         expected.should.deep.equal(actual);
+        theDatabase.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theDatabase.RemoveByDeath("Enemy");
+        let expected1 = theDatabase.CopyStageTwoEnemyArr[0];
+        let actual1 = theDatabase.CurrentEnemyArr[0];
+        expected1.should.deep.equal(actual1);
     });
 
     it("should handle methods in the correct sequence when MainGameCycle is run", () => {

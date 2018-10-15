@@ -166,6 +166,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.Regenerate(this.MaxHP);
+        this.isDead = false;
     }
 
     Die(): void {
@@ -178,6 +179,103 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.currentHP += 5 * this.player.ArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
+        }
+    }
+}
+
+export class Resource implements IFeedbackLoop, IExistence, ICountable {
+
+    readonly id: number;
+    readonly image: string;
+    private readonly name: string;
+    private count: number;
+    private isUnlocked: boolean;
+    private readonly player;
+
+
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count: number, player: IPlayer) {
+        this.id = id;
+        this.player = player;
+        this.image = image;
+        this.name = name;
+        this.baseHP = baseHP;
+        this.maxHP = this.baseHP * player.CurrentArmyVitality;
+        this.currentHP = this.MaxHP;
+        this.baseDamage = baseDamage;
+        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
+        this.range = range;
+        this.count = 0;
+        this.isUnlocked = false;
+        this.isDead = false;
+        this.count = count;
+    }
+
+    UpdateFeedback(counter: number): number {
+        if ((counter - 10) % 20 == 0 && this.isDead == false) {
+            return this.CurrentDamage;
+        }
+        return 0;
+    }
+
+    get MaxHP(): number {
+        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
+        return this.maxHP;
+    }
+
+    get CurrentHP(): number {
+        return this.currentHP;
+    }
+
+    get CurrentDamage(): number {
+        this.currentDamage = this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
+        return this.currentDamage;
+    }
+
+    get Count(): number {
+        return this.count;
+    }
+
+    ReceiveDamage(damage: number): void {
+        this.currentHP -= damage;
+        this.currentHP = Math.max(this.currentHP, 0);
+        adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
+        if (this.currentHP == 0) {
+            this.Die();
+            this.Unexist(1);
+        }
+    }
+
+    Unlocked(): void {
+        //alert("You have unlocked " + this.name);
+        this.isUnlocked = true;
+    }
+
+    Exist(count: number): void {
+        if (!this.isUnlocked) { this.Unlocked() };
+        this.count += count;
+    }
+
+    Unexist(count: number): void {
+        this.count -= count;
+        this.count = Math.max(this.count, 0);
+    }
+
+    Birth(): void {
+        //CSS animation for appearance on screen, including refreshing of health and name bars
+        this.Regenerate(this.MaxHP);
+        this.isDead = false;
+    }
+
+    Die(): void {
+        //CSS animation for removing unit off the screen and reducing count of unit
+        this.isDead = true;
+    }
+
+    Regenerate(counter: number) {
+        if (counter % 10 == 0) {
+            this.currentHP += 5 * this.player.ArmyVitality;
+            this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
+            adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
         }
     }
 }
