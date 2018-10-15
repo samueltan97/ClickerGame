@@ -32,7 +32,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     UpdateFeedback(counter: number):number {
-        if (counter % 20 && this.isDead == false) {
+        if (counter % 20 == 0 && this.isDead == false) {
             return this.CurrentDamage;
         }
         return 0;
@@ -53,7 +53,6 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     ReceiveDamage(damage: number): void {
-        console.log(damage);
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
@@ -72,7 +71,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Regenerate(counter: number) {
-        if (counter % 10) {
+        if (counter % 10 == 0) {
         this.currentHP += 5 * this.stage.CurrentLevel; //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
@@ -115,7 +114,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     UpdateFeedback(counter: number): number {
-        if (counter % 20 == 0 && this.isDead == false) {
+        if ((counter - 10) % 20 == 0 && this.isDead == false) {
             return this.CurrentDamage;
         }
         return 0;
@@ -175,7 +174,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Regenerate(counter: number) {
-        if (counter % 10) {
+        if (counter % 10 == 0) {
         this.currentHP += 5 * this.player.ArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));

@@ -126,8 +126,11 @@ export class Database implements IDatabase {
         }
         this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
         this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
-        this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
-        this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
+        if ((currentTime - 10) % 20 == 0) {
+            this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
+        } else if (currentTime % 20 == 0) {
+            this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
+        }
     }
 
     PopulateEnemyArr(index: number) {

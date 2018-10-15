@@ -16,4 +16,8 @@ export class Player implements IPlayer{
     get CurrentArmyVitality() {
         return this.ArmyVitality;
     }
+
+    IncreaseArmyVitality() {
+        this.ArmyVitality += 1;
+    }
 }
