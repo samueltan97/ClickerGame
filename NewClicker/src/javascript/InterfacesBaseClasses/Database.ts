@@ -19,6 +19,12 @@ export class Database implements IDatabase {
     EnemyArr: Enemy[][];
     CurrentEnemyArr: Enemy[]; //Will point to 5 different arrays with 
 
+    CopyStageOneEnemyArr: Enemy[];
+    CopyStageTwoEnemyArr: Enemy[];
+    CopyStageThreeEnemyArr: Enemy[];
+    CopyStageFourEnemyArr: Enemy[];
+    CopyStageFiveEnemyArr: Enemy[];
+
     RangeOneUnitArr: Unit[];
     RangeTwoUnitArr: Unit[];
     RangeThreeUnitArr: Unit[];
@@ -53,6 +59,11 @@ export class Database implements IDatabase {
         this.StageThreeEnemyArr = stageThreeEnemyArr;
         this.StageFourEnemyArr = stageFourEnemyArr;
         this.StageFiveEnemyArr = stageFiveEnemyArr;
+        this.CopyStageOneEnemyArr = stageOneEnemyArr.slice(0);
+        this.CopyStageTwoEnemyArr = stageTwoEnemyArr.slice(0);
+        this.CopyStageThreeEnemyArr = stageThreeEnemyArr.slice(0);
+        this.CopyStageFourEnemyArr = stageFourEnemyArr.slice(0);
+        this.CopyStageFiveEnemyArr = stageFiveEnemyArr.slice(0);
         this.EnemyArr = [this.StageOneEnemyArr, this.StageTwoEnemyArr, this.StageThreeEnemyArr, this.StageFourEnemyArr, this.StageFiveEnemyArr];
         this.EnemyArrCounter = 1;
         this.CurrentEnemyArr = this.StageOneEnemyArr;
@@ -93,8 +104,9 @@ export class Database implements IDatabase {
                 //include player as unit for enemy to face off
             }
         } else if (type == "Enemy") {
-            this.CurrentEnemyArr.slice(1);
+            this.CurrentEnemyArr.splice(0);
             if (!this.CurrentEnemyArr.length) {
+                this.PopulateEnemyArr((this.EnemyArrCounter - 1) % 5);
                 this.CurrentEnemyArr = this.EnemyArr[this.EnemyArrCounter % 5];
                 this.EnemyArrCounter++;
             }
@@ -103,7 +115,7 @@ export class Database implements IDatabase {
     }
 
     MainGameCycle(currentTime: number): void {
-        //Interactions for Units and Enemies
+        //Interactions for Units and Enemies       
         if (this.CurrentUnit.isDead) {
             this.CurrentUnit.isDead = false;
             this.RemoveByDeath("Unit");
@@ -112,7 +124,59 @@ export class Database implements IDatabase {
             this.CurrentEnemyArr[0].isDead = false;
             this.RemoveByDeath("Enemy");
         }
+        this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
+        this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
         this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
         this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
+    }
+
+    PopulateEnemyArr(index: number) {
+        switch (index % 5) {
+            case 0:
+                this.PopulateStageOneEnemyArray();
+                break;
+            case 1:
+                this.PopulateStageTwoEnemyArray();
+                break;
+            case 2:
+                this.PopulateStageThreeEnemyArray();
+                break;
+            case 3:
+                this.PopulateStageFourEnemyArray();
+                break;
+            case 4:
+                this.PopulateStageFiveEnemyArray();
+                break;
+        }
+    }
+
+    PopulateStageOneEnemyArray() {
+        this.CopyStageOneEnemyArr.forEach(x => x.Regenerate(x.MaxHP));
+        this.CopyStageOneEnemyArr.forEach(x => x.isDead = false);
+        this.CopyStageOneEnemyArr.forEach(x => this.StageOneEnemyArr.push(x));
+    }
+
+    PopulateStageTwoEnemyArray() {
+        this.CopyStageTwoEnemyArr.forEach(x => x.Regenerate(x.MaxHP));
+        this.CopyStageTwoEnemyArr.forEach(x => x.isDead = false);
+        this.CopyStageTwoEnemyArr.forEach(x => this.StageTwoEnemyArr.push(x));
+    }
+
+    PopulateStageThreeEnemyArray() {
+        this.CopyStageThreeEnemyArr.forEach(x => x.Regenerate(x.MaxHP));
+        this.CopyStageThreeEnemyArr.forEach(x => x.isDead = false);
+        this.CopyStageThreeEnemyArr.forEach(x => this.StageThreeEnemyArr.push(x));
+    }
+
+    PopulateStageFourEnemyArray() {
+        this.CopyStageFourEnemyArr.forEach(x => x.Regenerate(x.MaxHP));
+        this.CopyStageFourEnemyArr.forEach(x => x.isDead = false);
+        this.CopyStageFourEnemyArr.forEach(x => this.StageFourEnemyArr.push(x));
+    }
+
+    PopulateStageFiveEnemyArray() {
+        this.CopyStageFiveEnemyArr.forEach(x => x.Regenerate(x.MaxHP));
+        this.CopyStageFiveEnemyArr.forEach(x => x.isDead = false);
+        this.CopyStageFiveEnemyArr.forEach(x => this.StageFiveEnemyArr.push(x));
     }
 }

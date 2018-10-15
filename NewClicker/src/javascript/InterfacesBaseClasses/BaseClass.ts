@@ -9,6 +9,7 @@ import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
 import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { ICountable } from "./ICountable";
+import { isDate } from "util";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
@@ -31,9 +32,8 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     UpdateFeedback(counter: number):number {
-        if (counter % 20) {
-            this.Regenerate(10 * this.stage.CurrentLevel); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
-            return this.Hurt();
+        if (counter % 20 && this.isDead == false) {
+            return this.CurrentDamage;
         }
         return 0;
     }
@@ -53,6 +53,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     ReceiveDamage(damage: number): void {
+        console.log(damage);
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
@@ -70,14 +71,12 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.isDead = true;
     }
 
-    Hurt(): number {
-        return this.CurrentDamage;
-    }
-
-    Regenerate(health: number) {
-        this.currentHP += health;
+    Regenerate(counter: number) {
+        if (counter % 10) {
+        this.currentHP += 5 * this.stage.CurrentLevel; //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
+        }
     }
 }
 
@@ -115,10 +114,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.count = count;
     }
 
-    UpdateFeedback(counter: number):number {
-        if (counter % 20) {
-            this.Regenerate(10 * this.player.ArmyVitality); //Placeholder value for regeneration algorithm. Might want to consider designating a regen per sec field for each unit
-            return this.Hurt();
+    UpdateFeedback(counter: number): number {
+        if (counter % 20 == 0 && this.isDead == false) {
+            return this.CurrentDamage;
         }
         return 0;
     }
@@ -176,13 +174,11 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.isDead = true;
     }
 
-    Hurt(): number {
-        return this.CurrentDamage;
-    }
-
-    Regenerate(health: number) {
-        this.currentHP += health;
+    Regenerate(counter: number) {
+        if (counter % 10) {
+        this.currentHP += 5 * this.player.ArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
+        }
     }
 }
