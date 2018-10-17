@@ -8,8 +8,8 @@ import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
 import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
-import { ICountable } from "./ICountable";
 import { isDate } from "util";
+import { IResource } from "./IResource";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
@@ -20,8 +20,9 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private currentDamage: number;
     private readonly stage;
     public isDead: boolean;
+    private readonly resourceArray: number[];
 
-    constructor(baseHP: number, baseDamage: number, stage: IStageLevel) {
+    constructor(baseHP: number, baseDamage: number, resourceArray: number[], stage: IStageLevel) {
         this.baseHP = baseHP;
         this.stage = stage;
         this.maxHP = this.baseHP * stage.CurrentLevel;
@@ -29,6 +30,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.baseDamage = baseDamage;
         this.isDead = false;
         this.currentDamage = this.baseDamage * stage.CurrentLevel;
+        this.resourceArray = resourceArray;
     }
 
     UpdateFeedback(counter: number):number {
@@ -50,6 +52,10 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     get CurrentDamage(): number {
         this.currentDamage = this.baseDamage * this.stage.CurrentLevel
         return this.currentDamage; //Placeholder algorithm for damage value
+    }
+
+    get ResourceArray(): number[] {
+        return this.resourceArray;
     }
 
     ReceiveDamage(damage: number): void {
@@ -79,7 +85,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 }
 
-export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration, ICountable {
+export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration {
 
     readonly id: number;
     readonly image: string;
@@ -183,7 +189,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 }
 
-export class Resource implements IFeedbackLoop, IExistence, ICountable {
+export class Resource implements IResource {
 
     readonly id: number;
     readonly image: string;
@@ -193,56 +199,17 @@ export class Resource implements IFeedbackLoop, IExistence, ICountable {
     private readonly player;
 
 
-    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count: number, player: IPlayer) {
+    constructor(id: number, image: string, name: string) {
         this.id = id;
-        this.player = player;
         this.image = image;
         this.name = name;
-        this.baseHP = baseHP;
-        this.maxHP = this.baseHP * player.CurrentArmyVitality;
-        this.currentHP = this.MaxHP;
-        this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
-        this.range = range;
         this.count = 0;
         this.isUnlocked = false;
-        this.isDead = false;
-        this.count = count;
-    }
-
-    UpdateFeedback(counter: number): number {
-        if ((counter - 10) % 20 == 0 && this.isDead == false) {
-            return this.CurrentDamage;
-        }
-        return 0;
-    }
-
-    get MaxHP(): number {
-        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
-        return this.maxHP;
-    }
-
-    get CurrentHP(): number {
-        return this.currentHP;
-    }
-
-    get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
-        return this.currentDamage;
+        this.count = 0;
     }
 
     get Count(): number {
         return this.count;
-    }
-
-    ReceiveDamage(damage: number): void {
-        this.currentHP -= damage;
-        this.currentHP = Math.max(this.currentHP, 0);
-        adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
-        if (this.currentHP == 0) {
-            this.Die();
-            this.Unexist(1);
-        }
     }
 
     Unlocked(): void {
@@ -250,32 +217,62 @@ export class Resource implements IFeedbackLoop, IExistence, ICountable {
         this.isUnlocked = true;
     }
 
-    Exist(count: number): void {
+    Increase(count: number): void {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
+        //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
 
-    Unexist(count: number): void {
+    Decrease(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
-    }
-
-    Birth(): void {
-        //CSS animation for appearance on screen, including refreshing of health and name bars
-        this.Regenerate(this.MaxHP);
-        this.isDead = false;
-    }
-
-    Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
-        this.isDead = true;
+    }
+}
+
+export class Refiner implements IResource, IExistence, IConverter {
+
+    readonly id: number;
+    readonly image: string;
+    private readonly name: string;
+    private count: number;
+    private isUnlocked: boolean;
+    private toBeRefined: IResource[];
+    private refinedProduct: IResource[];
+
+
+    constructor(id: number, image: string, name: string, toBeRefined:IResource[], refinedProduct:IResource[]) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.count = 0;
+        this.isUnlocked = false;
+        this.toBeRefined = toBeRefined;
+        this.refinedProduct = refinedProduct;
     }
 
-    Regenerate(counter: number) {
-        if (counter % 10 == 0) {
-            this.currentHP += 5 * this.player.ArmyVitality;
-            this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
-            adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
-        }
+    get Count(): number {
+        return this.count;
+    }
+
+    Unlocked(): void {
+        //alert("You have unlocked " + this.name);
+        this.isUnlocked = true;
+    }
+
+    Increase(count: number): void {
+        if (!this.isUnlocked) { this.Unlocked() };
+        this.count += count;
+        //CSS animation for appearance on screen, including refreshing of health and name bars;
+    }
+
+    Decrease(count: number): void {
+        this.count -= count;
+        this.count = Math.max(this.count, 0);
+        //CSS animation for removing unit off the screen and reducing count of unit
+    }
+
+    Convert(): void {
+
     }
 }

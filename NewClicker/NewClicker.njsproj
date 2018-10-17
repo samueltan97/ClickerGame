@@ -251,10 +251,7 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICombative.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IConvertable.ts">
-      <SubType>Code</SubType>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICountable.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IConverter.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IDatabase.ts">
@@ -273,6 +270,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IResource.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IStageLevel.ts">

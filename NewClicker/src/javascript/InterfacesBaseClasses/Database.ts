@@ -1,4 +1,4 @@
-﻿import { Unit, Enemy } from "./BaseClass";
+﻿import { Unit, Enemy, Resource } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
@@ -36,6 +36,8 @@ export class Database implements IDatabase {
     CurrentUnit: Unit;;
     counter: number;
 
+    ResourceArr: Resource[];
+
     constructor(player: Player,
         stage: StageLevel,
         stageOneEnemyArr: Enemy[],
@@ -49,7 +51,8 @@ export class Database implements IDatabase {
         rangeFourUnitArr: Unit[],
         rangeFiveUnitArr: Unit[],
         rangeSixUnitArr: Unit[],
-        heroArr: Unit[]
+        heroArr: Unit[],
+        resourceArr:Resource[]
     )
     {
         this.thePlayer = player;
@@ -77,6 +80,7 @@ export class Database implements IDatabase {
         this.UnitArr = [this.RangeOneUnitArr, this.RangeTwoUnitArr, this.RangeThreeUnitArr, this.RangeFourUnitArr, this.RangeFiveUnitArr, this.RangeSixUnitArr, this.HeroArr]; //will have arrays inside organised according to increasing range before Heroes
         this.CurrentUnit = this.UnitArr[0][0];
         this.counter = 0;
+        this.ResourceArr = resourceArr;
     }
 
     get CurrentPlayer() {
@@ -123,6 +127,7 @@ export class Database implements IDatabase {
         }
         if (this.CurrentEnemyArr[0].isDead) {
             this.CurrentEnemyArr[0].isDead = false;
+            this.CurrentEnemyArr[0].ResourceArray.forEach(x => this.ResourceArr[x].Increase(1));
             this.RemoveByDeath("Enemy");
         }
         this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
