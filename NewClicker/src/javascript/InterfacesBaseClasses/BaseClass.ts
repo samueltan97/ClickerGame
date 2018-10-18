@@ -10,6 +10,7 @@ import { IPlayer } from "./IPlayer";
 import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { isDate } from "util";
 import { IResource } from "./IResource";
+import { IConverter } from "./IConverter";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
@@ -230,7 +231,7 @@ export class Resource implements IResource {
     }
 }
 
-export class Refiner implements IResource, IExistence, IConverter {
+export class Refiner implements IResource, IConverter, IFeedbackLoop {
 
     readonly id: number;
     readonly image: string;
@@ -238,10 +239,12 @@ export class Refiner implements IResource, IExistence, IConverter {
     private count: number;
     private isUnlocked: boolean;
     private toBeRefined: IResource[];
+    private toBeRefinedQuantity: number[];
     private refinedProduct: IResource[];
+    private refinedProductQuantity: number[];
 
 
-    constructor(id: number, image: string, name: string, toBeRefined:IResource[], refinedProduct:IResource[]) {
+    constructor(id: number, image: string, name: string, toBeRefined:IResource[], toBeRefinedQuantity:number[], refinedProduct:IResource[], refinedProductQuantity:number[]) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -249,10 +252,18 @@ export class Refiner implements IResource, IExistence, IConverter {
         this.isUnlocked = false;
         this.toBeRefined = toBeRefined;
         this.refinedProduct = refinedProduct;
+        this.toBeRefinedQuantity = toBeRefinedQuantity;
+        this.refinedProductQuantity = refinedProductQuantity;
     }
 
     get Count(): number {
         return this.count;
+    }
+
+    UpdateFeedback(currentTime: number): void {
+        if (currentTime % 20 == 0) {
+            this.Convert();
+        }
     }
 
     Unlocked(): void {
@@ -273,6 +284,17 @@ export class Refiner implements IResource, IExistence, IConverter {
     }
 
     Convert(): void {
-
+        var maxQuotient: number;
+        for (let i = 0; i < this.toBeRefined.length; i++) {
+            let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
+            maxQuotient = (i == 0) ? currentQuotient : Math.min(maxQuotient, currentQuotient);
+        }
+        let maxConvert: number = Math.min(maxQuotient, this.Count);
+        for (let i = 0; i < this.toBeRefined.length; i++) {
+            this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
+        }
+        for (let i = 0; i < this.refinedProduct.length; i++) {
+            this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+        }
     }
 }

@@ -1,3 +1,3 @@
-﻿export interface IConvertable {
+﻿export interface IConverter {
     Convert(): void
 }
