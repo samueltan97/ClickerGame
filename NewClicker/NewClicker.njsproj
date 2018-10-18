@@ -272,7 +272,7 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IResource.ts">
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\ICountable.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\IStageLevel.ts">

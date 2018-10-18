@@ -1,3 +1,3 @@
 ﻿export interface IConverter {
-    Convert(): void
+    Convert(maxQuotient:number): void
 }

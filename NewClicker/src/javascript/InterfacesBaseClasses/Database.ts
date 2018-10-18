@@ -1,4 +1,4 @@
-﻿import { Unit, Enemy, Resource } from "./BaseClass";
+﻿import { Unit, Enemy, Resource, Refiner } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
@@ -37,6 +37,7 @@ export class Database implements IDatabase {
     counter: number;
 
     ResourceArr: Resource[];
+    RefinerArr: Refiner[];
 
     constructor(player: Player,
         stage: StageLevel,
@@ -52,7 +53,8 @@ export class Database implements IDatabase {
         rangeFiveUnitArr: Unit[],
         rangeSixUnitArr: Unit[],
         heroArr: Unit[],
-        resourceArr:Resource[]
+        resourceArr: Resource[],
+        refinerArr:Refiner[]
     )
     {
         this.thePlayer = player;
@@ -81,6 +83,7 @@ export class Database implements IDatabase {
         this.CurrentUnit = this.UnitArr[0][0];
         this.counter = 0;
         this.ResourceArr = resourceArr;
+        this.RefinerArr = refinerArr;
     }
 
     get CurrentPlayer() {
@@ -132,6 +135,7 @@ export class Database implements IDatabase {
         }
         this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
         this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
+        this.RefinerArr.forEach(x => x.UpdateFeedback(currentTime));
         if ((currentTime - 10) % 20 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
         } else if (currentTime % 20 == 0) {

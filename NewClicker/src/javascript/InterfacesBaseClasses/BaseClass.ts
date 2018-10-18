@@ -9,7 +9,7 @@ import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
 import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { isDate } from "util";
-import { IResource } from "./IResource";
+import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
@@ -190,7 +190,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 }
 
-export class Resource implements IResource {
+export class Resource implements ICountable {
 
     readonly id: number;
     readonly image: string;
@@ -231,20 +231,20 @@ export class Resource implements IResource {
     }
 }
 
-export class Refiner implements IResource, IConverter, IFeedbackLoop {
+export class Refiner implements ICountable, IConverter, IFeedbackLoop {
 
     readonly id: number;
     readonly image: string;
     private readonly name: string;
     private count: number;
     private isUnlocked: boolean;
-    private toBeRefined: IResource[];
+    private toBeRefined: ICountable[];
     private toBeRefinedQuantity: number[];
-    private refinedProduct: IResource[];
+    private refinedProduct: ICountable[];
     private refinedProductQuantity: number[];
 
 
-    constructor(id: number, image: string, name: string, toBeRefined:IResource[], toBeRefinedQuantity:number[], refinedProduct:IResource[], refinedProductQuantity:number[]) {
+    constructor(id: number, image: string, name: string, toBeRefined:ICountable[], toBeRefinedQuantity:number[], refinedProduct:ICountable[], refinedProductQuantity:number[]) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -284,17 +284,85 @@ export class Refiner implements IResource, IConverter, IFeedbackLoop {
     }
 
     Convert(): void {
-        var maxQuotient: number;
+        let maxQuotient: number[] = [0];
         for (let i = 0; i < this.toBeRefined.length; i++) {
             let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
-            maxQuotient = (i == 0) ? currentQuotient : Math.min(maxQuotient, currentQuotient);
+            maxQuotient[0] = (i == 0) ? currentQuotient : Math.min(maxQuotient[0], currentQuotient);
         }
-        let maxConvert: number = Math.min(maxQuotient, this.Count);
+        let maxConvert: number = Math.min(maxQuotient[0], this.Count);
         for (let i = 0; i < this.toBeRefined.length; i++) {
             this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
         }
         for (let i = 0; i < this.refinedProduct.length; i++) {
             this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+        }
+    }
+}
+
+export class Trainer implements ICountable, IConverter, IFeedbackLoop {
+
+    readonly id: number;
+    readonly image: string;
+    private readonly name: string;
+    private count: number;
+    private isUnlocked: boolean;
+    private toBeUsed: ICountable[];
+    private toBeUsedQuantity: number[];
+    private producedUnit: ICountable[];
+    private producedUnitQuantity: number[];
+
+
+    constructor(id: number, image: string, name: string, toBeUsed: ICountable[], toBeUsedQuantity: number[], producedUnit: ICountable[], producedUnitQuantity: number[]) {
+        this.id = id;
+        this.image = image;
+        this.name = name;
+        this.count = 0;
+        this.isUnlocked = false;
+        this.toBeUsed = toBeUsed;
+        this.toBeUsedQuantity = toBeUsedQuantity;
+        this.producedUnit = producedUnit;
+        this.producedUnitQuantity = producedUnitQuantity;
+    }
+
+    get Count(): number {
+        return this.count;
+    }
+
+    UpdateFeedback(currentTime: number): void {
+        if (currentTime % 20 == 0) {
+            this.Convert();
+        }
+    }
+
+    Unlocked(): void {
+        //alert("You have unlocked " + this.name);
+        this.isUnlocked = true;
+    }
+
+    Increase(count: number): void {
+        if (!this.isUnlocked) { this.Unlocked() };
+        this.count += count;
+        //CSS animation for appearance on screen, including refreshing of health and name bars;
+    }
+
+    Decrease(count: number): void {
+        this.count -= count;
+        this.count = Math.max(this.count, 0);
+        //CSS animation for removing unit off the screen and reducing count of unit
+    }
+
+    Convert(): void {
+        let maxQuotient: number[] = [0];
+        for (let i = 0; i < this.toBeUsed.length; i++) {
+            let currentQuotient: number = Math.floor(this.toBeUsed[i].Count / this.toBeUsedQuantity[i]);
+            maxQuotient[0] = (i == 0) ? currentQuotient : Math.min(maxQuotient[0], currentQuotient);
+        }
+        let maxConvert: number = Math.min(maxQuotient[0], this.Count);
+        for (let i = 0; i < this.toBeUsed.length; i++) {
+            this.toBeUsed[i].Decrease(this.toBeUsedQuantity[i] * maxConvert);
+        }
+        for (let i = 0; i < this.producedUnit.length; i++) {
+            this.producedUnit[i].Increase(this.producedUnitQuantity[i] * maxConvert);
         }
     }
 }
