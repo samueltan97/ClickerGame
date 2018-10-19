@@ -11,26 +11,28 @@ import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { isDate } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
+import { ILevelProgression } from "./ILevelProgression";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
 
+    readonly id: number;
     private readonly baseHP: number;
-    private maxHP: number;
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    private currentDamage: number;
     private readonly stage;
     public isDead: boolean;
     private readonly resourceArray: number[];
+    private readonly baseExperience: number;
 
-    constructor(baseHP: number, baseDamage: number, resourceArray: number[], stage: IStageLevel) {
+
+    constructor(id:number, baseHP: number, baseDamage: number, baseExperience:number, resourceArray: number[], stage: IStageLevel) {
+        this.id = id;
         this.baseHP = baseHP;
         this.stage = stage;
-        this.maxHP = this.baseHP * stage.CurrentLevel;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
+        this.baseExperience = baseExperience;
         this.isDead = false;
-        this.currentDamage = this.baseDamage * stage.CurrentLevel;
         this.resourceArray = resourceArray;
     }
 
@@ -41,9 +43,12 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         return 0;
     }
 
-    get MaxHP(): number {
-        this.maxHP = this.baseHP * this.stage.CurrentLevel; //Placeholder algorithm for maxhp value
-        return this.maxHP;
+    get MaxHP(): number {         
+        return this.baseHP * this.stage.CurrentLevel; //Placeholder algorithm for maxhp value
+    }
+
+    get Count(): number {
+        return 1;
     }
 
     get CurrentHP(): number {
@@ -51,12 +56,15 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * this.stage.CurrentLevel
-        return this.currentDamage; //Placeholder algorithm for damage value
+        return this.baseDamage * this.stage.CurrentLevel; //Placeholder algorithm for damage value
     }
 
     get ResourceArray(): number[] {
         return this.resourceArray;
+    }
+
+    get CurrentExp(): number {
+        return this.baseExperience * this.stage.CurrentLevel;
     }
 
     ReceiveDamage(damage: number): void {
@@ -70,6 +78,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
+        this.isDead = false;
         this.Regenerate(this.MaxHP);
     }
 
@@ -78,7 +87,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Regenerate(counter: number) {
-        if (counter % 10 == 0) {
+        if (counter % 10 == 0 && !this.isDead) {
         this.currentHP += 5 * this.stage.CurrentLevel; //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
@@ -172,8 +181,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
-        this.Regenerate(this.MaxHP);
         this.isDead = false;
+        this.Regenerate(this.MaxHP);
     }
 
     Die(): void {
@@ -182,7 +191,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Regenerate(counter: number) {
-        if (counter % 10 == 0) {
+        if (counter % 10 == 0 && !this.isDead) {
         this.currentHP += 5 * this.player.ArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
@@ -231,7 +240,7 @@ export class Resource implements ICountable {
     }
 }
 
-export class Refiner implements ICountable, IConverter, IFeedbackLoop {
+export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
 
     readonly id: number;
     readonly image: string;
@@ -260,10 +269,11 @@ export class Refiner implements ICountable, IConverter, IFeedbackLoop {
         return this.count;
     }
 
-    UpdateFeedback(currentTime: number): void {
+    UpdateFeedback(currentTime: number): number {
         if (currentTime % 20 == 0) {
             this.Convert();
         }
+        return 0;
     }
 
     Unlocked(): void {
@@ -299,38 +309,86 @@ export class Refiner implements ICountable, IConverter, IFeedbackLoop {
     }
 }
 
-export class Trainer implements ICountable, IConverter, IFeedbackLoop {
+export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneration, ILevelProgression {
 
     readonly id: number;
     readonly image: string;
     private readonly name: string;
-    private count: number;
+    private readonly baseHP: number;
+    private maxHP: number;
+    private currentHP: number;
+    private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
+    private currentDamage: number;
+    private readonly range: number;
+    private readonly baseExperience: number;
+    private currentExperience: number;
+    private currentLevel: number;
     private isUnlocked: boolean;
-    private toBeUsed: ICountable[];
-    private toBeUsedQuantity: number[];
-    private producedUnit: ICountable[];
-    private producedUnitQuantity: number[];
+    public isDead: boolean;
+    private readonly player;
 
 
-    constructor(id: number, image: string, name: string, toBeUsed: ICountable[], toBeUsedQuantity: number[], producedUnit: ICountable[], producedUnitQuantity: number[]) {
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience:number, range: number, player: IPlayer) {
         this.id = id;
+        this.player = player;
         this.image = image;
         this.name = name;
-        this.count = 0;
+        this.baseHP = baseHP;
+        this.maxHP = this.baseHP * player.CurrentArmyVitality;
+        this.currentHP = this.MaxHP;
+        this.baseDamage = baseDamage;
+        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
+        this.baseExperience = baseExperience;
+        this.currentExperience = 0;
+        this.currentLevel = 1;
+        this.range = range;
         this.isUnlocked = false;
-        this.toBeUsed = toBeUsed;
-        this.toBeUsedQuantity = toBeUsedQuantity;
-        this.producedUnit = producedUnit;
-        this.producedUnitQuantity = producedUnitQuantity;
+        this.isDead = false;
+    }
+
+    UpdateFeedback(counter: number): number {
+        if ((counter - 10) % 20 == 0 && this.isDead == false) {
+            return this.CurrentDamage;
+        }
+        return 0;
+    }
+
+    get MaxHP(): number {
+        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
+        return this.maxHP;
+    }
+
+    get CurrentHP(): number {
+        return this.currentHP;
+    }
+
+    get CurrentDamage(): number {
+        this.currentDamage = this.baseDamage * this.player.ArmyVitality; //Placeholder algorithm for damage value
+        return this.currentDamage;
+    }
+
+    get CurrentExperience(): number {
+        return this.currentExperience;
+    }
+
+    get MaxExperience(): number {
+        return this.baseExperience * this.CurrentLevel; //Temporary formula
+    }
+
+    get CurrentLevel(): number {
+        return this.currentLevel;
     }
 
     get Count(): number {
-        return this.count;
+        return 1;
     }
 
-    UpdateFeedback(currentTime: number): void {
-        if (currentTime % 20 == 0) {
-            this.Convert();
+    ReceiveDamage(damage: number): void {
+        this.currentHP -= damage;
+        this.currentHP = Math.max(this.currentHP, 0);
+        adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
+        if (this.currentHP == 0) {
+            this.Die();
         }
     }
 
@@ -339,30 +397,38 @@ export class Trainer implements ICountable, IConverter, IFeedbackLoop {
         this.isUnlocked = true;
     }
 
-    Increase(count: number): void {
-        if (!this.isUnlocked) { this.Unlocked() };
-        this.count += count;
-        //CSS animation for appearance on screen, including refreshing of health and name bars;
+    Birth(): void {
+        //CSS animation for appearance on screen, including refreshing of health and name bars
+        if (!this.isUnlocked) this.Unlocked();
+        this.isDead = false;
+        this.Regenerate(this.MaxHP);
     }
 
-    Decrease(count: number): void {
-        this.count -= count;
-        this.count = Math.max(this.count, 0);
+    Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
+        this.isDead = true;
     }
 
-    Convert(): void {
-        let maxQuotient: number[] = [0];
-        for (let i = 0; i < this.toBeUsed.length; i++) {
-            let currentQuotient: number = Math.floor(this.toBeUsed[i].Count / this.toBeUsedQuantity[i]);
-            maxQuotient[0] = (i == 0) ? currentQuotient : Math.min(maxQuotient[0], currentQuotient);
+    Regenerate(counter: number):void {
+        if (counter % 10 == 0 && !this.isDead) {
+            this.currentHP += 5 * this.player.ArmyVitality;
+            this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
+            adjustBarAnimation("hero-hp", (this.CurrentHP / this.MaxHP));
         }
-        let maxConvert: number = Math.min(maxQuotient[0], this.Count);
-        for (let i = 0; i < this.toBeUsed.length; i++) {
-            this.toBeUsed[i].Decrease(this.toBeUsedQuantity[i] * maxConvert);
+    }
+
+    GainExperience(experience: number): void {
+        let experienceOverflow = this.currentExperience + experience - this.MaxExperience;
+        if (experienceOverflow > 0) {
+            this.LevelUp();
+            this.currentExperience += experienceOverflow;
+        } else {
+            this.currentExperience += experience;
         }
-        for (let i = 0; i < this.producedUnit.length; i++) {
-            this.producedUnit[i].Increase(this.producedUnitQuantity[i] * maxConvert);
-        }
+    }
+
+    LevelUp(): void {
+        this.currentLevel += 1;
+        this.currentExperience = 0;
     }
 }

@@ -1,9 +1,10 @@
-﻿import { Unit, Enemy, Resource, Refiner } from "./BaseClass";
+﻿import { Unit, Enemy, Resource, RefinerTrainer, Hero } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
 import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
 import { IExistence } from "./IExistence";
 import { IDatabase } from "./IDatabase";
+import { IMortality } from "./IMortality";
 
 export class Database implements IDatabase {
 
@@ -31,13 +32,13 @@ export class Database implements IDatabase {
     RangeFourUnitArr: Unit[];
     RangeFiveUnitArr: Unit[];
     RangeSixUnitArr: Unit[];
-    HeroArr: Unit[];
-    UnitArr: Unit[][]; //will have arrays inside organised according to increasing range before Heroes
-    CurrentUnit: Unit;;
+    HeroArr: Hero[];
+    UnitArr: IMortality[][]; //will have arrays inside organised according to increasing range before Heroes
+    CurrentUnit: IMortality;
     counter: number;
 
     ResourceArr: Resource[];
-    RefinerArr: Refiner[];
+    RefinerTrainerArr: RefinerTrainer[];
 
     constructor(player: Player,
         stage: StageLevel,
@@ -52,9 +53,9 @@ export class Database implements IDatabase {
         rangeFourUnitArr: Unit[],
         rangeFiveUnitArr: Unit[],
         rangeSixUnitArr: Unit[],
-        heroArr: Unit[],
+        heroArr: Hero[],
         resourceArr: Resource[],
-        refinerArr:Refiner[]
+        refinerTrainerArr:RefinerTrainer[]
     )
     {
         this.thePlayer = player;
@@ -83,7 +84,7 @@ export class Database implements IDatabase {
         this.CurrentUnit = this.UnitArr[0][0];
         this.counter = 0;
         this.ResourceArr = resourceArr;
-        this.RefinerArr = refinerArr;
+        this.RefinerTrainerArr = refinerTrainerArr;
     }
 
     get CurrentPlayer() {
@@ -99,17 +100,14 @@ export class Database implements IDatabase {
             let isEmpty: boolean = true;
             for (let i = 0; i < this.UnitArr.length && isEmpty; i++) {
                 for (let j = 0; j < this.UnitArr[i].length && isEmpty; j++) {
-                    if (this.UnitArr[i][j].Count > 0) {
+                    if (this.UnitArr[i][j].Count > 0 && !this.UnitArr[i][j].isDead) {
                         isEmpty = false;
                         this.UnitArr[i][j].Birth();
                         this.CurrentUnit = this.UnitArr[i][j];
                     }
                 }
-            }
-            if (isEmpty) {
-                this.CurrentPlayer.Birth();
-                //include player as unit for enemy to face off
-            }
+            }        
+
         } else if (type == "Enemy") {
             this.CurrentEnemyArr.splice(0, 1);
             if (this.CurrentEnemyArr.length == 0) {
@@ -123,7 +121,7 @@ export class Database implements IDatabase {
     }
 
     MainGameCycle(currentTime: number): void {
-        //Interactions for Units and Enemies       
+        //if (this.CurrentUnit.id > 30) 
         if (this.CurrentUnit.isDead) {
             this.CurrentUnit.isDead = false;
             this.RemoveByDeath("Unit");
@@ -131,16 +129,22 @@ export class Database implements IDatabase {
         if (this.CurrentEnemyArr[0].isDead) {
             this.CurrentEnemyArr[0].isDead = false;
             this.CurrentEnemyArr[0].ResourceArray.forEach(x => this.ResourceArr[x].Increase(1));
-            this.RemoveByDeath("Enemy");
-        }
-        this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
-        this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
-        this.RefinerArr.forEach(x => x.UpdateFeedback(currentTime));
+            this.HeroArr.forEach(x => x.GainExperience(this.CurrentEnemyArr[0].CurrentExp));
+            this.thePlayer.GainExperience(this.CurrentEnemyArr[0].CurrentExp);
+            this.RemoveByDeath("Enemy");      
+        }     
+        
         if ((currentTime - 10) % 20 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
+            this.CurrentEnemyArr[0].ReceiveDamage(this.thePlayer.UpdateFeedback(currentTime));
         } else if (currentTime % 20 == 0) {
             this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
         }
+
+        this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
+        this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
+
+        this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
     }
 
     PopulateEnemyArr(index: number) {

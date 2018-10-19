@@ -1,3 +1,3 @@
 ﻿export interface IFeedbackLoop {
-    UpdateFeedback(currentTime: number): void;
+    UpdateFeedback(currentTime: number): number;
 }
