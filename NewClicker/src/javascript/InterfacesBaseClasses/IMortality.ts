@@ -1,5 +1,6 @@
 ﻿import { IRegeneration } from "./IRegeneration";
 import { IFeedbackLoop } from "./IFeedbackLoop";
+import { ValueUpdateEvent } from "./ValueUpdateEvent";
 
 export interface IMortality extends IRegeneration, IFeedbackLoop {
     readonly id: number;
@@ -10,4 +11,5 @@ export interface IMortality extends IRegeneration, IFeedbackLoop {
     Birth(): void;
     isDead: boolean;
     Count: number;
+    AddValueUpdateEvent(e: (e: ValueUpdateEvent) => void)
 }

@@ -12,9 +12,10 @@ import { isDate } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
 import { ILevelProgression } from "./ILevelProgression";
+import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, RefinerTrainerValueUpdateEvent, HeroValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
-
+    readonly arrayId: number;
     readonly id: number;
     private readonly baseHP: number;
     private currentHP: number;
@@ -23,9 +24,11 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     public isDead: boolean;
     private readonly resourceArray: number[];
     private readonly baseExperience: number;
+    private valueUpdateEvents: ((e: EnemyValueUpdateEvent) => void)[] = [];
 
 
-    constructor(id:number, baseHP: number, baseDamage: number, baseExperience:number, resourceArray: number[], stage: IStageLevel) {
+    constructor(arrayId:number, id:number, baseHP: number, baseDamage: number, baseExperience:number, resourceArray: number[], stage: IStageLevel) {
+        this.arrayId = arrayId;
         this.id = id;
         this.baseHP = baseHP;
         this.stage = stage;
@@ -34,6 +37,14 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.baseExperience = baseExperience;
         this.isDead = false;
         this.resourceArray = resourceArray;
+    }
+
+    AddValueUpdateEvent(e: (e: EnemyValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new EnemyValueUpdateEvent(this.arrayId, this.id, this.currentHP)));
     }
 
     UpdateFeedback(counter: number):number {
@@ -74,6 +85,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         if (this.currentHP == 0) {
             this.Die();
         }
+        this.Update();
     }
 
     Birth(): void {
@@ -84,6 +96,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     Die(): void {
         this.isDead = true;
+        this.Update();
     }
 
     Regenerate(counter: number) {
@@ -92,6 +105,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
         }
+        this.Update();
     }
 }
 
@@ -101,16 +115,14 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     readonly image: string;
     private readonly name: string;
     private readonly baseHP: number;
-    private maxHP: number;
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    private currentDamage: number;
     private readonly range: number;
     private count: number;
     private isUnlocked: boolean;
     public isDead: boolean;
     private readonly player;
-
+    private valueUpdateEvents: ((e: UnitValueUpdateEvent) => void)[] = [];
 
     constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count:number, player:IPlayer) {
         this.id = id;
@@ -118,10 +130,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
-        this.maxHP = this.baseHP * player.CurrentArmyVitality;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
         this.range = range;
         this.count = 0;
         this.isUnlocked = false;
@@ -137,8 +147,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get MaxHP(): number {
-        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
-        return this.maxHP;
+        return this.baseHP * this.player.ArmyVitality; //Placeholder algorithm for maxhp value
     }
 
     get CurrentHP(): number {
@@ -146,12 +155,19 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
-        return this.currentDamage;
+        return this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
     }
 
     get Count(): number {
         return this.count;
+    }
+
+    AddValueUpdateEvent(e: (e: UnitValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new UnitValueUpdateEvent(this.id, this.CurrentHP, this.Count, this.isUnlocked)));
     }
 
     ReceiveDamage(damage: number): void {
@@ -162,32 +178,38 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
             this.Die();
             this.Unexist(1);
         }
+        this.Update();
     }
 
     Unlocked(): void {
         //alert("You have unlocked " + this.name);
         this.isUnlocked = true;
+        this.Update();
     }
 
     Exist(count: number): void {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
+        this.Update();
     }
 
     Unexist(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
+        this.Update();
     }
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = false;
         this.Regenerate(this.MaxHP);
+        this.Update();
     }
 
     Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
         this.isDead = true;
+        this.Update();
     }
 
     Regenerate(counter: number) {
@@ -196,6 +218,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
         }
+        this.Update();
     }
 }
 
@@ -206,8 +229,7 @@ export class Resource implements ICountable {
     private readonly name: string;
     private count: number;
     private isUnlocked: boolean;
-    private readonly player;
-
+    private valueUpdateEvents: ((e: ResourceValueUpdateEvent) => void)[] = [];
 
     constructor(id: number, image: string, name: string) {
         this.id = id;
@@ -218,6 +240,14 @@ export class Resource implements ICountable {
         this.count = 0;
     }
 
+    AddValueUpdateEvent(e: (e: ResourceValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new ResourceValueUpdateEvent(this.id, this.Count, this.isUnlocked)));
+    }
+
     get Count(): number {
         return this.count;
     }
@@ -225,17 +255,20 @@ export class Resource implements ICountable {
     Unlocked(): void {
         //alert("You have unlocked " + this.name);
         this.isUnlocked = true;
+        this.Update();
     }
 
     Increase(count: number): void {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
+        this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
 
     Decrease(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
+        this.Update();
         //CSS animation for removing unit off the screen and reducing count of unit
     }
 }
@@ -251,7 +284,7 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
     private toBeRefinedQuantity: number[];
     private refinedProduct: ICountable[];
     private refinedProductQuantity: number[];
-
+    private valueUpdateEvents: ((e: RefinerTrainerValueUpdateEvent) => void)[] = [];
 
     constructor(id: number, image: string, name: string, toBeRefined:ICountable[], toBeRefinedQuantity:number[], refinedProduct:ICountable[], refinedProductQuantity:number[]) {
         this.id = id;
@@ -263,6 +296,14 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         this.refinedProduct = refinedProduct;
         this.toBeRefinedQuantity = toBeRefinedQuantity;
         this.refinedProductQuantity = refinedProductQuantity;
+    }
+
+    AddValueUpdateEvent(e: (e: RefinerTrainerValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new RefinerTrainerValueUpdateEvent(this.id, this.Count, this.isUnlocked)));
     }
 
     get Count(): number {
@@ -279,17 +320,20 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
     Unlocked(): void {
         //alert("You have unlocked " + this.name);
         this.isUnlocked = true;
+        this.Update();
     }
 
     Increase(count: number): void {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
+        this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
 
     Decrease(count: number): void {
         this.count -= count;
         this.count = Math.max(this.count, 0);
+        this.Update();
         //CSS animation for removing unit off the screen and reducing count of unit
     }
 
@@ -315,10 +359,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     readonly image: string;
     private readonly name: string;
     private readonly baseHP: number;
-    private maxHP: number;
     private currentHP: number;
-    private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    private currentDamage: number;
+    private readonly baseDamage: number; 
     private readonly range: number;
     private readonly baseExperience: number;
     private currentExperience: number;
@@ -326,7 +368,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     private isUnlocked: boolean;
     public isDead: boolean;
     private readonly player;
-
+    private valueUpdateEvents: ((e: HeroValueUpdateEvent) => void)[] = [];
 
     constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience:number, range: number, player: IPlayer) {
         this.id = id;
@@ -334,10 +376,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
-        this.maxHP = this.baseHP * player.CurrentArmyVitality;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
-        this.currentDamage = this.baseDamage * player.CurrentArmyVitality;
         this.baseExperience = baseExperience;
         this.currentExperience = 0;
         this.currentLevel = 1;
@@ -353,9 +393,16 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         return 0;
     }
 
+    AddValueUpdateEvent(e: (e: HeroValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new HeroValueUpdateEvent(this.id, this.CurrentHP, this.isUnlocked, this.CurrentExperience, this.CurrentLevel)));
+    }
+
     get MaxHP(): number {
-        this.maxHP = this.baseHP * this.player.ArmyVitality //Placeholder algorithm for maxhp value
-        return this.maxHP;
+        return this.baseHP * this.player.ArmyVitality; //Placeholder algorithm for maxhp value
     }
 
     get CurrentHP(): number {
@@ -363,8 +410,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     get CurrentDamage(): number {
-        this.currentDamage = this.baseDamage * this.player.ArmyVitality; //Placeholder algorithm for damage value
-        return this.currentDamage;
+        return this.baseDamage * this.player.ArmyVitality; //Placeholder algorithm for damage value
     }
 
     get CurrentExperience(): number {
@@ -390,11 +436,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         if (this.currentHP == 0) {
             this.Die();
         }
+        this.Update();
     }
 
     Unlocked(): void {
         //alert("You have unlocked " + this.name);
         this.isUnlocked = true;
+        this.Update();
     }
 
     Birth(): void {
@@ -402,12 +450,14 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         if (!this.isUnlocked) this.Unlocked();
         this.isDead = false;
         this.Regenerate(this.MaxHP);
+        this.Update();
     }
 
     Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
         this.isDead = true;
-    }
+        this.Update();
+   }
 
     Regenerate(counter: number):void {
         if (counter % 10 == 0 && !this.isDead) {
@@ -415,6 +465,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
             this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
             adjustBarAnimation("hero-hp", (this.CurrentHP / this.MaxHP));
         }
+        this.Update();
     }
 
     GainExperience(experience: number): void {
@@ -425,10 +476,12 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         } else {
             this.currentExperience += experience;
         }
+        this.Update();
     }
 
     LevelUp(): void {
         this.currentLevel += 1;
         this.currentExperience = 0;
-    }
+        this.Update();
+   }
 }

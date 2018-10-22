@@ -1,9 +1,9 @@
 ﻿import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
-import { Enemy, Unit, Hero } from "./BaseClass";
+import { Enemy, Unit, Hero, Resource } from "./BaseClass";
 import { IMortality } from "./IMortality";
 
-export interface IDatabase {
+export interface IStorage {
     readonly CurrentPlayer:Player;
     readonly CurrentStage:StageLevel;
 
@@ -13,6 +13,11 @@ export interface IDatabase {
     StageThreeEnemyArr: Enemy[];
     StageFourEnemyArr: Enemy[];
     StageFiveEnemyArr: Enemy[];
+    CopyStageOneEnemyArr: Enemy[];
+    CopyStageTwoEnemyArr: Enemy[];
+    CopyStageThreeEnemyArr: Enemy[];
+    CopyStageFourEnemyArr: Enemy[];
+    CopyStageFiveEnemyArr: Enemy[];
     EnemyArr: Enemy[][];
     CurrentEnemyArr: Enemy[]; 
 
@@ -26,4 +31,7 @@ export interface IDatabase {
     UnitArr: IMortality[][]; 
     CurrentUnit: IMortality;
     counter: number;
+
+    ResourceArr: Resource[];
+    MainGameCycle(currentTime: number): void;
 }

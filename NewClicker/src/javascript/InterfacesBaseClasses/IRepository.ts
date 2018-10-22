@@ -1,6 +1,6 @@
-﻿import { IDatabase } from "./IDatabase";
+﻿import { IStorage } from "./IStorage";
 import { Unit, Enemy } from "./BaseClass";
 
 export interface IRepository {
-    database: IDatabase;
+    storage: IStorage;
 }

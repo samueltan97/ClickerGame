@@ -3,6 +3,7 @@ import { IMortality } from "./IMortality";
 import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
 import { ILevelProgression } from "./ILevelProgression";
 import { IRegeneration } from "./IRegeneration";
+import { PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 
 //Take note that player extends Unit for now to set it as a posssible current Unit for battle with the enemy
 export class Player implements IPlayer, ILevelProgression{
@@ -11,11 +12,8 @@ export class Player implements IPlayer, ILevelProgression{
     private readonly baseExperience: number;
     private readonly baseDamage: number;
     private currentLevel: number;
-    private
-
-        : number;
-    public isDead: boolean;
-
+    private currentExperience: number;
+    private valueUpdateEvents: ((e: PlayerValueUpdateEvent) => void)[] = [];
 
     constructor(baseDamage:number) {
         this.armyVitality = 1;
@@ -23,7 +21,14 @@ export class Player implements IPlayer, ILevelProgression{
         this.baseDamage = baseDamage;
         this.currentLevel = 1;
         this.currentExperience = 0;
-        this.isDead = false;
+    }
+
+    AddValueUpdateEvent(e: (e: PlayerValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(e);
+    }
+
+    Update(): void {
+        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality)));
     }
 
     get CurrentArmyVitality():number {

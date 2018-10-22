@@ -1,15 +1,14 @@
 ﻿import { Unit, Enemy } from "./BaseClass";
 //import { Enemy } from "./InterfacesBaseClasses/Enemy";
-import { IExistence } from "./IExistence";
-import { IDatabase } from "./IDatabase";
+import { IStorage } from "./IStorage";
 import { IRepository } from "./IRepository";
 
 export class Repository implements IRepository {
 
-    readonly database: IDatabase;   
+    storage: IStorage;
 
-    constructor(database:IDatabase) {
-        this.database = database;
+    constructor(database: IStorage) {
+        this.storage = database;
     }
 
     
