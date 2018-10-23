@@ -32,7 +32,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.id = id;
         this.baseHP = baseHP;
         this.stage = stage;
-        this.currentHP = this.MaxHP;
+        this.currentHP = this.baseHP;
         this.baseDamage = baseDamage;
         this.baseExperience = baseExperience;
         this.isDead = false;
@@ -109,8 +109,9 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 }
 
-export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration {
+export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, IRegeneration, ICountable {
 
+    
     readonly id: number;
     readonly image: string;
     private readonly name: string;
@@ -121,10 +122,11 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private count: number;
     private isUnlocked: boolean;
     public isDead: boolean;
+    private damageFrequency: number;
     private readonly player;
     private valueUpdateEvents: ((e: UnitValueUpdateEvent) => void)[] = [];
 
-    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count:number, player:IPlayer) {
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, range: number, count:number, player:IPlayer, damageFrequency:number) {
         this.id = id;
         this.player = player;
         this.image = image;
@@ -137,17 +139,18 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.isUnlocked = false;
         this.isDead = false;
         this.count = count;
+        this.damageFrequency = damageFrequency;
     }
 
     UpdateFeedback(counter: number): number {
-        if ((counter - 10) % 20 == 0 && this.isDead == false) {
+        if ((counter - 10) % this.damageFrequency == 0 && this.isDead == false) {
             return this.CurrentDamage;
         }
         return 0;
     }
 
     get MaxHP(): number {
-        return this.baseHP * this.player.ArmyVitality; //Placeholder algorithm for maxhp value
+        return this.baseHP * this.player.CurrentArmyVitality; //Placeholder algorithm for maxhp value
     }
 
     get CurrentHP(): number {
@@ -155,7 +158,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get CurrentDamage(): number {
-        return this.baseDamage * this.player.ArmyVitality * this.Count; //Placeholder algorithm for damage value
+        return this.baseDamage * this.player.CurrentArmyVitality * this.Count; //Placeholder algorithm for damage value
     }
 
     get Count(): number {
@@ -199,6 +202,13 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.Update();
     }
 
+    Increase(count: number): void {
+        this.Exist(count);
+    }
+    Decrease(count: number): void {
+        this.Unexist(count);
+    }
+
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = false;
@@ -214,7 +224,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     Regenerate(counter: number) {
         if (counter % 10 == 0 && !this.isDead) {
-        this.currentHP += 5 * this.player.ArmyVitality;
+            this.currentHP += 1 * this.player.CurrentArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
         }
@@ -284,9 +294,10 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
     private toBeRefinedQuantity: number[];
     private refinedProduct: ICountable[];
     private refinedProductQuantity: number[];
+    private productionFrequency: number;
     private valueUpdateEvents: ((e: RefinerTrainerValueUpdateEvent) => void)[] = [];
 
-    constructor(id: number, image: string, name: string, toBeRefined:ICountable[], toBeRefinedQuantity:number[], refinedProduct:ICountable[], refinedProductQuantity:number[]) {
+    constructor(id: number, image: string, name: string, toBeRefined: ICountable[], toBeRefinedQuantity: number[], refinedProduct: ICountable[], refinedProductQuantity: number[], productionFrequency: number) {
         this.id = id;
         this.image = image;
         this.name = name;
@@ -296,6 +307,7 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         this.refinedProduct = refinedProduct;
         this.toBeRefinedQuantity = toBeRefinedQuantity;
         this.refinedProductQuantity = refinedProductQuantity;
+        this.productionFrequency = productionFrequency;
     }
 
     AddValueUpdateEvent(e: (e: RefinerTrainerValueUpdateEvent) => void) {
@@ -311,7 +323,7 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
     }
 
     UpdateFeedback(currentTime: number): number {
-        if (currentTime % 20 == 0) {
+        if (currentTime % this.productionFrequency == 0) {
             this.Convert();
         }
         return 0;
@@ -343,12 +355,16 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
             let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
             maxQuotient[0] = (i == 0) ? currentQuotient : Math.min(maxQuotient[0], currentQuotient);
         }
-        let maxConvert: number = Math.min(maxQuotient[0], this.Count);
-        for (let i = 0; i < this.toBeRefined.length; i++) {
-            this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
-        }
-        for (let i = 0; i < this.refinedProduct.length; i++) {
-            this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+        if (this.id != 0) {
+            let maxConvert: number = Math.min(maxQuotient[0], this.Count);
+            for (let i = 0; i < this.toBeRefined.length; i++) {
+                this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
+            }
+            for (let i = 0; i < this.refinedProduct.length; i++) {
+                this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+            }
+        } else {
+            this.refinedProduct[0].Increase(this.Count);
         }
     }
 }

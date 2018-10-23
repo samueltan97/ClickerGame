@@ -93,7 +93,7 @@ export class Storage implements IStorage {
         return this.theStage;
     }
 
-    MainGameCycle(currentTime: number): void {
+    MainGameCycle(currentTime: number): Storage {
         if ((currentTime - 10) % 20 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
             this.CurrentEnemyArr[0].ReceiveDamage(this.thePlayer.UpdateFeedback(currentTime));
@@ -105,5 +105,7 @@ export class Storage implements IStorage {
         this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
 
         this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
+
+        return this;
     }
 }
