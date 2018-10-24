@@ -24,6 +24,7 @@ export class Storage implements IStorage {
     CopyStageThreeEnemyArr: Enemy[];
     CopyStageFourEnemyArr: Enemy[];
     CopyStageFiveEnemyArr: Enemy[];
+    CopyEnemyArr: Enemy[][];
 
     RangeOneUnitArr: Unit[];
     RangeTwoUnitArr: Unit[];
@@ -69,6 +70,7 @@ export class Storage implements IStorage {
         this.CopyStageFourEnemyArr = stageFourEnemyArr.slice(0);
         this.CopyStageFiveEnemyArr = stageFiveEnemyArr.slice(0);
         this.EnemyArr = [this.StageOneEnemyArr, this.StageTwoEnemyArr, this.StageThreeEnemyArr, this.StageFourEnemyArr, this.StageFiveEnemyArr];
+        this.CopyEnemyArr = [this.CopyStageOneEnemyArr, this.CopyStageTwoEnemyArr, this.CopyStageThreeEnemyArr, this.CopyStageFourEnemyArr, this.CopyStageFiveEnemyArr];
         this.EnemyArrCounter = 1;
         this.CurrentEnemyArr = this.StageOneEnemyArr;
         this.RangeOneUnitArr = rangeOneUnitArr;
@@ -94,17 +96,15 @@ export class Storage implements IStorage {
     }
 
     MainGameCycle(currentTime: number): Storage {
-        if ((currentTime - 10) % 20 == 0) {
+        if ((currentTime - 5) % 10 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
+            this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
             this.CurrentEnemyArr[0].ReceiveDamage(this.thePlayer.UpdateFeedback(currentTime));
-        } else if (currentTime % 20 == 0) {
+        } else if (currentTime % 10 == 0) {
             this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
+            this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
+            this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
         }
-
-        this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
-        this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
-
-        this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
 
         return this;
     }

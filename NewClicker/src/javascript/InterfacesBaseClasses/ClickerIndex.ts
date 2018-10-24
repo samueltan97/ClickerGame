@@ -12,25 +12,30 @@ export class ClickerIndex {
         this.counter = 1;
     }
 
+    get CurrentStorage() {
+        return this.theStorage;
+    }
+
     RemoveByDeath(type: string): void {
         if (type == "Unit") {
             let isEmpty: boolean = true;
-            for (let i = 0; i < this.theStorage.UnitArr.length && isEmpty; i++) {
-                for (let j = 0; j < this.theStorage.UnitArr[i].length && isEmpty; j++) {
-                    if (this.theStorage.UnitArr[i][j].Count > 0 && !this.theStorage.UnitArr[i][j].isDead) {
+            for (let i = 0; i < this.CurrentStorage.UnitArr.length && isEmpty; i++) {
+                for (let j = 0; j < this.CurrentStorage.UnitArr[i].length && isEmpty; j++) {
+                    if (this.CurrentStorage.UnitArr[i][j].Count > 0 && !this.CurrentStorage.UnitArr[i][j].isDead) {
                         isEmpty = false;
-                        this.theStorage.UnitArr[i][j].Birth();
-                        this.theStorage.CurrentUnit = this.theStorage.UnitArr[i][j];
+                        this.CurrentStorage.UnitArr[i][j].Birth();
+                        this.CurrentStorage.CurrentUnit = this.CurrentStorage.UnitArr[i][j];
                     }
                 }
             }
 
         } else if (type == "Enemy") {
-            this.theStorage.CurrentEnemyArr.splice(0, 1);
-            if (this.theStorage.CurrentEnemyArr.length == 0) {
-                this.PopulateEnemyArr((this.theStorage.EnemyArrCounter - 1) % 5);
-                this.theStorage.CurrentEnemyArr = this.theStorage.EnemyArr[this.theStorage.EnemyArrCounter % 5];
-                this.theStorage.EnemyArrCounter++;
+            this.CurrentStorage.CurrentEnemyArr.splice(0, 1);
+            if (this.CurrentStorage.CurrentEnemyArr.length == 0) {
+                this.PopulateEnemyArr((this.CurrentStorage.EnemyArrCounter - 1) % 5);
+                this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[this.CurrentStorage.EnemyArrCounter % 5];
+                this.CurrentStorage.EnemyArrCounter++;
+                //Increase StageLevel after every 5 stage
             }
             this.theStorage.CurrentEnemyArr[0].Birth();
 
@@ -38,15 +43,16 @@ export class ClickerIndex {
     }
 
     DeathLogic(e: EnemyValueUpdateEvent | UnitValueUpdateEvent): void {
-        if (this.theStorage.CurrentUnit.isDead) {
-            this.theStorage.CurrentUnit.isDead = false;
+        console.log(this);
+        if (this.CurrentStorage.CurrentUnit.isDead) {
+            this.CurrentStorage.CurrentUnit.isDead = false;
             this.RemoveByDeath("Unit");
         }
-        if (this.theStorage.CurrentEnemyArr[0].isDead) {
-            this.theStorage.CurrentEnemyArr[0].isDead = false;
-            this.theStorage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.theStorage.ResourceArr[x].Increase(1));
-            this.theStorage.HeroArr.forEach(x => x.GainExperience(this.theStorage.CurrentEnemyArr[0].CurrentExp));
-            this.theStorage.CurrentPlayer.GainExperience(this.theStorage.CurrentEnemyArr[0].CurrentExp);
+        if (this.CurrentStorage.CurrentEnemyArr[0].isDead) {
+            this.CurrentStorage.CurrentEnemyArr[0].isDead = false;
+            this.CurrentStorage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.CurrentStorage.ResourceArr[x].Increase(this.CurrentStorage.CurrentStage.CurrentLevel));
+            this.CurrentStorage.HeroArr.forEach(x => x.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp));
+            this.CurrentStorage.CurrentPlayer.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp);
             this.RemoveByDeath("Enemy");
         }    
     }

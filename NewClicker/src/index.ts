@@ -104,6 +104,50 @@ core.ExtendPrimitives();
 let thePlayer: Player = new Player(1);
 let theStage: StageLevel = new StageLevel(1);
 
+////Enemy (Base Exp and Resource not confirmed)
+//let Slime: Enemy = new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage);
+//let Boar: Enemy = new Enemy(0, 1, "abc", "Boar", 15, 4, 5, [1, 1], 40, 1, 100, theStage);
+//let Ashwinder1: Enemy = new Enemy(0, 2, "abc", "Ashwinder", 8, 2, 5, [1, 1], 40, 1, 100, theStage);
+//let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [1, 1], 20, 0, 100, theStage);
+//let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [1, 1], 10, 0, 100, theStage);
+//let Bandit: Enemy = new Enemy(0, 5, "abc", "Bandit", 7, 3, 5, [1, 1], 20, 1, 100, theStage);
+//let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [1, 1], 20, 1, 100, theStage);
+//let RevoltFootman: Enemy = new Enemy(0, 7, "abc", "Revolt Footman", 10, 5, 5, [1, 1], 20, 1, 100, theStage);
+//let Ashwinder2: Enemy = new Enemy(1, 8, "abc", "Ashwinder", 8, 2, 5, [1, 1], 40, 1, 100, theStage);
+//let RevoltFootman2: Enemy = new Enemy(1, 9, "abc", "Revolt Footman", 10, 5, 5, [1, 1], 20, 1, 100, theStage);
+//let Harpy1: Enemy = new Enemy(1, 10, "abc", "Harpy", 100, 55, 5, [1, 1], 40, 5, 100, theStage);
+//let Knarl: Enemy = new Enemy(1, 11, "abc", "Knarl", 140, 50, 5, [1, 1], 60, 5, 100, theStage);
+//let RevoltSpearman: Enemy = new Enemy(1, 12, "abc", "Revolt Spearman", 85, 45, 5, [1, 1], 30, 1, 100, theStage);
+//let RevoltArcher: Enemy = new Enemy(1, 13, "abc", "Revolt Archer", 75, 90, 5, [1, 1], 40, 0, 100, theStage);
+//let RevoltWarrior: Enemy = new Enemy(1, 14, "abc", "Revolt Warrior", 110, 40, 5, [1, 1], 20, 20, 160, theStage);
+//let RevoltFencer1: Enemy = new Enemy(1, 15, "abc", "Revolt Fencer", 70, 23, 5, [1, 1], 10, 0, 160, theStage);
+//let Harpy2: Enemy = new Enemy(2, 16, "abc", "Harpy", 100, 55, 5, [1, 1], 40, 5, 100, theStage);
+//let RevoltFencer2: Enemy = new Enemy(2, 17, "abc", "Revolt Fencer", 70, 23, 5, [1, 1], 10, 0, 160, theStage);
+//let Siren: Enemy = new Enemy(2, 18, "abc", "Siren", 1000, 255, 5, [1, 1], 30, 200, 60, theStage);
+//let RevoltRanger: Enemy = new Enemy(2, 19, "abc", "Revolt Ranger", 33500, 33000, 5, [1, 1], 40, 3000, 100, theStage);
+//let RevoltMusketeer1: Enemy = new Enemy(2, 20, "abc", "Revolt Musketeer", 1500, 2500, 5, [1, 1], 80, 50, 100, theStage);
+//let RevoltHexblade: Enemy = new Enemy(2, 21, "abc", "Revolt Hexblade", 2300, 1200, 5, [1, 1], 80, 500, 100, theStage);
+//let RevoltWarlord: Enemy = new Enemy(2, 22, "abc", "Revolt Warlord", 1900, 500, 5, [1, 1], 20, 100, 100, theStage);
+//let RevoltWarlock: Enemy = new Enemy(2, 23, "abc", "Revolt Warlock", 1250, 780, 5, [1, 1], 20, 100, 100, theStage);
+//let Siren2: Enemy = new Enemy(3, 24, "abc", "Siren", 1000, 255, 5, [1, 1], 30, 200, 60, theStage);
+//let Yeti1: Enemy = new Enemy(3, 25, "abc", "Yeti", 40000, 30000, 5, [1, 1], 60, 5000, 100, theStage);
+//let RevoltMusketeer2: Enemy = new Enemy(3, 26, "abc", "Revolt Musketeer", 1500, 2500, 5, [1, 1], 80, 50, 100, theStage);
+//let RevoltAssasin: Enemy = new Enemy(3, 27, "abc", "Revolt Assasin", 28000, 12000, 5, [1, 1], 15, 0, 10, theStage);
+//let RevoltTheurgist: Enemy = new Enemy(3, 28, "abc", "Revolt Theurgist", 1500, 3000, 5, [1, 1], 100, 150, 100, theStage);
+//let RevoltCavalier: Enemy = new Enemy(3, 29, "abc", "Revolt Cavalier", 48500, 7500, 5, [1, 1], 30, 5000, 80, theStage);
+//let RevoltGladiator1: Enemy = new Enemy(3, 30, "abc", "Revolt Gladiator", 300000, 240000, 5, [1, 1], 40, 20000, 100, theStage);
+//let RevoltNecromancer1: Enemy = new Enemy(3, 31, "abc", "Revolt Necromancer", 35000, 9000, 5, [1, 1], 60, 1000, 120, theStage);
+//let Dragon: Enemy = new Enemy(4, 32, "abc", "Dragon", 1000000, 375000, 5, [1, 1], 30, 50000, 100, theStage);
+//let Yeti2: Enemy = new Enemy(4, 33, "abc", "Yeti", 40000, 30000, 5, [1, 1], 60, 5000, 100, theStage);
+//let RevoltGladiator2: Enemy = new Enemy(4, 34, "abc", "Revolt Gladiator", 300000, 240000, 5, [1, 1], 40, 20000, 100, theStage);
+//let RevoltNecromancer2: Enemy = new Enemy(4, 35, "abc", "Revolt Necromancer", 35000, 9000, 5, [1, 1], 60, 1000, 120, theStage);
+//let RevoltArcaneRanger: Enemy = new Enemy(4, 36, "abc", "Revolt Arcane Ranger", 850000, 275000, 5, [1, 1], 20, 10000, 80, theStage);
+//let RevoltMarksman: Enemy = new Enemy(4, 37, "abc", "Revolt Marksman", 700000, 750000, 5, [1, 1], 40, 20000, 100, theStage);
+//let RevoltLancer: Enemy = new Enemy(4, 38, "abc", "Revolt Lancer", 1050000, 275000, 5, [1, 1], 50, 20000, 60, theStage);
+//let RevoltSummoner: Enemy = new Enemy(4, 39, "abc", "Revolt Lancer", 750000, 400000, 5, [1, 1], 80, 0, 100, theStage);
+
+//let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
+
 //Resources
 let Man: Resource = new Resource(0, "abc", "Man");
 let Wood: Resource = new Resource(1, "abc", "Wood");
@@ -161,7 +205,7 @@ let MysticRanger: Unit = new Unit(13, "abc", "MysticRanger", 7.5, 320000, 5, 0, 
 let Recruiter: RefinerTrainer = new RefinerTrainer(0, "abc", "Recruiter", [Coin], [1], [Man], [1], 1200);
 let Woodworker: RefinerTrainer = new RefinerTrainer(1, "abc", "Woodworker", [Wood], [1], [Plank], [2], 100);
 let Ironsmith: RefinerTrainer = new RefinerTrainer(2, "abc", "Ironsmith", [Iron], [5], [IronBar], [1], 60);
-let Couturier: RefinerTrainer = new RefinerTrainer(3, "abc", "Couturier", [Thread], [8], [Nylon], [1], 53);
+let Couturier: RefinerTrainer = new RefinerTrainer(3, "abc", "Couturier", [Thread], [8], [Nylon], [1], 50);
 let BladeSmith: RefinerTrainer = new RefinerTrainer(4, "abc", "Blade Smith", [IronBar], [2], [IronBlade], [1], 100);
 let ManaRefiner: RefinerTrainer = new RefinerTrainer(5, "abc", "Mana Refiner", [Manacyte], [1], [ManaShard], [1], 80);
 let PyrotechnicExpert: RefinerTrainer = new RefinerTrainer(6, "abc", "Pyrotechnic Expert", [IronBlade], [1], [Bullet], [10], 30);
@@ -203,11 +247,11 @@ let RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
 
 //Heroes
 
-let StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-let StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-let StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-let StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-let StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
+let StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
+var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
+var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
+var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
+var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
 let RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
 let RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
 let RangeThreeUnitArr: Unit[] = [Rifleman];

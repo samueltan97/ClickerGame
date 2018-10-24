@@ -111,11 +111,11 @@ describe("Storage", () => {
 
         //Heroes
 
-        var StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-        var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-        var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-        var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-        var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
+        var StageOneEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+        var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+        var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+        var StageFourEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+        var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
         var RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
         var RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
         var RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -133,6 +133,51 @@ describe("Storage", () => {
            SetupStorage().StageFiveEnemyArr, SetupStorage().RangeOneUnitArr, SetupStorage().RangeTwoUnitArr, SetupStorage().RangeThreeUnitArr, SetupStorage().RangeFourUnitArr, SetupStorage().RangeFiveUnitArr, SetupStorage().RangeSixUnitArr, SetupStorage().HeroArr, SetupStorage().ResourceArr, SetupStorage().RefinerTrainerArr);
        var thePlayer: Player = new Player(1);
        var theStage: StageLevel = new StageLevel(1);
+
+       ////Enemy (Base Exp and Resource not confirmed)
+       //let Slime: Enemy = new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1, 6], 40, 0, 20, theStage);
+       //let Boar: Enemy = new Enemy(0, 1, "abc", "Boar", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, theStage);
+       //let Ashwinder1: Enemy = new Enemy(0, 2, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6], 40, 1, 100, theStage);
+       //let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [3, 3, 3, 3, 6, 6], 20, 0, 100, theStage);
+       //let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [2, 2, 2, 2, 4, 4, 7, 7, 6], 10, 0, 100, theStage);
+       //let Bandit: Enemy = new Enemy(0, 5, "abc", "Bandit", 7, 3, 5, [4, 2, 5, 5, 7, 7, 7, 7, 7, 6, 6, 6], 20, 1, 100, theStage);
+       //let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [4, 4, 4, 4, 2, 2, 2, 2, 7, 7, 7, 7], 20, 1, 100, theStage);
+       //let RevoltFootman: Enemy = new Enemy(0, 7, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7], 20, 1, 100, theStage);
+       //let Ashwinder2: Enemy = new Enemy(1, 8, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6, 10], 40, 1, 100, theStage);
+       //let RevoltFootman2: Enemy = new Enemy(1, 9, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7, 9, 14], 20, 1, 100, theStage);
+       //let Harpy1: Enemy = new Enemy(1, 10, "abc", "Harpy", 100, 55, 5, [1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 10], 40, 5, 100, theStage);
+       //let Knarl: Enemy = new Enemy(1, 11, "abc", "Knarl", 140, 50, 5, [1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 10], 60, 5, 100, theStage);
+       //let RevoltSpearman: Enemy = new Enemy(1, 12, "abc", "Revolt Spearman", 85, 45, 5, [1, 1, 2, 2, 2, 4, 4, 4, 5, 5, 6, 7, 7, 7, 7, 7, 9, 14, 17], 30, 1, 100, theStage);
+       //let RevoltArcher: Enemy = new Enemy(1, 13, "abc", "Revolt Archer", 75, 90, 5, [1, 1, 2, 2, 3, 3, 3, 3, 3, 6, 6, 7, 7, 7, 7, 7, 15, 19], 40, 0, 100, theStage);
+       //let RevoltWarrior: Enemy = new Enemy(1, 14, "abc", "Revolt Warrior", 110, 40, 5, [1, 1, 2, 2, 2, 4, 4, 4, 5, 5, 6, 7, 7, 7, 7, 7, 9, 14, 18], 20, 20, 160, theStage);
+       //let RevoltFencer1: Enemy = new Enemy(1, 15, "abc", "Revolt Fencer", 70, 23, 5, [1, 1, 2, 2, 2, 4, 4, 4, 5, 5, 6, 7, 7, 7, 7, 7, 7, 7, 13, 9, 14, 23], 10, 0, 160, theStage);
+       //let Harpy2: Enemy = new Enemy(2, 16, "abc", "Harpy", 100, 55, 5, [1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 8, 10, 6, 6, 6, 15, 15, 19, 19], 40, 5, 100, theStage);
+       //let RevoltFencer2: Enemy = new Enemy(2, 17, "abc", "Revolt Fencer", 70, 23, 5, [1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 13, 13, 9, 9, 14, 14, 23, 23, 11], 10, 0, 160, theStage);
+       //let Siren: Enemy = new Enemy(2, 18, "abc", "Siren", 1000, 255, 5, [6, 6, 6, 6, 6, 6, 6, 6, 13, 13, 13, 13, 13, 13, 13, 5, 5, 5, 5, 5, 15, 15, 15, 15, 15, 15, 15, 15, 15], 30, 200, 60, theStage);
+       //let RevoltRanger: Enemy = new Enemy(2, 19, "abc", "Revolt Ranger", 33500, 33000, 5, [2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 711, 11, 11, 11, 13, 13, 13, 13, 12, 12, 12, 15, 15, 15, 15, 15, 21, 21], 40, 3000, 100, theStage);
+       //let RevoltMusketeer1: Enemy = new Enemy(2, 20, "abc", "Revolt Musketeer", 1500, 2500, 5, [1, 1], 80, 50, 100, theStage);
+       //let RevoltHexblade: Enemy = new Enemy(2, 21, "abc", "Revolt Hexblade", 2300, 1200, 5, [1, 1], 80, 500, 100, theStage);
+       //let RevoltWarlord: Enemy = new Enemy(2, 22, "abc", "Revolt Warlord", 1900, 500, 5, [1, 1], 20, 100, 100, theStage);
+       //let RevoltWarlock: Enemy = new Enemy(2, 23, "abc", "Revolt Warlock", 1250, 780, 5, [1, 1], 20, 100, 100, theStage);
+       //let Siren2: Enemy = new Enemy(3, 24, "abc", "Siren", 1000, 255, 5, [1, 1], 30, 200, 60, theStage);
+       //let Yeti1: Enemy = new Enemy(3, 25, "abc", "Yeti", 40000, 30000, 5, [1, 1], 60, 5000, 100, theStage);
+       //let RevoltMusketeer2: Enemy = new Enemy(3, 26, "abc", "Revolt Musketeer", 1500, 2500, 5, [1, 1], 80, 50, 100, theStage);
+       //let RevoltAssasin: Enemy = new Enemy(3, 27, "abc", "Revolt Assasin", 28000, 12000, 5, [1, 1], 15, 0, 10, theStage);
+       //let RevoltTheurgist: Enemy = new Enemy(3, 28, "abc", "Revolt Theurgist", 1500, 3000, 5, [1, 1], 100, 150, 100, theStage);
+       //let RevoltCavalier: Enemy = new Enemy(3, 29, "abc", "Revolt Cavalier", 48500, 7500, 5, [1, 1], 30, 5000, 80, theStage);
+       //let RevoltGladiator1: Enemy = new Enemy(3, 30, "abc", "Revolt Gladiator", 300000, 240000, 5, [1, 1], 40, 20000, 100, theStage);
+       //let RevoltNecromancer1: Enemy = new Enemy(3, 31, "abc", "Revolt Necromancer", 35000, 9000, 5, [1, 1], 60, 1000, 120, theStage);
+       //let Dragon: Enemy = new Enemy(4, 32, "abc", "Dragon", 1000000, 375000, 5, [1, 1], 30, 50000, 100, theStage);
+       //let Yeti2: Enemy = new Enemy(4, 33, "abc", "Yeti", 40000, 30000, 5, [1, 1], 60, 5000, 100, theStage);
+       //let RevoltGladiator2: Enemy = new Enemy(4, 34, "abc", "Revolt Gladiator", 300000, 240000, 5, [1, 1], 40, 20000, 100, theStage);
+       //let RevoltNecromancer2: Enemy = new Enemy(4, 35, "abc", "Revolt Necromancer", 35000, 9000, 5, [1, 1], 60, 1000, 120, theStage);
+       //let RevoltArcaneRanger: Enemy = new Enemy(4, 36, "abc", "Revolt Arcane Ranger", 850000, 275000, 5, [1, 1], 20, 10000, 80, theStage);
+       //let RevoltMarksman: Enemy = new Enemy(4, 37, "abc", "Revolt Marksman", 700000, 750000, 5, [1, 1], 40, 20000, 100, theStage);
+       //let RevoltLancer: Enemy = new Enemy(4, 38, "abc", "Revolt Lancer", 1050000, 275000, 5, [1, 1], 50, 20000, 60, theStage);
+       //let RevoltSummoner: Enemy = new Enemy(4, 39, "abc", "Revolt Lancer", 750000, 400000, 5, [1, 1], 80, 0, 100, theStage);
+
+       //let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
+
 
        //Resources
        var Man: Resource = new Resource(0, "abc", "Man");
@@ -232,11 +277,11 @@ describe("Storage", () => {
 
        //Heroes
 
-       var StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-       var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-       var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-       var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
-       var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, 5, 5, 2, [0, 1], theStage)];
+       var StageOneEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+       var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+       var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+       var StageFourEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
+       var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage)];
        var RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
        var RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
        var RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -263,131 +308,13 @@ describe("Storage", () => {
         expected.should.deep.equal(actual);
     });
 
-    //it("should get correct Unit on the screen", () => {
-    //    let thePlayer: Player = new Player(1);
-    //    let theStage: StageLevel = new StageLevel(1);
-
-    //    let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1000, theStage)];
-    //    let StageTwoEnemyArr: Enemy[] = [new Enemy(2000, 2000, theStage)];
-    //    let StageThreeEnemyArr: Enemy[] = [new Enemy(5, 1, theStage)];
-    //    let StageFourEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];;
-    //    let StageFiveEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
-    //    let RangeOneUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 10, 1, 1, 1, thePlayer), new Unit(2, "abc.com", "Warrior", 1, 1000, 1, 1, thePlayer)];
-    //    let RangeTwoUnitArr: Unit[] = [new Unit(3, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeThreeUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFourUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFiveUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeSixUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let HeroArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let theDatabase = new Database(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
-    //        StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr);
-    //    theDatabase.CurrentUnit = theDatabase.RangeTwoUnitArr[0];
-    //    theDatabase.CurrentUnit.ReceiveDamage(1000);
-    //    theDatabase.RemoveByDeath("Unit");
-    //    let expected = theDatabase.RangeOneUnitArr[0];
-    //    let actual = theDatabase.CurrentUnit;
-    //    expected.should.deep.equal(actual);
-    //    theDatabase.CurrentUnit.ReceiveDamage(1000);
-    //    theDatabase.RemoveByDeath("Unit");
-    //    let expected1 = theDatabase.RangeOneUnitArr[1];
-    //    let actual1 = theDatabase.CurrentUnit;
-    //    theDatabase.RangeTwoUnitArr[0].Exist(1);
-    //    expected1.should.deep.equal(actual1);
-    //    theDatabase.CurrentUnit.ReceiveDamage(1000);
-    //    theDatabase.RemoveByDeath("Unit");
-    //    let expected2 = theDatabase.RangeTwoUnitArr[0];
-    //    let actual2 = theDatabase.CurrentUnit;
-    //    expected2.should.deep.equal(actual2);
-    //    theDatabase.RangeOneUnitArr[0].Exist(1);
-    //    theDatabase.RemoveByDeath("Unit");
-    //    let expected3 = theDatabase.RangeOneUnitArr[0];
-    //    let actual3 = theDatabase.CurrentUnit;
-    //    expected3.should.deep.equal(actual3);
-
-    //});
-
-    //it("should get correct Enemy on the screen", () => {
-    //    let thePlayer: Player = new Player(1);
-    //    let theStage: StageLevel = new StageLevel(1);
-
-    //    let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1000, theStage), new Enemy(1, 1000, theStage)];
-    //    let StageTwoEnemyArr: Enemy[] = [new Enemy(2000, 2000, theStage)];
-    //    let StageThreeEnemyArr: Enemy[] = [new Enemy(5, 1, theStage)];
-    //    let StageFourEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];;
-    //    let StageFiveEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
-    //    let RangeOneUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 10, 1, 1, 1, thePlayer), new Unit(2, "abc.com", "Warrior", 1, 1000, 1, 1, thePlayer)];
-    //    let RangeTwoUnitArr: Unit[] = [new Unit(3, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeThreeUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFourUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFiveUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeSixUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let HeroArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let theDatabase = new Database(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
-    //        StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageOneEnemyArr;
-    //    theDatabase.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theDatabase.RemoveByDeath("Enemy");
-    //    let expected = theDatabase.CopyStageOneEnemyArr[1];
-    //    let actual = theDatabase.CurrentEnemyArr[0];
-    //    expected.should.deep.equal(actual);
-    //    theDatabase.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theDatabase.RemoveByDeath("Enemy");
-    //    let expected1 = theDatabase.CopyStageTwoEnemyArr[0];
-    //    let actual1 = theDatabase.CurrentEnemyArr[0];
-    //    expected1.should.deep.equal(actual1);
-    //});
+   
 
     it("should handle methods in the correct sequence when MainGameCycle is run less resources", () => {
-        (SetupStorage().MainGameCycle(10).CurrentEnemyArr[0].CurrentHP).should.equal(0);
-        (SetupStorage().MainGameCycle(10).CurrentUnit.CurrentHP).should.equal(SetupStorage().MainGameCycle(10).CurrentUnit.MaxHP);
-        (SetupStorage().MainGameCycle(20).CurrentUnit.CurrentHP).should.equal(2);
+        (SetupStorage().MainGameCycle(15).CurrentEnemyArr[0].CurrentHP).should.equal(8);
+        (SetupStorage().MainGameCycle(40).CurrentUnit.CurrentHP).should.equal(5);
+        (SetupStorage().MainGameCycle(45).CurrentUnit.CurrentHP).should.equal(6);
     });
 
-    //it("should repopulate enemy arrays", () => {
-    //    let thePlayer: Player = new Player(1);
-    //    let theStage: StageLevel = new StageLevel(1);
-
-    //    let StageOneEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
-    //    let StageTwoEnemyArr: Enemy[] = [new Enemy(2000, 2000, theStage)];
-    //    let StageThreeEnemyArr: Enemy[] = [new Enemy(5, 1, theStage)];
-    //    let StageFourEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];;
-    //    let StageFiveEnemyArr: Enemy[] = [new Enemy(1, 1, theStage)];
-    //    let RangeOneUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 10, 1, 1, 1, thePlayer), new Unit(2, "abc.com", "Warrior", 1, 1000, 1, 1, thePlayer)];
-    //    let RangeTwoUnitArr: Unit[] = [new Unit(3, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeThreeUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFourUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeFiveUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let RangeSixUnitArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let HeroArr: Unit[] = [new Unit(1, "abc.com", "Warrior", 1, 1, 1, 1, thePlayer)];
-    //    let theDatabase = new Database(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
-    //        StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageOneEnemyArr;
-    //    theDatabase.CurrentEnemyArr.splice(0);
-    //    theDatabase.CurrentEnemyArr.length.should.equal(0);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageTwoEnemyArr;
-    //    theDatabase.CurrentEnemyArr.splice(0);
-    //    theDatabase.CurrentEnemyArr.length.should.equal(0);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageThreeEnemyArr;
-    //    theDatabase.CurrentEnemyArr.splice(0);
-    //    theDatabase.CurrentEnemyArr.length.should.equal(0);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageFourEnemyArr;
-    //    theDatabase.CurrentEnemyArr.splice(0);
-    //    theDatabase.CurrentEnemyArr.length.should.equal(0);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageFiveEnemyArr;
-    //    theDatabase.CurrentEnemyArr.splice(0);
-    //    theDatabase.CurrentEnemyArr.length.should.equal(0);
-    //    for (let i = 0; i < 5; i++) {
-    //        theDatabase.PopulateEnemyArr(i);
-    //    }
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageOneEnemyArr;
-    //    theDatabase.CurrentEnemyArr.length.should.equal(1);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageTwoEnemyArr;
-    //    theDatabase.CurrentEnemyArr.length.should.equal(1);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageThreeEnemyArr;
-    //    theDatabase.CurrentEnemyArr.length.should.equal(1);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageFourEnemyArr;
-    //    theDatabase.CurrentEnemyArr.length.should.equal(1);
-    //    theDatabase.CurrentEnemyArr = theDatabase.StageFiveEnemyArr;
-    //    theDatabase.CurrentEnemyArr.length.should.equal(1);
-    //});
+ 
 });

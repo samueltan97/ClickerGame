@@ -17,6 +17,8 @@ import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
     readonly arrayId: number;
     readonly id: number;
+    readonly image: string;
+    readonly name: string;
     private readonly baseHP: number;
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
@@ -24,19 +26,27 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     public isDead: boolean;
     private readonly resourceArray: number[];
     private readonly baseExperience: number;
+    private damageFrequency: number;
+    private regen: number;
+    private regenFrequency: number;
     private valueUpdateEvents: ((e: EnemyValueUpdateEvent) => void)[] = [];
 
 
-    constructor(arrayId:number, id:number, baseHP: number, baseDamage: number, baseExperience:number, resourceArray: number[], stage: IStageLevel) {
+    constructor(arrayId: number, id: number, image:string, name:string, baseHP: number, baseDamage: number, baseExperience: number, resourceArray: number[], damageFrequency: number, regen: number, regenFrequency:number, stage: IStageLevel) {
         this.arrayId = arrayId;
         this.id = id;
+        this.image = image;
+        this.name = name;
         this.baseHP = baseHP;
         this.stage = stage;
         this.currentHP = this.baseHP;
         this.baseDamage = baseDamage;
         this.baseExperience = baseExperience;
         this.isDead = false;
+        this.damageFrequency = damageFrequency;
         this.resourceArray = resourceArray;
+        this.regen = regen;
+        this.regenFrequency = regenFrequency;
     }
 
     AddValueUpdateEvent(e: (e: EnemyValueUpdateEvent) => void) {
@@ -48,7 +58,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     UpdateFeedback(counter: number):number {
-        if (counter % 20 == 0 && this.isDead == false) {
+        if (counter % this.damageFrequency == 0 && this.isDead == false) {
             return this.CurrentDamage;
         }
         return 0;
@@ -100,8 +110,8 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Regenerate(counter: number) {
-        if (counter % 10 == 0 && !this.isDead) {
-        this.currentHP += 5 * this.stage.CurrentLevel; //placeholder for regeernation value
+        if (counter % this.regenFrequency == 0 && !this.isDead) {
+        this.currentHP += this.regen * this.stage.CurrentLevel; //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
         }
@@ -143,7 +153,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     UpdateFeedback(counter: number): number {
-        if ((counter - 10) % this.damageFrequency == 0 && this.isDead == false) {
+        if ((counter + 5) % this.damageFrequency == 0 && this.isDead == false) {
             return this.CurrentDamage;
         }
         return 0;
@@ -223,7 +233,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Regenerate(counter: number) {
-        if (counter % 10 == 0 && !this.isDead) {
+        if ((counter + 5) % 10 == 0 && !this.isDead) {
             this.currentHP += 1 * this.player.CurrentArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));

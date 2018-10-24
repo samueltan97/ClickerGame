@@ -19,6 +19,7 @@ export interface IStorage {
     CopyStageFourEnemyArr: Enemy[];
     CopyStageFiveEnemyArr: Enemy[];
     EnemyArr: Enemy[][];
+    CopyEnemyArr: Enemy[][];
     CurrentEnemyArr: Enemy[]; 
 
     RangeOneUnitArr: Unit[];
