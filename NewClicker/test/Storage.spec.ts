@@ -123,13 +123,13 @@ describe("Storage", () => {
         var RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
         var RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
         var HeroArr: Hero[] = [];
-        var theStorage = new Storage(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
+        var theStorage = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
             StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr);
         return theStorage;
     }
 
    it("should get correct database", () => {
-       let expected = new Storage(SetupStorage().CurrentPlayer, SetupStorage().CurrentStage, SetupStorage().StageOneEnemyArr, SetupStorage().StageTwoEnemyArr, SetupStorage().StageThreeEnemyArr, SetupStorage().StageFourEnemyArr,
+       let expected = new Storage(SetupStorage().CurrentPlayer, SetupStorage().StageOneEnemyArr, SetupStorage().StageTwoEnemyArr, SetupStorage().StageThreeEnemyArr, SetupStorage().StageFourEnemyArr,
            SetupStorage().StageFiveEnemyArr, SetupStorage().RangeOneUnitArr, SetupStorage().RangeTwoUnitArr, SetupStorage().RangeThreeUnitArr, SetupStorage().RangeFourUnitArr, SetupStorage().RangeFiveUnitArr, SetupStorage().RangeSixUnitArr, SetupStorage().HeroArr, SetupStorage().ResourceArr, SetupStorage().RefinerTrainerArr);
        var thePlayer: Player = new Player(1);
        var theStage: StageLevel = new StageLevel(1);
@@ -289,7 +289,7 @@ describe("Storage", () => {
        var RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
        var RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
        var HeroArr: Hero[] = [];
-       var theStorage = new Storage(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
+       var theStorage = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
            StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr);
        var actual = theStorage;
         expected.should.deep.equal(actual);

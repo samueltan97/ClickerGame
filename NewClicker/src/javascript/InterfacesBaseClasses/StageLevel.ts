@@ -2,15 +2,15 @@
 import { StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class StageLevel implements IStageLevel {
-    private Level: number;
-    hasEnemy: boolean;
-    hasUnit: boolean;
+    private Zone: number;
+    private Stage: number;
+    private enemyDefeated: number;
     private valueUpdateEvents: ((e: StageLevelValueUpdateEvent) => void)[] = [];
 
-    constructor(level: number) {
-        this.Level = level;
-        this.hasEnemy = false;
-        this.hasUnit = false;
+    constructor(stage:number) {
+        this.Zone = 1;
+        this.Stage = stage;
+        this.enemyDefeated = 0;
     }
 
     AddValueUpdateEvent(e: (e: StageLevelValueUpdateEvent) => void) {
@@ -18,10 +18,30 @@ export class StageLevel implements IStageLevel {
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new StageLevelValueUpdateEvent(this.CurrentLevel)));
+        this.valueUpdateEvents.forEach(x => x(new StageLevelValueUpdateEvent(this.CurrentZone)));
     }
 
-    get CurrentLevel() {
-        return this.Level;
+    IncreaseZone(): void {
+        this.Zone++;
+    }  
+
+    IncreaseEnemyDefeated(): void {
+        this.enemyDefeated++;
+        if (this.EnemyDefeated % 10 == 0) {
+            this.IncreaseZone();
+            this.Update();
+        }
+    }
+
+    get CurrentZone() {
+        return this.Zone;
+    }
+
+    get CurrentStage() {
+        return this.Stage;
+    }
+
+    get EnemyDefeated() {
+        return this.enemyDefeated;
     }
 }

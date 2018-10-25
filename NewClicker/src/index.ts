@@ -102,7 +102,11 @@ core.ExtendPrimitives();
 //});
 
 let thePlayer: Player = new Player(1);
-let theStage: StageLevel = new StageLevel(1);
+let StageOne: StageLevel = new StageLevel(1);
+let StageTwo: StageLevel = new StageLevel(2);
+let StageThree: StageLevel = new StageLevel(3);
+let StageFour: StageLevel = new StageLevel(4);
+let StageFive: StageLevel = new StageLevel(5);
 
 ////Enemy (Base Exp and Resource not confirmed)
 //let Slime: Enemy = new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage);
@@ -247,11 +251,11 @@ let RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
 
 //Heroes
 
-let StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
-var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
-var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
-var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
-var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, theStage)];
+let StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageOne)];
+var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageTwo)];
+var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageThree)];
+var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageFour)];
+var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageFive)];
 let RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
 let RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
 let RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -259,7 +263,7 @@ let RangeFourUnitArr: Unit[] = [Archer];
 let RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
 let RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
 let HeroArr: Hero[] = [];
-let theDatabase = new Storage(thePlayer, theStage, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
+let theDatabase = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
     StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr);
 export let theRepo = new Repository(theDatabase);
 

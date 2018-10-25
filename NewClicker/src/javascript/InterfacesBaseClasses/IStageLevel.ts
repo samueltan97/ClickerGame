@@ -1,3 +1,7 @@
 ﻿export interface IStageLevel {
-    readonly CurrentLevel: number;
+    readonly CurrentZone: number;
+    readonly CurrentStage: number;
+    readonly EnemyDefeated: number;
+    IncreaseZone(count: number): void;
+    IncreaseEnemyDefeated(count: number): void;
 }

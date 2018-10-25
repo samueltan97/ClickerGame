@@ -8,7 +8,12 @@ import { IMortality } from "./IMortality";
 export class Storage implements IStorage {
 
     private thePlayer: Player;
-    private theStage: StageLevel;
+    private StageOne: StageLevel = new StageLevel(1);
+    private StageTwo: StageLevel = new StageLevel(2);
+    private StageThree: StageLevel = new StageLevel(3);
+    private StageFour: StageLevel = new StageLevel(4);
+    private StageFive: StageLevel = new StageLevel(5);
+    private currentStage: StageLevel;
 
     EnemyArrCounter: number;
     StageOneEnemyArr: Enemy[];
@@ -41,7 +46,6 @@ export class Storage implements IStorage {
     RefinerTrainerArr: RefinerTrainer[];
 
     constructor(player: Player,
-        stage: StageLevel,
         stageOneEnemyArr: Enemy[],
         stageTwoEnemyArr: Enemy[],
         stageThreeEnemyArr: Enemy[],
@@ -58,7 +62,7 @@ export class Storage implements IStorage {
         refinerTrainerArr: RefinerTrainer[]
     ) {
         this.thePlayer = player;
-        this.theStage = stage;
+        this.currentStage = this.StageOne;
         this.StageOneEnemyArr = stageOneEnemyArr;
         this.StageTwoEnemyArr = stageTwoEnemyArr;
         this.StageThreeEnemyArr = stageThreeEnemyArr;
@@ -92,7 +96,7 @@ export class Storage implements IStorage {
     }
 
     get CurrentStage() {
-        return this.theStage;
+        return this.currentStage;
     }
 
     MainGameCycle(currentTime: number): Storage {

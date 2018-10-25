@@ -22,7 +22,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private readonly baseHP: number;
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    private readonly stage;
+    stage: IStageLevel;
     public isDead: boolean;
     private readonly resourceArray: number[];
     private readonly baseExperience: number;
@@ -49,8 +49,8 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.regenFrequency = regenFrequency;
     }
 
-    AddValueUpdateEvent(e: (e: EnemyValueUpdateEvent) => void) {
-        this.valueUpdateEvents.push(e);
+    AddValueUpdateEvent(event: (e: EnemyValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(event);
     }
 
     Update(): void {
@@ -65,7 +65,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get MaxHP(): number {         
-        return this.baseHP * this.stage.CurrentLevel; //Placeholder algorithm for maxhp value
+        return this.baseHP * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     get Count(): number {
@@ -77,7 +77,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentDamage(): number {
-        return this.baseDamage * this.stage.CurrentLevel; //Placeholder algorithm for damage value
+        return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     get ResourceArray(): number[] {
@@ -85,7 +85,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentExp(): number {
-        return this.baseExperience * this.stage.CurrentLevel;
+        return this.baseExperience * this.stage.CurrentStage;
     }
 
     ReceiveDamage(damage: number): void {
@@ -111,10 +111,15 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     Regenerate(counter: number) {
         if (counter % this.regenFrequency == 0 && !this.isDead) {
-        this.currentHP += this.regen * this.stage.CurrentLevel; //placeholder for regeernation value
+            this.currentHP += this.regen *  this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", (this.CurrentHP / this.MaxHP));
         }
+        this.Update();
+    }
+
+    RegenerateMax():void {
+        this.currentHP = this.MaxHP;
         this.Update();
     }
 }
@@ -188,8 +193,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation("fighter-hp", (this.CurrentHP / this.MaxHP));
         if (this.currentHP == 0) {
-            this.Die();
             this.Unexist(1);
+            this.Die();
         }
         this.Update();
     }

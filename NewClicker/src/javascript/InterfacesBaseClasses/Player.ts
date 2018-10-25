@@ -57,6 +57,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     IncreaseArmyVitality():void {
         this.armyVitality += 1;
+        this.Update();
     }
 
     GainExperience(experience: number): void {
@@ -67,10 +68,12 @@ export class Player implements IPlayer, ILevelProgression{
         } else {
             this.currentExperience += experience;
         }
+        this.Update();
     }
 
     LevelUp(): void {
         this.currentLevel += 1;
         this.currentExperience = 0;
+        this.Update();
     }
 }
