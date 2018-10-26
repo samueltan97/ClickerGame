@@ -62,7 +62,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     GainExperience(experience: number): void {
         let experienceOverflow = this.currentExperience + experience - this.MaxExperience;
-        if (experienceOverflow > 0) {
+        if (experienceOverflow >= 0) {
             this.LevelUp();
             this.currentExperience += experienceOverflow;
         } else {
