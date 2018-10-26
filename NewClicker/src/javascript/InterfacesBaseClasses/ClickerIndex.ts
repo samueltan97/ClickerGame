@@ -37,7 +37,6 @@ export class ClickerIndex {
             if (this.CurrentStorage.CurrentEnemyArr.length == 0) {
                 this.PopulateEnemyArr((this.CurrentStorage.CurrentStage.CurrentStage - 1) % 5);
                 this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[(this.CurrentStorage.CurrentStage.CurrentStage -1) % 5];
-                //Increase Zone after every 10 mobs
             }
             this.theStorage.CurrentEnemyArr[0].Birth();
         }
@@ -56,6 +55,19 @@ export class ClickerIndex {
             this.CurrentStorage.CurrentStage.IncreaseEnemyDefeated();
             this.RemoveByDeath("Enemy");
         }    
+    }
+
+    ChangeStage = (isIncrease: boolean): void => {
+        let counter: number = this.CurrentStorage.CurrentStage.CurrentStage;
+        this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
+        if (isIncrease) {
+            this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter];
+            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter];
+        } else {
+            this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter - 1];
+            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter - 1];
+        }
+        this.CurrentStorage.CurrentEnemyArr[0].Birth();
     }
 
     PopulateEnemyArr = (index: number) => {

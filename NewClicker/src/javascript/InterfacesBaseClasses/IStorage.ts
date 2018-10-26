@@ -5,7 +5,8 @@ import { IMortality } from "./IMortality";
 
 export interface IStorage {
     readonly CurrentPlayer:Player;
-    readonly CurrentStage:StageLevel;
+    CurrentStage: StageLevel;
+    StageArray: StageLevel[];
 
     EnemyArrCounter: number;
     StageOneEnemyArr: Enemy[];

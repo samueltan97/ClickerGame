@@ -13,7 +13,8 @@ export class Storage implements IStorage {
     private StageThree: StageLevel = new StageLevel(3);
     private StageFour: StageLevel = new StageLevel(4);
     private StageFive: StageLevel = new StageLevel(5);
-    private currentStage: StageLevel;
+    CurrentStage: StageLevel;
+    StageArray: StageLevel[];
 
     EnemyArrCounter: number;
     StageOneEnemyArr: Enemy[];
@@ -62,7 +63,7 @@ export class Storage implements IStorage {
         refinerTrainerArr: RefinerTrainer[]
     ) {
         this.thePlayer = player;
-        this.currentStage = this.StageOne;
+        this.CurrentStage = this.StageOne;
         this.StageOneEnemyArr = stageOneEnemyArr;
         this.StageTwoEnemyArr = stageTwoEnemyArr;
         this.StageThreeEnemyArr = stageThreeEnemyArr;
@@ -89,14 +90,11 @@ export class Storage implements IStorage {
         this.counter = 0;
         this.ResourceArr = resourceArr;
         this.RefinerTrainerArr = refinerTrainerArr;
+        this.StageArray = [this.StageOne, this.StageTwo, this.StageThree, this.StageFour, this.StageFive];
     }
 
     get CurrentPlayer() {
         return this.thePlayer;
-    }
-
-    get CurrentStage() {
-        return this.currentStage;
     }
 
     MainGameCycle(currentTime: number): Storage {

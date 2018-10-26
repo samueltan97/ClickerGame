@@ -12,7 +12,7 @@ import { isDate } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
 import { ILevelProgression } from "./ILevelProgression";
-import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, RefinerTrainerValueUpdateEvent, HeroValueUpdateEvent } from "./ValueUpdateEvent";
+import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, RefinerTrainerValueUpdateEvent, HeroValueUpdateEvent, StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
     readonly arrayId: number;
@@ -22,7 +22,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private readonly baseHP: number;
     private currentHP: number;
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
-    stage: IStageLevel;
+     stage: IStageLevel;
     public isDead: boolean;
     private readonly resourceArray: number[];
     private readonly baseExperience: number;
@@ -88,6 +88,11 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         return this.baseExperience * this.stage.CurrentStage;
     }
 
+    UpdateStage = (e: StageLevelValueUpdateEvent): void =>  {
+        this.stage.ChangeZone(e.newZone);
+        this.stage.ChangeEnemyDefeated(e.newEnemyDefeated);
+    }
+
     ReceiveDamage(damage: number): void {
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
@@ -105,8 +110,13 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Die(): void {
+                //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = true;
         this.Update();
+    }
+
+    Fadeout(): void {
+                //CSS animation for disappearance on screen, including refreshing of health and name bars
     }
 
     Regenerate(counter: number) {

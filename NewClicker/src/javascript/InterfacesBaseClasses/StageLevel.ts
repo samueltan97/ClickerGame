@@ -13,12 +13,12 @@ export class StageLevel implements IStageLevel {
         this.enemyDefeated = 0;
     }
 
-    AddValueUpdateEvent(e: (e: StageLevelValueUpdateEvent) => void) {
-        this.valueUpdateEvents.push(e);
+    AddValueUpdateEvent(event: (e: StageLevelValueUpdateEvent) => void) {
+        this.valueUpdateEvents.push(event);
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new StageLevelValueUpdateEvent(this.CurrentZone)));
+        this.valueUpdateEvents.forEach(x => x(new StageLevelValueUpdateEvent(this.CurrentZone, this.EnemyDefeated)));
     }
 
     IncreaseZone(): void {
@@ -29,8 +29,8 @@ export class StageLevel implements IStageLevel {
         this.enemyDefeated++;
         if (this.EnemyDefeated % 10 == 0) {
             this.IncreaseZone();
-            this.Update();
         }
+        this.Update();
     }
 
     get CurrentZone() {
@@ -44,4 +44,12 @@ export class StageLevel implements IStageLevel {
     get EnemyDefeated() {
         return this.enemyDefeated;
     }
+
+    ChangeZone(count: number): void {
+        this.Zone = count;
+    }
+    ChangeEnemyDefeated(count: number): void {
+        this.enemyDefeated = count;
+    }
+
 }

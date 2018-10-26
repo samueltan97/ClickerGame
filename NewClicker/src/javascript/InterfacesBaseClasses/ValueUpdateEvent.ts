@@ -90,9 +90,11 @@ export class PlayerValueUpdateEvent extends ValueUpdateEvent {
 }
 
 export class StageLevelValueUpdateEvent extends ValueUpdateEvent  {
-    newLevel: number;
-    constructor(level: number) {
+    newZone: number;
+    newEnemyDefeated: number;
+    constructor(zone: number, enemyDefeated:number) {
         super();
-        this.newLevel = level;
+        this.newZone = zone;
+        this.newEnemyDefeated = enemyDefeated;
     }
 }

@@ -2,6 +2,8 @@
     readonly CurrentZone: number;
     readonly CurrentStage: number;
     readonly EnemyDefeated: number;
-    IncreaseZone(count: number): void;
-    IncreaseEnemyDefeated(count: number): void;
+    IncreaseZone(): void;
+    IncreaseEnemyDefeated(): void;
+    ChangeZone(count: number): void;
+    ChangeEnemyDefeated(count: number): void;
 }

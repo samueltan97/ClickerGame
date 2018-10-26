@@ -265,7 +265,6 @@ let RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
 let HeroArr: Hero[] = [];
 let theDatabase = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
     StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr);
-export let theRepo = new Repository(theDatabase);
 
 
 
