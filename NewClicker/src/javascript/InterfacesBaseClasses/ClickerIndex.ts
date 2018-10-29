@@ -64,8 +64,8 @@ export class ClickerIndex {
             this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter];
             this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter];
         } else {
-            this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter - 1];
-            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter - 1];
+            this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter - 2];
+            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter - 2];
         }
         this.CurrentStorage.CurrentEnemyArr[0].Birth();
     }

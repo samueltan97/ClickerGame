@@ -8,11 +8,11 @@ import { IMortality } from "./IMortality";
 export class Storage implements IStorage {
 
     private thePlayer: Player;
-    private StageOne: StageLevel = new StageLevel(1);
-    private StageTwo: StageLevel = new StageLevel(2);
-    private StageThree: StageLevel = new StageLevel(3);
-    private StageFour: StageLevel = new StageLevel(4);
-    private StageFive: StageLevel = new StageLevel(5);
+    private StageOne: StageLevel;
+    private StageTwo: StageLevel;
+    private StageThree: StageLevel;
+    private StageFour: StageLevel;
+    private StageFive: StageLevel;
     CurrentStage: StageLevel;
     StageArray: StageLevel[];
 
@@ -60,10 +60,10 @@ export class Storage implements IStorage {
         rangeSixUnitArr: Unit[],
         heroArr: Hero[],
         resourceArr: Resource[],
-        refinerTrainerArr: RefinerTrainer[]
+        refinerTrainerArr: RefinerTrainer[],
+        stageArr: StageLevel[]
     ) {
         this.thePlayer = player;
-        this.CurrentStage = this.StageOne;
         this.StageOneEnemyArr = stageOneEnemyArr;
         this.StageTwoEnemyArr = stageTwoEnemyArr;
         this.StageThreeEnemyArr = stageThreeEnemyArr;
@@ -90,7 +90,13 @@ export class Storage implements IStorage {
         this.counter = 0;
         this.ResourceArr = resourceArr;
         this.RefinerTrainerArr = refinerTrainerArr;
-        this.StageArray = [this.StageOne, this.StageTwo, this.StageThree, this.StageFour, this.StageFive];
+        this.StageArray = stageArr;
+        this.StageOne = stageArr[0];
+        this.StageTwo = stageArr[1];
+        this.StageThree = stageArr[2];
+        this.StageFour = stageArr[3];
+        this.StageFive = stageArr[4];
+        this.CurrentStage = this.StageOne;
     }
 
     get CurrentPlayer() {

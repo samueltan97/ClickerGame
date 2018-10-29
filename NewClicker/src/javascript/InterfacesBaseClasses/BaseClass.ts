@@ -29,10 +29,12 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private damageFrequency: number;
     private regen: number;
     private regenFrequency: number;
+    private ability: Function;
+    private abilityFrequency: number;
     private valueUpdateEvents: ((e: EnemyValueUpdateEvent) => void)[] = [];
 
 
-    constructor(arrayId: number, id: number, image:string, name:string, baseHP: number, baseDamage: number, baseExperience: number, resourceArray: number[], damageFrequency: number, regen: number, regenFrequency:number, stage: IStageLevel) {
+    constructor(arrayId: number, id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience: number, resourceArray: number[], damageFrequency: number, regen: number, regenFrequency: number, ability: Function, abilityFrequency: number, stage: IStageLevel) {
         this.arrayId = arrayId;
         this.id = id;
         this.image = image;
@@ -47,6 +49,8 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.resourceArray = resourceArray;
         this.regen = regen;
         this.regenFrequency = regenFrequency;
+        this.ability = ability;
+        this.abilityFrequency = abilityFrequency;
     }
 
     AddValueUpdateEvent(event: (e: EnemyValueUpdateEvent) => void) {
@@ -57,10 +61,14 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.valueUpdateEvents.forEach(x => x(new EnemyValueUpdateEvent(this.arrayId, this.id, this.currentHP)));
     }
 
-    UpdateFeedback(counter: number):number {
+    UpdateFeedback(counter: number): number {
         if (counter % this.damageFrequency == 0 && this.isDead == false) {
+            if (counter % this.abilityFrequency == 0) {
+                if (this.id == 18) {this.currentHP = Math.min((this.currentHP + this.MaxHP * 0.2), this.MaxHP)} // hack for Siren regen
+                return this.ability(this.CurrentDamage, this.stage) * this.CurrentDamage;
+            }
             return this.CurrentDamage;
-        }
+        }       
         return 0;
     }
 
@@ -106,7 +114,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = false;
-        this.Regenerate(this.MaxHP);
+        this.RegenerateMax();
     }
 
     Die(): void {

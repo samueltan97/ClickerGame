@@ -107,10 +107,11 @@ let StageTwo: StageLevel = new StageLevel(2);
 let StageThree: StageLevel = new StageLevel(3);
 let StageFour: StageLevel = new StageLevel(4);
 let StageFive: StageLevel = new StageLevel(5);
+let StageArray: StageLevel[] = [StageOne, StageTwo, StageThree, StageFour, StageFive];
 
 ////Enemy (Base Exp and Resource not confirmed)
 //let Slime: Enemy = new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1], 40, 0, 20, theStage);
-//let Boar: Enemy = new Enemy(0, 1, "abc", "Boar", 15, 4, 5, [1, 1], 40, 1, 100, theStage);
+let Boar: Enemy = new Enemy(0, 1, "abc", "Boar", 15, 4, 5, [1, 1], 40, 1, 100, function (currentDamage:number) { HeroArr[Math.round(Math.random()*HeroArr.length)].ReceiveDamage(2*currentDamage)}, 2000, StageOne);
 //let Ashwinder1: Enemy = new Enemy(0, 2, "abc", "Ashwinder", 8, 2, 5, [1, 1], 40, 1, 100, theStage);
 //let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [1, 1], 20, 0, 100, theStage);
 //let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [1, 1], 10, 0, 100, theStage);
@@ -251,11 +252,11 @@ let RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
 
 //Heroes
 
-let StageOneEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageOne)];
-var StageTwoEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageTwo)];
-var StageThreeEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageThree)];
-var StageFourEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageFour)];
-var StageFiveEnemyArr: Enemy[] = [new Enemy(0, 1, "abc", "Slime", 5, 5, 2, [0, 1], 20, 1, 20, StageFive)];
+let StageOneEnemyArr: Enemy[] = [Boar];
+var StageTwoEnemyArr: Enemy[] = [Boar];
+var StageThreeEnemyArr: Enemy[] = [Boar];
+var StageFourEnemyArr: Enemy[] = [Boar];
+var StageFiveEnemyArr: Enemy[] = [Boar];
 let RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
 let RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
 let RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -264,7 +265,7 @@ let RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
 let RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
 let HeroArr: Hero[] = [];
 let theDatabase = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
-    StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr);
+    StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr, StageArray);
 
 
 
