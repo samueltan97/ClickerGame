@@ -103,7 +103,7 @@ export class Storage implements IStorage {
         return this.thePlayer;
     }
 
-    MainGameCycle(currentTime: number): Storage {
+    MainGameCycle = (currentTime: number): Storage => {
         if ((currentTime - 5) % 10 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
             this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));

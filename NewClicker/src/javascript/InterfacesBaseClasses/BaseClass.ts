@@ -12,7 +12,7 @@ import { isDate } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
 import { ILevelProgression } from "./ILevelProgression";
-import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, RefinerTrainerValueUpdateEvent, HeroValueUpdateEvent, StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
+import { EnemyValueUpdateEvent, UnitValueUpdateEvent, ResourceValueUpdateEvent, RefinerTrainerValueUpdateEvent, HeroValueUpdateEvent, StageLevelValueUpdateEvent, PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegeneration {
     readonly arrayId: number;
@@ -58,11 +58,11 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new EnemyValueUpdateEvent(this.arrayId, this.id, this.currentHP)));
+        this.valueUpdateEvents.forEach(x => x(new EnemyValueUpdateEvent(this.arrayId, this.id, this.currentHP, this.ResourceArray)));
     }
 
     UpdateFeedback(counter: number): number {
-        if (counter % this.damageFrequency == 0 && this.isDead == false) {
+         if (counter % this.damageFrequency == 0 && this.isDead == false) {
             if (counter % this.abilityFrequency == 0) {
                 if (this.id == 18) {this.currentHP = Math.min((this.currentHP + this.MaxHP * 0.2), this.MaxHP)} // hack for Siren regen
                 return this.ability(this.CurrentDamage, this.stage) * this.CurrentDamage;
@@ -96,7 +96,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         return this.baseExperience * this.stage.CurrentStage;
     }
 
-    UpdateStage = (e: StageLevelValueUpdateEvent): void =>  {
+    UpdateSource = (e: StageLevelValueUpdateEvent): void =>  {
         this.stage.ChangeZone(e.newZone);
         this.stage.ChangeEnemyDefeated(e.newEnemyDefeated);
     }
@@ -115,6 +115,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = false;
         this.RegenerateMax();
+        this.Update();
     }
 
     Die(): void {
@@ -155,7 +156,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private count: number;
     private isUnlocked: boolean;
     public isDead: boolean;
-    private damageFrequency: number;
+    public readonly damageFrequency: number;
     private readonly player;
     private valueUpdateEvents: ((e: UnitValueUpdateEvent) => void)[] = [];
 
@@ -204,6 +205,11 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     Update(): void {
         this.valueUpdateEvents.forEach(x => x(new UnitValueUpdateEvent(this.id, this.CurrentHP, this.Count, this.isUnlocked)));
+    }
+
+    UpdateSource = (e: PlayerValueUpdateEvent): void => {
+        this.player.ChangeArmyVitality(e.newArmyVitality);
+        this.player.ChangeLevel(e.newLevel);
     }
 
     ReceiveDamage(damage: number): void {
@@ -403,7 +409,7 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
 }
 
 export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneration, ILevelProgression {
-
+    //Hero has no damageFrequency. Their damage is dps.
     readonly id: number;
     readonly image: string;
     private readonly name: string;
@@ -425,7 +431,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
-        this.currentHP = this.MaxHP;
+        this.currentHP = this.baseHP;
         this.baseDamage = baseDamage;
         this.baseExperience = baseExperience;
         this.currentExperience = 0;
@@ -448,6 +454,11 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     Update(): void {
         this.valueUpdateEvents.forEach(x => x(new HeroValueUpdateEvent(this.id, this.CurrentHP, this.isUnlocked, this.CurrentExperience, this.CurrentLevel)));
+    }
+
+    UpdateSource = (e: PlayerValueUpdateEvent): void => {
+        this.player.ChangeArmyVitality(e.newArmyVitality);
+        this.player.ChangeLevel(e.newLevel);
     }
 
     get MaxHP(): number {

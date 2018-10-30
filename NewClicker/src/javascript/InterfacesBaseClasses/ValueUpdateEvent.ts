@@ -10,11 +10,13 @@ export class EnemyValueUpdateEvent extends ValueUpdateEvent{
     id: number;
     newHP: number;
     newIsDead: boolean;
-    constructor(arrayId: number, id: number, hp: number) {
+    newResourceArray: number[];
+    constructor(arrayId: number, id: number, hp: number, resourceArray:number[]) {
         super();
         this.arrayId = arrayId;
         this.id = id;
         this.newHP = hp;
+        this.newResourceArray = resourceArray;
         this.newIsDead = (this.newHP == 0) ? true : false;
     }
 }

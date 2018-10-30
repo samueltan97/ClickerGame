@@ -12,7 +12,7 @@ should();
 describe("ClickIndex", () => {
 
     function SetupStorage(): Storage {
-        var thePlayer: Player = new Player(1);
+        var thePlayer: Player = new Player(1, "NIL");
         let StageOne: StageLevel = new StageLevel(1);
         let StageTwo: StageLevel = new StageLevel(2);
         let StageThree: StageLevel = new StageLevel(3);
@@ -118,6 +118,8 @@ describe("ClickIndex", () => {
             MagusMaster, PaladinMaster, ArcaneGunslingerMaster, MysticRangerMaster];
 
         //Heroes
+        var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);
+        var HeroArr: Hero[] = [Charles];
 
 
         function HeroKillMechanics(damage: number, count: number): void {
@@ -211,63 +213,66 @@ describe("ClickIndex", () => {
         var RangeFourUnitArr: Unit[] = [Archer];
         var RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
         var RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
-        var HeroArr: Hero[] = [];
         var theStorage = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
             StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr, StageArray);
         return theStorage;
     }
 
-    //it("should change stage accordingly", () => {
-    //    let store: IStorage = SetupStorage();
-    //    let theIndex: ClickerIndex = new ClickerIndex(store);
-    //    theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-    //    theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-    //    (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(1);
-    //    theIndex.ChangeStage(true);
-    //    (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(2);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    (theIndex.CurrentStorage.CurrentStage.EnemyDefeated).should.equal(3);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-    //    (theIndex.CurrentStorage.CurrentStage.CurrentZone).should.equal(2);
-    //});
+    it("should change stage accordingly", () => {
+        let store: IStorage = SetupStorage();
+        let theIndex: ClickerIndex = new ClickerIndex(store);
+        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(1);
+        theIndex.ChangeStage(true);
+        (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(2);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        (theIndex.CurrentStorage.CurrentStage.EnemyDefeated).should.equal(3);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
+        (theIndex.CurrentStorage.CurrentStage.CurrentZone).should.equal(2);
+    });
 
-    //it("should get correct Unit on the screen", () => {
-    //    let store: IStorage = SetupStorage();
-    //    let theIndex: ClickerIndex = new ClickerIndex(store);
-    //    theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-    //    theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-    //    theIndex.CurrentStorage.UnitArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-    //    theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-    //    let expected = theIndex.CurrentStorage.RangeTwoUnitArr[0];
-    //    let actual = theIndex.CurrentStorage.CurrentUnit;
-    //    expected.should.deep.equal(actual);
-    //    theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-    //    let expected1 = theIndex.CurrentStorage.RangeFourUnitArr[0];
-    //    let actual1 = theIndex.CurrentStorage.CurrentUnit;
-    //    expected1.should.deep.equal(actual1);
-    //    theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-    //    let expected2 = theIndex.CurrentStorage.RangeFourUnitArr[0];
-    //    let actual2 = theIndex.CurrentStorage.CurrentUnit;
-    //    expected2.should.deep.equal(actual2);
-    //});
+    it("should get correct Unit on the screen", () => {
+        let store: IStorage = SetupStorage();
+        let theIndex: ClickerIndex = new ClickerIndex(store);
+        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.UnitArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
+        let expected = theIndex.CurrentStorage.RangeTwoUnitArr[0];
+        let actual = theIndex.CurrentStorage.CurrentUnit;
+        expected.should.deep.equal(actual);
+        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
+        let expected1 = theIndex.CurrentStorage.RangeFourUnitArr[0];
+        let actual1 = theIndex.CurrentStorage.CurrentUnit;
+        expected1.should.deep.equal(actual1);
+        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
+        let expected2 = theIndex.CurrentStorage.HeroArr[0];
+        let actual2 = theIndex.CurrentStorage.CurrentUnit;
+        expected2.should.deep.equal(actual2);
+        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(2000);
+        let expected3 = theIndex.CurrentStorage.HeroArr[0];
+        let actual3 = theIndex.CurrentStorage.CurrentUnit;
+        expected3.should.deep.equal(actual3);
+    });
 
     it("should get correct Enemy on the screen regardless of zone and stage changes", () => {
         let store: IStorage = SetupStorage();
         let theIndex: ClickerIndex = new ClickerIndex(store);
         theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
+        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
+        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
         let expected = theIndex.CurrentStorage.CopyStageOneEnemyArr[0];
         let actual = theIndex.CurrentStorage.CurrentEnemyArr[0];
@@ -282,13 +287,13 @@ describe("ClickIndex", () => {
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
         let expected1 = theIndex.CurrentStorage.CurrentEnemyArr[0].CurrentHP;
-        (expected1).should.deep.equal(40);
+        (expected1).should.deep.equal(60);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(2);
         theIndex.ChangeStage(true);
         (theIndex.CurrentStorage.CurrentEnemyArr[0]).should.deep.equal(theIndex.CurrentStorage.StageTwoEnemyArr[0]);
         theIndex.ChangeStage(false);
         let expected2 = theIndex.CurrentStorage.CurrentEnemyArr[0].CurrentHP;
-        (expected2).should.deep.equal(40);
+        (expected2).should.deep.equal(60);
 
     });
 
@@ -296,9 +301,9 @@ describe("ClickIndex", () => {
         let store: IStorage = SetupStorage();
         let theIndex: ClickerIndex = new ClickerIndex(store);
         theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x=> theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage)));
+        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
         theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x=> theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage)));
+        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
         theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageOneEnemyArr;
         theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
         theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
@@ -335,37 +340,37 @@ describe("ClickIndex", () => {
         let store: IStorage = SetupStorage();
         let theIndex: ClickerIndex = new ClickerIndex(store);
         theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
         let expected = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected.should.deep.equal(2);
+        expected.should.deep.equal(4);
         theIndex.ChangeStage(true);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected1 = theIndex.CurrentStorage.ResourceArr[2].Count;
-        expected1.should.deep.equal(4);
+        let expected1 = theIndex.CurrentStorage.ResourceArr[1].Count;
+        expected1.should.deep.equal(12);
         theIndex.ChangeStage(true);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected2 = theIndex.CurrentStorage.ResourceArr[3].Count;
-        expected2.should.deep.equal(6);
+        let expected2 = theIndex.CurrentStorage.ResourceArr[1].Count;
+        expected2.should.deep.equal(24);
         theIndex.ChangeStage(true);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected3 = theIndex.CurrentStorage.ResourceArr[4].Count;
-        expected3.should.deep.equal(8);
+        let expected3 = theIndex.CurrentStorage.ResourceArr[1].Count;
+        expected3.should.deep.equal(40);
         theIndex.ChangeStage(true);
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected4 = theIndex.CurrentStorage.ResourceArr[5].Count;
-        expected4.should.deep.equal(10);
+        let expected4 = theIndex.CurrentStorage.ResourceArr[1].Count;
+        expected4.should.deep.equal(60);
     });
 
     it("should give Player the right experience and level up accordingly", () => {
         let store: IStorage = SetupStorage();
         let theIndex: ClickerIndex = new ClickerIndex(store);
         theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateStage));
+        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
         theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
         (theIndex.CurrentStorage.CurrentPlayer.CurrentExperience).should.equal(0);
         (theIndex.CurrentStorage.CurrentPlayer.CurrentLevel).should.equal(2);
@@ -376,4 +381,20 @@ describe("ClickIndex", () => {
         (theIndex.CurrentStorage.CurrentPlayer.CurrentExperience).should.equal(0);
         (theIndex.CurrentStorage.CurrentPlayer.CurrentLevel).should.equal(3);
     });
+
+    it("should deal the right amount of damage to hero by enemy special power", () => {
+        let store: IStorage = SetupStorage();
+        let theIndex: ClickerIndex = new ClickerIndex(store);
+        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
+        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
+        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
+        theIndex.CurrentStorage.MainGameCycle(80);
+        (theIndex.CurrentStorage.HeroArr[0].CurrentHP).should.equal(1000);
+        (theIndex.CurrentStorage.CurrentUnit.CurrentHP).should.equal(2);
+        theIndex.CurrentStorage.MainGameCycle(200);
+        (theIndex.CurrentStorage.HeroArr[0].CurrentHP).should.equal(992);
+        (theIndex.CurrentStorage.CurrentUnit.id).should.equal(0);
+    });
+
 });

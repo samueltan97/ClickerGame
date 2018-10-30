@@ -170,6 +170,7 @@
     <Folder Include="src\" />
     <Folder Include="src\javascript\" />
     <Folder Include="src\javascript\Classes\" />
+    <Folder Include="src\javascript\InterfacesBaseClasses\Skills\" />
     <Folder Include="src\javascript\Interface\" />
     <Folder Include="src\javascript\InterfacesBaseClasses\" />
     <Folder Include="src\javascript\CSSAnimation\" />
@@ -285,6 +286,25 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Player.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\HeroSkill.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\HeroSkillsBaseClass.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\IPassiveSkill.ts" />
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\IActiveSkill.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\ISkillFactory.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\PlayerSkill.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Skills\PlayerSkillsBaseClass.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\StageLevel.ts">

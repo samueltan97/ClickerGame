@@ -9,18 +9,22 @@ import { PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 export class Player implements IPlayer, ILevelProgression{
 
     private armyVitality: number;
+    private job: string;
     private readonly baseExperience: number;
     private readonly baseDamage: number;
+    public readonly dps: number;
     private currentLevel: number;
     private currentExperience: number;
     private valueUpdateEvents: ((e: PlayerValueUpdateEvent) => void)[] = [];
 
-    constructor(baseDamage:number) {
+    constructor(baseDamage: number, job: string) {
+        this.job = job;
         this.armyVitality = 1;
         this.baseExperience = 5; //temporary formula
         this.baseDamage = baseDamage;
         this.currentLevel = 1;
         this.currentExperience = 0;
+        this.dps = 0;
     }
 
     AddValueUpdateEvent(e: (e: PlayerValueUpdateEvent) => void) {
@@ -51,6 +55,14 @@ export class Player implements IPlayer, ILevelProgression{
         return this.baseDamage * this.CurrentLevel; //temporary formula
     }
 
+    get CurrentDPS(): number {
+        return this.dps * this.CurrentArmyVitality * this.CurrentLevel; //temporary formula
+    }
+
+    set CurrentDamage(count:number) {
+        this.CurrentDamage = this.CurrentDamage * 5;
+    }
+
     UpdateFeedback(currentTime: number): number {
         return this.CurrentDamage;
     }
@@ -74,6 +86,14 @@ export class Player implements IPlayer, ILevelProgression{
     LevelUp(): void {
         this.currentLevel += 1;
         this.currentExperience = 0;
+        this.IncreaseArmyVitality();
         this.Update();
+    }
+
+    ChangeArmyVitality(count: number): void {
+        this.armyVitality = count;
+    }
+    ChangeLevel(count: number): void {
+        this.currentLevel = count;
     }
 }

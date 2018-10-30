@@ -9,7 +9,7 @@ should();
 describe("Storage", () => {
 
     function SetupStorage(): Storage {
-        var thePlayer: Player = new Player(1);
+        var thePlayer: Player = new Player(1, "NIL");
         var StageOne: StageLevel = new StageLevel(1);
         var StageTwo: StageLevel = new StageLevel(2);
         var StageThree: StageLevel = new StageLevel(3);
@@ -216,8 +216,7 @@ describe("Storage", () => {
     }
 
     it("should get correct Player on the screen", () => {
-        let thePlayer: Player = new Player(1);
-        let expected = new Player(1);
+        let expected = new Player(1, "NIL");
         let actual = SetupStorage().CurrentPlayer;
         expected.should.deep.equal(actual);
     });
@@ -226,9 +225,7 @@ describe("Storage", () => {
         let expected = new StageLevel(1);
         let actual = SetupStorage().CurrentStage;
         expected.should.deep.equal(actual);
-    });
-
-   
+    });   
 
     it("should handle methods in the correct sequence when MainGameCycle is run less resources", () => {
         (SetupStorage().MainGameCycle(15).CurrentEnemyArr[0].CurrentHP).should.equal(13);

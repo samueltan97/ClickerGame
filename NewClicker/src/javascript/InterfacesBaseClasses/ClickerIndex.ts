@@ -1,6 +1,6 @@
 ﻿import { IStorage } from "./IStorage";
 import { setInterval } from "timers";
-import { EnemyValueUpdateEvent, UnitValueUpdateEvent } from "./ValueUpdateEvent";
+import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class ClickerIndex {
 
@@ -42,7 +42,7 @@ export class ClickerIndex {
         }
     }
 
-    DeathLogic = (e: EnemyValueUpdateEvent | UnitValueUpdateEvent): void => {
+    DeathLogic = (e: HeroValueUpdateEvent | EnemyValueUpdateEvent | UnitValueUpdateEvent): void => {
         if (this.CurrentStorage.CurrentUnit.isDead) {
             this.CurrentStorage.CurrentUnit.isDead = false;
             this.RemoveByDeath("Unit");
@@ -120,12 +120,20 @@ export class ClickerIndex {
         this.theStorage.CopyStageFiveEnemyArr.forEach(x => x.isDead = false);
     }
 
-    SetUpClicker=(): void=> {
+   SetUpClicker=(): void=> {
         //Add listener
         this.theStorage.UnitArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+        this.theStorage.UnitArr.forEach(x => x.forEach(y => this.theStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
         this.theStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+        this.theStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+       this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+       this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+        for (var i = 0; i < this.theStorage.StageArray.length; i++) {
+            this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
+            this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
+        }
+        let index = this;
         setInterval(function () {
-            this.theStorage.MainGameCycle(this.counter)
-        }, 50);
-    }
+            index.theStorage.MainGameCycle(this.counter)
+        }, 50);    }
 }
