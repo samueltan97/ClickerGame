@@ -1,5 +1,6 @@
 ﻿export interface IPlayer {
-    readonly CurrentArmyVitality: number;
-    ChangeArmyVitality(count: number): void;
-    ChangeLevel(count: number): void;
+    CurrentArmyVitality: number;
+    CurrentDamage: number;
+    CurrentDPS: number;
+    ClickCount: number;
 }

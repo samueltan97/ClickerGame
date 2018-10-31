@@ -3,13 +3,13 @@ import { StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class StageLevel implements IStageLevel {
     private Zone: number;
-    private Stage: number;
+    public readonly CurrentStage: number;
     private enemyDefeated: number;
     private valueUpdateEvents: ((e: StageLevelValueUpdateEvent) => void)[] = [];
 
     constructor(stage:number) {
         this.Zone = 1;
-        this.Stage = stage;
+        this.CurrentStage = stage;
         this.enemyDefeated = 0;
     }
 
@@ -37,19 +37,17 @@ export class StageLevel implements IStageLevel {
         return this.Zone;
     }
 
-    get CurrentStage() {
-        return this.Stage;
+    set CurrentZone(count: number) {
+        this.Zone = count;
+        this.Update();
     }
 
     get EnemyDefeated() {
         return this.enemyDefeated;
     }
 
-    ChangeZone(count: number): void {
-        this.Zone = count;
-    }
-    ChangeEnemyDefeated(count: number): void {
+    set EnemyDefeated(count: number) {
         this.enemyDefeated = count;
+        this.Update();
     }
-
 }

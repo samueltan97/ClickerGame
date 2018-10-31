@@ -11,8 +11,9 @@ export class Player implements IPlayer, ILevelProgression{
     private armyVitality: number;
     private job: string;
     private readonly baseExperience: number;
-    private readonly baseDamage: number;
-    public readonly dps: number;
+    private baseDamage: number;
+    public dps: number;
+    private clickcount: number;
     private currentLevel: number;
     private currentExperience: number;
     private valueUpdateEvents: ((e: PlayerValueUpdateEvent) => void)[] = [];
@@ -25,6 +26,7 @@ export class Player implements IPlayer, ILevelProgression{
         this.currentLevel = 1;
         this.currentExperience = 0;
         this.dps = 0;
+        this.clickcount = 0;
     }
 
     AddValueUpdateEvent(e: (e: PlayerValueUpdateEvent) => void) {
@@ -32,11 +34,15 @@ export class Player implements IPlayer, ILevelProgression{
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality)));
+        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality, this.CurrentDamage, this.MaxExperience, this.CurrentDPS, this.ClickCount)));
     }
 
     get CurrentArmyVitality():number {
         return this.armyVitality;
+    }
+
+    set CurrentArmyVitality(count:number) {
+        this.armyVitality = count;
     }
 
     get CurrentExperience():number {
@@ -55,16 +61,31 @@ export class Player implements IPlayer, ILevelProgression{
         return this.baseDamage * this.CurrentLevel; //temporary formula
     }
 
+    set CurrentDamage(multiplier: number) {
+        this.baseDamage = this.baseDamage * multiplier;
+        this.Update();
+    }
+
     get CurrentDPS(): number {
         return this.dps * this.CurrentArmyVitality * this.CurrentLevel; //temporary formula
     }
 
-    set CurrentDamage(count:number) {
-        this.CurrentDamage = this.CurrentDamage * 5;
+    set CurrentDPS(multiplier: number) {
+        this.dps = this.dps * multiplier;
+        this.Update();
+    }
+
+    get ClickCount(): number {
+        return this.clickcount;
     }
 
     UpdateFeedback(currentTime: number): number {
         return this.CurrentDamage;
+    }
+
+    Hurt(): number {
+        this.clickcount++;
+        return this.CurrentDamage;        
     }
 
     IncreaseArmyVitality():void {
@@ -88,12 +109,5 @@ export class Player implements IPlayer, ILevelProgression{
         this.currentExperience = 0;
         this.IncreaseArmyVitality();
         this.Update();
-    }
-
-    ChangeArmyVitality(count: number): void {
-        this.armyVitality = count;
-    }
-    ChangeLevel(count: number): void {
-        this.currentLevel = count;
     }
 }

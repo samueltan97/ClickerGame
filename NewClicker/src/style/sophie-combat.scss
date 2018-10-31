@@ -31,12 +31,12 @@ body {
     overflow: hidden;
     background-color: black;
 
-    #clickable-screen{
-        position:absolute;
-        z-index:200;
-        display:none;
-        height:100vh;
-        width:178vh;
+    #clickable-screen {
+        position: absolute;
+        z-index: 200;
+        display: none;
+        height: 100vh;
+        width: 178vh;
     }
 
     #backdrop {
@@ -55,7 +55,7 @@ body {
             width: 17%;
             position: absolute;
             z-index: 10;
-            left:-3%;
+            left: -3%;
         }
 
         #fight-div {
@@ -69,7 +69,7 @@ body {
                 width: 100%;
                 height: calc(100% - 20px);
                 position: absolute;
-                left:-24%;
+                left: -24%;
                 display: block;
 
                 #village-zone-div {
@@ -164,7 +164,8 @@ body {
                     @include kuehlapis;
                     top: 0%;
 
-                    #monster-normal {
+                    .monster-normal {
+                        display: none;
                         width: 23vh;
                         height: 23vh;
                         position: absolute;
@@ -172,13 +173,17 @@ body {
                         transform: translateX(-50%);
                     }
 
-                    #monster-hurt {
+                    .monster-hurt {
                         display: none;
                         width: 23vh;
                         height: 23vh;
                         position: absolute;
                         left: 66%;
                         transform: translateX(-50%);
+                    }
+
+                    #monster-onstage {
+                        display: block;
                     }
                 }
 
@@ -278,7 +283,8 @@ body {
     }
 
     #sophie-speech {
-        display:none;
+        display: none;
+
         #sophie-name-box {
             color: black;
             z-index: 103;

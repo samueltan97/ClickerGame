@@ -1,21 +1,22 @@
-﻿import { Player } from "../Player";
-import { Resource, Hero, Unit } from "../BaseClass";
-import { StageLevel } from "../StageLevel";
+﻿import { Resource, Hero, Unit, Enemy } from "../BaseClass";
+import { IPlayer } from "../IPlayer";
+import { IStageLevel } from "../IStageLevel";
 
 export interface IActiveSkill {
     readonly name: string;
     readonly id: number;
     readonly Level: number;
-    readonly IsUnlocked: boolean;
-    readonly InCooldown: boolean;
-    readonly cooldown: number;
-    player: Player;
-    stage: StageLevel;
-    resource: Resource[];
-    hero: Hero[];
-    unit: Unit[];
+    readonly isUnlocked: boolean;
+    readonly inCooldown: boolean;
+    Cooldown: number;
+    Player: IPlayer;
+    Stage: IStageLevel;
+    Resource: Resource[];
+    Hero: Hero[];
+    Unit: Unit[];
+    Enemy: Enemy[];
     CooldownCounter(): void;
-    Action(): void;
+    Action(input: number): void;
     LevelUp(): void;
     Unlock(): void;
 }
