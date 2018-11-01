@@ -30,7 +30,8 @@ export class UnitValueUpdateEvent extends ValueUpdateEvent {
     count:number
     newIsDead: boolean;
     isUnlocked: boolean;
-    constructor(id: number, hp: number, maxHP:number, count:number, isUnlocked:boolean) {
+    isImmune: boolean;
+    constructor(id: number, hp: number, maxHP:number, count:number, isUnlocked:boolean, isImmune:boolean) {
         super();
         this.id = id;
         this.newHP = hp;
@@ -38,6 +39,7 @@ export class UnitValueUpdateEvent extends ValueUpdateEvent {
         this.count = count;
         this.newIsDead = (this.newHP == 0) ? true : false;
         this.isUnlocked = isUnlocked;
+        this.isImmune = isImmune;
     }
 }
 
@@ -74,7 +76,9 @@ export class HeroValueUpdateEvent extends ValueUpdateEvent {
     newExperience: number;
     newMaxExperience: number;
     newLevel: number;
-    constructor(id: number, hp: number, maxHP:number, isUnlocked: boolean, experience: number, maxExperience:number, level:number) {
+    isImmune: boolean;
+
+    constructor(id: number, hp: number, maxHP:number, isUnlocked: boolean, experience: number, maxExperience:number, level:number, isImmune:boolean) {
         super();
         this.id = id;
         this.newHP = hp;
@@ -84,6 +88,7 @@ export class HeroValueUpdateEvent extends ValueUpdateEvent {
         this.newExperience = experience;
         this.newMaxExperience = maxExperience;
         this.newLevel = level;
+        this.isImmune = isImmune;
     }
 }
 

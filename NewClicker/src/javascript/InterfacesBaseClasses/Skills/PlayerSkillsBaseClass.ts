@@ -1,10 +1,9 @@
 ﻿import { IActiveSkill } from "./IActiveSkill";
 import { IPassiveSkill } from "./IPassiveSkill";
-import { EnemyValueUpdateEvent, PlayerValueUpdateEvent } from "../ValueUpdateEvent";
+import { EnemyValueUpdateEvent, PlayerValueUpdateEvent, UnitValueUpdateEvent } from "../ValueUpdateEvent";
 import { Resource, Hero, Unit, Enemy } from "../BaseClass";
 import { IPlayer } from "../IPlayer";
 import { IStageLevel } from "../IStageLevel";
-import { HeroSkill } from "./HeroSkill";
 import { HeroActiveSkill } from "./HeroSkillsBaseClass";
 
 export class PlayerActiveSkill implements IActiveSkill {
@@ -73,7 +72,7 @@ export class PlayerActiveSkill implements IActiveSkill {
     };
 
     LevelUp(): void {
-        this.level++;
+        this.level += 1;
     };
 }
 
@@ -239,10 +238,11 @@ export class Whirlwind extends PlayerActiveSkill {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             this.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
+            let skill = this;
             setTimeout(function () {
-                this.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
+                skill.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
                 setTimeout(function () {
-                    this.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
+                    skill.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
                 }, 1000);
             }, 1000);
         }
@@ -313,13 +313,175 @@ export class CursedContract extends PlayerActiveSkill {
             super.Action(heroId);
             this.Hero[heroId].ReceiveDamage(this.Hero[heroId].CurrentHP - 20);
             this.Player.CurrentDamage = 6;
+            let skill = this;
             setTimeout(function () {
-                this.Player.CurrentDamage = 1/6;
+                skill.Player.CurrentDamage = 1/6;
             }, 60000);
         }
     }
 }
 
-export class PlayerPassiveSkill implements IPassiveSkill{
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+export class PlayerPassiveSkill implements IPassiveSkill {
+    name: string;
+    id: number;
+    level: number;
+    isUnlocked: boolean;
+    Player: IPlayer;
+    Stage: IStageLevel;
+    Resource: Resource[];
+    Hero: Hero[];
+    Unit: Unit[];
+    Enemy: Enemy[];
+    AllEnemy: Enemy[][];
+    HeroActiveSkill: HeroActiveSkill[];
+
+    constructor(id: number, name: string, player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], enemy: Enemy[], allEnemy: Enemy[][], heroActiveSkill: HeroActiveSkill[]) {
+        this.name = name;
+        this.id = id;
+        this.level = 1;
+        this.isUnlocked = false;
+        this.Player = player;
+        this.Stage = stage;
+        this.Resource = resource;
+        this.Hero = hero;
+        this.Enemy = enemy;
+        this.Unit = unit;
+        this.HeroActiveSkill = heroActiveSkill;
+        this.AllEnemy = allEnemy;
+    }
+
+    get Level(): number {
+        return this.level;
+    }
+
+    get IsUnlocked(): boolean {
+        return this.isUnlocked;
+    }
+
+    Unlock(): void {
+        this.isUnlocked = true;
+        this.Action();
+    }
+
+    Action(): void {
+    };
+
+    LevelUp(): void {
+        this.level+=1;
+    };
+}
+
+export class Pickpocket extends PlayerPassiveSkill {
+
+    constructor(player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], heroActiveSkill: HeroActiveSkill[], enemy: Enemy[], allEnemy:Enemy[][]) {
+        super(0, "Pickpocket", player, stage, resource, hero, unit, enemy, allEnemy, heroActiveSkill);
+    }
+
+    Action() {
+        if (this.isUnlocked) {
+            this.AllEnemy.forEach(x => x.forEach(x => x.ResourceArray.concat(x.ResourceArray)));
+        }
+    }
+}
+
+export class CoinAffinity extends PlayerPassiveSkill {
+
+    constructor(player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], heroActiveSkill: HeroActiveSkill[], enemy: Enemy[], allEnemy:Enemy[][]) {
+        super(2, "Coin Affinity", player, stage, resource, hero, unit, enemy, allEnemy, heroActiveSkill);
+    }
+
+    Action() {
+        if (this.isUnlocked) {
+            this.Player.AddHurtUpdateEvents(this.Resource[7].Increase);
+        }
+    }
+}
+
+export class MelodicAura extends PlayerPassiveSkill {
+
+    constructor(player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], heroActiveSkill: HeroActiveSkill[], enemy: Enemy[], allEnemy:Enemy[][]) {
+        super(7, "Melodic Aura", player, stage, resource, hero, unit, enemy, allEnemy, heroActiveSkill);
+    }
+
+    Action() {
+        if (this.isUnlocked) {
+            this.Unit.forEach(x=>x.MaxHP = 2);
+            this.Unit.forEach(x=>x.CurrentHP = 2);
+            this.Hero.forEach(x=>x.CurrentHP = 2);
+            this.Hero.forEach(x=>x.CurrentHP = 2);
+        }
+    }
+}
+
+export class Valor extends PlayerPassiveSkill {
+
+    constructor(player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], heroActiveSkill: HeroActiveSkill[], enemy: Enemy[], allEnemy: Enemy[][]) {
+        super(11, "Valor", player, stage, resource, hero, unit, enemy, allEnemy, heroActiveSkill);
+    }
+
+    Action() {
+        if (this.isUnlocked) {
+            this.Player.AddValueUpdateEvent(this.UpdatePlayer);
+            this.Unit[1].AddValueUpdateEvent(this.UpdateUnit);
+            this.Unit[4].AddValueUpdateEvent(this.UpdateUnit);
+            this.Unit[6].AddValueUpdateEvent(this.UpdateUnit);
+            let newUnitCount: number = this.Unit[1].Count + this.Unit[4].Count + this.Unit[6].Count;
+            this.Player.CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentLevel * newUnitCount)));
+        }
+    }
+
+    UpdatePlayer = (e: PlayerValueUpdateEvent): void => {
+        this.Player.CurrentLevel = e.newLevel;
+        let newUnitCount: number = this.Unit[1].Count + this.Unit[4].Count + this.Unit[6].Count;
+        this.Player.CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentLevel * newUnitCount)));
+    }
+
+    UpdateUnit = (e: UnitValueUpdateEvent): void => {
+        switch (e.id) {
+            case 1:
+                this.Unit[1].Count = e.count;
+                break;
+            case 4:
+                this.Unit[4].Count = e.count;
+                break;
+            case 6:
+                this.Unit[6].Count = e.count;
+                break;
+        }
+        let newUnitCount: number = this.Unit[1].Count + this.Unit[4].Count + this.Unit[6].Count;
+        this.Player.CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentLevel * newUnitCount)));
+    }
+}
+
+export class WarCry extends PlayerPassiveSkill {
+
+    constructor(player: IPlayer, stage: IStageLevel, resource: Resource[], hero: Hero[], unit: Unit[], heroActiveSkill: HeroActiveSkill[], enemy: Enemy[], allEnemy: Enemy[][]) {
+        super(13, "War Cry", player, stage, resource, hero, unit, enemy, allEnemy, heroActiveSkill);
+    }
+
+    Action() {
+        if (this.isUnlocked) {
+            this.Unit[1].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+            this.Unit[4].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+            this.Unit[6].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+            this.Player.AddValueUpdateEvent(this.UpdateUnit);
+        }
+    }
+
+    UpdateUnit = (e: PlayerValueUpdateEvent): void => {
+        this.Unit[1].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+        this.Unit[4].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+        this.Unit[6].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.Player.CurrentDamage)));
+    }
 }

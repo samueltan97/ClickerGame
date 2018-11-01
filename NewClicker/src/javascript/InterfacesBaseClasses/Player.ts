@@ -17,6 +17,7 @@ export class Player implements IPlayer, ILevelProgression{
     private currentLevel: number;
     private currentExperience: number;
     private valueUpdateEvents: ((e: PlayerValueUpdateEvent) => void)[] = [];
+    private hurtUpdateEvents: Function[] = [];
 
     constructor(baseDamage: number, job: string) {
         this.job = job;
@@ -31,6 +32,10 @@ export class Player implements IPlayer, ILevelProgression{
 
     AddValueUpdateEvent(e: (e: PlayerValueUpdateEvent) => void) {
         this.valueUpdateEvents.push(e);
+    }
+
+    AddHurtUpdateEvents(f: Function){
+        this.hurtUpdateEvents.push(f);
     }
 
     Update(): void {
@@ -55,6 +60,10 @@ export class Player implements IPlayer, ILevelProgression{
 
     get CurrentLevel(): number {
         return this.currentLevel;
+    }
+
+    set CurrentLevel(count:number) {
+        this.currentLevel = count;
     }
 
     get CurrentDamage(): number {
@@ -84,7 +93,9 @@ export class Player implements IPlayer, ILevelProgression{
     }
 
     Hurt(): number {
-        this.clickcount++;
+        this.clickcount +=1;
+        this.hurtUpdateEvents.forEach(x => x());
+        this.Update();
         return this.CurrentDamage;        
     }
 

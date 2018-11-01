@@ -22,11 +22,12 @@ export class StageLevel implements IStageLevel {
     }
 
     IncreaseZone(): void {
-        this.Zone++;
+        this.Zone += 1;
+        this.Update();
     }  
 
     IncreaseEnemyDefeated(): void {
-        this.enemyDefeated++;
+        this.enemyDefeated+=1;
         if (this.EnemyDefeated % 10 == 0) {
             this.IncreaseZone();
         }
@@ -39,7 +40,6 @@ export class StageLevel implements IStageLevel {
 
     set CurrentZone(count: number) {
         this.Zone = count;
-        this.Update();
     }
 
     get EnemyDefeated() {
@@ -48,6 +48,5 @@ export class StageLevel implements IStageLevel {
 
     set EnemyDefeated(count: number) {
         this.enemyDefeated = count;
-        this.Update();
     }
 }
