@@ -40,6 +40,7 @@ export class Storage implements IStorage {
     RangeSixUnitArr: Unit[];
     HeroArr: Hero[];
     UnitArr: IMortality[][]; //will have arrays inside organised according to increasing range before Heroes
+    PureUnitArr: Unit[];
     CurrentUnit: IMortality;
     counter: number;
 
@@ -58,6 +59,7 @@ export class Storage implements IStorage {
         rangeFourUnitArr: Unit[],
         rangeFiveUnitArr: Unit[],
         rangeSixUnitArr: Unit[],
+        allUnitArr:Unit[],
         heroArr: Hero[],
         resourceArr: Resource[],
         refinerTrainerArr: RefinerTrainer[],
@@ -86,6 +88,7 @@ export class Storage implements IStorage {
         this.RangeSixUnitArr = rangeSixUnitArr;
         this.HeroArr = heroArr;
         this.UnitArr = [this.RangeOneUnitArr, this.RangeTwoUnitArr, this.RangeThreeUnitArr, this.RangeFourUnitArr, this.RangeFiveUnitArr, this.RangeSixUnitArr, this.HeroArr]; //will have arrays inside organised according to increasing range before Heroes
+        this.PureUnitArr = allUnitArr; 
         this.CurrentUnit = this.UnitArr[0][0];
         this.counter = 0;
         this.ResourceArr = resourceArr;

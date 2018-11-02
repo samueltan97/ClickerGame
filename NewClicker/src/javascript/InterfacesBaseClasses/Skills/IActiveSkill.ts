@@ -1,6 +1,7 @@
 ﻿import { Resource, Hero, Unit, Enemy } from "../BaseClass";
 import { IPlayer } from "../IPlayer";
 import { IStageLevel } from "../IStageLevel";
+import { ISkillFactory } from "./ISkillFactory";
 
 export interface IActiveSkill {
     readonly name: string;
@@ -9,12 +10,7 @@ export interface IActiveSkill {
     readonly isUnlocked: boolean;
     readonly inCooldown: boolean;
     Cooldown: number;
-    Player: IPlayer;
-    Stage: IStageLevel;
-    Resource: Resource[];
-    Hero: Hero[];
-    Unit: Unit[];
-    Enemy: Enemy[];
+    SkillFactory: ISkillFactory;
     CooldownCounter(): void;
     Action(input: number): void;
     LevelUp(): void;

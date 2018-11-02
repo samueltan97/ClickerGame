@@ -6,10 +6,17 @@ import { StageLevel } from "../src/javascript/InterfacesBaseClasses/StageLevel";
 import { ClickerIndex } from "../src/javascript/InterfacesBaseClasses/ClickerIndex";
 import { EnemyValueUpdateEvent, UnitValueUpdateEvent } from "../src/javascript/InterfacesBaseClasses/ValueUpdateEvent";
 import { IStorage } from "../src/javascript/InterfacesBaseClasses/IStorage";
+import { Steal } from "../src/javascript/InterfacesBaseClasses/Skills/PlayerSkillsBaseClass";
+import { PlayerSkillFactory } from "../src/javascript/InterfacesBaseClasses/Skills/PlayerSkill";
+import { HeroSkillFactory} from "../src/javascript/InterfacesBaseClasses/Skills/HeroSkill";
+import { ISkillFactory } from "../src/javascript/InterfacesBaseClasses/Skills/ISkillFactory";
+import { HeroActiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/HeroSkillsBaseClass";
+import { IActiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/IActiveSkill";
+import { IPassiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/IPassiveSkill";
 
 should();
 
-describe("ClickIndex", () => {
+describe("Skills", () => {
 
     function SetupStorage(): Storage {
         var thePlayer: Player = new Player(1, "NIL");
@@ -119,7 +126,10 @@ describe("ClickIndex", () => {
 
         //Heroes
         var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);
-        var HeroArr: Hero[] = [Charles];
+        var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, thePlayer);
+        var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, thePlayer);
+        var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, thePlayer);
+        var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
 
         function HeroKillMechanics(damage: number, count: number): void {
@@ -213,188 +223,381 @@ describe("ClickIndex", () => {
         var RangeFourUnitArr: Unit[] = [Archer];
         var RangeFiveUnitArr: Unit[] = [CrossArcher, Chanter, MysticRanger];
         var RangeSixUnitArr: Unit[] = [Magus, ArcaneGunslinger];
+        var FullUnitArr: Unit[] = [Spearman, Swordsman, Archer, Pikeman, Warrior, Rifleman, Knight, CrossArcher, Chanter, Paladin, Magus, ArcaneGunslinger, MysticRanger];
+
+        //var heroSkillFactory:ISkillFactory = new HeroSkillFactory(thePlayer, StageOne, ResourceArr, HeroArr, FullUnitArr, StageOneEnemyArr, [StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr, StageFiveEnemyArr], []);
+        //var Heal = heroSkillFactory.CreateActive("Heal");
+        //var Purify = heroSkillFactory.CreateActive("Purify");
+        //var ArcaneShelter = heroSkillFactory.CreateActive("ArcaneShelter");
+        //var StrafingRun = heroSkillFactory.CreateActive("StrafingRun");
+        //var Hurricane = heroSkillFactory.CreateActive("Hurricane");
+        //var CrossCut = heroSkillFactory.CreateActive("CrossCut");
+        //var LanceDance = heroSkillFactory.CreateActive("LanceDance");
+        //var UnlimitedLanceWork = heroSkillFactory.CreateActive("UnlimitedLanceWork");
+        //var VitalContract = heroSkillFactory.CreatePassive("VitalContract");
+        //var RecoveryMantra = heroSkillFactory.CreatePassive("RecoveryMantra");
+        //var Bang = heroSkillFactory.CreatePassive("Bang");
+        //var DoubleTap = heroSkillFactory.CreatePassive("DoubleTap");
+        //var Marksman = heroSkillFactory.CreatePassive("Marksman");
+        //var Matrix = heroSkillFactory.CreatePassive("Matrix");
+        //var FocusShot = heroSkillFactory.CreatePassive("FocusShot");
+        //var TriangleFire = heroSkillFactory.CreatePassive("TriangleFire");
+        //var AuraOfAccuracy = heroSkillFactory.CreatePassive("AuraOfAccuracy");
+        //var SuperiorPerception = heroSkillFactory.CreatePassive("SuperiorPerception");
+        //var Lance = heroSkillFactory.CreatePassive("Lance");
+        //var IndraBlessing = heroSkillFactory.CreatePassive("IndraBlessing");
+
+        //var heroActiveSkill:IActiveSkill[] = [Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork];
+        //var heroPassiveSkill: IPassiveSkill[] = [VitalContract, RecoveryMantra, Bang, StrafingRun, DoubleTap, Marksman, Matrix, FocusShot, TriangleFire, AuraOfAccuracy, SuperiorPerception, Lance, IndraBlessing];
+        //var heroSkill: any[] = [];
+        //heroActiveSkill.forEach(x => heroSkill.push(x));
+        //heroPassiveSkill.forEach(x => heroSkill.push(x));
+
+        //var playerSkillFactory = new PlayerSkillFactory(thePlayer, StageOne, ResourceArr, HeroArr, FullUnitArr, StageOneEnemyArr, [StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr, StageFiveEnemyArr], heroSkill);
+        //var Steal = playerSkillFactory.CreateActive("Steal");
+        //var Heist = playerSkillFactory.CreateActive("Heist");
+        //var MoneyIsPower = playerSkillFactory.CreateActive("MoneyIsPower");
+        //var Ballad = playerSkillFactory.CreateActive("Ballad");
+        //var Solo = playerSkillFactory.CreateActive("Solo");
+        //var SongOfCourage = playerSkillFactory.CreateActive("SongOfCourage");
+        //var ChorusOfDeath = playerSkillFactory.CreateActive("ChorusOfDeath");
+        //var ImpactStab = playerSkillFactory.CreateActive("ImpactStab");
+        //var Whirlwind = playerSkillFactory.CreateActive("Whirlwind");
+        //var FinalBlow = playerSkillFactory.CreateActive("FinalBlow");
+        //var DarkRitual = playerSkillFactory.CreateActive("DarkRitual");
+        //var Biohack = playerSkillFactory.CreateActive("Biohack");
+        //var CursedContract = playerSkillFactory.CreateActive("CursedContract");
+        //var Pickpocket = playerSkillFactory.CreatePassive("Pickpocket");
+        //var CoinAffinity = playerSkillFactory.CreatePassive("CoinAffinity");
+        //var MelodicAura = playerSkillFactory.CreatePassive("MelodicAura");
+        //var Valor = playerSkillFactory.CreatePassive("Valor");
+        //var WarCry = playerSkillFactory.CreatePassive("WarCry");
+        //var playerActiveSkill: IActiveSkill[] = [Steal, Heist, MoneyIsPower, Ballad, Solo, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, FinalBlow, DarkRitual, Biohack, CursedContract];
+        //var playerPassiveSkill: IPassiveSkill[] = [Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry];
+        //var playerSkill: any[] = [];
+        //playerActiveSkill.forEach(x => playerSkill.push(x));
+        //playerPassiveSkill.forEach(x => playerSkill.push(x));
+
         var theStorage = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, StageThreeEnemyArr, StageFourEnemyArr,
-            StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, HeroArr, ResourceArr, RefinerTrainerArr, StageArray);
+            StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, FullUnitArr, HeroArr, ResourceArr, RefinerTrainerArr, StageArray);
         return theStorage;
     }
 
-    it("should change stage accordingly", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(1);
-        theIndex.ChangeStage(true);
-        (theIndex.CurrentStorage.CurrentStage.CurrentStage).should.equal(2);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        (theIndex.CurrentStorage.CurrentStage.EnemyDefeated).should.equal(3);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        (theIndex.CurrentStorage.CurrentStage.CurrentZone).should.equal(2);
+    function SetupHeroSkillFactory(storage:IStorage): HeroSkillFactory{
+        return new HeroSkillFactory(storage, []);
+    }
+
+    function SetupPlayerSkillFactory(storage: IStorage): PlayerSkillFactory{
+        var heroSkillFactory: ISkillFactory = SetupHeroSkillFactory(storage);
+        var Heal = heroSkillFactory.CreateActive("Heal");
+        var Purify = heroSkillFactory.CreateActive("Purify");
+        var ArcaneShelter = heroSkillFactory.CreateActive("ArcaneShelter");
+        var StrafingRun = heroSkillFactory.CreateActive("StrafingRun");
+        var Hurricane = heroSkillFactory.CreateActive("Hurricane");
+        var CrossCut = heroSkillFactory.CreateActive("CrossCut");
+        var LanceDance = heroSkillFactory.CreateActive("LanceDance");
+        var UnlimitedLanceWork = heroSkillFactory.CreateActive("UnlimitedLanceWork");
+        var VitalContract = heroSkillFactory.CreatePassive("VitalContract");
+        var RecoveryMantra = heroSkillFactory.CreatePassive("RecoveryMantra");
+        var Bang = heroSkillFactory.CreatePassive("Bang");
+        var DoubleTap = heroSkillFactory.CreatePassive("DoubleTap");
+        var Marksman = heroSkillFactory.CreatePassive("Marksman");
+        var Matrix = heroSkillFactory.CreatePassive("Matrix");
+        var FocusShot = heroSkillFactory.CreatePassive("FocusShot");
+        var TriangleFire = heroSkillFactory.CreatePassive("TriangleFire");
+        var AuraOfAccuracy = heroSkillFactory.CreatePassive("AuraOfAccuracy");
+        var SuperiorPerception = heroSkillFactory.CreatePassive("SuperiorPerception");
+        var Lance = heroSkillFactory.CreatePassive("Lance");
+        var IndraBlessing = heroSkillFactory.CreatePassive("IndraBlessing");
+
+        var heroActiveSkill: IActiveSkill[] = [Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork];
+
+        return new PlayerSkillFactory(SetupStorage(), heroActiveSkill);
+    }
+
+    //Hero Active Skill
+
+    //it("should test functions of Heal", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Heal: IActiveSkill = HeroSkillFactory.CreateActive("Heal");
+    //    Heal.id.should.equal(19);
+    //    Heal.name.should.equal("Heal");
+    //    Heal.Cooldown.should.equal(120000);
+    //    HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(100));
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(900);
+    //    HeroSkillFactory.Hero[1].CurrentHP.should.equal(1400);
+    //    Heal.Action(0);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(900);
+    //    HeroSkillFactory.Hero[1].CurrentHP.should.equal(1400);
+    //    Heal.Unlock();
+    //    Heal.Action(0);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(925);
+    //    HeroSkillFactory.Hero[1].CurrentHP.should.equal(1425);
+    //    Heal.inCooldown.should.equal(true);
+    //    Heal.Action(0);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(925);
+    //    HeroSkillFactory.Hero[1].CurrentHP.should.equal(1425);
+    //    setTimeout(function () {
+    //        Heal.inCooldown.should.equal(false);
+    //        Heal.Action(0);
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(950);
+    //        HeroSkillFactory.Hero[1].CurrentHP.should.equal(1450);
+    //    }, 130000)
+    //});
+
+    //it("should test functions of Purify", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Purify: IActiveSkill = HeroSkillFactory.CreateActive("Purify");
+    //    Purify.id.should.equal(20);
+    //    Purify.name.should.equal("Purify");
+    //    Purify.Cooldown.should.equal(240000);
+    //    HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(4));
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(2);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(2);
+    //    Purify.Action(0);
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(2);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(2);
+    //    Purify.Unlock();
+    //    Purify.Action(0);
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(6);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(6);
+    //    Purify.inCooldown.should.equal(true);
+    //    HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(4));
+    //    Purify.Action(0);
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(2);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(2);
+    //    setTimeout(function () {
+    //        Purify.inCooldown.should.equal(false);
+    //        Purify.Action(0);
+    //        HeroSkillFactory.Unit[0].CurrentHP.should.equal(6);
+    //        HeroSkillFactory.Unit[1].CurrentHP.should.equal(6);
+    //    }, 250000)
+    //});
+
+    //it("should test functions of ArcaneShelter", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let ArcaneShelter: IActiveSkill = HeroSkillFactory.CreateActive("ArcaneShelter");
+    //    ArcaneShelter.id.should.equal(22);
+    //    ArcaneShelter.name.should.equal("Arcane Shelter");
+    //    ArcaneShelter.Cooldown.should.equal(72000000);
+    //    HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(5);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(5);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(999);
+    //    ArcaneShelter.Action(0);
+    //    HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(4);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(4);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(998);
+    //    ArcaneShelter.Unlock();
+    //    ArcaneShelter.Action(0);
+    //    HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(1));
+    //    HeroSkillFactory.Unit[0].CurrentHP.should.equal(4);
+    //    HeroSkillFactory.Unit[1].CurrentHP.should.equal(4);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(998);
+    //    ArcaneShelter.inCooldown.should.equal(true);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Unit[0].IsImmune.should.equal(false);
+    //    }, 30000);
+    //    setTimeout(function () {
+    //        ArcaneShelter.inCooldown.should.equal(false);
+    //        HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(1));
+    //        HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(1));
+    //        HeroSkillFactory.Unit[0].CurrentHP.should.equal(3);
+    //        HeroSkillFactory.Unit[1].CurrentHP.should.equal(3);
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(997);
+    //        ArcaneShelter.Action(0);
+    //        HeroSkillFactory.Unit.forEach(x => x.ReceiveDamage(1));
+    //        HeroSkillFactory.Hero.forEach(x => x.ReceiveDamage(1));
+    //        HeroSkillFactory.Unit[0].CurrentHP.should.equal(3);
+    //        HeroSkillFactory.Unit[1].CurrentHP.should.equal(3);
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(997);
+    //    }, 73000000)
+    //});
+
+    //it("should test functions of StrafingRun", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let StrafingRun: IActiveSkill = HeroSkillFactory.CreateActive("StrafingRun");
+    //    StrafingRun.id.should.equal(25);
+    //    StrafingRun.name.should.equal("Strafing Run");
+    //    StrafingRun.Cooldown.should.equal(240000);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    StrafingRun.Action(0);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    StrafingRun.Unlock();
+    //    StrafingRun.Action(0);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.lessThan(15);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.above(5);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(10.000000000000018);
+    //        StrafingRun.inCooldown.should.equal(true);
+    //        StrafingRun.Action(0);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(10.000000000000018);
+    //    }, 5000);
+    //    setTimeout(function () {
+    //        StrafingRun.inCooldown.should.equal(false);
+    //        StrafingRun.Action(0);
+    //        setTimeout(function () {
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.lessThan(11);
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.above(5);
+    //        }, 1000);
+    //        setTimeout(function () {
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(5.0000000000000355);
+    //        }, 6000);
+    //    }, 250000)
+    //});
+
+    //it("should test functions of Hurricane", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Hurricane: IActiveSkill = HeroSkillFactory.CreateActive("Hurricane");
+    //    Hurricane.id.should.equal(32);
+    //    Hurricane.name.should.equal("Hurricane");
+    //    Hurricane.Cooldown.should.equal(72000000);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    Hurricane.Action(0);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    Hurricane.Unlock();
+    //    Hurricane.Action(0);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.lessThan(15);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.above(5);
+    //    }, 10000);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(10.000000000000284);
+    //        Hurricane.inCooldown.should.equal(true);
+    //        Hurricane.Action(0);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(10.000000000000284);
+    //    }, 70000);
+    //    setTimeout(function () {
+    //        Hurricane.inCooldown.should.equal(false);
+    //        Hurricane.Action(0);
+    //        setTimeout(function () {
+    //            console.log("MARK");
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.lessThan(11);
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.above(5);
+    //        }, 10000);
+    //        setTimeout(function () {
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(5.000000000000249);
+    //        }, 70000);
+    //    }, 73000000)
+    //});
+
+    //it("should test functions of CrossCut", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let CrossCut: IActiveSkill = HeroSkillFactory.CreateActive("CrossCut");
+    //    CrossCut.id.should.equal(34);
+    //    CrossCut.name.should.equal("Cross Cut");
+    //    CrossCut.Cooldown.should.equal(10000);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    CrossCut.Action(0);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    CrossCut.Unlock();
+    //    CrossCut.Action(0);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        CrossCut.inCooldown.should.equal(true);
+    //        CrossCut.Action(0);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+    //    }, 2000);
+    //    setTimeout(function () {
+    //        CrossCut.inCooldown.should.equal(false);
+    //        CrossCut.Action(0);
+    //        setTimeout(function () {
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(0);
+    //        }, 1000);
+    //    }, 11000)
+    //});
+
+    //it("should test functions of LanceDance", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let LanceDance: IActiveSkill = HeroSkillFactory.CreateActive("LanceDance");
+    //    LanceDance.id.should.equal(35);
+    //    LanceDance.name.should.equal("Lance Dance");
+    //    LanceDance.Cooldown.should.equal(500000);
+    //    HeroSkillFactory.Unit[0].CurrentDamage.should.equal(1);
+    //    LanceDance.Action(0);
+    //    HeroSkillFactory.Unit[0].CurrentDamage.should.equal(1);
+    //    LanceDance.Unlock();
+    //    LanceDance.Action(0);
+    //    HeroSkillFactory.Unit[0].CurrentDamage.should.equal(6);
+    //    setTimeout(function () {
+    //        LanceDance.inCooldown.should.equal(true);
+    //        LanceDance.Action(0);
+    //        HeroSkillFactory.Unit[0].CurrentDamage.should.equal(6);
+    //    }, 5000);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Unit[0].CurrentDamage.should.equal(1);
+    //        LanceDance.inCooldown.should.equal(false);
+    //        LanceDance.Action(0);
+    //        HeroSkillFactory.Unit[0].CurrentDamage.should.equal(6);
+    //    }, 510000)
+    //});
+
+    //it("should test functions of UnlimitedLanceWork", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let UnlimitedLanceWork: IActiveSkill = HeroSkillFactory.CreateActive("UnlimitedLanceWork");
+    //    UnlimitedLanceWork.id.should.equal(37);
+    //    UnlimitedLanceWork.name.should.equal("Unlimited Lance Work");
+    //    UnlimitedLanceWork.Cooldown.should.equal(72000000);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    UnlimitedLanceWork.Action(0);
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+    //    UnlimitedLanceWork.Unlock();
+    //    UnlimitedLanceWork.Action(0);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        UnlimitedLanceWork.inCooldown.should.equal(true);
+    //        UnlimitedLanceWork.Action(0);
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+    //    }, 2000);
+    //    setTimeout(function () {
+    //        UnlimitedLanceWork.inCooldown.should.equal(false);
+    //        UnlimitedLanceWork.Action(0);
+    //        setTimeout(function () {
+    //            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(0);
+    //        }, 1000);
+    //    }, 6000)
+    //});
+
+    it("should test functions of VitalContract", () => {
+        let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+        let VitalContract: IPassiveSkill = HeroSkillFactory.CreatePassive("Vital Contract");
+        VitalContract.id.should.equal(37);
+        VitalContract.name.should.equal("Unlimited Lance Work");
+        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+        VitalContract.Action(0);
+        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
+        VitalContract.Unlock();
+        VitalContract.Action(0);
+        setTimeout(function () {
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+        }, 1000);
+        setTimeout(function () {
+            VitalContract.inCooldown.should.equal(true);
+            VitalContract.Action(0);
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+        }, 2000);
+        setTimeout(function () {
+            VitalContract.inCooldown.should.equal(false);
+            VitalContract.Action(0);
+            setTimeout(function () {
+                HeroSkillFactory.Enemy[0].CurrentHP.should.equal(0);
+            }, 1000);
+        }, 6000)
     });
 
-    it("should get correct Unit on the screen", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.UnitArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-        let expected = theIndex.CurrentStorage.RangeTwoUnitArr[0];
-        let actual = theIndex.CurrentStorage.CurrentUnit;
-        expected.should.deep.equal(actual);
-        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-        let expected1 = theIndex.CurrentStorage.RangeFourUnitArr[0];
-        let actual1 = theIndex.CurrentStorage.CurrentUnit;
-        expected1.should.deep.equal(actual1);
-        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(1000);
-        let expected2 = theIndex.CurrentStorage.HeroArr[0];
-        let actual2 = theIndex.CurrentStorage.CurrentUnit;
-        expected2.should.deep.equal(actual2);
-        theIndex.CurrentStorage.CurrentUnit.ReceiveDamage(2000);
-        let expected3 = theIndex.CurrentStorage.HeroArr[0];
-        let actual3 = theIndex.CurrentStorage.CurrentUnit;
-        expected3.should.deep.equal(actual3);
-    });
-
-    it("should get correct Enemy on the screen regardless of zone and stage changes", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.StageArray[1].AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected = theIndex.CurrentStorage.CopyStageOneEnemyArr[0];
-        let actual = theIndex.CurrentStorage.CurrentEnemyArr[0];
-        expected.should.deep.equal(actual);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected1 = theIndex.CurrentStorage.CurrentEnemyArr[0].CurrentHP;
-        (expected1).should.deep.equal(60);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(2);
-        theIndex.ChangeStage(true);
-        (theIndex.CurrentStorage.CurrentEnemyArr[0]).should.deep.equal(theIndex.CurrentStorage.StageTwoEnemyArr[0]);
-        theIndex.ChangeStage(false);
-        let expected2 = theIndex.CurrentStorage.CurrentEnemyArr[0].CurrentHP;
-        (expected2).should.deep.equal(60);
-
-    });
-
-    it("should repopulate enemy arrays", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageOneEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
-        theIndex.PopulateEnemyArr(0);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageTwoEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
-        theIndex.PopulateEnemyArr(1);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageThreeEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
-        theIndex.PopulateEnemyArr(2);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageFourEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
-        theIndex.PopulateEnemyArr(3);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageFiveEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.splice(0);
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(0);
-        theIndex.PopulateEnemyArr(4);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageOneEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(1);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageTwoEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(1);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageThreeEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(1);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageFourEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(1);
-        theIndex.CurrentStorage.CurrentEnemyArr = theIndex.CurrentStorage.StageFiveEnemyArr;
-        theIndex.CurrentStorage.CurrentEnemyArr.length.should.equal(1);
-    });
-
-    it("should give Player the right resources on the screen", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected.should.deep.equal(4);
-        theIndex.ChangeStage(true);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected1 = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected1.should.deep.equal(12);
-        theIndex.ChangeStage(true);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected2 = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected2.should.deep.equal(24);
-        theIndex.ChangeStage(true);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected3 = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected3.should.deep.equal(40);
-        theIndex.ChangeStage(true);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        let expected4 = theIndex.CurrentStorage.ResourceArr[1].Count;
-        expected4.should.deep.equal(60);
-    });
-
-    it("should give Player the right experience and level up accordingly", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentExperience).should.equal(0);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentLevel).should.equal(2);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentLevel).should.equal(2);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentExperience).should.equal(5);
-        theIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(1000);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentExperience).should.equal(0);
-        (theIndex.CurrentStorage.CurrentPlayer.CurrentLevel).should.equal(3);
-    });
-
-    it("should deal the right amount of damage to hero by enemy special power", () => {
-        let store: IStorage = SetupStorage();
-        let theIndex: ClickerIndex = new ClickerIndex(store);
-        theIndex.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.CopyStageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => x.AddValueUpdateEvent(theIndex.DeathLogic)));
-        theIndex.CurrentStorage.StageOneEnemyArr.forEach(x => theIndex.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource));
-        theIndex.CurrentStorage.MainGameCycle(80);
-        (theIndex.CurrentStorage.HeroArr[0].CurrentHP).should.equal(1000);
-        (theIndex.CurrentStorage.CurrentUnit.CurrentHP).should.equal(2);
-        theIndex.CurrentStorage.MainGameCycle(200);
-        (theIndex.CurrentStorage.HeroArr[0].CurrentHP).should.equal(992);
-        (theIndex.CurrentStorage.CurrentUnit.id).should.equal(0);
-    });
-
+    //var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);
+    //var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, thePlayer);
+    //var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, thePlayer);
+    //var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, thePlayer);
+    //var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 });

@@ -31,6 +31,7 @@ export interface IStorage {
     RangeSixUnitArr: Unit[];
     HeroArr: Hero[];
     UnitArr: IMortality[][]; 
+    PureUnitArr: Unit[];
     CurrentUnit: IMortality;
     counter: number;
 
