@@ -416,7 +416,8 @@
     <TypeScriptCompile Include="src\javascript\InterfacesBaseClasses\Repository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="test\Skills.spec.ts" />
+    <TypeScriptCompile Include="test\PlayerSkills.spec.ts" />
+    <TypeScriptCompile Include="test\HeroSkills.spec.ts" />
     <TypeScriptCompile Include="test\clickIndex.spec.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

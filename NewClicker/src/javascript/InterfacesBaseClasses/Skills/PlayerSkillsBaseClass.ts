@@ -52,9 +52,9 @@ export class PlayerActiveSkill implements IActiveSkill {
     }
 
     CooldownCounter(): void {
-        let InCooldown = this.inCooldown;
-        InCooldown = true;
-        setTimeout(function () { InCooldown = false; }, this.cooldown);
+        let skill = this;
+        skill.inCooldown = true;
+        setTimeout(function () { skill.inCooldown = false; }, skill.cooldown);
     }
 
     Action(input:number): void {
@@ -68,21 +68,14 @@ export class PlayerActiveSkill implements IActiveSkill {
 
 export class Steal extends PlayerActiveSkill {
 
-    private currentEnemyResource: number[];
-
     constructor(playerSkillFactory: ISkillFactory) {
         super(1, "Steal", 120000, playerSkillFactory);
-        this.currentEnemyResource = [];
-    }
-
-    UpdateSource = (e: EnemyValueUpdateEvent): void => {
-        this.currentEnemyResource = e.newResourceArray;
     }
 
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.currentEnemyResource.forEach(x => this.SkillFactory.Resource[x].Increase(this.SkillFactory.Stage.CurrentStage));
+            this.SkillFactory.Enemy[0].ResourceArray.forEach(x => this.SkillFactory.Resource[x].Increase(this.SkillFactory.Stage.CurrentStage));
         }
     }
 }
@@ -102,6 +95,7 @@ export class Heist extends PlayerActiveSkill {
             let totalDamage: number = 0;
             this.SkillFactory.Unit.forEach(x => totalDamage += (x.CurrentDamage * 20 / x.damageFrequency * 5));
             this.SkillFactory.Hero.forEach(x => totalDamage += (x.CurrentDamage * 5));
+            totalDamage = Math.floor(totalDamage);
             this.SkillFactory.Resource.forEach(x => x.Increase(totalDamage));
             this.SkillFactory.Resource[7].Increase(totalDamage);
         }
@@ -111,7 +105,7 @@ export class Heist extends PlayerActiveSkill {
 export class MoneyIsPower extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(4, "Money Is Power", 7200000, playerSkillFactory);
+        super(4, "Money is Power", 7200000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -230,9 +224,9 @@ export class Whirlwind extends PlayerActiveSkill {
             this.SkillFactory.Enemy[0].ReceiveDamage(this.SkillFactory.Player.CurrentDamage * 100);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
+                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Player.CurrentDamage * 100);
                 setTimeout(function () {
-                    skill.SkillFactory.Enemy[0].ReceiveDamage(this.Player.CurrentDamage * 100);
+                    skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Player.CurrentDamage * 100);
                 }, 1000);
             }, 1000);
         }
@@ -247,20 +241,19 @@ export class FinalBlow extends PlayerActiveSkill {
     constructor(playerSkillFactory: ISkillFactory) {
         super(14, "Final Blow", 100000, playerSkillFactory);
         this.ClickCount = this.SkillFactory.Player.ClickCount;
-        this.MaxCount = this.SkillFactory.Player.ClickCount + 5;
+        this.MaxCount = 0;
     }
 
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         this.ClickCount = e.newClickCount;
         if (this.ClickCount == this.MaxCount) {
             this.SkillFactory.Player.CurrentDamage = 1 / 1000;
-            this.inCooldown = false;
         }
     }
 
-    public Action() {
-        if (this.isUnlocked && !this.InCooldown) {
-            this.inCooldown = true;
+    public Action(input:number) {
+        if (this.isUnlocked && !this.InCooldown && this.ClickCount >= this.MaxCount) {
+            super.Action(input);
             this.MaxCount = this.ClickCount + 5;
             this.SkillFactory.Player.CurrentDamage = 1000;
         }
@@ -360,13 +353,23 @@ export class PlayerPassiveSkill implements IPassiveSkill {
 
 export class Pickpocket extends PlayerPassiveSkill {
 
+    isUsed: boolean;
+
     constructor(playerSkillFactory:ISkillFactory) {
         super(0, "Pickpocket", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.AllEnemy.forEach(x => x.forEach(x => x.ResourceArray.concat(x.ResourceArray)));
+        if (this.isUnlocked && !this.isUsed) {
+            console.log("Yay");
+            for (var i = 0; i < this.SkillFactory.AllEnemy.length; i++) {
+                for (var j = 0; j < this.SkillFactory.AllEnemy[i].length; j++) {
+                    this.SkillFactory.AllEnemy[i][j].ResourceArray = this.SkillFactory.AllEnemy[i][j].ResourceArray.concat(this.SkillFactory.AllEnemy[i][j].ResourceArray);
+                }
+            }
+            console.log(this.SkillFactory.Enemy[0].ResourceArray);
+            this.isUsed = true;
         }
     }
 }

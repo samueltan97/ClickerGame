@@ -6,6 +6,9 @@ export interface IPlayer {
     CurrentDPS: number;
     CurrentLevel: number;
     ClickCount: number;
+    IncreaseArmyVitality(): void;
     AddHurtUpdateEvents(f: Function): void;
     AddValueUpdateEvent(e: (e: PlayerValueUpdateEvent) => void);
+    LevelUp(): void;
+    Hurt(): number;
 }

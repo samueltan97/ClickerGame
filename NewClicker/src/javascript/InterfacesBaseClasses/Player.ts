@@ -48,6 +48,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentArmyVitality(count:number) {
         this.armyVitality = count;
+        this.Update();
     }
 
     get CurrentExperience():number {
@@ -72,7 +73,6 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentDamage(multiplier: number) {
         this.baseDamage = this.baseDamage * multiplier;
-        this.Update();
     }
 
     get CurrentDPS(): number {
@@ -81,7 +81,6 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentDPS(multiplier: number) {
         this.dps = this.dps * multiplier;
-        this.Update();
     }
 
     get ClickCount(): number {

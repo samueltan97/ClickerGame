@@ -16,7 +16,7 @@ import { IPassiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/IP
 
 should();
 
-describe("Skills", () => {
+describe("HeroSkills", () => {
 
     function SetupStorage(): Storage {
         var thePlayer: Player = new Player(1, "NIL");
@@ -568,31 +568,107 @@ describe("Skills", () => {
     //    }, 6000)
     //});
 
-    it("should test functions of VitalContract", () => {
+    //it("should test functions of AuraOfAccuracy", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let AuraOfAccuracy: IPassiveSkill = HeroSkillFactory.CreatePassive("AuraOfAccuracy");
+    //    AuraOfAccuracy.id.should.equal(30);
+    //    AuraOfAccuracy.name.should.equal("Aura of Accuracy");
+    //    HeroSkillFactory.Unit[7].Exist(1);
+    //    HeroSkillFactory.Unit[12].Exist(1);
+    //    HeroSkillFactory.Unit[2].CurrentDamage.should.equal(100);
+    //    HeroSkillFactory.Unit[7].CurrentDamage.should.equal(1500);
+    //    HeroSkillFactory.Unit[12].CurrentDamage.should.equal(320000);
+    //    AuraOfAccuracy.Action();
+    //    HeroSkillFactory.Unit[2].CurrentDamage.should.equal(100);
+    //    HeroSkillFactory.Unit[7].CurrentDamage.should.equal(1500);
+    //    HeroSkillFactory.Unit[12].CurrentDamage.should.equal(320000);
+    //    AuraOfAccuracy.Unlock();
+    //    HeroSkillFactory.Unit[2].CurrentDamage.should.equal(200);
+    //    HeroSkillFactory.Unit[7].CurrentDamage.should.equal(3000);
+    //    HeroSkillFactory.Unit[12].CurrentDamage.should.equal(640000);
+    //    HeroSkillFactory.Player.CurrentArmyVitality = 2;
+    //    HeroSkillFactory.Unit[2].CurrentDamage.should.equal(400);
+    //    HeroSkillFactory.Unit[7].CurrentDamage.should.equal(6000);
+    //    HeroSkillFactory.Unit[12].CurrentDamage.should.equal(1280000);
+    //});
+
+    //it("should test functions of SuperiorPerception", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let SuperiorPerception: IPassiveSkill = HeroSkillFactory.CreatePassive("SuperiorPerception");
+    //    SuperiorPerception.id.should.equal(31);
+    //    SuperiorPerception.name.should.equal("Superior Perception");
+    //    HeroSkillFactory.Hero[2].CurrentDamage.should.equal(30);
+    //    SuperiorPerception.Action();
+    //    HeroSkillFactory.Hero[2].CurrentDamage.should.equal(30);
+    //    SuperiorPerception.Unlock();
+    //    HeroSkillFactory.Hero[2].CurrentDamage.should.equal(30030);
+    //    HeroSkillFactory.Player.CurrentArmyVitality = 2;
+    //    HeroSkillFactory.Hero[2].CurrentDamage.should.equal(60060);
+    //});
+
+    //it("should test functions of Lance", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Lance: IPassiveSkill = HeroSkillFactory.CreatePassive("Lance");
+    //    Lance.id.should.equal(33);
+    //    Lance.name.should.equal("Lance");
+    //    HeroSkillFactory.Enemy.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+    //    HeroSkillFactory.Enemy.splice(0, 1);
+    //    Lance.Action();
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    Lance.Unlock();
+    //    HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2990);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Player.CurrentArmyVitality = 2;
+    //    }, 1200);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2970);
+    //    }, 2100);
+    //});
+
+    it("should test functions of IndraBlessing", () => {
         let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
-        let VitalContract: IPassiveSkill = HeroSkillFactory.CreatePassive("Vital Contract");
-        VitalContract.id.should.equal(37);
-        VitalContract.name.should.equal("Unlimited Lance Work");
-        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
-        VitalContract.Action(0);
-        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
-        VitalContract.Unlock();
-        VitalContract.Action(0);
-        setTimeout(function () {
-            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
-        }, 1000);
-        setTimeout(function () {
-            VitalContract.inCooldown.should.equal(true);
-            VitalContract.Action(0);
-            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
-        }, 2000);
-        setTimeout(function () {
-            VitalContract.inCooldown.should.equal(false);
-            VitalContract.Action(0);
-            setTimeout(function () {
-                HeroSkillFactory.Enemy[0].CurrentHP.should.equal(0);
-            }, 1000);
-        }, 6000)
+        let IndraBlessing: IPassiveSkill = HeroSkillFactory.CreatePassive("IndraBlessing");
+        HeroSkillFactory.Hero.forEach(x => HeroSkillFactory.Player.AddValueUpdateEvent(x.UpdateSource));
+        HeroSkillFactory.Unit.forEach(x => HeroSkillFactory.Player.AddValueUpdateEvent(x.UpdateSource));
+        IndraBlessing.id.should.equal(36);
+        IndraBlessing.name.should.equal("Indra's Blessing");
+        HeroSkillFactory.Unit[9].Exist(1);
+        HeroSkillFactory.Unit[3].Exist(1);
+        HeroSkillFactory.Hero[3].CurrentHP.should.equal(10000);
+        HeroSkillFactory.Unit[0].CurrentHP.should.equal(6);
+        HeroSkillFactory.Unit[9].CurrentHP.should.equal(10);
+        HeroSkillFactory.Unit[3].CurrentHP.should.equal(7);
+        IndraBlessing.Action();
+        HeroSkillFactory.Hero[3].ReceiveDamage(2);
+        HeroSkillFactory.Unit[0].ReceiveDamage(2);
+        HeroSkillFactory.Unit[9].ReceiveDamage(2);
+        HeroSkillFactory.Unit[3].ReceiveDamage(2);
+        HeroSkillFactory.Hero[3].CurrentHP.should.equal(9998);
+        HeroSkillFactory.Unit[0].CurrentHP.should.equal(4);
+        HeroSkillFactory.Unit[9].CurrentHP.should.equal(8);
+        HeroSkillFactory.Unit[3].CurrentHP.should.equal(5);
+        IndraBlessing.Unlock();
+        HeroSkillFactory.Hero[3].CurrentHP.should.equal(19996);
+        HeroSkillFactory.Unit[0].CurrentHP.should.equal(8);
+        HeroSkillFactory.Unit[9].CurrentHP.should.equal(16);
+        HeroSkillFactory.Unit[3].CurrentHP.should.equal(10);
+        HeroSkillFactory.Hero[3].MaxHP.should.equal(20000);
+        HeroSkillFactory.Unit[0].MaxHP.should.equal(12);
+        HeroSkillFactory.Unit[9].MaxHP.should.equal(20);
+        HeroSkillFactory.Unit[3].MaxHP.should.equal(14);
+        HeroSkillFactory.Player.IncreaseArmyVitality();
+        HeroSkillFactory.Hero[3].CurrentHP.should.equal(39996);
+        HeroSkillFactory.Unit[0].CurrentHP.should.equal(20);
+        HeroSkillFactory.Unit[9].CurrentHP.should.equal(36);
+        HeroSkillFactory.Unit[3].CurrentHP.should.equal(24);
+        HeroSkillFactory.Hero[3].MaxHP.should.equal(40000);
+        HeroSkillFactory.Unit[0].MaxHP.should.equal(24);
+        HeroSkillFactory.Unit[9].MaxHP.should.equal(40);
+        HeroSkillFactory.Unit[3].MaxHP.should.equal(28);
+
     });
 
     //var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);

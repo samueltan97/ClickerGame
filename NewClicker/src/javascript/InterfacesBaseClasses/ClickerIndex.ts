@@ -126,8 +126,9 @@ export class ClickerIndex {
         this.theStorage.UnitArr.forEach(x => x.forEach(y => this.theStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
         this.theStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
         this.theStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
-       this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-       this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+        this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+        this.theStorage.UnitArr.forEach(x => x.forEach(x=>this.theStorage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource)));
+        this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
         for (var i = 0; i < this.theStorage.StageArray.length; i++) {
             this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
             this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
