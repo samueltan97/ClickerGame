@@ -26,7 +26,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
      stage: IStageLevel;
     public isDead: boolean;
     public readonly isBoss: boolean;
-    private readonly resourceArray: number[];
+    private resourceArray: number[];
     private readonly baseExperience: number;
     private damageFrequency: number;
     private regen: number;
@@ -88,6 +88,10 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     get CurrentDamage(): number {
         return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
+    }
+
+    set ResourceArray(array:number[]) {
+        this.resourceArray = array;
     }
 
     get ResourceArray(): number[] {
@@ -152,6 +156,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     readonly image: string;
     private readonly name: string;
     private baseHP: number;
+    private maxHP: number;
     private currentHP: number;
     private baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
     private readonly range: number;
@@ -170,6 +175,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
+        this.maxHP = baseHP;
         this.currentHP = this.MaxHP;
         this.baseDamage = baseDamage;
         this.range = range;
@@ -207,7 +213,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get MaxHP(): number {
-        return this.baseHP * this.player.CurrentArmyVitality; //Placeholder algorithm for maxhp value
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality;
+        return this.maxHP; //Placeholder algorithm for maxhp value
     }
 
     set MaxHP(multiplier: number) {
@@ -250,7 +257,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
-        this.player.CurrentArmyVitality = e.newArmyVitality;
+        let difference: number = this.maxHP - this.CurrentHP;
+        this.currentHP = this.MaxHP - difference;
     }
 
     ReceiveDamage(damage: number): void {
@@ -473,6 +481,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     readonly image: string;
     private readonly name: string;
     private baseHP: number;
+    private maxHP: number;
     private currentHP: number;
     private baseDamage: number; 
     private readonly range: number;
@@ -491,6 +500,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.image = image;
         this.name = name;
         this.baseHP = baseHP;
+        this.maxHP = baseHP;
         this.currentHP = this.baseHP;
         this.baseDamage = baseDamage;
         this.baseExperience = baseExperience;
@@ -518,7 +528,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
-        this.player.CurrentArmyVitality = e.newArmyVitality;
+        let difference: number = this.maxHP - this.CurrentHP;
+        this.currentHP = this.MaxHP - difference;
     }
 
     get IsImmune(): boolean {
@@ -530,7 +541,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     get MaxHP(): number {
-        return this.baseHP * this.player.CurrentArmyVitality; //Placeholder algorithm for maxhp value
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality;
+        return this.maxHP; //Placeholder algorithm for maxhp value
     }
 
     set MaxHP(multiplier: number) {

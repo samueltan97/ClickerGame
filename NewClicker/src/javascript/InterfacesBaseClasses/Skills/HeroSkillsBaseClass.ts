@@ -414,11 +414,11 @@ export class AuraOfAccuracy extends HeroPassiveSkill {
         super(30, "Aura of Accuracy", playerSkillFactory);
     }
 
-    Action() {
+    Action () {
         if (this.isUnlocked) {
             this.SkillFactory.Unit[2].CurrentDamage = 2;
             this.SkillFactory.Unit[7].CurrentDamage = 2;
-            this.SkillFactory.Unit[13].CurrentDamage = 2;
+            this.SkillFactory.Unit[12].CurrentDamage = 2;
         }
     }
 }

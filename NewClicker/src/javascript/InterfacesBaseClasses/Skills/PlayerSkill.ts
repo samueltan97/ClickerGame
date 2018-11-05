@@ -4,7 +4,7 @@ import { IPassiveSkill } from "./IPassiveSkill";
 import { Resource, Hero, Unit, Enemy } from "../BaseClass";
 import { IPlayer } from "../IPlayer";
 import { IStageLevel } from "../IStageLevel";
-import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyIsPower, Ballad, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry } from "./PlayerSkillsBaseClass";
+import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyIsPower, Ballad, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry, Solo } from "./PlayerSkillsBaseClass";
 import { HeroActiveSkill } from "./HeroSkillsBaseClass";
 import { IStorage } from "../IStorage";
 
@@ -38,6 +38,7 @@ export class PlayerSkillFactory implements ISkillFactory {
             case "Heist": return new Heist(this);
             case "MoneyIsPower": return new MoneyIsPower(this);
             case "Ballad": return new Ballad(this);
+            case "Solo": return new Solo(this);
             case "SongOfCourage": return new SongOfCourage(this);
             case "ChorusOfDeath": return new ChorusOfDeath(this);
             case "ImpactStab": return new ImpactStab(this);
