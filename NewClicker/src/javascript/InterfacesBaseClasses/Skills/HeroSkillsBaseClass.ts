@@ -278,7 +278,7 @@ export class VitalContract extends HeroPassiveSkill {
         }
     }
 
-    UpdateCharles(e: HeroValueUpdateEvent): void {
+    UpdateCharles = (e: HeroValueUpdateEvent): void => {
         if (e.newHP < e.newMaxHP) {
             let skill = this;
            setTimeout(function () {
@@ -338,6 +338,8 @@ export class DoubleTap extends HeroPassiveSkill {
 
 export class Marksman extends HeroPassiveSkill {
 
+    prevMultiplier: number = 1;
+
     constructor(playerSkillFactory: ISkillFactory) {
         super(26, "Marksman", playerSkillFactory);
     }
@@ -345,12 +347,18 @@ export class Marksman extends HeroPassiveSkill {
     Action() {
         if (this.isUnlocked) {
             this.SkillFactory.Hero[1].AddValueUpdateEvent(this.UpdateUnit);
+            this.prevMultiplier = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
+            this.SkillFactory.Unit[5].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
+            this.SkillFactory.Unit[11].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
         }
     }
 
-    UpdateUnit(e: HeroValueUpdateEvent): void {
-        this.SkillFactory.Unit[5].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
-        this.SkillFactory.Unit[12].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
+    UpdateUnit = (e: HeroValueUpdateEvent): void => {
+        this.SkillFactory.Unit[5].CurrentDamage = 1/this.prevMultiplier;
+        this.SkillFactory.Unit[11].CurrentDamage = 1 / this.prevMultiplier;
+        this.prevMultiplier = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
+        this.SkillFactory.Unit[5].CurrentDamage = this.prevMultiplier;
+        this.SkillFactory.Unit[11].CurrentDamage = this.prevMultiplier;
     }
 }
 
@@ -363,7 +371,7 @@ export class Matrix extends HeroPassiveSkill {
     Action() {
         if (this.isUnlocked) {
             this.SkillFactory.Unit[5].CanEvade = true;
-            this.SkillFactory.Unit[12].CanEvade = true;
+            this.SkillFactory.Unit[11].CanEvade = true;
         }
     }
 }
@@ -395,7 +403,7 @@ export class TriangleFire extends HeroPassiveSkill {
             let skill = this;
             setInterval(function () {
                 skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[2].CurrentDamage * 3);
-            }, 10000);
+            }, 1000);
         }
     }
 }

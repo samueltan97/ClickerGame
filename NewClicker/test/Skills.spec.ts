@@ -13,6 +13,7 @@ import { ISkillFactory } from "../src/javascript/InterfacesBaseClasses/Skills/IS
 import { HeroActiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/HeroSkillsBaseClass";
 import { IActiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/IActiveSkill";
 import { IPassiveSkill } from "../src/javascript/InterfacesBaseClasses/Skills/IPassiveSkill";
+import { setTimeout } from "timers";
 
 should();
 
@@ -568,31 +569,162 @@ describe("Skills", () => {
     //    }, 6000)
     //});
 
-    it("should test functions of VitalContract", () => {
+    //it("should test functions of VitalContract", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let VitalContract: IPassiveSkill = HeroSkillFactory.CreatePassive("VitalContract");
+    //    VitalContract.id.should.equal(18);
+    //    VitalContract.name.should.equal("Vital Contract");
+    //    HeroSkillFactory.Hero[0].ReceiveDamage(100);
+    //    HeroSkillFactory.Hero[0].CurrentHP.should.equal(900);
+    //    VitalContract.Action();
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(900);
+    //    }, 500);
+    //    setTimeout(function () {
+    //        VitalContract.Unlock();
+    //        HeroSkillFactory.Hero[0].ReceiveDamage(100);
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(800);
+    //    }, 600);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Hero[0].CurrentHP.should.equal(1000);
+    //    }, 1100)
+    //});
+
+    //it("should test functions of RecoveryMantra", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let RecoveryMantra: IPassiveSkill = HeroSkillFactory.CreatePassive("RecoveryMantra");
+    //    RecoveryMantra.id.should.equal(21);
+    //    RecoveryMantra.name.should.equal("Recovery Mantra");
+    //    HeroSkillFactory.Hero[3].ReceiveDamage(1000);
+    //    HeroSkillFactory.Hero[3].CurrentHP.should.equal(9000);
+    //    RecoveryMantra.Action();
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Hero[3].CurrentHP.should.equal(9000);
+    //    }, 500);
+    //    setTimeout(function () {
+    //        RecoveryMantra.Unlock();
+    //        HeroSkillFactory.Hero[3].ReceiveDamage(1000);
+    //        HeroSkillFactory.Hero[3].CurrentHP.should.equal(8000);
+    //    }, 600);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Hero[3].CurrentHP.should.equal(8500);
+    //    }, 70000)
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Hero[3].CurrentHP.should.equal(9000);
+    //    }, 130000)
+    //});
+
+    //it("should test functions of Bang", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Bang: IPassiveSkill = HeroSkillFactory.CreatePassive("Bang");
+    //    Bang.id.should.equal(23);
+    //    Bang.name.should.equal("Bang");
+    //    HeroSkillFactory.Enemy.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+    //    HeroSkillFactory.Enemy.splice(0, 1);
+    //    Bang.Action();
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        Bang.Unlock();
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    }, 1100);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2950);
+    //    }, 2200)
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2900);
+    //    }, 3200)
+    //});
+
+    //it("should test functions of DoubleTap", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let DoubleTap: IPassiveSkill = HeroSkillFactory.CreatePassive("DoubleTap");
+    //    DoubleTap.id.should.equal(24);
+    //    DoubleTap.name.should.equal("Double Tap");
+    //    HeroSkillFactory.Enemy.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+    //    HeroSkillFactory.Enemy.splice(0, 1);
+    //    DoubleTap.Action();
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    }, 1000);
+    //    setTimeout(function () {
+    //        DoubleTap.Unlock();
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+    //    }, 1100);
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2950);
+    //    }, 2200)
+    //    setTimeout(function () {
+    //        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2900);
+    //    }, 3200)
+    //});
+
+    //it("should test functions of Matrix", () => {
+    //    let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+    //    let Matrix: IPassiveSkill = HeroSkillFactory.CreatePassive("Matrix");
+    //    Matrix.id.should.equal(27);
+    //    Matrix.name.should.equal("Matrix");
+    //    Matrix.Action();
+    //    HeroSkillFactory.Unit[5].Exist(1);
+    //    HeroSkillFactory.Unit[5].ReceiveDamage(1);
+    //    HeroSkillFactory.Unit[5].CurrentHP.should.equal(4);
+    //    HeroSkillFactory.Unit[11].Exist(1);
+    //    HeroSkillFactory.Unit[11].ReceiveDamage(1);
+    //    HeroSkillFactory.Unit[11].CurrentHP.should.equal(5);
+    //    Matrix.Unlock();
+    //    HeroSkillFactory.Unit[5].ReceiveDamage(1);
+    //    HeroSkillFactory.Unit[5].CanEvade.should.equal(true);
+    //    HeroSkillFactory.Unit[11].ReceiveDamage(1);
+    //    HeroSkillFactory.Unit[5].CanEvade.should.equal(true);
+    //});
+
+    it("should test functions of FocusShot", () => {
         let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
-        let VitalContract: IPassiveSkill = HeroSkillFactory.CreatePassive("Vital Contract");
-        VitalContract.id.should.equal(37);
-        VitalContract.name.should.equal("Unlimited Lance Work");
-        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
-        VitalContract.Action(0);
-        HeroSkillFactory.Enemy[0].CurrentHP.should.equal(15);
-        VitalContract.Unlock();
-        VitalContract.Action(0);
+        let FocusShot: IPassiveSkill = HeroSkillFactory.CreatePassive("FocusShot");
+        FocusShot.id.should.equal(28);
+        FocusShot.name.should.equal("Focus Shot");
+        HeroSkillFactory.Enemy.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        HeroSkillFactory.Enemy.splice(0, 1);
+        FocusShot.Action();
         setTimeout(function () {
-            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
         }, 1000);
         setTimeout(function () {
-            VitalContract.inCooldown.should.equal(true);
-            VitalContract.Action(0);
-            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(7);
-        }, 2000);
+            FocusShot.Unlock();
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+        }, 1100);
         setTimeout(function () {
-            VitalContract.inCooldown.should.equal(false);
-            VitalContract.Action(0);
-            setTimeout(function () {
-                HeroSkillFactory.Enemy[0].CurrentHP.should.equal(0);
-            }, 1000);
-        }, 6000)
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2970);
+        }, 2200)
+        setTimeout(function () {
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2940);
+            console.log("Done");
+        }, 3200)
+    });
+
+    it("should test functions of TriangleFire", () => {
+        let HeroSkillFactory: HeroSkillFactory = SetupHeroSkillFactory(SetupStorage());
+        let TriangleFire: IPassiveSkill = HeroSkillFactory.CreatePassive("TriangleFire");
+        TriangleFire.id.should.equal(29);
+        TriangleFire.name.should.equal("Triangle Fire");
+        HeroSkillFactory.Enemy.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        HeroSkillFactory.Enemy.splice(0, 1);
+        TriangleFire.Action();
+        setTimeout(function () {
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+        }, 1000);
+        setTimeout(function () {
+            TriangleFire.Unlock();
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(3000);
+        }, 1100);
+        setTimeout(function () {
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2910);
+        }, 2200)
+        setTimeout(function () {
+            HeroSkillFactory.Enemy[0].CurrentHP.should.equal(2820);
+            console.log("Done");
+        }, 3200)
     });
 
     //var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);

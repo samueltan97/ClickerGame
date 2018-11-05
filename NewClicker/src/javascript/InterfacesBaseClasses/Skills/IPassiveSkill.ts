@@ -11,4 +11,5 @@ export interface IPassiveSkill {
     SkillFactory: ISkillFactory;
     LevelUp(): void;
     Unlock(): void;
+    Action(): void;
 }
