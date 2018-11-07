@@ -75,11 +75,11 @@ export class Heal extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Hero.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Hero.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Hero.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Hero.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Hero.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
         }
     }
 }
@@ -93,7 +93,7 @@ export class Purify extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Unit.forEach(x => x.RegenerateMax());
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.RegenerateMax());
         }
     }
 }
@@ -107,12 +107,12 @@ export class ArcaneShelter extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Unit.forEach(x => x.IsImmune = true);
-            this.SkillFactory.Hero.forEach(x => x.IsImmune = true);
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.IsImmune = true);
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.IsImmune = true);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Unit.forEach(x => x.IsImmune = false);
-                skill.SkillFactory.Hero.forEach(x => x.IsImmune = false);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.IsImmune = false);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.IsImmune = false);
             }, 20000);
         }
     }
@@ -127,7 +127,7 @@ export class StrafingRun extends HeroActiveSkill {
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
-            skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[1].CurrentDamage);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage);
         }, 100 * count);
     }
 
@@ -151,7 +151,7 @@ export class Hurricane extends HeroActiveSkill {
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
-            skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[2].CurrentDamage);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage);
         }, 100 * count);
     }
 
@@ -175,10 +175,10 @@ export class CrossCut extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
-            this.SkillFactory.Enemy[0].ReceiveDamage(this.SkillFactory.Hero[3].CurrentDamage * 2/5);
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2/5);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[3].CurrentDamage * 2/5);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2/5);
             }, 100);
         }
     }
@@ -193,10 +193,10 @@ export class LanceDance extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
-            [this.SkillFactory.Unit[0], this.SkillFactory.Unit[3], this.SkillFactory.Unit[9]].forEach(x => x.CurrentDamage = 6);
+            [this.SkillFactory.Storage.PureUnitArr[0], this.SkillFactory.Storage.PureUnitArr[3], this.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 6);
             let skill = this;
            setTimeout(function () {
-               [skill.SkillFactory.Unit[0], skill.SkillFactory.Unit[3], skill.SkillFactory.Unit[9]].forEach(x => x.CurrentDamage = 1/6);
+               [skill.SkillFactory.Storage.PureUnitArr[0], skill.SkillFactory.Storage.PureUnitArr[3], skill.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 1/6);
             }, 10000);
         }
     }
@@ -210,11 +210,11 @@ export class UnlimitedLanceWork extends HeroActiveSkill {
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);     
-            let count: number = this.SkillFactory.Unit[0].Count + this.SkillFactory.Unit[3].Count + this.SkillFactory.Unit[9].Count + 1;
-            this.SkillFactory.Enemy[0].ReceiveDamage(this.SkillFactory.Hero[3].CurrentDamage * 10 * count);
+            let count: number = this.SkillFactory.Storage.PureUnitArr[0].Count + this.SkillFactory.Storage.PureUnitArr[3].Count + this.SkillFactory.Storage.PureUnitArr[9].Count + 1;
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[3].CurrentDamage * 10 * count);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count);
             }, 500);
         }
     }
@@ -267,14 +267,17 @@ export class HeroPassiveSkill implements IPassiveSkill {
 }
 
 export class VitalContract extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(18, "Vital Contract", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.Hero[0].AddValueUpdateEvent(this.UpdateCharles);
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.HeroArr[0].AddValueUpdateEvent(this.UpdateCharles);
+            this.isUsed = true;
         }
     }
 
@@ -282,192 +285,223 @@ export class VitalContract extends HeroPassiveSkill {
         if (e.newHP < e.newMaxHP) {
             let skill = this;
            setTimeout(function () {
-               skill.SkillFactory.Hero[0].RegenerateMax();
+               skill.SkillFactory.Storage.HeroArr[0].RegenerateMax();
             }, 400); 
         }
     }
 }
 
 export class RecoveryMantra extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(21, "Recovery Mantra", playerSkillFactory);
-    }
+        this.isUsed = false;
+   }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Hero.forEach(x=>x.RegeneratePercentage(5));
+                skill.SkillFactory.Storage.HeroArr.forEach(x=>x.RegeneratePercentage(5));
             }, 60000);
-        }
+            this.isUsed = true;
+       }
     }
 }
 
 export class Bang extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(23, "Bang", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[1].CurrentDamage);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage);
             }, 1000);
+            this.isUsed = true;
         }
     }
 }
 
 export class DoubleTap extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(24, "Double Tap", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[1].CurrentDamage);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage);
             }, 1000);
+            this.isUsed = true;
         }
     }
 }
 
 export class Marksman extends HeroPassiveSkill {
+    isUsed: boolean;
 
     prevMultiplier: number = 1;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(26, "Marksman", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.Hero[1].AddValueUpdateEvent(this.UpdateUnit);
-            this.prevMultiplier = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
-            this.SkillFactory.Unit[5].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
-            this.SkillFactory.Unit[11].CurrentDamage = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.HeroArr[1].AddValueUpdateEvent(this.UpdateUnit);
+            this.UpdateUnit();
+            this.isUsed = true;
         }
     }
 
-    UpdateUnit = (e: HeroValueUpdateEvent): void => {
-        this.SkillFactory.Unit[5].CurrentDamage = 1/this.prevMultiplier;
-        this.SkillFactory.Unit[11].CurrentDamage = 1 / this.prevMultiplier;
-        this.prevMultiplier = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Hero[1].CurrentDamage)));
-        this.SkillFactory.Unit[5].CurrentDamage = this.prevMultiplier;
-        this.SkillFactory.Unit[11].CurrentDamage = this.prevMultiplier;
+    UpdateUnit = (): void => {
+        this.SkillFactory.Storage.PureUnitArr[5].CurrentDamage = 1/this.prevMultiplier;
+        this.SkillFactory.Storage.PureUnitArr[11].CurrentDamage = 1 / this.prevMultiplier;
+        this.prevMultiplier = Math.max(1, Math.floor(Math.sqrt(this.SkillFactory.Storage.HeroArr[1].CurrentDamage)));
+        this.SkillFactory.Storage.PureUnitArr[5].CurrentDamage = this.prevMultiplier;
+        this.SkillFactory.Storage.PureUnitArr[11].CurrentDamage = this.prevMultiplier;
     }
 }
 
 export class Matrix extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(27, "Matrix", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.Unit[5].CanEvade = true;
-            this.SkillFactory.Unit[11].CanEvade = true;
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.PureUnitArr[5].CanEvade = true;
+            this.SkillFactory.Storage.PureUnitArr[11].CanEvade = true;
+            this.isUsed = true;
         }
     }
 }
 
 export class FocusShot extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(28, "Focus Shot", playerSkillFactory);
-    }
+        this.isUsed = false;
+   }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[2].CurrentDamage);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage);
             }, 1000);
+            this.isUsed = true;
         }
     }
 }
 
 export class TriangleFire extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(29, "Triangle Fire", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[2].CurrentDamage * 3);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage * 3);
             }, 1000);
-        }
+            this.isUsed = true;
+       }
     }
 }
 
 export class AuraOfAccuracy extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(30, "Aura of Accuracy", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action () {
-        if (this.isUnlocked) {
-            this.SkillFactory.Unit[2].CurrentDamage = 2;
-            this.SkillFactory.Unit[7].CurrentDamage = 2;
-            this.SkillFactory.Unit[12].CurrentDamage = 2;
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.PureUnitArr[2].CurrentDamage = 2;
+            this.SkillFactory.Storage.PureUnitArr[7].CurrentDamage = 2;
+            this.SkillFactory.Storage.PureUnitArr[12].CurrentDamage = 2;
+            this.isUsed = true;
         }
     }
 }
 
 export class SuperiorPerception extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(31, "Superior Perception", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.Hero[2].CurrentDamage = 1001;
-        }
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.HeroArr[2].CurrentDamage = 1001;
+            this.isUsed = true;
+       }
     }
 }
 
 export class Lance extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(33, "Lance", playerSkillFactory);
-    }
+        this.isUsed = false;
+   }
 
     Action() {
-        if (this.isUnlocked) {
+        if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Enemy[0].ReceiveDamage(skill.SkillFactory.Hero[3].CurrentDamage);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage);
             }, 1000);
+            this.isUsed = true;
         }
     }
 }
 
 export class IndraBlessing extends HeroPassiveSkill {
+    isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(36, "Indra's Blessing", playerSkillFactory);
+        this.isUsed = false;
     }
 
     Action() {
-        if (this.isUnlocked) {
-            this.SkillFactory.Unit[0].MaxHP = 2;
-            this.SkillFactory.Unit[9].MaxHP = 2;
-            this.SkillFactory.Unit[3].MaxHP = 2;
-            this.SkillFactory.Hero[3].MaxHP = 2;
-            this.SkillFactory.Unit[0].CurrentHP = 2;
-            this.SkillFactory.Unit[9].CurrentHP = 2;
-            this.SkillFactory.Unit[3].CurrentHP = 2;
-            this.SkillFactory.Hero[3].CurrentHP = 2;
+        if (this.isUnlocked && !this.isUsed) {
+            this.SkillFactory.Storage.PureUnitArr[0].MaxHP = 2;
+            this.SkillFactory.Storage.PureUnitArr[9].MaxHP = 2;
+            this.SkillFactory.Storage.PureUnitArr[3].MaxHP = 2;
+            this.SkillFactory.Storage.HeroArr[3].MaxHP = 2;
+            this.SkillFactory.Storage.PureUnitArr[0].CurrentHP = 2;
+            this.SkillFactory.Storage.PureUnitArr[9].CurrentHP = 2;
+            this.SkillFactory.Storage.PureUnitArr[3].CurrentHP = 2;
+            this.SkillFactory.Storage.HeroArr[3].CurrentHP = 2;
+            this.isUsed = true;
         }
     }
 }

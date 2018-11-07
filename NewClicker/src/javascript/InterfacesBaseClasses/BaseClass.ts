@@ -370,7 +370,7 @@ export class Resource implements ICountable {
         this.Update();
     }
 
-    Increase(count?: number): void {
+    Increase = (count?: number): void =>{
         if (!this.isUnlocked) { this.Unlocked() };
         this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count +count);
         this.Update();

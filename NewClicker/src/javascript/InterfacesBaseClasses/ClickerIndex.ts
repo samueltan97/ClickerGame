@@ -1,19 +1,21 @@
 ﻿import { IStorage } from "./IStorage";
 import { setInterval } from "timers";
 import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent } from "./ValueUpdateEvent";
+import { SkillFactory } from "./Skills/PlayerSkill";
+import { ISkillFactory } from "./Skills/ISkillFactory";
 
 export class ClickerIndex {
 
     private counter: number;
-    private theStorage: IStorage;
+    private skillFactory: ISkillFactory;
 
-    constructor(storage: IStorage) {
-        this.theStorage = storage;
+    constructor(skillfactory: ISkillFactory) {
+        this.skillFactory = skillfactory;
         this.counter = 1;
     }
 
     get CurrentStorage() {
-        return this.theStorage;
+        return this.skillFactory.Storage;
     }
 
     RemoveByDeath = (type: string): void => {
@@ -38,7 +40,7 @@ export class ClickerIndex {
                 this.PopulateEnemyArr((this.CurrentStorage.CurrentStage.CurrentStage - 1) % 5);
                 this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[(this.CurrentStorage.CurrentStage.CurrentStage -1) % 5];
             }
-            this.theStorage.CurrentEnemyArr[0].Birth();
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
         }
     }
 
@@ -48,6 +50,7 @@ export class ClickerIndex {
             this.RemoveByDeath("Unit");
         }
         if (this.CurrentStorage.CurrentEnemyArr[0].isDead) {
+            console.log("YAY");
             this.CurrentStorage.CurrentEnemyArr[0].isDead = false;
             this.CurrentStorage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.CurrentStorage.ResourceArr[x].Increase(this.CurrentStorage.CurrentStage.CurrentStage));
             this.CurrentStorage.HeroArr.forEach(x => x.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp));
@@ -91,50 +94,50 @@ export class ClickerIndex {
     }
 
     PopulateStageOneEnemyArray = () => {
-        this.theStorage.CopyStageOneEnemyArr.forEach(x => this.theStorage.StageOneEnemyArr.push(x));
-        this.theStorage.CopyStageOneEnemyArr.forEach(x => x.RegenerateMax());
-        this.theStorage.CopyStageOneEnemyArr.forEach(x => x.isDead = false);
+        this.CurrentStorage.CopyStageOneEnemyArr.forEach(x => this.CurrentStorage.StageOneEnemyArr.push(x));
+        this.CurrentStorage.CopyStageOneEnemyArr.forEach(x => x.RegenerateMax());
+        this.CurrentStorage.CopyStageOneEnemyArr.forEach(x => x.isDead = false);
     }
 
     PopulateStageTwoEnemyArray=()=> {
-        this.theStorage.CopyStageTwoEnemyArr.forEach(x => this.theStorage.StageTwoEnemyArr.push(x));
-        this.theStorage.CopyStageTwoEnemyArr.forEach(x => x.RegenerateMax());
-        this.theStorage.CopyStageTwoEnemyArr.forEach(x => x.isDead = false);
+        this.CurrentStorage.CopyStageTwoEnemyArr.forEach(x => this.CurrentStorage.StageTwoEnemyArr.push(x));
+        this.CurrentStorage.CopyStageTwoEnemyArr.forEach(x => x.RegenerateMax());
+        this.CurrentStorage.CopyStageTwoEnemyArr.forEach(x => x.isDead = false);
     }
 
     PopulateStageThreeEnemyArray=()=> {
-        this.theStorage.CopyStageThreeEnemyArr.forEach(x => this.theStorage.StageThreeEnemyArr.push(x));
-        this.theStorage.CopyStageThreeEnemyArr.forEach(x => x.RegenerateMax());
-        this.theStorage.CopyStageThreeEnemyArr.forEach(x => x.isDead = false);
+        this.CurrentStorage.CopyStageThreeEnemyArr.forEach(x => this.CurrentStorage.StageThreeEnemyArr.push(x));
+        this.CurrentStorage.CopyStageThreeEnemyArr.forEach(x => x.RegenerateMax());
+        this.CurrentStorage.CopyStageThreeEnemyArr.forEach(x => x.isDead = false);
     }
 
     PopulateStageFourEnemyArray=()=> {
-        this.theStorage.CopyStageFourEnemyArr.forEach(x => this.theStorage.StageFourEnemyArr.push(x));
-        this.theStorage.CopyStageFourEnemyArr.forEach(x => x.RegenerateMax());
-        this.theStorage.CopyStageFourEnemyArr.forEach(x => x.isDead = false);
+        this.CurrentStorage.CopyStageFourEnemyArr.forEach(x => this.CurrentStorage.StageFourEnemyArr.push(x));
+        this.CurrentStorage.CopyStageFourEnemyArr.forEach(x => x.RegenerateMax());
+        this.CurrentStorage.CopyStageFourEnemyArr.forEach(x => x.isDead = false);
     }
 
     PopulateStageFiveEnemyArray=()=> {
-        this.theStorage.CopyStageFiveEnemyArr.forEach(x => this.theStorage.StageFiveEnemyArr.push(x));
-        this.theStorage.CopyStageFiveEnemyArr.forEach(x => x.RegenerateMax());
-        this.theStorage.CopyStageFiveEnemyArr.forEach(x => x.isDead = false);
+        this.CurrentStorage.CopyStageFiveEnemyArr.forEach(x => this.CurrentStorage.StageFiveEnemyArr.push(x));
+        this.CurrentStorage.CopyStageFiveEnemyArr.forEach(x => x.RegenerateMax());
+        this.CurrentStorage.CopyStageFiveEnemyArr.forEach(x => x.isDead = false);
     }
 
    SetUpClicker=(): void=> {
         //Add listener
-        this.theStorage.UnitArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
-        this.theStorage.UnitArr.forEach(x => x.forEach(y => this.theStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
-        this.theStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
-        this.theStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
-        this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-        this.theStorage.UnitArr.forEach(x => x.forEach(x=>this.theStorage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource)));
-        this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-        for (var i = 0; i < this.theStorage.StageArray.length; i++) {
-            this.theStorage.EnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
-            this.theStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.theStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
+       this.CurrentStorage.UnitArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+       this.CurrentStorage.UnitArr.forEach(x => x.forEach(y => this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
+       this.CurrentStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+       this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+       this.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+       this.CurrentStorage.UnitArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource)));
+       this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
+       for (var i = 0; i < this.CurrentStorage.StageArray.length; i++) {
+           this.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
+           this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
         }
         let index = this;
         setInterval(function () {
-            index.theStorage.MainGameCycle(this.counter)
+            index.CurrentStorage.MainGameCycle(this.counter)
         }, 50);    }
 }

@@ -92,7 +92,7 @@ export class Player implements IPlayer, ILevelProgression{
     }
 
     Hurt(): number {
-        this.clickcount +=1;
+        this.clickcount += 1;
         this.hurtUpdateEvents.forEach(x => x());
         this.Update();
         return this.CurrentDamage;        

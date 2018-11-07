@@ -10,15 +10,9 @@ import { IStorage } from "../IStorage";
 export interface ISkillFactory {
 
     Storage: IStorage;
-    Player: IPlayer;
-    Stage: IStageLevel;
-    Resource: Resource[];
-    Hero: Hero[];
-    Unit: Unit[];
-    Enemy: Enemy[];
-    AllEnemy: Enemy[][];
     HeroActiveSkill: IActiveSkill[];
-
-    CreateActive(type:string): IActiveSkill;
-    CreatePassive(type: string): IPassiveSkill;
+    CreatePlayerActive(type:string): IActiveSkill;
+    CreatePlayerPassive(type: string): IPassiveSkill;
+    CreateHeroActive(type:string): IActiveSkill;
+    CreateHeroPassive(type: string): IPassiveSkill;
 }
