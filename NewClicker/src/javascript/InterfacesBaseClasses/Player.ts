@@ -39,7 +39,7 @@ export class Player implements IPlayer, ILevelProgression{
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality, this.CurrentDamage, this.MaxExperience, this.CurrentDPS, this.ClickCount)));
+        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality, this.CurrentDamage, this.MaxExperience, this.ClickCount)));
     }
 
     get CurrentArmyVitality():number {
@@ -73,14 +73,6 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentDamage(multiplier: number) {
         this.baseDamage = this.baseDamage * multiplier;
-    }
-
-    get CurrentDPS(): number {
-        return this.dps * this.CurrentArmyVitality * this.CurrentLevel; //temporary formula
-    }
-
-    set CurrentDPS(multiplier: number) {
-        this.dps = this.dps * multiplier;
     }
 
     get ClickCount(): number {

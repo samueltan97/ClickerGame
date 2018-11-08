@@ -69,7 +69,7 @@ export class PlayerActiveSkill implements IActiveSkill {
 export class Steal extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(1, "Steal", 120000, playerSkillFactory);
+        super(1, "Steal", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -85,7 +85,7 @@ export class Heist extends PlayerActiveSkill {
     private enemyDamageCounter: number;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(3, "Heist", 400000, playerSkillFactory);
+        super(3, "Heist", 1000, playerSkillFactory);
         this.enemyDamageCounter = 0;
     }
 
@@ -105,7 +105,7 @@ export class Heist extends PlayerActiveSkill {
 export class MoneyIsPower extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(4, "Money is Power", 7200000, playerSkillFactory);
+        super(4, "Money is Power", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -114,7 +114,7 @@ export class MoneyIsPower extends PlayerActiveSkill {
            let multiplier: number = 100 * this.SkillFactory.Storage.ResourceArr[7].Count;
            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier;
             let skill = this;
-           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/multiplier; }, 5000);
+           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/multiplier; }, 500);
         }
     }
 }
@@ -122,7 +122,7 @@ export class MoneyIsPower extends PlayerActiveSkill {
 export class Ballad extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(5, "Ballad", 120000, playerSkillFactory);
+        super(5, "Ballad", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -134,7 +134,7 @@ export class Ballad extends PlayerActiveSkill {
             setTimeout(function () {
                 skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 0.5);
                 skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 0.5);
-            }, 30000);
+            }, 500);
         }
     }
 }
@@ -142,7 +142,7 @@ export class Ballad extends PlayerActiveSkill {
 export class Solo extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(6, "Solo", 120000, playerSkillFactory);
+        super(6, "Solo", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -153,7 +153,7 @@ export class Solo extends PlayerActiveSkill {
             let skill = this;
             setTimeout(function () {
                 skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/multiplier;
-            }, 10000);
+            }, 500);
         }
     }
 }
@@ -161,7 +161,7 @@ export class Solo extends PlayerActiveSkill {
 export class SongOfCourage extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(8, "Song of Courage", 600000, playerSkillFactory);
+        super(8, "Song of Courage", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -179,7 +179,7 @@ export class SongOfCourage extends PlayerActiveSkill {
                 skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 0.5);
                 skill.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 0.5);
                 skill.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 2);
-            }, 30000);
+            }, 500);
         }
     }
 }
@@ -187,7 +187,7 @@ export class SongOfCourage extends PlayerActiveSkill {
 export class ChorusOfDeath extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(9, "Chorus of Death", 50000, playerSkillFactory);
+        super(9, "Chorus of Death", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -201,7 +201,7 @@ export class ChorusOfDeath extends PlayerActiveSkill {
 export class ImpactStab extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(10, "Impact Stab", 20000, playerSkillFactory);
+        super(10, "Impact Stab", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -215,7 +215,7 @@ export class ImpactStab extends PlayerActiveSkill {
 export class Whirlwind extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(12, "Whirlwind", 5000, playerSkillFactory);
+        super(12, "Whirlwind", 3000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -239,7 +239,7 @@ export class FinalBlow extends PlayerActiveSkill {
     private MaxCount: number;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(14, "Final Blow", 100000, playerSkillFactory);
+        super(14, "Final Blow", 1000, playerSkillFactory);
         this.ClickCount = this.SkillFactory.Storage.CurrentPlayer.ClickCount;
         this.MaxCount = 0;
     }
@@ -274,7 +274,7 @@ export class DarkRitual extends PlayerActiveSkill {
 export class Biohack extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(16, "Biohack", 600000, playerSkillFactory);
+        super(16, "Biohack", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -288,7 +288,7 @@ export class Biohack extends PlayerActiveSkill {
 export class CursedContract extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(17, "Cursed Contract", 120000, playerSkillFactory);
+        super(17, "Cursed Contract", 1000, playerSkillFactory);
     }
 
     public Action(heroId:number) {
@@ -299,7 +299,7 @@ export class CursedContract extends PlayerActiveSkill {
             let skill = this;
             setTimeout(function () {
                 skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/6;
-            }, 60000);
+            }, 500);
         }
     }
 }

@@ -3,7 +3,6 @@
 export interface IPlayer {
     CurrentArmyVitality: number;
     CurrentDamage: number;
-    CurrentDPS: number;
     CurrentLevel: number;
     ClickCount: number;
     IncreaseArmyVitality(): void;

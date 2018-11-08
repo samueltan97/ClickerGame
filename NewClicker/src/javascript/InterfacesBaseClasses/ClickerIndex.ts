@@ -18,6 +18,13 @@ export class ClickerIndex {
         return this.skillFactory.Storage;
     }
 
+    get CurrentDPS(): number {
+        let total: number = 0;
+        this.skillFactory.Storage.PureUnitArr.forEach(x => total += (x.Count / x.damageFrequency * x.CurrentDamage * 20));
+        this.skillFactory.Storage.HeroArr.forEach(x => total += x.CurrentDamage);
+        return total;
+    }
+
     RemoveByDeath = (type: string): void => {
         if (type == "Unit") {
             let isEmpty: boolean = true;
@@ -50,7 +57,6 @@ export class ClickerIndex {
             this.RemoveByDeath("Unit");
         }
         if (this.CurrentStorage.CurrentEnemyArr[0].isDead) {
-            console.log("YAY");
             this.CurrentStorage.CurrentEnemyArr[0].isDead = false;
             this.CurrentStorage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.CurrentStorage.ResourceArr[x].Increase(this.CurrentStorage.CurrentStage.CurrentStage));
             this.CurrentStorage.HeroArr.forEach(x => x.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp));
@@ -129,9 +135,6 @@ export class ClickerIndex {
        this.CurrentStorage.UnitArr.forEach(x => x.forEach(y => this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
        this.CurrentStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
        this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
-       this.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
-       this.CurrentStorage.UnitArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource)));
-       this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.CurrentStage.AddValueUpdateEvent(x.UpdateSource)));
        for (var i = 0; i < this.CurrentStorage.StageArray.length; i++) {
            this.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
            this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
@@ -139,5 +142,6 @@ export class ClickerIndex {
         let index = this;
         setInterval(function () {
             index.CurrentStorage.MainGameCycle(this.counter)
-        }, 50);    }
+       }, 50);
+   }
 }

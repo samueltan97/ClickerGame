@@ -98,16 +98,14 @@ export class PlayerValueUpdateEvent extends ValueUpdateEvent {
     newArmyVitality: number;
     newDamage: number;
     newMaxExperience: number;
-    newDPS: number;
     newClickCount: number;
-    constructor(experience: number, level: number, armyVitality: number, damage: number, maxExperience:number, dps:number, clickCount:number) {
+    constructor(experience: number, level: number, armyVitality: number, damage: number, maxExperience:number, clickCount:number) {
         super();
         this.newArmyVitality = armyVitality;
         this.newExperience = experience;
         this.newLevel = level;
         this.newDamage = damage;
         this.newMaxExperience = maxExperience;
-        this.newDPS = dps;
         this.newClickCount = clickCount;
     }
 }

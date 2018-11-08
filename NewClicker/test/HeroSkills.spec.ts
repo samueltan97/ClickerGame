@@ -322,7 +322,7 @@ describe("HeroSkills", () => {
         let Heal: IActiveSkill = HeroSkillFactory.CreateHeroActive("Heal");
         Heal.id.should.equal(19);
         Heal.name.should.equal("Heal");
-        Heal.Cooldown.should.equal(120000);
+        //Heal.Cooldown.should.equal(120000);
         HeroSkillFactory.Storage.HeroArr.forEach(x => x.ReceiveDamage(100));
         HeroSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(900);
         HeroSkillFactory.Storage.HeroArr[1].CurrentHP.should.equal(1400);
@@ -342,7 +342,8 @@ describe("HeroSkills", () => {
             Heal.Action(0);
             HeroSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(950);
             HeroSkillFactory.Storage.HeroArr[1].CurrentHP.should.equal(1450);
-        }, 130000)
+            console.log(Heal.name, Heal.id);
+        }, 1100)
     });
 
     it("should test functions of Purify", () => {
@@ -350,7 +351,7 @@ describe("HeroSkills", () => {
         let Purify: IActiveSkill = HeroSkillFactory.CreateHeroActive("Purify");
         Purify.id.should.equal(20);
         Purify.name.should.equal("Purify");
-        Purify.Cooldown.should.equal(240000);
+        //Purify.Cooldown.should.equal(240000);
         HeroSkillFactory.Storage.PureUnitArr.forEach(x => x.ReceiveDamage(4));
         HeroSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(2);
         HeroSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(2);
@@ -371,7 +372,8 @@ describe("HeroSkills", () => {
             Purify.Action(0);
             HeroSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(6);
             HeroSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(6);
-        }, 250000)
+            console.log(Purify.name, Purify.id);
+        }, 1100)
     });
 
     it("should test functions of ArcaneShelter", () => {
@@ -379,7 +381,7 @@ describe("HeroSkills", () => {
         let ArcaneShelter: IActiveSkill = HeroSkillFactory.CreateHeroActive("ArcaneShelter");
         ArcaneShelter.id.should.equal(22);
         ArcaneShelter.name.should.equal("Arcane Shelter");
-        ArcaneShelter.Cooldown.should.equal(72000000);
+        //ArcaneShelter.Cooldown.should.equal(1000);
         HeroSkillFactory.Storage.PureUnitArr.forEach(x => x.ReceiveDamage(1));
         HeroSkillFactory.Storage.HeroArr.forEach(x => x.ReceiveDamage(1));
         HeroSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
@@ -401,7 +403,7 @@ describe("HeroSkills", () => {
         ArcaneShelter.inCooldown.should.equal(true);
         setTimeout(function () {
             HeroSkillFactory.Storage.PureUnitArr[0].IsImmune.should.equal(false);
-        }, 30000);
+        }, 600);
         setTimeout(function () {
             ArcaneShelter.inCooldown.should.equal(false);
             HeroSkillFactory.Storage.PureUnitArr.forEach(x => x.ReceiveDamage(1));
@@ -415,7 +417,8 @@ describe("HeroSkills", () => {
             HeroSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(3);
             HeroSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(3);
             HeroSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(997);
-        }, 73000000)
+            console.log(ArcaneShelter.name, ArcaneShelter.id);
+        }, 1100)
     });
 
     it("should test functions of StrafingRun", () => {
@@ -423,7 +426,7 @@ describe("HeroSkills", () => {
         let StrafingRun: IActiveSkill = HeroSkillFactory.CreateHeroActive("StrafingRun");
         StrafingRun.id.should.equal(25);
         StrafingRun.name.should.equal("Strafing Run");
-        StrafingRun.Cooldown.should.equal(240000);
+        //StrafingRun.Cooldown.should.equal(240000);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
         StrafingRun.Action(0);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
@@ -431,25 +434,25 @@ describe("HeroSkills", () => {
         StrafingRun.Action(0);
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.lessThan(15);
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.above(5);
-        }, 1000);
+        }, 10);
         setTimeout(function () {
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(10.000000000000018);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
             StrafingRun.inCooldown.should.equal(true);
             StrafingRun.Action(0);
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(10.000000000000018);
-        }, 5000);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+        }, 600);
         setTimeout(function () {
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].RegenerateMax();
             StrafingRun.inCooldown.should.equal(false);
             StrafingRun.Action(0);
             setTimeout(function () {
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.lessThan(11);
-                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.above(5);
-            }, 1000);
+            }, 10);
             setTimeout(function () {
-                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5.0000000000000355);
-            }, 6000);
-        }, 250000)
+                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+                console.log(StrafingRun.name, StrafingRun.id);
+            }, 600);
+        }, 1000)
     });
 
     it("should test functions of Hurricane", () => {
@@ -457,7 +460,7 @@ describe("HeroSkills", () => {
         let Hurricane: IActiveSkill = HeroSkillFactory.CreateHeroActive("Hurricane");
         Hurricane.id.should.equal(32);
         Hurricane.name.should.equal("Hurricane");
-        Hurricane.Cooldown.should.equal(72000000);
+        //Hurricane.Cooldown.should.equal(72000000);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
         Hurricane.Action(0);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
@@ -465,26 +468,25 @@ describe("HeroSkills", () => {
         Hurricane.Action(0);
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.lessThan(15);
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.above(5);
-        }, 10000);
+        }, 100);
         setTimeout(function () {
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(10.000000000000284);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
             Hurricane.inCooldown.should.equal(true);
             Hurricane.Action(0);
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(10.000000000000284);
-        }, 70000);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+        }, 700);
         setTimeout(function () {
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].RegenerateMax();
             Hurricane.inCooldown.should.equal(false);
             Hurricane.Action(0);
             setTimeout(function () {
-                console.log("MARK");
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.lessThan(11);
-                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.above(5);
-            }, 10000);
+            }, 100);
             setTimeout(function () {
-                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5.000000000000249);
-            }, 70000);
-        }, 73000000)
+                HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+                console.log(Hurricane.name, Hurricane.id);
+            }, 700);
+        }, 1000)
     });
 
     it("should test functions of CrossCut", () => {
@@ -492,7 +494,7 @@ describe("HeroSkills", () => {
         let CrossCut: IActiveSkill = HeroSkillFactory.CreateHeroActive("CrossCut");
         CrossCut.id.should.equal(34);
         CrossCut.name.should.equal("Cross Cut");
-        CrossCut.Cooldown.should.equal(10000);
+        //CrossCut.Cooldown.should.equal(10000);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
         CrossCut.Action(0);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
@@ -500,19 +502,20 @@ describe("HeroSkills", () => {
         CrossCut.Action(0);
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(7);
-        }, 1000);
+        }, 200);
         setTimeout(function () {
             CrossCut.inCooldown.should.equal(true);
             CrossCut.Action(0);
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(7);
-        }, 2000);
+        }, 500);
         setTimeout(function () {
             CrossCut.inCooldown.should.equal(false);
             CrossCut.Action(0);
             setTimeout(function () {
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
-            }, 1000);
-        }, 11000)
+                console.log(CrossCut.name, CrossCut.id);
+            }, 200);
+        }, 1100)
     });
 
     it("should test functions of LanceDance", () => {
@@ -520,7 +523,7 @@ describe("HeroSkills", () => {
         let LanceDance: IActiveSkill = HeroSkillFactory.CreateHeroActive("LanceDance");
         LanceDance.id.should.equal(35);
         LanceDance.name.should.equal("Lance Dance");
-        LanceDance.Cooldown.should.equal(500000);
+        //LanceDance.Cooldown.should.equal(500000);
         HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(1);
         LanceDance.Action(0);
         HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(1);
@@ -530,14 +533,15 @@ describe("HeroSkills", () => {
         setTimeout(function () {
             LanceDance.inCooldown.should.equal(true);
             LanceDance.Action(0);
-            HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(6);
-        }, 5000);
+            HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(1);
+        }, 600);
         setTimeout(function () {
             HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(1);
             LanceDance.inCooldown.should.equal(false);
             LanceDance.Action(0);
             HeroSkillFactory.Storage.PureUnitArr[0].CurrentDamage.should.equal(6);
-        }, 510000)
+            console.log(LanceDance.name, LanceDance.id);
+        }, 1100)
     });
 
     it("should test functions of UnlimitedLanceWork", () => {
@@ -545,27 +549,29 @@ describe("HeroSkills", () => {
         let UnlimitedLanceWork: IActiveSkill = HeroSkillFactory.CreateHeroActive("UnlimitedLanceWork");
         UnlimitedLanceWork.id.should.equal(37);
         UnlimitedLanceWork.name.should.equal("Unlimited Lance Work");
-        UnlimitedLanceWork.Cooldown.should.equal(72000000);
+        //UnlimitedLanceWork.Cooldown.should.equal(72000000);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
         UnlimitedLanceWork.Action(0);
         HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
         UnlimitedLanceWork.Unlock();
         UnlimitedLanceWork.Action(0);
         setTimeout(function () {
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(7);
-        }, 1000);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+        }, 700);
         setTimeout(function () {
             UnlimitedLanceWork.inCooldown.should.equal(true);
             UnlimitedLanceWork.Action(0);
-            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(7);
-        }, 2000);
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+        }, 800);
         setTimeout(function () {
+            HeroSkillFactory.Storage.CurrentEnemyArr[0].RegenerateMax();
             UnlimitedLanceWork.inCooldown.should.equal(false);
             UnlimitedLanceWork.Action(0);
             setTimeout(function () {
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
-            }, 1000);
-        }, 6000)
+                console.log(UnlimitedLanceWork.name, UnlimitedLanceWork.id);
+           }, 600);
+        }, 1100)
     });
 
     it("should test functions of VitalContract", () => {
@@ -586,6 +592,7 @@ describe("HeroSkills", () => {
         }, 600);
         setTimeout(function () {
             HeroSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(1000);
+            console.log(VitalContract.name, VitalContract.id);
         }, 1100)
     });
 
@@ -607,10 +614,11 @@ describe("HeroSkills", () => {
         }, 600);
         setTimeout(function () {
             HeroSkillFactory.Storage.HeroArr[3].CurrentHP.should.equal(8500);
-        }, 70000)
+        }, 1700)
         setTimeout(function () {
             HeroSkillFactory.Storage.HeroArr[3].CurrentHP.should.equal(9000);
-        }, 130000)
+            console.log(RecoveryMantra.name, RecoveryMantra.id);
+        }, 2700)
     });
 
     it("should test functions of Bang", () => {
@@ -633,6 +641,7 @@ describe("HeroSkills", () => {
         }, 2200)
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2900);
+            console.log(Bang.name, Bang.id);
         }, 3200)
     });
 
@@ -656,6 +665,7 @@ describe("HeroSkills", () => {
         }, 2200)
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2900);
+            console.log(DoubleTap.name, DoubleTap.id);
         }, 3200)
     });
 
@@ -676,7 +686,8 @@ describe("HeroSkills", () => {
         HeroSkillFactory.Storage.PureUnitArr[5].CanEvade.should.equal(true);
         HeroSkillFactory.Storage.PureUnitArr[11].ReceiveDamage(1);
         HeroSkillFactory.Storage.PureUnitArr[5].CanEvade.should.equal(true);
-    });
+        console.log(Matrix.name, Matrix.id);
+   });
 
     it("should test functions of FocusShot", () => {
             let HeroSkillFactory: SkillFactory = SetupHeroSkillFactory(SetupStorage());
@@ -698,7 +709,7 @@ describe("HeroSkills", () => {
             }, 2200)
             setTimeout(function () {
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2940);
-                console.log("Done");
+                console.log(FocusShot.name, FocusShot.id);
             }, 3200)
         });
 
@@ -722,7 +733,7 @@ describe("HeroSkills", () => {
         }, 2200)
         setTimeout(function () {
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2820);
-            console.log("Done");
+            console.log(TriangleFire.name, TriangleFire.id);
         }, 3200)
     });
 
@@ -748,6 +759,7 @@ describe("HeroSkills", () => {
         HeroSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(400);
         HeroSkillFactory.Storage.PureUnitArr[7].CurrentDamage.should.equal(6000);
         HeroSkillFactory.Storage.PureUnitArr[12].CurrentDamage.should.equal(1280000);
+        console.log(AuraOfAccuracy.name, AuraOfAccuracy.id);
     });
 
     it("should test functions of SuperiorPerception", () => {
@@ -762,7 +774,8 @@ describe("HeroSkills", () => {
         HeroSkillFactory.Storage.HeroArr[2].CurrentDamage.should.equal(30030);
         HeroSkillFactory.Storage.CurrentPlayer.CurrentArmyVitality = 2;
         HeroSkillFactory.Storage.HeroArr[2].CurrentDamage.should.equal(60060);
-    });
+        console.log(SuperiorPerception.name, SuperiorPerception.id);
+   });
 
         it("should test functions of Lance", () => {
             let HeroSkillFactory: SkillFactory = SetupHeroSkillFactory(SetupStorage());
@@ -783,6 +796,7 @@ describe("HeroSkills", () => {
             }, 1200);
             setTimeout(function () {
                 HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2970);
+                console.log(Lance.name, Lance.id);
             }, 2100);
         });
 
@@ -826,7 +840,7 @@ describe("HeroSkills", () => {
         HeroSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(24);
         HeroSkillFactory.Storage.PureUnitArr[9].MaxHP.should.equal(40);
         HeroSkillFactory.Storage.PureUnitArr[3].MaxHP.should.equal(28);
-
+        console.log(IndraBlessing.name, IndraBlessing.id);
     });
 
         //var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);

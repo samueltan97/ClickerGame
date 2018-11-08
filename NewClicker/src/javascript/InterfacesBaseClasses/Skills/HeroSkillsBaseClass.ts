@@ -52,8 +52,7 @@ export class HeroActiveSkill implements IActiveSkill {
     CooldownCounter(): void {
         let skill = this;
         this.inCooldown = true;
-        console.log(this.inCooldown);
-        setTimeout(function () { skill.inCooldown = false; console.log("DUH", skill.inCooldown); }
+        setTimeout(function () { skill.inCooldown = false;}
             , this.cooldown);
     }
 
@@ -69,7 +68,7 @@ export class HeroActiveSkill implements IActiveSkill {
 export class Heal extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(19, "Heal", 120000, playerSkillFactory);
+        super(19, "Heal", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -87,7 +86,7 @@ export class Heal extends HeroActiveSkill {
 export class Purify extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(20, "Purify", 240000, playerSkillFactory);
+        super(20, "Purify", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -101,7 +100,7 @@ export class Purify extends HeroActiveSkill {
 export class ArcaneShelter extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(22, "Arcane Shelter", 72000000, playerSkillFactory);
+        super(22, "Arcane Shelter", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -113,7 +112,7 @@ export class ArcaneShelter extends HeroActiveSkill {
             setTimeout(function () {
                 skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.IsImmune = false);
                 skill.SkillFactory.Storage.HeroArr.forEach(x => x.IsImmune = false);
-            }, 20000);
+            }, 500);
         }
     }
 }
@@ -121,14 +120,14 @@ export class ArcaneShelter extends HeroActiveSkill {
 export class StrafingRun extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(25, "Strafing Run", 240000, playerSkillFactory);
+        super(25, "Strafing Run", 1000, playerSkillFactory);
     }
 
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
             skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage);
-        }, 100 * count);
+        }, 1 * count);
     }
 
     public Action(input: number) {
@@ -145,14 +144,14 @@ export class StrafingRun extends HeroActiveSkill {
 export class Hurricane extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(32, "Hurricane", 72000000, playerSkillFactory);
+        super(32, "Hurricane", 1000, playerSkillFactory);
     }
 
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
             skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage);
-        }, 100 * count);
+        }, 1 * count);
     }
 
     public Action(input: number) {
@@ -169,7 +168,7 @@ export class Hurricane extends HeroActiveSkill {
 export class CrossCut extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(34, "Cross Cut", 10000, playerSkillFactory);
+        super(34, "Cross Cut", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -187,7 +186,7 @@ export class CrossCut extends HeroActiveSkill {
 export class LanceDance extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(35, "Lance Dance", 500000, playerSkillFactory);
+        super(35, "Lance Dance", 1000, playerSkillFactory);
     }
 
     public Action(input: number) {
@@ -197,7 +196,7 @@ export class LanceDance extends HeroActiveSkill {
             let skill = this;
            setTimeout(function () {
                [skill.SkillFactory.Storage.PureUnitArr[0], skill.SkillFactory.Storage.PureUnitArr[3], skill.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 1/6);
-            }, 10000);
+            }, 500);
         }
     }
 }
@@ -205,7 +204,7 @@ export class LanceDance extends HeroActiveSkill {
 export class UnlimitedLanceWork extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(37, "Unlimited Lance Work", 72000000, playerSkillFactory);
+        super(37, "Unlimited Lance Work", 1000, playerSkillFactory);
     }
     public Action(input: number) {
         if (this.isUnlocked && !this.InCooldown) {
@@ -304,7 +303,7 @@ export class RecoveryMantra extends HeroPassiveSkill {
             let skill = this;
             setInterval(function () {
                 skill.SkillFactory.Storage.HeroArr.forEach(x=>x.RegeneratePercentage(5));
-            }, 60000);
+            }, 1000);
             this.isUsed = true;
        }
     }

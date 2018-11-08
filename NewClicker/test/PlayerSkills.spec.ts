@@ -268,411 +268,397 @@ describe("PlayerSkills", () => {
 
     //Player Active Skill
 
-    //it("should test functions of Steal", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Steal: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Steal");
-    //    Steal.id.should.equal(1);
-    //    Steal.name.should.equal("Steal");
-    //    Steal.Cooldown.should.equal(120000);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(0);
-    //    Steal.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(0);
-    //    Steal.Unlock();
-    //    Steal.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(4);
-    //    PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(2);
-    //    Steal.inCooldown.should.equal(true);
-    //    Steal.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(4);
-    //    PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(2);
-    //    setTimeout(function () {
-    //        Steal.inCooldown.should.equal(false);
-    //        Steal.Action(0);
-    //        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(8);
-    //        PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(4);
-    //    }, 120000)
-    //});
+    it("should test functions of Steal", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Steal: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Steal");
+        Steal.id.should.equal(1);
+        Steal.name.should.equal("Steal");
+        //Steal.Cooldown.should.equal(120000);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(0);
+        Steal.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(0);
+        Steal.Unlock();
+        Steal.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(4);
+        PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(2);
+        Steal.inCooldown.should.equal(true);
+        Steal.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(4);
+        PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(2);
+        setTimeout(function () {
+            Steal.inCooldown.should.equal(false);
+            Steal.Action(0);
+            PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(8);
+            PlayerSkillFactory.Storage.ResourceArr[6].Count.should.equal(4);
+            console.log(Steal.name, Steal.id);
+        }, 1100)
+    });
 
-    //it("should test functions of Heist", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Heist: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Heist");
-    //    Heist.id.should.equal(3);
-    //    Heist.name.should.equal("Heist");
-    //    Heist.Cooldown.should.equal(400000);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(0);
-    //    Heist.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(0);
-    //    Heist.Unlock();
-    //    Heist.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(542);
-    //    PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(542);
-    //    PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(1084);
-    //    Heist.inCooldown.should.equal(true);
-    //    Heist.Action(0);
-    //    PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(542);
-    //    PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(542);
-    //    PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(1084);
-    //    setTimeout(function () {
-    //        Heist.inCooldown.should.equal(false);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.IncreaseArmyVitality();
-    //        Heist.Action(0);
-    //        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(1627);
-    //        PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(1627);
-    //        PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(3254);
-    //    }, 400000)
-    //});
+    it("should test functions of Heist", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Heist: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Heist");
+        Heist.id.should.equal(3);
+        Heist.name.should.equal("Heist");
+        //Heist.Cooldown.should.equal(400000);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(0);
+        Heist.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(0);
+        PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(0);
+        Heist.Unlock();
+        Heist.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(542);
+        PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(542);
+        PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(1084);
+        Heist.inCooldown.should.equal(true);
+        Heist.Action(0);
+        PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(542);
+        PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(542);
+        PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(1084);
+        setTimeout(function () {
+            Heist.inCooldown.should.equal(false);
+            PlayerSkillFactory.Storage.CurrentPlayer.IncreaseArmyVitality();
+            Heist.Action(0);
+            PlayerSkillFactory.Storage.ResourceArr[1].Count.should.equal(1627);
+            PlayerSkillFactory.Storage.ResourceArr[19].Count.should.equal(1627);
+            PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(3254);
+            console.log(Heist.name, Heist.id);
+        }, 1100)
+    });
 
-    //it("should test functions of MoneyIsPower", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let MoneyIsPower: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("MoneyIsPower");
-    //    MoneyIsPower.id.should.equal(4);
-    //    MoneyIsPower.name.should.equal("Money is Power");
-    //    //MoneyIsPower.Cooldown.should.equal(7200000);
-    //    PlayerSkillFactory.Storage.ResourceArr[7].Increase(5);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    MoneyIsPower.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    MoneyIsPower.Unlock();
-    //    MoneyIsPower.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(500);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //        MoneyIsPower.inCooldown.should.equal(true);
-    //        MoneyIsPower.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //    }, 5100);       
-    //    setTimeout(function () {
-    //        MoneyIsPower.inCooldown.should.equal(false);
-    //        PlayerSkillFactory.Storage.ResourceArr[7].Increase(5);
-    //        MoneyIsPower.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
-    //    }, 7210000)
-    //});
+    it("should test functions of MoneyIsPower", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let MoneyIsPower: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("MoneyIsPower");
+        MoneyIsPower.id.should.equal(4);
+        MoneyIsPower.name.should.equal("Money is Power");
+        //MoneyIsPower.Cooldown.should.equal(7200000);
+        PlayerSkillFactory.Storage.ResourceArr[7].Increase(5);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        MoneyIsPower.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        MoneyIsPower.Unlock();
+        MoneyIsPower.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(500);
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+            MoneyIsPower.inCooldown.should.equal(true);
+            MoneyIsPower.Action(0);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+        }, 600);       
+        setTimeout(function () {
+            MoneyIsPower.inCooldown.should.equal(false);
+            PlayerSkillFactory.Storage.ResourceArr[7].Increase(5);
+            MoneyIsPower.Action(0);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
+            console.log(MoneyIsPower.name, MoneyIsPower.id);
+        }, 1100)
+    });
 
-    //it("should test functions of Ballad", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Ballad: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Ballad");
-    //    Ballad.id.should.equal(5);
-    //    Ballad.name.should.equal("Ballad");
-    //    Ballad.Cooldown.should.equal(120000);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(10);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(100);
-    //    Ballad.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(10);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(100);
-    //    Ballad.Unlock();
-    //    Ballad.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
-    //        Ballad.inCooldown.should.equal(true);
-    //        Ballad.Action(0);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
-    //    }, 30000);       
-    //    setTimeout(function () {
-    //        Ballad.inCooldown.should.equal(false);
-    //        Ballad.Action(0);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(40);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(400);
-    //    }, 120000)
-    //});
+    it("should test functions of Ballad", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Ballad: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Ballad");
+        Ballad.id.should.equal(5);
+        Ballad.name.should.equal("Ballad");
+        //Ballad.Cooldown.should.equal(120000);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(10);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(100);
+        Ballad.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(10);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(100);
+        Ballad.Unlock();
+        Ballad.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
+            Ballad.inCooldown.should.equal(true);
+            Ballad.Action(0);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(20);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(200);
+        }, 600);       
+        setTimeout(function () {
+            Ballad.inCooldown.should.equal(false);
+            Ballad.Action(0);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentDamage.should.equal(40);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentDamage.should.equal(400);
+            console.log(Ballad.name, Ballad.id);
+       }, 1100)
+    });
 
-    //it("should test functions of Solo", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Solo: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Solo");
-    //    Solo.id.should.equal(6);
-    //    Solo.name.should.equal("Solo");
-    //    Solo.Cooldown.should.equal(120000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    Solo.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    Solo.Unlock();
-    //    Solo.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(100);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //        Solo.inCooldown.should.equal(true);
-    //        Solo.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //    }, 10000);       
-    //    setTimeout(function () {
-    //        Solo.inCooldown.should.equal(false);
-    //        Solo.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(400);
-    //    }, 120000)
-    //});
+    it("should test functions of Solo", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Solo: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Solo");
+        Solo.id.should.equal(6);
+        Solo.name.should.equal("Solo");
+        //Solo.Cooldown.should.equal(120000);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        Solo.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        Solo.Unlock();
+        Solo.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(100);
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+            Solo.inCooldown.should.equal(true);
+            Solo.Action(0);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+        }, 600);       
+        setTimeout(function () {
+            Solo.inCooldown.should.equal(false);
+            Solo.Action(0);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(400);
+            console.log(Solo.name, Solo.id);
+        }, 1100)
+    });
 
-    //it("should test functions of SongOfCourage", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let SongOfCourage: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("SongOfCourage");
-    //    PlayerSkillFactory.Storage.HeroArr.forEach(x => PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource));
-    //    PlayerSkillFactory.Storage.PureUnitArr.forEach(x => PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource));
-    //    SongOfCourage.id.should.equal(8);
-    //    SongOfCourage.name.should.equal("Song of Courage");
-    //    SongOfCourage.Cooldown.should.equal(600000);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(6);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(120000);
-    //    SongOfCourage.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(6);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(120000);
-    //    SongOfCourage.Unlock();
-    //    SongOfCourage.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(10);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
-    //    PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(60000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
-    //        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(120000);
-    //        SongOfCourage.inCooldown.should.equal(true);
-    //        SongOfCourage.Action(0);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
-    //        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(120000);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
-    //    }, 30000);       
-    //    setTimeout(function () {
-    //        SongOfCourage.inCooldown.should.equal(false);
-    //        SongOfCourage.Action(0);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(22);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(24);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(24);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(24);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(20);
-    //        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(60000);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(20);
-    //    }, 600000)
-    //});
+    it("should test functions of SongOfCourage", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let SongOfCourage: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("SongOfCourage");
+        PlayerSkillFactory.Storage.HeroArr.forEach(x => PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource));
+        PlayerSkillFactory.Storage.PureUnitArr.forEach(x => PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(x.UpdateSource));
+        SongOfCourage.id.should.equal(8);
+        SongOfCourage.name.should.equal("Song of Courage");
+        //SongOfCourage.Cooldown.should.equal(600000);
+        PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(6);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(5);
+        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(1000);
+        SongOfCourage.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(6);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(5);
+        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(1000);
+        SongOfCourage.Unlock();
+        SongOfCourage.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(10);
+        PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
+        PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
+        PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
+        PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(500);
+        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
+            PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
+            PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
+            PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(1000);
+            SongOfCourage.inCooldown.should.equal(true);
+            SongOfCourage.Action(0);
+            PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
+            PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
+            PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(1000);
+            PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(10);
+        }, 600);       
+        setTimeout(function () {
+            SongOfCourage.inCooldown.should.equal(false);
+            SongOfCourage.Action(0);
+            PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(22);
+            PlayerSkillFactory.Storage.PureUnitArr[0].MaxHP.should.equal(24);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(24);
+            PlayerSkillFactory.Storage.PureUnitArr[1].MaxHP.should.equal(24);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(20);
+            PlayerSkillFactory.HeroActiveSkill[0].Cooldown.should.equal(500);
+            PlayerSkillFactory.Storage.PureUnitArr[2].MaxHP.should.equal(20);
+            console.log(SongOfCourage.name, SongOfCourage.id);
+        }, 1100)
+    });
 
-    //it("should test functions of ChorusOfDeath", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let ChorusOfDeath: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("ChorusOfDeath");
-    //    ChorusOfDeath.id.should.equal(9);
-    //    ChorusOfDeath.name.should.equal("Chorus of Death");
-    //    ChorusOfDeath.Cooldown.should.equal(50000);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
-    //    ChorusOfDeath.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
-    //    ChorusOfDeath.Unlock();
-    //    ChorusOfDeath.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(true);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].Birth();
-    //    ChorusOfDeath.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(false);
-    //    setTimeout(function () {
-    //        ChorusOfDeath.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(true);
-    //    }, 50000); 
-    //});
+    it("should test functions of ChorusOfDeath", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let ChorusOfDeath: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("ChorusOfDeath");
+        ChorusOfDeath.id.should.equal(9);
+        ChorusOfDeath.name.should.equal("Chorus of Death");
+        //ChorusOfDeath.Cooldown.should.equal(50000);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
+        ChorusOfDeath.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
+        ChorusOfDeath.Unlock();
+        ChorusOfDeath.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(true);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].Birth();
+        ChorusOfDeath.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(false);
+        setTimeout(function () {
+            ChorusOfDeath.Action(0);
+            PlayerSkillFactory.Storage.CurrentEnemyArr[0].isDead.should.equal(true);
+            console.log(ChorusOfDeath.name, ChorusOfDeath.id);
+        }, 1100); 
+    });
 
-    //it("should test functions of ImpactStab", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let ImpactStab: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("ImpactStab");
-    //    ImpactStab.id.should.equal(10);
-    //    ImpactStab.name.should.equal("Impact Stab");
-    //    ImpactStab.Cooldown.should.equal(20000);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
-    //    ImpactStab.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
-    //    ImpactStab.Unlock();
-    //    ImpactStab.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5);
-    //    ImpactStab.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5);
-    //    setTimeout(function () {
-    //        ImpactStab.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
-    //    }, 20000); 
-    //});
+    it("should test functions of ImpactStab", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let ImpactStab: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("ImpactStab");
+        ImpactStab.id.should.equal(10);
+        ImpactStab.name.should.equal("Impact Stab");
+        //ImpactStab.Cooldown.should.equal(20000);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
+        ImpactStab.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(15);
+        ImpactStab.Unlock();
+        ImpactStab.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5);
+        ImpactStab.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(5);
+        setTimeout(function () {
+            ImpactStab.Action(0);
+            PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(0);
+            console.log(ImpactStab.name, ImpactStab.id);
+        }, 1100); 
+    });
 
-    //it("should test functions of Whirlwind", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Whirlwind: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Whirlwind");
-    //    Whirlwind.id.should.equal(12);
-    //    Whirlwind.name.should.equal("Whirlwind");
-    //    Whirlwind.Cooldown.should.equal(5000);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
-    //    Whirlwind.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
-    //    Whirlwind.Unlock();
-    //    Whirlwind.Action(0);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
-    //        Whirlwind.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
-    //    }, 4000);
-    //    setTimeout(function () {
-    //        Whirlwind.Action(0);
-    //        setTimeout(function () {
-    //            PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2400);
-    //        }, 4000);
-    //    }, 5000); 
-    //});
+    it("should test functions of Whirlwind", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Whirlwind: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Whirlwind");
+        Whirlwind.id.should.equal(12);
+        Whirlwind.name.should.equal("Whirlwind");
+        //Whirlwind.Cooldown.should.equal(5000);
+        PlayerSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        PlayerSkillFactory.Storage.CurrentEnemyArr.splice(0, 2);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
+        Whirlwind.Action(0);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
+        Whirlwind.Unlock();
+        Whirlwind.Action(0);
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
+            Whirlwind.Action(0);
+            PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
+        }, 2500);
+        setTimeout(function () {
+            Whirlwind.Action(0);
+            setTimeout(function () {
+                PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2400);
+                console.log(Whirlwind.name, Whirlwind.id);
+            }, 3000);
+        }, 3000); 
+    });
 
-    //it("should test functions of Whirlwind", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Whirlwind: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Whirlwind");
-    //    Whirlwind.id.should.equal(12);
-    //    Whirlwind.name.should.equal("Whirlwind");
-    //    Whirlwind.Cooldown.should.equal(5000);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
-    //    Whirlwind.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
-    //    Whirlwind.Unlock();
-    //    Whirlwind.Action(0);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
-    //        Whirlwind.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2700);
-    //    }, 4000);
-    //    setTimeout(function () {
-    //        Whirlwind.Action(0);
-    //        setTimeout(function () {
-    //            PlayerSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(2400);
-    //        }, 4000);
-    //    }, 5000); 
-    //});
+    it("should test functions of FinalBlow", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let finalBlow: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("FinalBlow");
+        let FinalBlow = <FinalBlow>finalBlow;
+        PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(FinalBlow.UpdateSource);
+        FinalBlow.id.should.equal(14);
+        FinalBlow.name.should.equal("Final Blow");
+        //FinalBlow.Cooldown.should.equal(100000);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        FinalBlow.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        FinalBlow.Unlock();
+        FinalBlow.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.Hurt();   
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
+        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
+        PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+        FinalBlow.Action(0);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
+        setTimeout(function () {
+            FinalBlow.Action(0);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
+            console.log(FinalBlow.name, FinalBlow.id);
+        }, 1100);
+    });
 
-    //it("should test functions of FinalBlow", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let finalBlow: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("FinalBlow");
-    //    let FinalBlow = <FinalBlow>finalBlow;
-    //    PlayerSkillFactory.Storage.CurrentPlayer.AddValueUpdateEvent(FinalBlow.UpdateSource);
-    //    FinalBlow.id.should.equal(14);
-    //    FinalBlow.name.should.equal("Final Blow");
-    //    FinalBlow.Cooldown.should.equal(100000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    FinalBlow.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    FinalBlow.Unlock();
-    //    FinalBlow.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.Hurt();   
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
-    //    PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //    FinalBlow.Action(0);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2);
-    //    setTimeout(function () {
-    //        FinalBlow.Action(0);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(2000);
-    //    }, 100000);
-    //});
+    it("should test functions of DarkRitual", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let DarkRitual: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("DarkRitual");
+        DarkRitual.id.should.equal(15);
+        DarkRitual.name.should.equal("Dark Ritual");
+        DarkRitual.Cooldown.should.equal(315360000000);
+    });
 
-    //it("should test functions of DarkRitual", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let DarkRitual: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("DarkRitual");
-    //    DarkRitual.id.should.equal(15);
-    //    DarkRitual.name.should.equal("Dark Ritual");
-    //    DarkRitual.Cooldown.should.equal(315360000000);
-    //});
+    it("should test functions of Biohack", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let Biohack: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Biohack");
+        Biohack.id.should.equal(16);
+        Biohack.name.should.equal("Biohack");
+        //Biohack.Cooldown.should.equal(600000);
+        PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[1].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[2].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(4);
+        Biohack.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(5);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(4);
+        PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
+        Biohack.Unlock();
+        Biohack.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(12);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
+        PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[1].ReceiveDamage(1);
+        PlayerSkillFactory.Storage.PureUnitArr[2].ReceiveDamage(1);
+        Biohack.Action(0);
+        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
+        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(11);
+        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(9);
+        setTimeout(function () {
+            Biohack.Action(0);
+            PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
+            PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
+            console.log(Biohack.name, Biohack.id);
+        }, 1100);
+    });
 
-    //it("should test functions of Biohack", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let Biohack: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("Biohack");
-    //    Biohack.id.should.equal(16);
-    //    Biohack.name.should.equal("Biohack");
-    //    Biohack.Cooldown.should.equal(600000);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(4);
-    //    Biohack.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(5);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(4);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
-    //    Biohack.Unlock();
-    //    Biohack.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(12);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].ReceiveDamage(1);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].ReceiveDamage(1);
-    //    Biohack.Action(0);
-    //    PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(11);
-    //    PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(11);
-    //    PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(9);
-    //    setTimeout(function () {
-    //        Biohack.Action(0);
-    //        PlayerSkillFactory.Storage.PureUnitArr[0].CurrentHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[1].CurrentHP.should.equal(12);
-    //        PlayerSkillFactory.Storage.PureUnitArr[2].CurrentHP.should.equal(10);
-    //    }, 600000);
-    //});
-
-    //it("should test functions of CursedContract", () => {
-    //    let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
-    //    let CursedContract: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("CursedContract");
-    //    CursedContract.id.should.equal(17);
-    //    CursedContract.name.should.equal("Cursed Contract");
-    //    //CursedContract.Cooldown.should.equal(120000);
-    //    PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    CursedContract.Action(0);
-    //    PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(1000);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    CursedContract.Unlock();
-    //    CursedContract.Action(0);
-    //    PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
-    //    CursedContract.Action(0);
-    //    PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
-    //    PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
-    //    setTimeout(function () {
-    //        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
-    //        PlayerSkillFactory.Storage.HeroArr[0].RegenerateMax();
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
-    //    }, 60000);
-    //    setTimeout(function () {
-    //        CursedContract.Action(0);
-    //        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
-    //        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
-    //    }, 120000);
-    //});
+    it("should test functions of CursedContract", () => {
+        let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
+        let CursedContract: IActiveSkill = PlayerSkillFactory.CreatePlayerActive("CursedContract");
+        CursedContract.id.should.equal(17);
+        CursedContract.name.should.equal("Cursed Contract");
+        //CursedContract.Cooldown.should.equal(120000);
+        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        CursedContract.Action(0);
+        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(1000);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        CursedContract.Unlock();
+        CursedContract.Action(0);
+        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
+        CursedContract.Action(0);
+        PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
+        PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
+        setTimeout(function () {
+            PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
+            PlayerSkillFactory.Storage.HeroArr[0].RegenerateMax();
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(1);
+        }, 600);
+        setTimeout(function () {
+            CursedContract.Action(0);
+            PlayerSkillFactory.Storage.HeroArr[0].CurrentHP.should.equal(20);
+            PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
+            console.log(CursedContract.name, CursedContract.id);
+       }, 1100);
+    });
 
     it("should test functions of Pickpocket", () => {
         let PlayerSkillFactory: SkillFactory = SetupPlayerSkillFactory(SetupStorage());
@@ -698,6 +684,7 @@ describe("PlayerSkills", () => {
         PlayerSkillFactory.Storage.EnemyArr[1][0].ResourceArray.should.deep.equal([1, 1, 1, 1, 6, 6, 1, 1, 1, 1, 6, 6]);
         PlayerSkillFactory.Storage.EnemyArr[2][0].ResourceArray.should.deep.equal([1, 1, 1, 1, 6, 6, 1, 1, 1, 1, 6, 6]);
         PlayerSkillFactory.Storage.EnemyArr[3][0].ResourceArray.should.deep.equal([1, 1, 1, 1, 6, 6, 1, 1, 1, 1, 6, 6]);
+        console.log(Pickpocket.name, Pickpocket.id);
     });
 
     it("should test functions of CoinAffinity", () => {
@@ -716,6 +703,7 @@ describe("PlayerSkills", () => {
         PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(1);
         PlayerSkillFactory.Storage.CurrentPlayer.Hurt();
         PlayerSkillFactory.Storage.ResourceArr[7].Count.should.equal(2);
+        console.log(CoinAffinity.name, CoinAffinity.id);
     });
 
     it("should test functions of MelodicAura", () => {
@@ -774,6 +762,7 @@ describe("PlayerSkills", () => {
         PlayerSkillFactory.Storage.HeroArr[2].CurrentHP.should.equal(14000);
         PlayerSkillFactory.Storage.HeroArr[1].MaxHP.should.equal(6000);
         PlayerSkillFactory.Storage.HeroArr[2].MaxHP.should.equal(14000);
+        console.log(MelodicAura.name, MelodicAura.id);
     });
 
     it("should test functions of Valor", () => {
@@ -792,7 +781,8 @@ describe("PlayerSkills", () => {
         PlayerSkillFactory.Storage.CurrentPlayer.LevelUp();
         PlayerSkillFactory.Storage.PureUnitArr[4].Exist(1);
         PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(6);
-    });
+        console.log(Valor.name, Valor.id);
+   });
 
     it("should test functions of WarCry", () => {
         let Storage: IStorage = SetupStorage();
@@ -822,13 +812,15 @@ describe("PlayerSkills", () => {
         Valor.Unlock();
         PlayerSkillFactory.Storage.CurrentPlayer.CurrentDamage.should.equal(16);
         PlayerSkillFactory.Storage.HeroArr[0].ReceiveDamage(500);
-        console.log(clickerIndex.CurrentStorage.HeroArr[0]);
+        //console.log(clickerIndex.CurrentStorage.HeroArr[0]);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(500);
         clickerIndex.DeathLogic(new EnemyValueUpdateEvent(0, 0, 0, 0, []));
-        console.log(PlayerSkillFactory.Storage.CurrentEnemyArr);
+        //console.log(PlayerSkillFactory.Storage.CurrentEnemyArr);
         PlayerSkillFactory.Storage.CurrentEnemyArr[0].name.should.equal("Boar5");
         clickerIndex.ChangeStage(true);
-        console.log(PlayerSkillFactory.Storage.CurrentStage);
-        console.log(clickerIndex.CurrentStorage.CurrentStage);
-        PlayerSkillFactory.Storage.CurrentEnemyArr[0].name.should.equal("Boar1");
+        //console.log(PlayerSkillFactory.Storage.CurrentStage);
+        //console.log(clickerIndex.CurrentStorage.CurrentStage);
+        PlayerSkillFactory.Storage.CurrentEnemyArr[0].name.should.equal("Boar2");
+        console.log(WarCry.name, WarCry.id);
     });
 });
