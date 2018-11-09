@@ -43,15 +43,15 @@
                     <div id="monster-hp-bar-background">
                         <div id="monster-hp-bar">
                             <div id="monster-hp-text">
-                                <div class="text-left">Slime LVL: 10</div>
-                                <div class="text-right">HP: 1000/1000</div>
+                                <div id="monster-hp-text-left" class="text-left">Slime</div>
+                                <div id="monster-hp-text-right" class="text-right">HP: 1000/1000</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="combat-text-div">
-                    <div class="text-left">Zone Status: 0/10</div>
-                    <div class="text-right">Time Left: 00:30</div>
+                    <div id="combat-text-left" class="text-left">Zone Status: 1/10</div>
+                    <div id="combat-text-right" class="text-right">Time Left: 00:30</div>
                 </div>
                 <div id="monster-div">
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Arachne-tattoo.png" />
@@ -75,7 +75,7 @@
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/rev-warlord.png" />
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/rev-warrior.png" />
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Siren.png" />
-                        <img id="monster-onstage" class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Slime.png" />
+                        <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Slime.png" />
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Arachne-tattoo.png" />
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Arachne-tattoo.png" />
                         <img class="monster-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Arachne-tattoo.png" />
@@ -108,7 +108,7 @@
                 </div>
                 <div id="fighter-div">
                     <div id="fighter">
-                        <img style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Fighter.png" />
+                        <img id="warrior-normal" style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Fighter.png" />
                     </div>
                 </div>
                 <div id="fighter-description-text">
@@ -145,7 +145,7 @@
                     <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Units/UnitBackground.png" />
                     <div id="unit-repo">
                         <div class="unit-cell">
-                            <div class="unit-desc">Warriors<br />X 23</div>
+                            <div id="Warrior-count" class="unit-desc">Warrior<br />X 23</div>
                             <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
                             <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Sample/UnitResource/Unit/Warrior.png" />
                         </div>
@@ -166,49 +166,49 @@
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/man.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/wood.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/iron.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/thread.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/carbon.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/gunpowder.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/manashard.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Raw/coin.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                             </div>
                         </div>
@@ -227,55 +227,55 @@
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/plank.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/iron bar.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/nylon.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/steel blade.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/manacyte.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/bullet.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/steel bar.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/arrow.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                             <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/steel plate.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                             </div>
                         </div>
@@ -294,85 +294,85 @@
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/spear.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/sword.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/bow.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/wooden shield.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/rifle.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/iron shield.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/steel armor.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/wand.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/crossbow.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/staff.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/enchant sword.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/mystic bow.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/arcane rifle.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                                 <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 5vh; height: 5vh; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Product/holy lance.png" />
-                                    <div class="resource-desc">Wood<br /><div id="wood-quantity">X 1000</div></div>
+                                    <div class="resource-desc">Wood<br /><div id="Wood-quantity">X 1000</div></div>
                                 </div>
                             </div>
                         </div>

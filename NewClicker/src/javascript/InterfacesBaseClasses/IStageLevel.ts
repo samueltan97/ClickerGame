@@ -2,6 +2,7 @@
     CurrentZone: number;
     readonly CurrentStage: number;
     EnemyDefeated: number;
-    IncreaseZone(): void;
+    IncreaseZone(isAuto:boolean): void;
+    DecreaseZone(): void;
     IncreaseEnemyDefeated(): void;
 }

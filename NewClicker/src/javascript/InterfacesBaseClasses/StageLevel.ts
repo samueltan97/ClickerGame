@@ -2,13 +2,17 @@
 import { StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class StageLevel implements IStageLevel {
+    private MaxZone: number;
+    public readonly StageName: string;
     private Zone: number;
     public readonly CurrentStage: number;
     private enemyDefeated: number;
     private valueUpdateEvents: ((e: StageLevelValueUpdateEvent) => void)[] = [];
 
-    constructor(stage:number) {
+    constructor(stage: number, name: string) {
+        this.StageName = name;
         this.Zone = 1;
+        this.MaxZone = 1;
         this.CurrentStage = stage;
         this.enemyDefeated = 0;
     }
@@ -21,15 +25,36 @@ export class StageLevel implements IStageLevel {
         this.valueUpdateEvents.forEach(x => x(new StageLevelValueUpdateEvent(this.CurrentZone, this.EnemyDefeated)));
     }
 
-    IncreaseZone(): void {
-        this.Zone += 1;
-        this.Update();
-    }  
+    IncreaseZone(isAuto:boolean): void {
+        if (isAuto && this.Zone == this.MaxZone) {
+            this.MaxZone += 1;            
+            this.Zone += 1;
+            this.enemyDefeated = 0;
+            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            this.Update();
+        } else if (isAuto || this.Zone != this.MaxZone) {
+            this.Zone += 1;
+            this.enemyDefeated = 0;
+            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            this.Update();
+        }
+    } 
+
+    DecreaseZone(): void {
+        if (this.Zone > 1) {
+            this.Zone -= 1;
+            this.enemyDefeated = 0;
+            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            this.Update();
+        }
+    } 
 
     IncreaseEnemyDefeated(): void {
-        this.enemyDefeated+=1;
-        if (this.EnemyDefeated % 10 == 0) {
-            this.IncreaseZone();
+        this.enemyDefeated += 1;
+        $("#combat-text-left").text("Zone Status: " + this.EnemyDefeated + "/10")
+        if (this.EnemyDefeated == 10) {
+            this.IncreaseZone(true);
+            this.enemyDefeated = 0;
         }
         this.Update();
     }

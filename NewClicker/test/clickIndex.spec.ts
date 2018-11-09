@@ -15,11 +15,11 @@ describe("ClickIndex", () => {
 
     function SetupStorage(): Storage {
         var thePlayer: Player = new Player(1, "NIL");
-        let StageOne: StageLevel = new StageLevel(1);
-        let StageTwo: StageLevel = new StageLevel(2);
-        let StageThree: StageLevel = new StageLevel(3);
-        let StageFour: StageLevel = new StageLevel(4);
-        let StageFive: StageLevel = new StageLevel(5);
+        let StageOne: StageLevel = new StageLevel(1, "Kroigren");
+        let StageTwo: StageLevel = new StageLevel(2, "Brostika");
+        let StageThree: StageLevel = new StageLevel(3, "Erithven");
+        let StageFour: StageLevel = new StageLevel(4, "Boriolsis");
+        let StageFive: StageLevel = new StageLevel(5, "Malidret");
         let StageArray: StageLevel[] = [StageOne, StageTwo, StageThree, StageFour, StageFive];
 
         //Resources

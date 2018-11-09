@@ -7,9 +7,9 @@
   padding-right: 12vh; }
 
 body {
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  margin: 0;
+  padding: 0;
+  border: 0;
   overflow: hidden;
   background-color: black; }
   body #clickable-screen {
@@ -122,15 +122,17 @@ body {
         body #backdrop #fight-div #combat-area #monster-div {
           position: relative;
           width: 100%;
-          top: 0%; }
-          body #backdrop #fight-div #combat-area #monster-div #monster-normal {
-            width: 23vh;
-            height: 23vh;
-            position: absolute;
-            left: 66%;
-            transform: translateX(-50%); }
-          body #backdrop #fight-div #combat-area #monster-div #monster-hurt {
-            display: none;
+          top: 0; }
+            body #backdrop #fight-div #combat-area #monster-div .monster-normal {
+                opacity: 0;
+                width: 23vh;
+                height: 23vh;
+                position: absolute;
+                left: 66%;
+                transform: translateX(-50%);
+            }
+          body #backdrop #fight-div #combat-area #monster-div .monster-hurt {
+            opacity:0; 
             width: 23vh;
             height: 23vh;
             position: absolute;
@@ -141,6 +143,7 @@ body {
           width: 100%;
           top: 33%; }
           body #backdrop #fight-div #combat-area #fighter-div #fighter {
+            opacity:0;
             width: 23vh;
             height: 23vh;
             position: absolute;
@@ -202,7 +205,7 @@ body {
     max-width: 76%;
     max-height: 18%;
     top: 74.6%;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     user-select: none;
     z-index: 102;
     filter: hue-rotate(0deg) contrast(100%) brightness(200%) saturate(100%); }

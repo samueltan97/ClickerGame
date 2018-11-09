@@ -286,6 +286,9 @@
     <Folder Include="test\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\index.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="src\javascript\Classes\Achievements.js" />
     <Compile Include="src\javascript\Classes\Carofles.js" />
     <Compile Include="src\javascript\Classes\Converters.js" />

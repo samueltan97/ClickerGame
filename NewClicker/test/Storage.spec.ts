@@ -10,11 +10,11 @@ describe("Storage", () => {
 
     function SetupStorage(): Storage {
         var thePlayer: Player = new Player(1, "NIL");
-        var StageOne: StageLevel = new StageLevel(1);
-        var StageTwo: StageLevel = new StageLevel(2);
-        var StageThree: StageLevel = new StageLevel(3);
-        var StageFour: StageLevel = new StageLevel(4);
-        var StageFive: StageLevel = new StageLevel(5);
+        let StageOne: StageLevel = new StageLevel(1, "Kroigren");
+        let StageTwo: StageLevel = new StageLevel(2, "Brostika");
+        let StageThree: StageLevel = new StageLevel(3, "Erithven");
+        let StageFour: StageLevel = new StageLevel(4, "Boriolsis");
+        let StageFive: StageLevel = new StageLevel(5, "Malidret");
         let StageArray: StageLevel[] = [StageOne, StageTwo, StageThree, StageFour, StageFive];
         
         //Resources
@@ -223,7 +223,7 @@ describe("Storage", () => {
     });
 
     it("should get correct Stage on the screen", () => {
-        let expected = new StageLevel(1);
+        let expected = new StageLevel(1, "Kroigren");
         let actual = SetupStorage().CurrentStage;
         expected.should.deep.equal(actual);
     });   

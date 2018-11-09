@@ -73,6 +73,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentDamage(multiplier: number) {
         this.baseDamage = this.baseDamage * multiplier;
+        $("#player-click-damage").text("Click Damage: " + this.CurrentDamage);
     }
 
     get ClickCount(): number {
@@ -92,6 +93,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     IncreaseArmyVitality():void {
         this.armyVitality += 1;
+        $("#player-army-vitality").text("Army Vitality: " + this.CurrentArmyVitality);
         this.Update();
     }
 
@@ -103,6 +105,8 @@ export class Player implements IPlayer, ILevelProgression{
         } else {
             this.currentExperience += experience;
         }
+        adjustBarAnimation("player-exp", "EXP", this.CurrentExperience, this.MaxExperience);
+        $("#player-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
         this.Update();
     }
 
@@ -110,6 +114,10 @@ export class Player implements IPlayer, ILevelProgression{
         this.currentLevel += 1;
         this.currentExperience = 0;
         this.IncreaseArmyVitality();
+        adjustBarAnimation("player-exp", "EXP", this.CurrentExperience, this.MaxExperience);
+        $("#player-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        $("#stats-desc-lvl").text("LVL: " + this.CurrentLevel);
+        $("#player-click-damage").text("Click Damage: " + this.CurrentDamage);
         this.Update();
     }
 }

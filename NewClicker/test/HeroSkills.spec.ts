@@ -20,11 +20,11 @@ describe("HeroSkills", () => {
 
     function SetupStorage(): Storage {
         var thePlayer: Player = new Player(1, "NIL");
-        let StageOne: StageLevel = new StageLevel(1);
-        let StageTwo: StageLevel = new StageLevel(2);
-        let StageThree: StageLevel = new StageLevel(3);
-        let StageFour: StageLevel = new StageLevel(4);
-        let StageFive: StageLevel = new StageLevel(5);
+        let StageOne: StageLevel = new StageLevel(1, "Kroigren");
+        let StageTwo: StageLevel = new StageLevel(2, "Brostika");
+        let StageThree: StageLevel = new StageLevel(3, "Erithven");
+        let StageFour: StageLevel = new StageLevel(4, "Boriolsis");
+        let StageFive: StageLevel = new StageLevel(5, "Malidret");
         let StageArray: StageLevel[] = [StageOne, StageTwo, StageThree, StageFour, StageFive];
 
         //Resources
@@ -626,7 +626,7 @@ describe("HeroSkills", () => {
         let Bang: IPassiveSkill = HeroSkillFactory.CreateHeroPassive("Bang");
         Bang.id.should.equal(23);
         Bang.name.should.equal("Bang");
-        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1, "Kroigren"), false));
         HeroSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
         Bang.Action();
         setTimeout(function () {
@@ -650,7 +650,7 @@ describe("HeroSkills", () => {
         let DoubleTap: IPassiveSkill = HeroSkillFactory.CreateHeroPassive("DoubleTap");
         DoubleTap.id.should.equal(24);
         DoubleTap.name.should.equal("Double Tap");
-        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1, "Kroigren"), false));
         HeroSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
         DoubleTap.Action();
         setTimeout(function () {
@@ -694,7 +694,7 @@ describe("HeroSkills", () => {
             let FocusShot: IPassiveSkill = HeroSkillFactory.CreateHeroPassive("FocusShot");
             FocusShot.id.should.equal(28);
             FocusShot.name.should.equal("Focus Shot");
-            HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+            HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1, "Kroigren"), false));
             HeroSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
             FocusShot.Action();
             setTimeout(function () {
@@ -718,7 +718,7 @@ describe("HeroSkills", () => {
         let TriangleFire: IPassiveSkill = HeroSkillFactory.CreateHeroPassive("TriangleFire");
         TriangleFire.id.should.equal(29);
         TriangleFire.name.should.equal("Triangle Fire");
-        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+        HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1, "Kroigren"), false));
         HeroSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
         TriangleFire.Action();
         setTimeout(function () {
@@ -782,7 +782,7 @@ describe("HeroSkills", () => {
             let Lance: IPassiveSkill = HeroSkillFactory.CreateHeroPassive("Lance");
             Lance.id.should.equal(33);
             Lance.name.should.equal("Lance");
-            HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1), false));
+            HeroSkillFactory.Storage.CurrentEnemyArr.push(new Enemy(0, 0, "", "", 3000, 0, 0, [], 0, 0, 0, function () { }, 0, new StageLevel(1, "Kroigren"), false));
             HeroSkillFactory.Storage.CurrentEnemyArr.splice(0, 1);
             Lance.Action();
             HeroSkillFactory.Storage.CurrentEnemyArr[0].CurrentHP.should.equal(3000);
