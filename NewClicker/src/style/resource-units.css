@@ -130,6 +130,16 @@
           left: 50%;
           transform: translate(-50%, -50%);
           top: 50%; }
+        #resource-unit-div #resource-unit-area #secondary-resource #secondary-resource-repo {
+            top: 10%;
+            position: absolute;
+            left: 10%;
+            width: 85%;
+            height: 100%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }
     #resource-unit-div #resource-unit-area #tertiary-resource {
       position: absolute;
       width: 95%;
@@ -150,3 +160,13 @@
           left: 50%;
           transform: translate(-50%, -50%);
           top: 50%; }
+        #resource-unit-div #resource-unit-area #tertiary-resource #tertiary-resource-repo {
+            top: 10%;
+            position: absolute;
+            left: 10%;
+            width: 85%;
+            height: 100%;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+        }

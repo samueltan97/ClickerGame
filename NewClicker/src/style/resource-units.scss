@@ -154,6 +154,17 @@
                     top: 50%;
                 }
             }
+
+            #secondary-resource-repo {
+                top: 10%;
+                position: absolute;
+                left: 10%;
+                width: 85%;
+                height: 100%;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                white-space: nowrap;
+            }
         }
 
         #tertiary-resource {
@@ -177,8 +188,20 @@
                     font-weight: 400;
                     left: 50%;
                     transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%);
                     top: 50%;
                 }
+            }
+
+            #tertiary-resource-repo {
+                top: 10%;
+                position: absolute;
+                left: 10%;
+                width: 85%;
+                height: 100%;
+                overflow-x: scroll;
+                overflow-y: hidden;
+                white-space: nowrap;
             }
         }
     }

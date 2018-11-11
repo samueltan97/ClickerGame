@@ -110,11 +110,10 @@ export class Storage implements IStorage {
         if ((currentTime - 5) % 10 == 0) {
             this.UnitArr.forEach(s => s.forEach(u => this.CurrentEnemyArr[0].ReceiveDamage(u.UpdateFeedback(currentTime))));
             this.UnitArr.forEach(s => s.forEach(x => x.Regenerate(currentTime)));
-            this.CurrentEnemyArr[0].ReceiveDamage(this.thePlayer.UpdateFeedback(currentTime));
         } else if (currentTime % 10 == 0) {
             this.CurrentUnit.ReceiveDamage(this.CurrentEnemyArr[0].UpdateFeedback(currentTime));
             this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
-            this.CurrentEnemyArr.forEach(s => s.Regenerate(currentTime));
+            this.CurrentEnemyArr[0].Regenerate(currentTime);
         }
 
         return this;

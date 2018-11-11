@@ -3,7 +3,7 @@ import { ICombative } from "./ICombative";
 import { IFeedbackLoop } from "./IFeedbackLoop";
 import { IExistence } from "./IExistence";
 import { IRegeneration } from "./IRegeneration";
-import $ from "jquery";
+import * as $ from "jquery";
 import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
@@ -75,7 +75,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get MaxHP(): number {         
-        return this.baseHP * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
+        return this.baseHP * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     get Count(): number {
@@ -87,7 +87,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentDamage(): number {
-        return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
+        return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     set ResourceArray(array:number[]) {
@@ -108,12 +108,10 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     ReceiveDamage(damage: number): void {
+        console.log(damage);
+        if (damage > 0) {
         let enemy = this;
-        $("#" + enemy.name + "-normal").fadeOut(100, "linear", function () {
-            $("#" + enemy.name + "-hurt").fadeIn(100, "linear").delay(200).fadeOut(100, "linear", function () {
-                $("#" + enemy.name + "-normal").fadeOut(100, "linear");
-            });
-        });
+        $("#" + enemy.name + "-hurt").fadeIn(100, "linear").fadeOut(100, "linear");
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation("monster-hp", this.name, this.CurrentHP, this.MaxHP);
@@ -121,23 +119,25 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
        if (this.currentHP == 0) {
             this.Die();
         }
-        this.Update();
+            this.Update();
+        }
     }
 
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
+        this.isDead = false;
+        this.RegenerateMax();
         $("#" + this.name + "-normal").fadeIn(100);
         $("#monster-hp-text-left").text(this.name);
         $("#monster-hp-text-right").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
-        this.isDead = false;
-        this.RegenerateMax();
         this.Update();
     }
 
     Die(): void {
         $("#" + this.name + "-normal").fadeOut(100);
         $("#" + this.name + "-hurt").fadeOut(100);
-        $("#" + this.name).removeClass("monster-onstage");
+        $("#monster-hp-text-left").text("");
+        $("#monster-hp-text-right").text("");
         this.isDead = true;
         this.Update();
     }

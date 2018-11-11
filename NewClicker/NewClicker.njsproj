@@ -236,7 +236,6 @@
     <Content Include="src\style\side-panel.css" />
     <Content Include="src\style\side-panel.scss" />
     <Content Include="src\style\sophie-combat.css" />
-    <Content Include="src\style\sophie-combat.scss" />
     <Content Include="src\style\StyleSheet.css" />
     <Content Include="src\style\tooltip.css" />
     <Content Include="src\style\tooltip.scss" />

@@ -1,6 +1,6 @@
 ﻿import { Player } from "./Player";
 import { StageLevel } from "./StageLevel";
-import { Enemy, Unit, Hero, Resource } from "./BaseClass";
+import { Enemy, Unit, Hero, Resource, RefinerTrainer } from "./BaseClass";
 import { IMortality } from "./IMortality";
 
 export interface IStorage {
@@ -36,5 +36,6 @@ export interface IStorage {
     counter: number;
 
     ResourceArr: Resource[];
+    RefinerTrainerArr: RefinerTrainer[];
     MainGameCycle(currentTime: number): void;
 }

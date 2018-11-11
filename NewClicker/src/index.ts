@@ -1,7 +1,7 @@
 ﻿import { Fighter } from "./javascript/Classes/Fighters"
 import { Player } from "./javascript/InterfacesBaseClasses/Player";
 import { Kore } from "@kirinnee/core";
-import $ from "jquery";
+import * as $ from "jquery";
 import { Repository } from "./javascript/InterfacesBaseClasses/Repository";
 import { Storage } from "./javascript/InterfacesBaseClasses/Storage";
 import { StageLevel } from "./javascript/InterfacesBaseClasses/StageLevel";
@@ -14,114 +14,6 @@ import { ClickerIndex } from "./javascript/InterfacesBaseClasses/ClickerIndex";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
-$(document).ready(function () {
-    //$("#map-image").draggable({
-    //    containment: "#map-container",
-    //    cursor: "crosshair"
-    //});
-    $("#backdrop").fadeIn(0);
-    $("#sophie").click(function () {
-        $("#sophie").css("z-index", "101");
-        $("#resource-unit-div").css("z-index", "0");
-        $("#side-panel-black-overlay,#sophie-speech,#clickable-screen").fadeIn(0, function () {
-            $("#clickable-screen").click(function () {
-                $("#side-panel-black-overlay,#sophie-speech,#clickable-screen").fadeOut(0);
-                $("#sophie").css("z-index", "10");
-            });
-        });
-    });
-    $(".side-panel-button").click(function () {
-        var button = $(this);
-        var id = button.attr('name');
-        $(".side-panel-info-card").animate({ "right": "-600%" }, 600);
-        if (button.hasClass("selectedPanel")) {
-            button.removeClass("selectedPanel");
-        }
-        else {
-            $(".selectedPanel").removeClass("selectedPanel");
-            $("#" + id).animate({ "right": "100%" }, 600);
-            button.addClass("selectedPanel");
-        }
-    });
-    $(".side-panel-block").click(function () {
-        $("#sophie").css("z-index", "0");
-        var id = $(this).attr('name');
-        $("#side-panel-black-overlay,#clickable-screen,#" + id).fadeIn(0);
-        $("#clickable-screen").click(function () {
-            $("#side-panel-black-overlay,#clickable-screen,#" + id).fadeOut(0);
-            $("#sophie").css("z-index", "10");
-        });
-    });
-    $(".refiner-trainer-button").click(function () {
-        var id = $(this).attr('name');
-        $("#refiner-trainer-area").children().fadeOut(0);
-        if (id === "refiner-repo") {
-            $("#refiner-trainer-title-text").text("Refiners");
-        }
-        else {
-            $("#refiner-trainer-title-text").text("Trainers");
-        }
-        $("#" + id).fadeIn(0);
-    });
-    $(".map-stats-skills-heroes-button").click(function () {
-        var id = $(this).attr('name');
-        $("#map-div-area").children().fadeOut(0);
-        if (id === "stats-selected") {
-            $("#map-title-text").text("Stats");
-        }
-        if (id === "skills-selected") {
-            $("#map-title-text").text("Skills");
-        }
-        if (id === "heroes-selected") {
-            $("#map-title-text").text("Heroes");
-        }
-        if (id === "map-selected") {
-            $("#map-title-text").text("Map");
-        }
-        $("#" + id).fadeIn(0);
-    });
-    $("#toggle-button").click(function () {
-        if (!($("#toggle-button").hasClass("toggle-button-switched"))) {
-            $("#toggle-button").addClass("toggle-button-switched").animate({ "right": "2%" }, 300);
-            $("#resource-unit-title-text").text("Units");
-            $("#unit-area").fadeIn(200);
-            $("#resource-area").fadeOut(200);
-        }
-        else {
-            $("#toggle-button").removeClass("toggle-button-switched").animate({ "right": "7%" }, 300);
-            $("#resource-unit-title-text").text("Resources");
-            $("#unit-area").fadeOut(200);
-            $("#resource-area").fadeIn(200);
-        }
-    });
-
-    //NEW
-
-    $(".monster-onstage").click(function () {
-        clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
-    });
-
-    $("#village-zone-arrow-left").click(function () {
-        clickerIndex.CurrentStorage.CurrentStage.DecreaseZone();
-    });
-
-    $("#village-zone-arrow-right").click(function () {
-        clickerIndex.CurrentStorage.CurrentStage.IncreaseZone(false);
-    });
-
-    setInterval(function () {
-        $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
-    }, 100);
-
-    function addQuantityAnimation(type, quantityAdd) {
-        var old = $("#" + type + "-quantity").text();
-        var oldQuantity = parseInt(old.substr(2));
-        var newQuantity = oldQuantity + quantityAdd;
-        $("#" + type + "-quantity").text("X " + newQuantity.toString());
-    }
-
-
-});
 var thePlayer: Player = new Player(1, "NIL");
 let StageOne: StageLevel = new StageLevel(1, "Kroigren");
 let StageTwo: StageLevel = new StageLevel(2, "Brostika");
@@ -168,9 +60,9 @@ var ResourceArr: Resource[] = [Man, Wood, Iron, Thread, Steel, Gunpowder, ManaSh
     MysticBow, ArcaneRifle, HolyLance];
 
 //Units
-var Spearman: Unit = new Unit(0, "abc", "Spearman", 6, 1, 2, 1, thePlayer, 20);
-var Swordsman: Unit = new Unit(1, "abc", "Swordsman", 6, 10, 1, 1, thePlayer, 40);
-var Archer: Unit = new Unit(2, "abc", "Archer", 5, 100, 4, 1, thePlayer, 160);
+var Spearman: Unit = new Unit(0, "abc", "Spearman", 6, 1, 2, 0, thePlayer, 20);
+var Swordsman: Unit = new Unit(1, "abc", "Swordsman", 6, 10, 1, 0, thePlayer, 40);
+var Archer: Unit = new Unit(2, "abc", "Archer", 5, 100, 4, 0, thePlayer, 160);
 var Pikeman: Unit = new Unit(3, "abc", "Pikeman", 7, 14, 2, 0, thePlayer, 20);
 var Warrior: Unit = new Unit(4, "abc", "Warrior", 7.5, 60, 1, 0, thePlayer, 40);
 var Rifleman: Unit = new Unit(5, "abc", "Rifleman", 5, 250, 3, 0, thePlayer, 80);
@@ -232,7 +124,7 @@ var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1
 var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, thePlayer);
 var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, thePlayer);
 var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, thePlayer);
-var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
+var HeroArr: Hero[] = [Charles/*, Yusie, Halley, Helmuth*/];
 
 
 function HeroKillMechanics(damage: number, count: number): void {
@@ -319,7 +211,7 @@ let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6],
 //let RevoltSummoner: Enemy = new Enemy(4, 39, "abc", "Revolt Lancer", 750000, 400000, 5, [1, 1], 80, 0, 100, theStage);
 // let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
 
-var StageOneEnemyArr: Enemy[] = [Boar, Boar4];
+var StageOneEnemyArr: Enemy[] = [Slime, Boar4];
 var StageTwoEnemyArr: Enemy[] = [Boar1];
 var StageThreeEnemyArr: Enemy[] = [Boar2];
 var StageFourEnemyArr: Enemy[] = [Boar3];
@@ -336,28 +228,138 @@ var theStorage = new Storage(thePlayer, StageOneEnemyArr, StageTwoEnemyArr, Stag
     StageFiveEnemyArr, RangeOneUnitArr, RangeTwoUnitArr, RangeThreeUnitArr, RangeFourUnitArr, RangeFiveUnitArr, RangeSixUnitArr, FullUnitArr, HeroArr, ResourceArr, RefinerTrainerArr, StageArray);
 
 var skillFactory: ISkillFactory = new SkillFactory(theStorage, []);
-    var Heal = skillFactory.CreateHeroActive("Heal");
-    var Purify = skillFactory.CreateHeroActive("Purify");
-    var ArcaneShelter = skillFactory.CreateHeroActive("ArcaneShelter");
-    var StrafingRun = skillFactory.CreateHeroActive("StrafingRun");
-    var Hurricane = skillFactory.CreateHeroActive("Hurricane");
-    var CrossCut = skillFactory.CreateHeroActive("CrossCut");
-    var LanceDance = skillFactory.CreateHeroActive("LanceDance");
-    var UnlimitedLanceWork = skillFactory.CreateHeroActive("UnlimitedLanceWork");
-    var VitalContract = skillFactory.CreateHeroPassive("VitalContract");
-    var RecoveryMantra = skillFactory.CreateHeroPassive("RecoveryMantra");
-    var Bang = skillFactory.CreateHeroPassive("Bang");
-    var DoubleTap = skillFactory.CreateHeroPassive("DoubleTap");
-    var Marksman = skillFactory.CreateHeroPassive("Marksman");
-    var Matrix = skillFactory.CreateHeroPassive("Matrix");
-    var FocusShot = skillFactory.CreateHeroPassive("FocusShot");
-    var TriangleFire = skillFactory.CreateHeroPassive("TriangleFire");
-    var AuraOfAccuracy = skillFactory.CreateHeroPassive("AuraOfAccuracy");
-    var SuperiorPerception = skillFactory.CreateHeroPassive("SuperiorPerception");
-    var Lance = skillFactory.CreateHeroPassive("Lance");
-    var IndraBlessing = skillFactory.CreateHeroPassive("IndraBlessing");
+var Heal = skillFactory.CreateHeroActive("Heal");
+var Purify = skillFactory.CreateHeroActive("Purify");
+var ArcaneShelter = skillFactory.CreateHeroActive("ArcaneShelter");
+var StrafingRun = skillFactory.CreateHeroActive("StrafingRun");
+var Hurricane = skillFactory.CreateHeroActive("Hurricane");
+var CrossCut = skillFactory.CreateHeroActive("CrossCut");
+var LanceDance = skillFactory.CreateHeroActive("LanceDance");
+var UnlimitedLanceWork = skillFactory.CreateHeroActive("UnlimitedLanceWork");
+var VitalContract = skillFactory.CreateHeroPassive("VitalContract");
+var RecoveryMantra = skillFactory.CreateHeroPassive("RecoveryMantra");
+var Bang = skillFactory.CreateHeroPassive("Bang");
+var DoubleTap = skillFactory.CreateHeroPassive("DoubleTap");
+var Marksman = skillFactory.CreateHeroPassive("Marksman");
+var Matrix = skillFactory.CreateHeroPassive("Matrix");
+var FocusShot = skillFactory.CreateHeroPassive("FocusShot");
+var TriangleFire = skillFactory.CreateHeroPassive("TriangleFire");
+var AuraOfAccuracy = skillFactory.CreateHeroPassive("AuraOfAccuracy");
+var SuperiorPerception = skillFactory.CreateHeroPassive("SuperiorPerception");
+var Lance = skillFactory.CreateHeroPassive("Lance");
+var IndraBlessing = skillFactory.CreateHeroPassive("IndraBlessing");
 
 var heroActiveSkill: IActiveSkill[] = [Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork];
 heroActiveSkill.forEach(x => skillFactory.HeroActiveSkill.push(x));
 
 var clickerIndex: ClickerIndex = new ClickerIndex(skillFactory);
+
+$(document).ready(function () {
+    //$("#map-image").draggable({
+    //    containment: "#map-container",
+    //    cursor: "crosshair"
+    //});
+    $("#backdrop").fadeIn(0);
+    $("#sophie").click(function () {
+        $("#sophie").css("z-index", "101");
+        $("#resource-unit-div").css("z-index", "0");
+        $("#side-panel-black-overlay,#sophie-speech,#clickable-screen").fadeIn(0, function () {
+            $("#clickable-screen").click(function () {
+                $("#side-panel-black-overlay,#sophie-speech,#clickable-screen").fadeOut(0);
+                $("#sophie").css("z-index", "10");
+            });
+        });
+    });
+    $(".side-panel-button").click(function () {
+        var button = $(this);
+        var id = button.attr('name');
+        $(".side-panel-info-card").animate({ "right": "-600%" }, 600);
+        if (button.hasClass("selectedPanel")) {
+            button.removeClass("selectedPanel");
+        }
+        else {
+            $(".selectedPanel").removeClass("selectedPanel");
+            $("#" + id).animate({ "right": "100%" }, 600);
+            button.addClass("selectedPanel");
+        }
+    });
+    $(".side-panel-block").click(function () {
+        $("#sophie").css("z-index", "0");
+        var id = $(this).attr('name');
+        $("#side-panel-black-overlay,#clickable-screen,#" + id).fadeIn(0);
+        $("#clickable-screen").click(function () {
+            $("#side-panel-black-overlay,#clickable-screen,#" + id).fadeOut(0);
+            $("#sophie").css("z-index", "10");
+        });
+    });
+    $(".refiner-trainer-button").click(function () {
+        var id = $(this).attr('name');
+        $("#refiner-trainer-area").children().fadeOut(0);
+        if (id === "refiner-repo") {
+            $("#refiner-trainer-title-text").text("Refiners");
+        }
+        else {
+            $("#refiner-trainer-title-text").text("Trainers");
+        }
+        $("#" + id).fadeIn(0);
+    });
+    $(".map-stats-skills-heroes-button").click(function () {
+        var id = $(this).attr('name');
+        $("#map-div-area").children().fadeOut(0);
+        if (id === "stats-selected") {
+            $("#map-title-text").text("Stats");
+        }
+        if (id === "skills-selected") {
+            $("#map-title-text").text("Skills");
+        }
+        if (id === "heroes-selected") {
+            $("#map-title-text").text("Heroes");
+        }
+        if (id === "map-selected") {
+            $("#map-title-text").text("Map");
+        }
+        $("#" + id).fadeIn(0);
+    });
+    $("#toggle-button").click(function () {
+        if (!($("#toggle-button").hasClass("toggle-button-switched"))) {
+            $("#toggle-button").addClass("toggle-button-switched").animate({ "right": "2%" }, 300);
+            $("#resource-unit-title-text").text("Units");
+            $("#unit-area").fadeIn(200);
+            $("#resource-area").fadeOut(200);
+        }
+        else {
+            $("#toggle-button").removeClass("toggle-button-switched").animate({ "right": "7%" }, 300);
+            $("#resource-unit-title-text").text("Resources");
+            $("#unit-area").fadeOut(200);
+            $("#resource-area").fadeIn(200);
+        }
+    });
+
+    //NEW
+
+    clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
+
+    clickerIndex.CurrentStorage.PureUnitArr[4].Birth();
+
+    clickerIndex.CurrentStorage.RefinerTrainerArr[1].Unlocked();
+    clickerIndex.CurrentStorage.RefinerTrainerArr[1].Increase(1);
+
+    $("#monster-div").click(function () {
+        clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
+    });
+
+    $("#village-zone-arrow-left").click(function () {
+        clickerIndex.CurrentStorage.CurrentStage.DecreaseZone();
+    });
+
+    $("#village-zone-arrow-right").click(function () {
+        clickerIndex.CurrentStorage.CurrentStage.IncreaseZone(false);
+    });
+
+    setInterval(function () {
+        $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
+    }, 100);
+
+    clickerIndex.SetUpClicker();
+
+});

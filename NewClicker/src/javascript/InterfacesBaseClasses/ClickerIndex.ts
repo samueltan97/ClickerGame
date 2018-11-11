@@ -20,7 +20,7 @@ export class ClickerIndex {
 
     get CurrentDPS(): number {
         let total: number = 0;
-        this.skillFactory.Storage.PureUnitArr.forEach(x => total += (x.Count / x.damageFrequency * x.CurrentDamage * 20));
+        this.skillFactory.Storage.PureUnitArr.forEach(x => total += (x.CurrentDamage / x.damageFrequency * 20));
         this.skillFactory.Storage.HeroArr.forEach(x => total += x.CurrentDamage);
         return total;
     }
@@ -141,7 +141,8 @@ export class ClickerIndex {
         }
         let index = this;
         setInterval(function () {
-            index.CurrentStorage.MainGameCycle(this.counter)
+            index.CurrentStorage.MainGameCycle(index.counter)
+            index.counter++;
        }, 50);
    }
 }
