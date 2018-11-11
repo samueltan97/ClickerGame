@@ -24,6 +24,7 @@
       left: 50%;
       transform: translateX(-50%);
       top: 10%; }
+    
   #refiner-trainer-div #refiner-trainer-selector {
     position: absolute;
     height: 18%;
@@ -47,20 +48,55 @@
     left: 10%;
     overflow:hidden;
     top: 20%; }
+    #refiner-trainer-div #recruit-button {
+        position: absolute;
+        width: 10%;
+        height: 10.65%;
+        left: 18%;
+        top: 25%;
+        z-index: 1;
+    }
+    #refiner-trainer-div #refiner-trainer-area #manpower-count-div {
+        position: absolute;
+        top: 4%;
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 20%;
+        background-image: url(images/Layout/Player/Skills/SkillPointBackground.png);
+        background-size: 100% 100%;
+    }
+
+        #refiner-trainer-div #refiner-trainer-area #manpower-count-div #manpower-count-repo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: max-content;
+            font-size: 3vh;
+            font-weight: 800;
+        }
+    #refiner-trainer-div #refiner-trainer-area #manpower-count-separator {
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        top: 24%;
+        background-image: url(images/Layout/Player/Skills/Separator.png);
+        background-size: 100% 100%;
+    }
     #refiner-trainer-div #refiner-trainer-area #trainer-repo {
         position: absolute;
-        height: 100%;
+        width: 95%;
+        height: 65%;
         left: 2.5%;
-        top: 4%;
-        width: 100%;
+        top: 35%;
         overflow-y: scroll;
-        display: none;
     }
       #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block {
         position: relative;
         width: 100%;
         display: inline-block;
-        height: 47%;
+        height: 72%;
         margin-bottom: 1%;
         background-size: 100% 100%;
         background-image: url(images/Layout/Converters/Cubicle.png); }
@@ -140,17 +176,18 @@
             background-size: 100% 100%;
             background-image: url(images/Layout/Converters/ButtonFrame.png); }
     #refiner-trainer-div #refiner-trainer-area #refiner-repo {
-      position: absolute;
-      width: 95%;
-      height: 100%;
-      left: 2.5%;
-      top: 4%;
-      overflow-y: scroll; }
+        position: absolute;
+        width: 95%;
+        height: 65%;
+        left: 2.5%;
+        top: 35%;
+        overflow-y: scroll;
+    }
       #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block {
         position: relative;
         width: 100%;
         display: inline-block;
-        height: 47%;
+        height: 72%;
         margin-bottom: 1%;
         background-size: 100% 100%;
         background-image: url(images/Layout/Converters/Cubicle.png); }

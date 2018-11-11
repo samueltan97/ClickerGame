@@ -302,6 +302,7 @@ $(document).ready(function () {
             $("#refiner-trainer-title-text").text("Trainers");
         }
         $("#" + id).fadeIn(0);
+        $("#manpower-count-div, #manpower-count-separator").fadeIn(0);
     });
     $(".map-stats-skills-heroes-button").click(function () {
         var id = $(this).attr('name');
