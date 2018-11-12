@@ -531,29 +531,30 @@
                 <div class="refiner-trainer-button" name="refiner-repo" id="refiner-button"></div>
                 <div class="refiner-trainer-button" name="trainer-repo" id="trainer-button"></div>
             </div>
-            <div id="recruit-button">
-                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
-            </div>           
+           
             <div id="refiner-trainer-area">
                 <div id="manpower-count-div">
                     <div id="manpower-count-repo">Manpower: 0</div>
                 </div>
+                <div id="Recruit-button" class="skill-button" skillIndex=0>
+                    <img style="position:absolute;height:90%; width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                </div>
                 <div id="manpower-count-separator"></div>
                 <div id="refiner-repo">
                     <div class="refiner-block">
-                        <div class="refiner-sprite"></div>
+                        <div id="Woodworker-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
-                            <div class="refiner-name">Courtiers</div>
-                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-name">Woodworkers</div>
+                            <div id="Woodworker-quantity" class="refiner-count">X 0</div>
                             <div class="refiner-calibrator">
-                                <div class="refiner-calibrator-left-arrow"></div>
-                                <div class="refiner-calibrator-text">X 1000</div>
-                                <div class="refiner-calibrator-right-arrow"></div>
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-1"></div>
+                                <div id="refinerCalibration-1" class="refiner-calibrator-text">X 100</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-1"></div>
                             </div>
-                            <div class="refiner-train">
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-1">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
-                            <div class="refiner-untrain">
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-1">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
                             </div>
                         </div>
@@ -618,11 +619,6 @@
             </div>
         </div>
         <div id="side-panel-div">
-            <div id="side-panel-news-button" class="side-panel-button" name="news-info-card"></div>
-            <div id="side-panel-achievement-button" class="side-panel-button" name="achievement-info-card"></div>
-            <div id="side-panel-carofle-button" class="side-panel-button" name="carofle-info-card"></div>
-            <div id="side-panel-settings-button" class="side-panel-button" name="settings-info-card"></div>
-            <div id="side-panel-inventory-button" class="side-panel-button" name="inventory-info-card"></div>
             <div id="news-info-card" class="side-panel-info-card">
                 <div class="side-panel-info-card-title">
                     <div class="side-panel-info-card-title-text">News</div>
@@ -728,6 +724,12 @@
                 </div>
 
             </div>
+            <div id="side-panel-news-button" class="side-panel-button" name="news-info-card"></div>
+            <div id="side-panel-achievement-button" class="side-panel-button" name="achievement-info-card"></div>
+            <div id="side-panel-carofle-button" class="side-panel-button" name="carofle-info-card"></div>
+            <div id="side-panel-settings-button" class="side-panel-button" name="settings-info-card"></div>
+            <div id="side-panel-inventory-button" class="side-panel-button" name="inventory-info-card"></div>
+
 
         </div>
         <div class="full-news-block" id="king-queen-death-news">

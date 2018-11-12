@@ -1,7 +1,7 @@
 ﻿import { Fighter } from "./javascript/Classes/Fighters"
 import { Player } from "./javascript/InterfacesBaseClasses/Player";
 import { Kore } from "@kirinnee/core";
-import * as $ from "jquery";
+import $ from "jquery";
 import { Repository } from "./javascript/InterfacesBaseClasses/Repository";
 import { Storage } from "./javascript/InterfacesBaseClasses/Storage";
 import { StageLevel } from "./javascript/InterfacesBaseClasses/StageLevel";
@@ -11,6 +11,8 @@ import { ISkillFactory } from "./javascript/InterfacesBaseClasses/Skills/ISkillF
 import { SkillFactory } from "./javascript/InterfacesBaseClasses/Skills/PlayerSkill";
 import { IActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IActiveSkill";
 import { ClickerIndex } from "./javascript/InterfacesBaseClasses/ClickerIndex";
+import { PlayerActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/PlayerSkillsBaseClass";
+import { IPassiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IPassiveSkill";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
@@ -252,6 +254,10 @@ var IndraBlessing = skillFactory.CreateHeroPassive("IndraBlessing");
 var heroActiveSkill: IActiveSkill[] = [Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork];
 heroActiveSkill.forEach(x => skillFactory.HeroActiveSkill.push(x));
 
+var Recruit: IActiveSkill = skillFactory.CreatePlayerActive("Recruit");
+
+var SkillArray: any = [Recruit]; 
+
 var clickerIndex: ClickerIndex = new ClickerIndex(skillFactory);
 
 $(document).ready(function () {
@@ -355,6 +361,53 @@ $(document).ready(function () {
 
     $("#village-zone-arrow-right").click(function () {
         clickerIndex.CurrentStorage.CurrentStage.IncreaseZone(false);
+    });
+
+    $(".skill-button").click(function () {
+        let string = $(this).attr("skillIndex");
+        if (typeof (string) === "string" && string != "18") {
+            let id: number = parseInt(string);
+            SkillArray[id].Action();
+        }
+        
+    });
+
+    $(".refiner-calibrator-left-arrow").click(function () {
+        let id = $(this).attr("refinerCalibration");
+        let currentQuantity: string = $("#" + id).text();
+        if (currentQuantity != "X 1") {
+            let newQuantity: string = currentQuantity.RemoveLast();
+            $("#" + id).text(newQuantity);
+        }
+    });
+
+    $(".refiner-calibrator-right-arrow").click(function () {
+        let id = $(this).attr("refinerCalibration");
+        let currentQuantity: string = $("#" + id).text();
+        let newQuantity: string = currentQuantity.concat("0");
+        $("#" + id).text(newQuantity);
+    });
+
+    $(".refiner-train").click(function () {
+        let id = $(this).attr("refinerCalibration");
+        let displayNumber: string = $("#" + id).text();
+        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
+        if (typeof id === "string" && currentQuantity <= clickerIndex.CurrentStorage.ResourceArr[0].Count) {
+            let refinerIndex: number = parseInt(id.split("-")[1]);
+            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Increase(currentQuantity);
+            clickerIndex.CurrentStorage.ResourceArr[0].Decrease(currentQuantity);
+        }
+    });
+
+    $(".refiner-untrain").click(function () {
+        let id = $(this).attr("refinerCalibration");
+        let displayNumber: string = $("#" + id).text();
+        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
+        let refinerIndex: number = (typeof id === "string")? parseInt(id.split("-")[1]) : 0;
+        if (currentQuantity <= clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Count) {
+            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Decrease(currentQuantity);
+            clickerIndex.CurrentStorage.ResourceArr[0].Increase(currentQuantity);
+        }
     });
 
     setInterval(function () {

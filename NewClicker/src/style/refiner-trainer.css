@@ -48,14 +48,7 @@
     left: 10%;
     overflow:hidden;
     top: 20%; }
-    #refiner-trainer-div #recruit-button {
-        position: absolute;
-        width: 10%;
-        height: 10.65%;
-        left: 18%;
-        top: 25%;
-        z-index: 1;
-    }
+    
     #refiner-trainer-div #refiner-trainer-area #manpower-count-div {
         position: absolute;
         top: 4%;
@@ -76,6 +69,7 @@
             font-size: 3vh;
             font-weight: 800;
         }
+    
     #refiner-trainer-div #refiner-trainer-area #manpower-count-separator {
         position: absolute;
         height: 10%;
@@ -85,12 +79,20 @@
         background-size: 100% 100%;
     }
     #refiner-trainer-div #refiner-trainer-area #trainer-repo {
+        display:none;
         position: absolute;
         width: 95%;
         height: 65%;
         left: 2.5%;
         top: 35%;
         overflow-y: scroll;
+    }
+    #refiner-trainer-div #refiner-trainer-area #Recruit-button {
+        position: absolute;
+        width: 10%;
+        height: 10.65%;
+        left: 10%;
+        top: 9%;
     }
       #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block {
         position: relative;
@@ -192,13 +194,15 @@
         background-size: 100% 100%;
         background-image: url(images/Layout/Converters/Cubicle.png); }
         #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-sprite {
-          position: absolute;
-          width: 40%;
-          height: 82%;
-          top: 9%;
-          left: 5%;
-          background-size: 100% 100%;
-          background-image: url(images/Sample/Converter/Courtier.png); }
+            position: absolute;
+            width: 40%;
+            height: 82%;
+            top: 9%;
+            left: 5%;
+            background-size: 100% 100%;
+        }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block #Woodworker-sprite{
+        background-image: url(images/Actual/RefinerTrainer/Woodworkers.png); }
         #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc {
           position: absolute;
           width: 55%;

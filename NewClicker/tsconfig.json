@@ -10,6 +10,7 @@
     "removeComments": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
+    "esModuleInterop": true,
     "target": "es5"
   }
 }

@@ -3,7 +3,7 @@ import { ICombative } from "./ICombative";
 import { IFeedbackLoop } from "./IFeedbackLoop";
 import { IExistence } from "./IExistence";
 import { IRegeneration } from "./IRegeneration";
-import * as $ from "jquery";
+import $ from "jquery";
 import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
@@ -400,15 +400,19 @@ export class Resource implements ICountable {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count +count);
         $("#" + this.name + "-quantity").text("X " + this.Count);
+        if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + this.Count);}
         this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
 
     Decrease(count: number): void {
-        this.count -= count;
-        this.count = Math.max(this.count, 0);
-        $("#" + this.name + "-quantity").text("X " + this.Count);
-        this.Update();
+        if (this.Count >= count) {
+            this.count -= count;
+            this.count = Math.max(this.count, 0);
+            $("#" + this.name + "-quantity").text("X " + this.Count);
+            if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + this.Count); }
+                this.Update();
+        }
         //CSS animation for removing unit off the screen and reducing count of unit
     }
 }
@@ -472,14 +476,18 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
     Increase(count: number): void {
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
+        $("#" + this.name + "-quantity").text("X " + this.Count);
         this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
 
     Decrease(count: number): void {
+        if (count <= this.Count) {
         this.count -= count;
         this.count = Math.max(this.count, 0);
-        this.Update();
+        $("#" + this.name + "-quantity").text("X " + this.Count);
+            this.Update();
+        }
         //CSS animation for removing unit off the screen and reducing count of unit
     }
 

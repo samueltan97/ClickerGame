@@ -4,7 +4,7 @@ import { IPassiveSkill } from "./IPassiveSkill";
 import { Resource, Hero, Unit, Enemy } from "../BaseClass";
 import { IPlayer } from "../IPlayer";
 import { IStageLevel } from "../IStageLevel";
-import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyIsPower, Ballad, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry, Solo } from "./PlayerSkillsBaseClass";
+import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyIsPower, Ballad, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry, Solo, Recruit } from "./PlayerSkillsBaseClass";
 import { HeroActiveSkill, Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork, VitalContract, RecoveryMantra, Bang, DoubleTap, Marksman, Matrix, FocusShot, TriangleFire, AuraOfAccuracy, SuperiorPerception, Lance, IndraBlessing } from "./HeroSkillsBaseClass";
 import { IStorage } from "../IStorage";
 
@@ -33,6 +33,7 @@ export class SkillFactory implements ISkillFactory {
             case "DarkRitual": return new DarkRitual(this);
             case "Biohack": return new Biohack(this);
             case "CursedContract": return new CursedContract(this);
+            case "Recruit": return new Recruit(this);
             default: throw new DOMException("No such Player Active Skill");
         }
     };

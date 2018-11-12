@@ -56,7 +56,7 @@ export class HeroActiveSkill implements IActiveSkill {
             , this.cooldown);
     }
 
-    Action(input: number): void {
+    Action(input?: number): void {
         this.CooldownCounter();
     }
 
@@ -68,10 +68,10 @@ export class HeroActiveSkill implements IActiveSkill {
 export class Heal extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(19, "Heal", 1000, playerSkillFactory);
+        super(20, "Heal", 1000, playerSkillFactory);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
@@ -86,10 +86,10 @@ export class Heal extends HeroActiveSkill {
 export class Purify extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(20, "Purify", 1000, playerSkillFactory);
+        super(21, "Purify", 1000, playerSkillFactory);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             this.SkillFactory.Storage.PureUnitArr.forEach(x => x.RegenerateMax());
@@ -100,10 +100,10 @@ export class Purify extends HeroActiveSkill {
 export class ArcaneShelter extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(22, "Arcane Shelter", 1000, playerSkillFactory);
+        super(23, "Arcane Shelter", 1000, playerSkillFactory);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             this.SkillFactory.Storage.PureUnitArr.forEach(x => x.IsImmune = true);
@@ -120,7 +120,7 @@ export class ArcaneShelter extends HeroActiveSkill {
 export class StrafingRun extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(25, "Strafing Run", 1000, playerSkillFactory);
+        super(26, "Strafing Run", 1000, playerSkillFactory);
     }
 
     doTimeOut(count: number) {
@@ -130,7 +130,7 @@ export class StrafingRun extends HeroActiveSkill {
         }, 1 * count);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             //Reference current enemy array to Enemy
@@ -144,7 +144,7 @@ export class StrafingRun extends HeroActiveSkill {
 export class Hurricane extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(32, "Hurricane", 1000, playerSkillFactory);
+        super(33, "Hurricane", 1000, playerSkillFactory);
     }
 
     doTimeOut(count: number) {
@@ -154,7 +154,7 @@ export class Hurricane extends HeroActiveSkill {
         }, 1 * count);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             //Reference current enemy array to Enemy
@@ -168,10 +168,10 @@ export class Hurricane extends HeroActiveSkill {
 export class CrossCut extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(34, "Cross Cut", 1000, playerSkillFactory);
+        super(35, "Cross Cut", 1000, playerSkillFactory);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2/5);
@@ -186,10 +186,10 @@ export class CrossCut extends HeroActiveSkill {
 export class LanceDance extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(35, "Lance Dance", 1000, playerSkillFactory);
+        super(36, "Lance Dance", 1000, playerSkillFactory);
     }
 
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             [this.SkillFactory.Storage.PureUnitArr[0], this.SkillFactory.Storage.PureUnitArr[3], this.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 6);
@@ -204,9 +204,9 @@ export class LanceDance extends HeroActiveSkill {
 export class UnlimitedLanceWork extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(37, "Unlimited Lance Work", 1000, playerSkillFactory);
+        super(38, "Unlimited Lance Work", 1000, playerSkillFactory);
     }
-    public Action(input: number) {
+    public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);     
             let count: number = this.SkillFactory.Storage.PureUnitArr[0].Count + this.SkillFactory.Storage.PureUnitArr[3].Count + this.SkillFactory.Storage.PureUnitArr[9].Count + 1;
@@ -269,7 +269,7 @@ export class VitalContract extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(18, "Vital Contract", playerSkillFactory);
+        super(19, "Vital Contract", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -294,7 +294,7 @@ export class RecoveryMantra extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(21, "Recovery Mantra", playerSkillFactory);
+        super(22, "Recovery Mantra", playerSkillFactory);
         this.isUsed = false;
    }
 
@@ -313,7 +313,7 @@ export class Bang extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(23, "Bang", playerSkillFactory);
+        super(24, "Bang", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -332,7 +332,7 @@ export class DoubleTap extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(24, "Double Tap", playerSkillFactory);
+        super(25, "Double Tap", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -353,7 +353,7 @@ export class Marksman extends HeroPassiveSkill {
     prevMultiplier: number = 1;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(26, "Marksman", playerSkillFactory);
+        super(27, "Marksman", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -378,7 +378,7 @@ export class Matrix extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(27, "Matrix", playerSkillFactory);
+        super(28, "Matrix", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -395,7 +395,7 @@ export class FocusShot extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(28, "Focus Shot", playerSkillFactory);
+        super(29, "Focus Shot", playerSkillFactory);
         this.isUsed = false;
    }
 
@@ -414,7 +414,7 @@ export class TriangleFire extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(29, "Triangle Fire", playerSkillFactory);
+        super(30, "Triangle Fire", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -433,7 +433,7 @@ export class AuraOfAccuracy extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(30, "Aura of Accuracy", playerSkillFactory);
+        super(31, "Aura of Accuracy", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -451,7 +451,7 @@ export class SuperiorPerception extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(31, "Superior Perception", playerSkillFactory);
+        super(32, "Superior Perception", playerSkillFactory);
         this.isUsed = false;
     }
 
@@ -467,7 +467,7 @@ export class Lance extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(33, "Lance", playerSkillFactory);
+        super(34, "Lance", playerSkillFactory);
         this.isUsed = false;
    }
 
@@ -486,7 +486,7 @@ export class IndraBlessing extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(36, "Indra's Blessing", playerSkillFactory);
+        super(37, "Indra's Blessing", playerSkillFactory);
         this.isUsed = false;
     }
 
