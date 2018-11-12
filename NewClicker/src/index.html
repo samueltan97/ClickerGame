@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div id="combat-text-div">
-                    <div id="combat-text-left" class="text-left">Zone Status: 1/10</div>
+                    <div id="combat-text-left" class="text-left">Zone Status: 0/10</div>
                     <div id="combat-text-right" class="text-right">Time Left: 00:30</div>
                 </div>
                 <div id="monster-div">
@@ -106,8 +106,44 @@
                         <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Harpy-hurt.png" />
                 </div>
                 <div id="fighter-div">
-                    <div id="fighter">
-                        <img id="warrior-normal" style="max-height:100%; max-width:100%;" src="style/images/Sample/Fight/Fighter.png" />
+                    <div id="Spearman" class="fighter">
+                        <img id="Spearman-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Spearman.png" />
+                    </div>
+                    <div id="Swordsman" class="fighter">
+                        <img id="Swordsman-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual//Ally//Swordsman.png" />
+                    </div>
+                    <div id="Archer" class="fighter">
+                        <img id="Archer-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Archers.png" />
+                    </div>
+                    <div id="Pikeman" class="fighter">
+                        <img id="Pikeman-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Pikeman.png" />
+                    </div>
+                    <div id="Warrior" class="fighter">
+                        <img id="Warrior-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Warrior.png" />
+                    </div>
+                    <div id="Rifleman" class="fighter">
+                        <img id="Rifleman-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual//Ally/Rifleman.png" />
+                    </div>
+                    <div id="Knight" class="fighter">
+                        <img id="Knight-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Knight.png" />
+                    </div>
+                    <div id="CrossArcher" class="fighter">
+                        <img id="CrossArcher-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Crossbow Archers.png" />
+                    </div>
+                    <div id="Chanter" class="fighter">
+                        <img id="Chanter-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Chanter.png" />
+                    </div>
+                    <div id="Paladin" class="fighter">
+                        <img id="Paladin-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Paladin.png" />
+                    </div>
+                    <div id="Magus" class="fighter">
+                        <img id="Magus-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Mage.png">
+                    </div>
+                    <div id="ArcaneGunslinger" class="fighter">
+                        <img id="ArcaneGunslinger-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Gunslinger.png" />
+                    </div>
+                    <div id="MysticRanger" class="fighter">
+                        <img id="MysticRanger-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Magical Archer.png" />
                     </div>
                 </div>
                 <div id="fighter-description-text">
@@ -458,26 +494,30 @@
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
-                        <div class="heroes-name">Helmuth</div>
-                        <div class="heroes-lvl">LVL: 32</div>
-                        <div class="heroes-dps">DPS: 320</div>
+                        <div class="heroes-name">Charles</div>
+                        <div class="heroes-lvl">LVL: 1</div>
+                        <div class="heroes-dps">DPS: 0</div>
                         <div class="heroes-hp-div">
                             <div class="heroes-hp-bar-background">
-                                <div class="heroes-hp-text">HP: 450/500 (90%)</div>
-                                <div class="heroes-hp-bar">
+                                <div id="Charles-hp-text" class="heroes-hp-text">HP: 1000/1000 (100%)</div>
+                                <div id="Charles-hp-bar" class="heroes-hp-bar">
                                 </div>
                             </div>
                         </div>
                         <div class="heroes-exp-div">
                             <div class="heroes-exp-bar-background">
-                                <div class="heroes-exp-text">EXP: 450/500 (90%)</div>
+                                <div id="Charles-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
                                 <div class="heroes-exp-bar">
                                 </div>
                             </div>
                         </div>
                         <div class="heroes-skills-repo">
                             <div class="hero-skills">
-                                <img style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="VitalContract-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Heal-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Purify-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="RecoveryMantra-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="ArcaneShelter-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             </div>
                         </div>
                     </div>
@@ -485,26 +525,29 @@
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
-                        <div class="heroes-name">Helmuth</div>
-                        <div class="heroes-lvl">LVL: 32</div>
-                        <div class="heroes-dps">DPS: 320</div>
+                        <div class="heroes-name">Yusie</div>
+                        <div class="heroes-lvl">LVL: 10</div>
+                        <div class="heroes-dps">DPS: 500</div>
                         <div class="heroes-hp-div">
                             <div class="heroes-hp-bar-background">
-                                <div class="heroes-hp-bar">
-                                    <div class="heroes-hp-text">HP: 450/500 (90%)</div>
+                                <div id="Yusie-hp-bar" class="heroes-hp-bar">
+                                    <div id="Yusie-hp-bar" class="heroes-hp-text">HP: 15000/15000 (100%)</div>
                                 </div>
                             </div>
                         </div>
                         <div class="heroes-exp-div">
                             <div class="heroes-exp-bar-background">
-                                <div class="heroes-exp-bar">
-                                    <div class="heroes-exp-text">EXP: 450/500 (90%)</div>
-                                </div>
+                                <div class="heroes-exp-bar"></div>
+                                <div id="Yusie-exp-text" class="heroes-exp-text">EXP: 0/150 (0%)</div>
                             </div>
                         </div>
                         <div class="heroes-skills-repo">
                             <div class="hero-skills">
-                                <img style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Bang-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="DoubleTap-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="StrafingRun-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Marksman-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Matrix-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             </div>
                         </div>
                     </div>
@@ -542,13 +585,31 @@
                 <div id="manpower-count-separator"></div>
                 <div id="refiner-repo">
                     <div class="refiner-block">
+                        <div id="Recruiter-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Recruiters</div>
+                            <div id="Recruiter-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-0"></div>
+                                <div id="refinerCalibration-0" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-0"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-0">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-0">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="refiner-block">
                         <div id="Woodworker-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
                             <div class="refiner-name">Woodworkers</div>
                             <div id="Woodworker-quantity" class="refiner-count">X 0</div>
                             <div class="refiner-calibrator">
                                 <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-1"></div>
-                                <div id="refinerCalibration-1" class="refiner-calibrator-text">X 100</div>
+                                <div id="refinerCalibration-1" class="refiner-calibrator-text">X 1</div>
                                 <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-1"></div>
                             </div>
                             <div class="refiner-train" refinerCalibration="refinerCalibration-1">
@@ -560,37 +621,37 @@
                         </div>
                     </div>
                     <div class="refiner-block">
-                        <div class="refiner-sprite"></div>
+                        <div id="Couturier-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
-                            <div class="refiner-name">Courtiers</div>
-                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-name">Couturiers</div>
+                            <div id="Couturier-quantity" class="refiner-count">X 0</div>
                             <div class="refiner-calibrator">
-                                <div class="refiner-calibrator-left-arrow"></div>
-                                <div class="refiner-calibrator-text">X 1000</div>
-                                <div class="refiner-calibrator-right-arrow"></div>
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-3"></div>
+                                <div id="refinerCalibration-3" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-3"></div>
                             </div>
-                            <div class="refiner-train">
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-3">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
-                            <div class="refiner-untrain">
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-3">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
                             </div>
                         </div>
                     </div>
                     <div class="refiner-block">
-                        <div class="refiner-sprite"></div>
+                        <div id="ManaRefiner-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
-                            <div class="refiner-name">Courtiers</div>
-                            <div id="courtier-quantity" class="refiner-count">X 4235</div>
+                            <div class="refiner-name">Mana Refiners</div>
+                            <div id="ManaRefiner-quantity" class="refiner-count">X 0</div>
                             <div class="refiner-calibrator">
-                                <div class="refiner-calibrator-left-arrow"></div>
-                                <div class="refiner-calibrator-text">X 1000</div>
-                                <div class="refiner-calibrator-right-arrow"></div>
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-5"></div>
+                                <div id="refinerCalibration-5" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-5"></div>
                             </div>
-                            <div class="refiner-train">
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-5">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
-                            <div class="refiner-untrain">
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-5">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
                             </div>
                         </div>

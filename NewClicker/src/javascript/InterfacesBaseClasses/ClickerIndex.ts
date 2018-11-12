@@ -68,15 +68,18 @@ export class ClickerIndex {
 
     ChangeStage = (isIncrease: boolean): void => {
         let counter: number = this.CurrentStorage.CurrentStage.CurrentStage;
-        this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
-        if (isIncrease) {
+        if (isIncrease && counter < 4) {
+            this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
             this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter];
-            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter];
-        } else {
+            this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter];            
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
+        } else if (!isIncrease && counter > 1) {
+            this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
             this.CurrentStorage.CurrentStage = this.CurrentStorage.StageArray[counter - 2];
             this.CurrentStorage.CurrentEnemyArr = this.CurrentStorage.EnemyArr[counter - 2];
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
         }
-        this.CurrentStorage.CurrentEnemyArr[0].Birth();
+        this.CurrentStorage.CurrentStage.Birth();
     }
 
     PopulateEnemyArr = (index: number) => {

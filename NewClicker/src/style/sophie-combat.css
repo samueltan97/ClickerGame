@@ -192,9 +192,10 @@ body {
                     height: 30%;
                 }
 
-                    body #backdrop #fight-div #combat-area #fighter-div #fighter {
+                    body #backdrop #fight-div #combat-area #fighter-div .fighter {
                         /* opacity:0; */
                         /* width: 23vh; */
+                        display:none;
                         height: 100%;
                         position: absolute;
                         left: 50%;

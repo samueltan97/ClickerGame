@@ -5,4 +5,5 @@
     IncreaseZone(isAuto:boolean): void;
     DecreaseZone(): void;
     IncreaseEnemyDefeated(): void;
+    Birth(): void;
 }

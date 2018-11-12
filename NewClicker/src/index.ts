@@ -177,7 +177,7 @@ let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6],
 // let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [3, 3, 3, 3, 6, 6], 20, 0, 100, function (currentDamage: number, stage: StageLevel): number { return 1; }, 100000, StageOne, false);
 // let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [2, 2, 2, 2, 4, 4, 7, 7, 6], 10, 0, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1;}, 100, theStage);
 // let Bandit: Enemy = new Enemy(0, 5, "abc", "Bandit", 7, 3, 5, [4, 2, 5, 5, 7, 7, 7, 7, 7, 6, 6, 6], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { return 3; }, 200, theStage);
-// let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [4, 4, 4, 4, 2, 2, 2, 2, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(5 * currentDamage, 1); return 1; }, 300, theStage);
+ let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [4, 4, 4, 4, 2, 2, 2, 2, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(5 * currentDamage, 1); return 1; }, 300, StageOne, false);
 // let RevoltFootman: Enemy = new Enemy(0, 7, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); return 1; }, 160, theStage);
 // let Ashwinder2: Enemy = new Enemy(1, 8, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6, 10], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1; }, 200, theStage);
 // let RevoltFootman2: Enemy = new Enemy(1, 9, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7, 9, 14], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); return 1; }, 160, theStage);
@@ -213,11 +213,11 @@ let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6],
 //let RevoltSummoner: Enemy = new Enemy(4, 39, "abc", "Revolt Lancer", 750000, 400000, 5, [1, 1], 80, 0, 100, theStage);
 // let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
 
-var StageOneEnemyArr: Enemy[] = [Slime, Boar4];
-var StageTwoEnemyArr: Enemy[] = [Boar1];
-var StageThreeEnemyArr: Enemy[] = [Boar2];
-var StageFourEnemyArr: Enemy[] = [Boar3];
-var StageFiveEnemyArr: Enemy[] = [];
+var StageOneEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageTwoEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageThreeEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageFourEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageFiveEnemyArr: Enemy[] = [Slime, RevoltBrawler];
 var RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
 var RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
 var RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -346,7 +346,7 @@ $(document).ready(function () {
 
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
 
-    clickerIndex.CurrentStorage.PureUnitArr[4].Birth();
+    clickerIndex.CurrentStorage.PureUnitArr[7].Birth();
 
     clickerIndex.CurrentStorage.RefinerTrainerArr[1].Unlocked();
     clickerIndex.CurrentStorage.RefinerTrainerArr[1].Increase(1);
@@ -412,7 +412,7 @@ $(document).ready(function () {
 
     setInterval(function () {
         $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
-    }, 100);
+    }, 50);
 
     clickerIndex.SetUpClicker();
 

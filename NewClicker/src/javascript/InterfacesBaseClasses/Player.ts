@@ -48,6 +48,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentArmyVitality(count:number) {
         this.armyVitality = count;
+        $("#player-army-vitality").text("Army Vitality: " + this.CurrentArmyVitality);
         this.Update();
     }
 
@@ -65,6 +66,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentLevel(count:number) {
         this.currentLevel = count;
+        $("#stats-desc-lvl").text("LVL: " + this.CurrentLevel);
     }
 
     get CurrentDamage(): number {

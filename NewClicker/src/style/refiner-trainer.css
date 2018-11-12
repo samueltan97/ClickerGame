@@ -201,8 +201,14 @@
             left: 5%;
             background-size: 100% 100%;
         }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block #Recruiter-sprite{
+        background-image: url(images/Actual/RefinerTrainer/Recruiter.png); }
         #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block #Woodworker-sprite{
         background-image: url(images/Actual/RefinerTrainer/Woodworkers.png); }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block #Couturier-sprite{
+        background-image: url(images/Actual/RefinerTrainer/Courtier.png); }
+        #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block #ManaRefiner-sprite{
+        background-image: url(images/Actual/RefinerTrainer/ManaRefiner.png); }
         #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc {
           position: absolute;
           width: 55%;

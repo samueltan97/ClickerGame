@@ -59,6 +59,11 @@ export class StageLevel implements IStageLevel {
         this.Update();
     }
 
+    Birth(): void {
+        $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+        $("#combat-text-left").text("Zone Status: " + this.EnemyDefeated + "/10")
+    }
+
     get CurrentZone() {
         return this.Zone;
     }
