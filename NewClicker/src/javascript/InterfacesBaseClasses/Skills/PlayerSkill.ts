@@ -9,7 +9,6 @@ import { HeroActiveSkill, Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, C
 import { IStorage } from "../IStorage";
 
 export class SkillFactory implements ISkillFactory {
-
     Storage: IStorage;
     HeroActiveSkill: IActiveSkill[];
 
@@ -82,4 +81,5 @@ export class SkillFactory implements ISkillFactory {
     AddHeroActive(skill: IActiveSkill) {
         this.HeroActiveSkill.push(skill);
     }
+
 }

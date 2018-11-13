@@ -444,14 +444,14 @@
                     <div id="skills-separator"></div>
                     <div id="skills-repo">
                         <div class="skills-block">
-                            <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            <img class="skill-button" skillIndex=1 style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             <div class="skills-icon"></div>
                             <div class="skills-stats">
-                                <div class="skills-stats-name">Mirror Blades</div>
-                                <div class="skills-stats-lvl">Level 35</div>
+                                <div class="skills-stats-name">Pickpocket</div>
+                                <div id="Pickpocket-lvl" class="skills-stats-lvl">Level 1</div>
                             </div>
                             <div class="skills-level-up-button-frame">
-                                <img style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                                <img class="skill-point-button" skillTag=1 style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
                         </div>
                         <div class="skills-block">
@@ -495,7 +495,7 @@
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
                         <div class="heroes-name">Charles</div>
-                        <div class="heroes-lvl">LVL: 1</div>
+                        <div id="Charles-lvl" class="heroes-lvl">LVL: 1</div>
                         <div class="heroes-dps">DPS: 0</div>
                         <div class="heroes-hp-div">
                             <div class="heroes-hp-bar-background">
@@ -507,17 +507,17 @@
                         <div class="heroes-exp-div">
                             <div class="heroes-exp-bar-background">
                                 <div id="Charles-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
-                                <div class="heroes-exp-bar">
+                                <div id="Charles-exp-bar" class="heroes-exp-bar">
                                 </div>
                             </div>
                         </div>
                         <div class="heroes-skills-repo">
                             <div class="hero-skills">
-                                <img id="VitalContract-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="Heal-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="Purify-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="RecoveryMantra-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="ArcaneShelter-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="VitalContract-normal" class="skill-button" skillIndex=19 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Heal-normal" class="skill-button" skillIndex=20 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Purify-normal" class="skill-button" skillIndex=21 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="RecoveryMantra-normal" class="skill-button" skillIndex=22 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="ArcaneShelter-normal" class="skill-button" skillIndex=23 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             </div>
                         </div>
                     </div>
@@ -526,28 +526,88 @@
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
                         <div class="heroes-name">Yusie</div>
-                        <div class="heroes-lvl">LVL: 10</div>
-                        <div class="heroes-dps">DPS: 500</div>
+                        <div id="Yusie-lvl" class="heroes-lvl">LVL: 1</div>
+                        <div class="heroes-dps">DPS: 50</div>
                         <div class="heroes-hp-div">
                             <div class="heroes-hp-bar-background">
                                 <div id="Yusie-hp-bar" class="heroes-hp-bar">
-                                    <div id="Yusie-hp-bar" class="heroes-hp-text">HP: 15000/15000 (100%)</div>
+                                    <div id="Yusie-hp-bar" class="heroes-hp-text">HP: 1500/1500 (100%)</div>
                                 </div>
                             </div>
                         </div>
                         <div class="heroes-exp-div">
                             <div class="heroes-exp-bar-background">
                                 <div class="heroes-exp-bar"></div>
-                                <div id="Yusie-exp-text" class="heroes-exp-text">EXP: 0/150 (0%)</div>
+                                <div id="Yusie-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
                             </div>
                         </div>
                         <div class="heroes-skills-repo">
                             <div class="hero-skills">
-                                <img id="Bang-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="DoubleTap-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="StrafingRun-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="Marksman-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="Matrix-normal" style="position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Bang-normal" class="skill-button" skillIndex=24 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="DoubleTap-normal" class="skill-button" skillIndex=25 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="StrafingRun-normal" class="skill-button" skillIndex=26 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Marksman-normal" class="skill-button" skillIndex=27 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Matrix-normal" class="skill-button" skillIndex=28 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heroes-block">
+                        <div class="heroes-background">
+                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                        </div>
+                        <div class="heroes-name">Halley</div>
+                        <div id="Halley-lvl" class="heroes-lvl">LVL: 1</div>
+                        <div class="heroes-dps">DPS: 30</div>
+                        <div class="heroes-hp-div">
+                            <div class="heroes-hp-bar-background">
+                                <div id="Halley-hp-bar" class="heroes-hp-bar">
+                                    <div id="Halley-hp-bar" class="heroes-hp-text">HP: 3500/3500 (100%)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-exp-div">
+                            <div class="heroes-exp-bar-background">
+                                <div class="heroes-exp-bar"></div>
+                                <div id="Halley-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                            </div>
+                        </div>
+                        <div class="heroes-skills-repo">
+                            <div class="hero-skills">
+                                <img id="FocusShot-normal" class="skill-button" skillIndex=29 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="TriangleFire-normal" class="skill-button" skillIndex=30 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="AuraOfAccuracy-normal" class="skill-button" skillIndex=31 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="SuperiorPerception-normal" class="skill-button" skillIndex=32 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="Hurricane-normal" class="skill-button" skillIndex=33 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="heroes-block">
+                        <div class="heroes-background">
+                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                        </div>
+                        <div class="heroes-name">Helmuth</div>
+                        <div id="Helmuth-lvl" class="heroes-lvl">LVL: 1</div>
+                        <div class="heroes-dps">DPS: 10</div>
+                        <div class="heroes-hp-div">
+                            <div class="heroes-hp-bar-background">
+                                <div id="Helmuth-hp-bar" class="heroes-hp-bar">
+                                    <div id="Helmuth-hp-bar" class="heroes-hp-text">HP: 10000/10000 (100%)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="heroes-exp-div">
+                            <div class="heroes-exp-bar-background">
+                                <div class="heroes-exp-bar"></div>
+                                <div id="Helmuth-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                            </div>
+                        </div>
+                        <div class="heroes-skills-repo">
+                            <div class="hero-skills">
+                                <img id="Lance-normal" class="skill-button" skillIndex=29 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="CrossCut-normal" class="skill-button" skillIndex=30 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="LanceDance-normal" class="skill-button" skillIndex=31 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="IndraBlessing-normal" class="skill-button" skillIndex=32 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                <img id="UnlimitedLanceWork-normal" class="skill-button" skillIndex=33 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             </div>
                         </div>
                     </div>

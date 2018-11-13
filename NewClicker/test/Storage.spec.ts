@@ -9,7 +9,7 @@ should();
 describe("Storage", () => {
 
     function SetupStorage(): Storage {
-        var thePlayer: Player = new Player(1, "NIL");
+        var thePlayer: Player = new Player(1, 0);
         let StageOne: StageLevel = new StageLevel(1, "Kroigren");
         let StageTwo: StageLevel = new StageLevel(2, "Brostika");
         let StageThree: StageLevel = new StageLevel(3, "Erithven");
@@ -217,7 +217,7 @@ describe("Storage", () => {
     }
 
     it("should get correct Player on the screen", () => {
-        let expected = new Player(1, "NIL");
+        let expected = new Player(1, 0);
         let actual = SetupStorage().CurrentPlayer;
         expected.should.deep.equal(actual);
     });

@@ -9,7 +9,8 @@ import { PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 export class Player implements IPlayer, ILevelProgression{
 
     private armyVitality: number;
-    private job: string;
+    private job: number; //0, 1, 2 for different jobs
+    private skillPoint:number
     private readonly baseExperience: number;
     private baseDamage: number;
     public dps: number;
@@ -19,8 +20,9 @@ export class Player implements IPlayer, ILevelProgression{
     private valueUpdateEvents: ((e: PlayerValueUpdateEvent) => void)[] = [];
     private hurtUpdateEvents: Function[] = [];
 
-    constructor(baseDamage: number, job: string) {
+    constructor(baseDamage: number, job: number) {
         this.job = job;
+        this.skillPoint = 0;
         this.armyVitality = 1;
         this.baseExperience = 5; //temporary formula
         this.baseDamage = baseDamage;
@@ -39,7 +41,7 @@ export class Player implements IPlayer, ILevelProgression{
     }
 
     Update(): void {
-        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality, this.CurrentDamage, this.MaxExperience, this.ClickCount)));
+        this.valueUpdateEvents.forEach(x => x(new PlayerValueUpdateEvent(this.CurrentExperience, this.CurrentLevel, this.CurrentArmyVitality, this.CurrentDamage, this.MaxExperience, this.ClickCount, this.job)));
     }
 
     get CurrentArmyVitality():number {
@@ -82,6 +84,10 @@ export class Player implements IPlayer, ILevelProgression{
         return this.clickcount;
     }
 
+    get SkillPoint(): number {
+        return this.skillPoint;
+    }
+
     UpdateFeedback(currentTime: number): number {
         return this.CurrentDamage;
     }
@@ -116,10 +122,21 @@ export class Player implements IPlayer, ILevelProgression{
         this.currentLevel += 1;
         this.currentExperience = 0;
         this.IncreaseArmyVitality();
+        this.IncreaseSkillPoint();
         adjustBarAnimation("player-exp", "EXP", this.CurrentExperience, this.MaxExperience);
         $("#player-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
         $("#stats-desc-lvl").text("LVL: " + this.CurrentLevel);
         $("#player-click-damage").text("Click Damage: " + this.CurrentDamage);
         this.Update();
+    }
+
+    IncreaseSkillPoint(): void {
+        this.skillPoint += 1;
+        $("#skill-points-repo").text("Skill Points: " + this.skillPoint);
+    }
+
+    DecreaseSkillPoint(): void {
+        this.skillPoint -= 1;
+        $("#skill-points-repo").text("Skill Points: " + this.skillPoint);
     }
 }

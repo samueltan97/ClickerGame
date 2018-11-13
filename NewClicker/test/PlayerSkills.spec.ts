@@ -19,7 +19,7 @@ should();
 describe("PlayerSkills", () => {
 
     function SetupStorage(): Storage {
-        var thePlayer: Player = new Player(1, "NIL");
+        var thePlayer: Player = new Player(1, 0);
         let StageOne: StageLevel = new StageLevel(1, "Kroigren");
         let StageTwo: StageLevel = new StageLevel(2, "Brostika");
         let StageThree: StageLevel = new StageLevel(3, "Erithven");
@@ -125,10 +125,10 @@ describe("PlayerSkills", () => {
             MagusMaster, PaladinMaster, ArcaneGunslingerMaster, MysticRangerMaster];
 
         //Heroes
-        var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);
-        var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, thePlayer);
-        var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, thePlayer);
-        var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, thePlayer);
+        var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, [19, 20, 21, 22, 23], thePlayer);
+        var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
+        var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
+        var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
         var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
 

@@ -8,7 +8,6 @@ import { HeroActiveSkill } from "./HeroSkillsBaseClass";
 import { IStorage } from "../IStorage";
 
 export interface ISkillFactory {
-
     Storage: IStorage;
     HeroActiveSkill: IActiveSkill[];
     CreatePlayerActive(type:string): IActiveSkill;

@@ -46,7 +46,11 @@ export class HeroActiveSkill implements IActiveSkill {
     }
 
     Unlock(): void {
+        if (!this.isUnlocked) {
         this.isUnlocked = true;
+        $("#" + this.name.replace(/\s+/g, '') + "-normal").fadeIn(100);
+            alert("Unlocked a new skill: " + this.name);
+        }
     }
 
     CooldownCounter(): void {
@@ -253,8 +257,13 @@ export class HeroPassiveSkill implements IPassiveSkill {
     }
 
     Unlock(): void {
-        this.isUnlocked = true;
-        this.Action();
+        if (!this.isUnlocked) {
+            this.isUnlocked = true;
+            let id: string = (this.id != 37) ? this.name.replace(/\s+/g, '') : "IndraBlessing";
+            $("#" + id + "-normal").fadeIn(100);
+            alert("Unlocked a new skill: " + this.name);
+            this.Action();
+        }
     }
 
     Action(): void {
@@ -285,7 +294,7 @@ export class VitalContract extends HeroPassiveSkill {
             let skill = this;
            setTimeout(function () {
                skill.SkillFactory.Storage.HeroArr[0].RegenerateMax();
-            }, 400); 
+            }, 1500); 
         }
     }
 }

@@ -48,7 +48,11 @@ export class PlayerActiveSkill implements IActiveSkill {
     }
 
     Unlock(): void {
-        this.isUnlocked = true;
+        if (!this.isUnlocked) {
+            this.isUnlocked = true;
+            $("#" + this.name.replace(/\s+/g, '') + "-normal").fadeIn(100);
+            alert("You have unlocked a new skill: " + this.name);
+        }
     }
 
     CooldownCounter(): void {
@@ -63,6 +67,7 @@ export class PlayerActiveSkill implements IActiveSkill {
 
     LevelUp(): void {
         this.level += 1;
+        $("#" + this.name.replace(/\s+/g, '') + "-lvl").text("Level " + this.level);
     }
 }
 
@@ -353,15 +358,20 @@ export class PlayerPassiveSkill implements IPassiveSkill {
     }
 
     Unlock(): void {
-        this.isUnlocked = true;
-        this.Action();
+        if (!this.isUnlocked) {
+            this.isUnlocked = true;
+            this.Action();
+            $("#" + this.name.replace(/\s+/g, '') + "-normal").fadeIn(100);
+            alert("You have unlocked a new skill: " + this.name);
+        }
     }
 
     Action(): void {
     };
 
     LevelUp(): void {
-        this.level+=1;
+        this.level += 1;
+        $("#" + this.name.replace(/\s+/g, '') + "-lvl").text("Level " + this.level);
     };
 }
 

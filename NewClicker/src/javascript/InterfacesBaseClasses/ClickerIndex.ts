@@ -1,6 +1,6 @@
 ﻿import { IStorage } from "./IStorage";
 import { setInterval } from "timers";
-import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent } from "./ValueUpdateEvent";
+import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent, PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 import { SkillFactory } from "./Skills/PlayerSkill";
 import { ISkillFactory } from "./Skills/ISkillFactory";
 
@@ -8,10 +8,12 @@ export class ClickerIndex {
 
     private counter: number;
     private skillFactory: ISkillFactory;
+    private skillUnlockFunction: Function[];
 
     constructor(skillfactory: ISkillFactory) {
         this.skillFactory = skillfactory;
         this.counter = 1;
+        this.skillUnlockFunction = [];
     }
 
     get CurrentStorage() {
@@ -82,6 +84,38 @@ export class ClickerIndex {
         this.CurrentStorage.CurrentStage.Birth();
     }
 
+    AddSkillUnlockFunction = (f:Function) => {
+        this.skillUnlockFunction.push(f);
+    }
+
+    UnlockHeroSkill = (e: HeroValueUpdateEvent): void =>{
+        switch (e.newLevel) {
+            case 10: this.skillUnlockFunction.forEach(x=>x(20 + (e.id * 5)));
+                break;
+            case 100: this.skillUnlockFunction.forEach(x => x(21 + (e.id * 5)));
+                break;
+            case 1000: this.skillUnlockFunction.forEach(x => x(22 + (e.id * 5)));
+                break;
+            case 10000: this.skillUnlockFunction.forEach(x => x(23 + (e.id * 5)));
+                break;
+        }
+    }
+
+    UnlockPlayerSkill = (e: PlayerValueUpdateEvent): void =>{
+        switch (e.newLevel) {
+            case 10: this.skillUnlockFunction.forEach(x=>x(1 + (e.job * 5)));
+                break;
+            case 50: this.skillUnlockFunction.forEach(x => x(2 + (e.job * 5)));
+                break;
+            case 100: this.skillUnlockFunction.forEach(x => x(3 + (e.job * 5)));
+                break;
+            case 500: this.skillUnlockFunction.forEach(x => x(4 + (e.job * 5)));
+                break;
+            case 1000: this.skillUnlockFunction.forEach(x => x(5 + (e.job * 5)));
+                break;
+        }
+    }
+
     PopulateEnemyArr = (index: number) => {
         switch (index % 5) {
             case 0:
@@ -138,6 +172,8 @@ export class ClickerIndex {
        this.CurrentStorage.UnitArr.forEach(x => x.forEach(y => this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(y.UpdateSource)));
        this.CurrentStorage.EnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
        this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
+       this.CurrentStorage.HeroArr.forEach(x => x.AddValueUpdateEvent(this.UnlockHeroSkill));
+       this.CurrentStorage.CurrentPlayer.AddValueUpdateEvent(this.UnlockPlayerSkill);
        for (var i = 0; i < this.CurrentStorage.StageArray.length; i++) {
            this.CurrentStorage.EnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
            this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));

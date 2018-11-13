@@ -90,7 +90,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
-    set ResourceArray(array:number[]) {
+    set ResourceArray(array: number[]) {
         this.resourceArray = array;
     }
 
@@ -99,7 +99,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentExp(): number {
-        return this.baseExperience * this.stage.CurrentStage;
+        return this.baseExperience * this.stage.CurrentStage * this.stage.CurrentZone;
     }
 
     UpdateSource = (e: StageLevelValueUpdateEvent): void =>  {
@@ -149,13 +149,14 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     Regenerate(counter: number) {
-        if (counter % this.regenFrequency == 0 && !this.isDead) {
+        if (counter % this.regenFrequency == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
             this.currentHP += this.regen *  this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value //placeholder for regeernation value
         this.currentHP = Math.min(this.CurrentHP, this.MaxHP);
         adjustBarAnimation("monster-hp", this.name, this.CurrentHP, this.MaxHP);
-        }
         $("#monster-hp-text-right").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
-       this.Update();
+        this.Update();
+        }
+        
     }
 
     RegenerateMax():void {
@@ -285,7 +286,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     ReceiveDamage(damage: number): void {
-        if (!this.IsImmune) {
+        if (!this.IsImmune && damage > 0) {
             if (this.CanEvade) {
                 damage = Math.round(Math.random()) * damage;
             }
@@ -347,13 +348,14 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Regenerate(counter: number) {
-        if ((counter + 5) % 10 == 0 && !this.isDead) {
+        if ((counter + 5) % 20 == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
             this.currentHP += 1 * this.player.CurrentArmyVitality;
         this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
         adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-        }
         $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
         this.Update();
+        }
+
     }
 
     RegenerateMax(): void {
@@ -400,7 +402,6 @@ export class Resource implements ICountable {
 
     Unlocked(): void {
         alert("You have unlocked " + this.name);
-        console.log("Unlocked", this.name);
         this.isUnlocked = true;
         this.Update();
     }
@@ -543,9 +544,10 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     public isDead: boolean;
     private player:IPlayer;
     private valueUpdateEvents: ((e: HeroValueUpdateEvent) => void)[] = [];
+    public readonly skillArray: number[];
     private isImmune: boolean;
 
-    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience:number, range: number, player: IPlayer) {
+    constructor(id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience:number, range: number, skillArray:number[], player: IPlayer) {
         this.id = id;
         this.player = player;
         this.image = image;
@@ -561,6 +563,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.isUnlocked = false;
         this.isDead = false;
         this.isImmune = false;
+        this.skillArray = skillArray;
     }
 
     UpdateFeedback(counter: number): number {
@@ -581,8 +584,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
    }
 
     get IsImmune(): boolean {
@@ -600,8 +603,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set MaxHP(multiplier: number) {
         this.baseHP = this.baseHP * multiplier;
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
     }
 
     get CurrentHP(): number {
@@ -610,8 +613,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set CurrentHP(multiplier: number) {
         this.currentHP = this.currentHP * multiplier;
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
     }
 
     get CurrentDamage(): number {
@@ -639,11 +642,11 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     ReceiveDamage(damage: number): void {
-        if (!this.IsImmune) {
+        if (!this.IsImmune && damage > 0) {
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
        if (this.currentHP == 0) {
             this.Die();
         }
@@ -672,13 +675,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     Regenerate(counter: number):void {
-        if ((counter + 5) % 10 == 0 && !this.isDead) {
+        if ((counter + 5) % 10 == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
             this.currentHP += 5 * this.player.CurrentArmyVitality;
             this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
-            adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+            adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+            this.Update();
         }
-        this.Update();
     }
 
     RegeneratePercentage(percentage: number): void {
@@ -690,30 +693,30 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     RegenerateMax(): void {
         this.currentHP = this.MaxHP;
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
         this.Update();
     }
 
     GainExperience(experience: number): void {
-        console.log("Gained");
         let experienceOverflow = this.currentExperience + experience - this.MaxExperience;
-        if (experienceOverflow > 0) {
+        if (experienceOverflow >= 0) {
             this.LevelUp();
             this.currentExperience += experienceOverflow;
         } else {
             this.currentExperience += experience;
         }
-        adjustBarAnimation("hero-exp", this.name, this.CurrentExperience, this.MaxExperience);
-        $("#" + this.name + "-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-exp", this.name, this.CurrentExperience, this.MaxExperience);
+        $("#" + this.name.split(" ")[0] + "-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
         this.Update();
     }
 
     LevelUp(): void {
         this.currentLevel += 1;
         this.currentExperience = 0;
-        adjustBarAnimation("hero-exp", this.name, this.CurrentExperience, this.MaxExperience);
-        $("#" + this.name + "-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-exp", this.name, this.CurrentExperience, this.MaxExperience);
+        $("#" + this.name.split(" ")[0] + "-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        $("#" + this.name.split(" ")[0] + "-lvl").text("LVL: " + this.CurrentLevel);
         this.Update();
    }
 }

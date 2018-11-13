@@ -16,7 +16,7 @@ import { IPassiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IPassiv
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
-var thePlayer: Player = new Player(1, "NIL");
+var thePlayer: Player = new Player(1, 0);
 let StageOne: StageLevel = new StageLevel(1, "Kroigren");
 let StageTwo: StageLevel = new StageLevel(2, "Brostika");
 let StageThree: StageLevel = new StageLevel(3, "Erithven");
@@ -122,11 +122,11 @@ var RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
     MagusMaster, PaladinMaster, ArcaneGunslingerMaster, MysticRangerMaster];
 
 //Heroes
-var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, thePlayer);
-var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, thePlayer);
-var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, thePlayer);
-var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, thePlayer);
-var HeroArr: Hero[] = [Charles/*, Yusie, Halley, Helmuth*/];
+var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, [19, 20, 21, 22, 23], thePlayer);
+var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
+var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
+var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
+var HeroArr: Hero[] = [Charles/*, Yusie*//*, Halley, Helmuth*/];
 
 
 function HeroKillMechanics(damage: number, count: number): void {
@@ -214,10 +214,10 @@ let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6],
 // let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
 
 var StageOneEnemyArr: Enemy[] = [Slime, RevoltBrawler];
-var StageTwoEnemyArr: Enemy[] = [Slime, RevoltBrawler];
-var StageThreeEnemyArr: Enemy[] = [Slime, RevoltBrawler];
-var StageFourEnemyArr: Enemy[] = [Slime, RevoltBrawler];
-var StageFiveEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageTwoEnemyArr: Enemy[] = [];
+var StageThreeEnemyArr: Enemy[] = [];
+var StageFourEnemyArr: Enemy[] = [];
+var StageFiveEnemyArr: Enemy[] = [];
 var RangeOneUnitArr: Unit[] = [Swordsman, Warrior, Knight];
 var RangeTwoUnitArr: Unit[] = [Spearman, Pikeman, Paladin];
 var RangeThreeUnitArr: Unit[] = [Rifleman];
@@ -255,8 +255,30 @@ var heroActiveSkill: IActiveSkill[] = [Heal, Purify, ArcaneShelter, StrafingRun,
 heroActiveSkill.forEach(x => skillFactory.HeroActiveSkill.push(x));
 
 var Recruit: IActiveSkill = skillFactory.CreatePlayerActive("Recruit");
+var Steal: IActiveSkill = skillFactory.CreatePlayerActive("Steal");
+var Heist: IActiveSkill = skillFactory.CreatePlayerActive("Heist");
+var MoneyIsPower: IActiveSkill = skillFactory.CreatePlayerActive("MoneyIsPower");
+var Ballad: IActiveSkill = skillFactory.CreatePlayerActive("Ballad");
+var Solo: IActiveSkill = skillFactory.CreatePlayerActive("Solo");
+var SongOfCourage: IActiveSkill = skillFactory.CreatePlayerActive("SongOfCourage");
+var ChorusOfDeath: IActiveSkill = skillFactory.CreatePlayerActive("ChorusOfDeath");
+var ImpactStab: IActiveSkill = skillFactory.CreatePlayerActive("ImpactStab");
+var Whirlwind: IActiveSkill = skillFactory.CreatePlayerActive("Whirlwind");
+var FinalBlow: IActiveSkill = skillFactory.CreatePlayerActive("FinalBlow");
+var DarkRitual: IActiveSkill = skillFactory.CreatePlayerActive("DarkRitual");
+var Biohack: IActiveSkill = skillFactory.CreatePlayerActive("Biohack");
+var CursedContract: IActiveSkill = skillFactory.CreatePlayerActive("CursedContract");
+var Pickpocket: IPassiveSkill = skillFactory.CreatePlayerPassive("Pickpocket");
+var CoinAffinity: IPassiveSkill = skillFactory.CreatePlayerPassive("CoinAffinity");
+var MelodicAura: IPassiveSkill = skillFactory.CreatePlayerPassive("MelodicAura");
+var Valor: IPassiveSkill = skillFactory.CreatePlayerPassive("Valor");
+var WarCry: IPassiveSkill = skillFactory.CreatePlayerPassive("WarCry");
 
-var SkillArray: any = [Recruit]; 
+var SkillArray: any = [Recruit, Pickpocket, Steal, CoinAffinity, Heist, MoneyIsPower, Ballad, Solo, MelodicAura, SongOfCourage, ChorusOfDeath, ImpactStab, Valor, Whirlwind, WarCry, FinalBlow, DarkRitual, Biohack, CursedContract, VitalContract, Heal, Purify, RecoveryMantra, ArcaneShelter, Bang, DoubleTap, StrafingRun, Marksman, Matrix, FocusShot, TriangleFire, AuraOfAccuracy, SuperiorPerception, Hurricane, Lance, CrossCut, LanceDance, IndraBlessing, UnlimitedLanceWork]; 
+
+function UnlockSkill(index: number):void {
+    SkillArray[index].Unlock();
+}
 
 var clickerIndex: ClickerIndex = new ClickerIndex(skillFactory);
 
@@ -344,12 +366,14 @@ $(document).ready(function () {
 
     //NEW
 
+    clickerIndex.AddSkillUnlockFunction(UnlockSkill);
+    Pickpocket.Unlock();
+    SkillArray[19].Unlock();
+    SkillArray[24].Unlock();
+    SkillArray[29].Unlock();
+    SkillArray[34].Unlock();
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
-
     clickerIndex.CurrentStorage.PureUnitArr[7].Birth();
-
-    clickerIndex.CurrentStorage.RefinerTrainerArr[1].Unlocked();
-    clickerIndex.CurrentStorage.RefinerTrainerArr[1].Increase(1);
 
     $("#monster-div").click(function () {
         clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
@@ -367,9 +391,20 @@ $(document).ready(function () {
         let string = $(this).attr("skillIndex");
         if (typeof (string) === "string" && string != "18") {
             let id: number = parseInt(string);
+            console.log("Skill clicked");
             SkillArray[id].Action();
         }
-        
+        //For Cursed Contract, use an event listener        
+    });
+
+    $(".skill-point-button").click(function () {
+        let string = $(this).attr("skillTag");
+        if (typeof (string) === "string" && string != "18" && clickerIndex.CurrentStorage.CurrentPlayer.SkillPoint > 0) {
+            let id: number = parseInt(string);
+            clickerIndex.CurrentStorage.CurrentPlayer.DecreaseSkillPoint();
+            SkillArray[id].LevelUp();
+        }
+        //For Cursed Contract, use an event listener        
     });
 
     $(".refiner-calibrator-left-arrow").click(function () {
