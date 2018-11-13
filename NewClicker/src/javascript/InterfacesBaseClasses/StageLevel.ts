@@ -51,17 +51,18 @@ export class StageLevel implements IStageLevel {
 
     IncreaseEnemyDefeated(): void {
         this.enemyDefeated += 1;
-        $("#combat-text-left").text("Zone Status: " + this.EnemyDefeated + "/10")
         if (this.EnemyDefeated == 10) {
             this.IncreaseZone(true);
             this.enemyDefeated = 0;
         }
+        $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
+
         this.Update();
     }
 
     Birth(): void {
         $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
-        $("#combat-text-left").text("Zone Status: " + this.EnemyDefeated + "/10")
+        $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
     }
 
     get CurrentZone() {
