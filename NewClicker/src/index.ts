@@ -366,12 +366,9 @@ $(document).ready(function () {
 
     //NEW
 
-    clickerIndex.AddSkillUnlockFunction(UnlockSkill);
-    Pickpocket.Unlock();
-    SkillArray[19].Unlock();
-    SkillArray[24].Unlock();
-    SkillArray[29].Unlock();
-    SkillArray[34].Unlock();
+    clickerIndex.AddSkillUnlockFunction(UnlockSkill); //Initialize event listeners for skills
+    Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
+    SkillArray[19].Unlock(); //Initialize Charles's skill
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
     clickerIndex.CurrentStorage.PureUnitArr[7].Birth();
 

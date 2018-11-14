@@ -172,7 +172,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     
     readonly id: number;
     readonly image: string;
-    private readonly name: string;
+    readonly name: string;
     private baseHP: number;
     private maxHP: number;
     private currentHP: number;
@@ -531,7 +531,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     //Hero has no damageFrequency. Their damage is dps.
     readonly id: number;
     readonly image: string;
-    private readonly name: string;
+    readonly name: string;
     private baseHP: number;
     private maxHP: number;
     private currentHP: number;
@@ -542,6 +542,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     private currentLevel: number;
     private isUnlocked: boolean;
     public isDead: boolean;
+    public isRogue: boolean;
     private player:IPlayer;
     private valueUpdateEvents: ((e: HeroValueUpdateEvent) => void)[] = [];
     public readonly skillArray: number[];
@@ -564,6 +565,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.isDead = false;
         this.isImmune = false;
         this.skillArray = skillArray;
+        this.isRogue = false;
     }
 
     UpdateFeedback(counter: number): number {
@@ -663,14 +665,18 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     Birth(): void {
         //CSS animation for appearance on screen, including refreshing of health and name bars
         if (!this.isUnlocked) this.Unlocked();
-        this.RegenerateMax();
+        if (this.isRogue) {
+            //CSS Animation for Rogue Charles birth
+        };
         this.isDead = false;
         this.Update();
     }
 
     Die(): void {
         //CSS animation for removing unit off the screen and reducing count of unit
-        this.isDead = true;
+        if (this.isRogue) {
+        this.isDead = true; //& CSS Animation for dead Charles
+        }
         this.Update();
     }
 

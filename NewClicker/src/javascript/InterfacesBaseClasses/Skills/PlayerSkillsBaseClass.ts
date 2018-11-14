@@ -50,7 +50,7 @@ export class PlayerActiveSkill implements IActiveSkill {
     Unlock(): void {
         if (!this.isUnlocked) {
             this.isUnlocked = true;
-            $("#" + this.name.replace(/\s+/g, '') + "-normal").fadeIn(100);
+            $("#" + this.name.replace(/\s+/g, '') + "-skill-block").fadeIn(100);
             alert("You have unlocked a new skill: " + this.name);
         }
     }
@@ -107,7 +107,7 @@ export class Heist extends PlayerActiveSkill {
     }
 }
 
-export class MoneyIsPower extends PlayerActiveSkill {
+export class MoneyisPower extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(5, "Money is Power", 1000, playerSkillFactory);
@@ -163,7 +163,7 @@ export class Solo extends PlayerActiveSkill {
     }
 }
 
-export class SongOfCourage extends PlayerActiveSkill {
+export class SongofCourage extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(9, "Song of Courage", 1000, playerSkillFactory);
@@ -189,7 +189,7 @@ export class SongOfCourage extends PlayerActiveSkill {
     }
 }
 
-export class ChorusOfDeath extends PlayerActiveSkill {
+export class ChorusofDeath extends PlayerActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
         super(10, "Chorus of Death", 1000, playerSkillFactory);
@@ -299,8 +299,9 @@ export class CursedContract extends PlayerActiveSkill {
     public Action(heroId:number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(heroId);
-            this.SkillFactory.Storage.HeroArr[heroId].ReceiveDamage(this.SkillFactory.Storage.HeroArr[heroId].CurrentHP - 20);
+            this.SkillFactory.Storage.HeroArr[heroId].isRogue = true;
             this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 6;
+            this.SkillFactory.Storage.HeroArr[heroId].ReceiveDamage(this.SkillFactory.Storage.HeroArr[heroId].CurrentHP - 20);
             let skill = this;
             setTimeout(function () {
                 skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/6;
@@ -361,7 +362,7 @@ export class PlayerPassiveSkill implements IPassiveSkill {
         if (!this.isUnlocked) {
             this.isUnlocked = true;
             this.Action();
-            $("#" + this.name.replace(/\s+/g, '') + "-normal").fadeIn(100);
+            $("#" + this.name.replace(/\s+/g, '') + "-skill-block").fadeIn(100);
             alert("You have unlocked a new skill: " + this.name);
         }
     }

@@ -438,7 +438,7 @@ export class TriangleFire extends HeroPassiveSkill {
     }
 }
 
-export class AuraOfAccuracy extends HeroPassiveSkill {
+export class AuraofAccuracy extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {

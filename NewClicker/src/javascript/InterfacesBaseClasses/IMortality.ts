@@ -4,6 +4,7 @@ import { ValueUpdateEvent, PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 
 export interface IMortality extends IRegeneration, IFeedbackLoop {
     readonly id: number;
+    readonly name: string;
     readonly MaxHP: number;
     readonly CurrentHP: number;
     ReceiveDamage(damage: number): void;

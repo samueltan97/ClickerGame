@@ -3,6 +3,7 @@ import { setInterval } from "timers";
 import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent, PlayerValueUpdateEvent } from "./ValueUpdateEvent";
 import { SkillFactory } from "./Skills/PlayerSkill";
 import { ISkillFactory } from "./Skills/ISkillFactory";
+import { IMortality } from "./IMortality";
 
 export class ClickerIndex {
 
@@ -40,7 +41,7 @@ export class ClickerIndex {
                 }
             }
             if (isEmpty) {
-                console.log("GG");
+                alert("GG");
             }
 
         } else if (type == "Enemy") {
@@ -65,7 +66,26 @@ export class ClickerIndex {
             this.CurrentStorage.CurrentPlayer.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp);
             this.CurrentStorage.CurrentStage.IncreaseEnemyDefeated();
             this.RemoveByDeath("Enemy");
-        }    
+        }
+        let currentUnit = this.CurrentStorage.CurrentUnit;
+        let currentUnitName: string = currentUnit.name.split(" ")[0];
+        if (currentUnitName == "Charles"){
+            this.CheckPureUnitArrForAlive();
+        }
+    }
+
+    CheckPureUnitArrForAlive = ():boolean => {
+        let isEmpty: boolean = true;
+            for (let j = 0; j < this.CurrentStorage.PureUnitArr.length && isEmpty; j++) {
+                if (this.CurrentStorage.PureUnitArr[j].Count > 0 && !this.CurrentStorage.PureUnitArr[j].isDead) {
+                    isEmpty = false;
+                    this.CurrentStorage.CurrentUnit.Die();
+                    this.CurrentStorage.PureUnitArr[j].Birth();
+                    this.CurrentStorage.CurrentUnit = this.CurrentStorage.PureUnitArr[j];
+                    return true;
+                }
+        }
+        return false;
     }
 
     ChangeStage = (isIncrease: boolean): void => {

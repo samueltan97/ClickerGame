@@ -4,8 +4,8 @@ import { IPassiveSkill } from "./IPassiveSkill";
 import { Resource, Hero, Unit, Enemy } from "../BaseClass";
 import { IPlayer } from "../IPlayer";
 import { IStageLevel } from "../IStageLevel";
-import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyIsPower, Ballad, SongOfCourage, ChorusOfDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry, Solo, Recruit } from "./PlayerSkillsBaseClass";
-import { HeroActiveSkill, Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork, VitalContract, RecoveryMantra, Bang, DoubleTap, Marksman, Matrix, FocusShot, TriangleFire, AuraOfAccuracy, SuperiorPerception, Lance, IndraBlessing } from "./HeroSkillsBaseClass";
+import { PlayerActiveSkill, PlayerPassiveSkill, Steal, Heist, MoneyisPower, Ballad, SongofCourage, ChorusofDeath, ImpactStab, Whirlwind, Biohack, FinalBlow, DarkRitual, CursedContract, Pickpocket, CoinAffinity, MelodicAura, Valor, WarCry, Solo, Recruit } from "./PlayerSkillsBaseClass";
+import { HeroActiveSkill, Heal, Purify, ArcaneShelter, StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork, VitalContract, RecoveryMantra, Bang, DoubleTap, Marksman, Matrix, FocusShot, TriangleFire, AuraofAccuracy, SuperiorPerception, Lance, IndraBlessing } from "./HeroSkillsBaseClass";
 import { IStorage } from "../IStorage";
 
 export class SkillFactory implements ISkillFactory {
@@ -21,11 +21,11 @@ export class SkillFactory implements ISkillFactory {
         switch (type) {
             case "Steal": return new Steal(this);
             case "Heist": return new Heist(this);
-            case "MoneyIsPower": return new MoneyIsPower(this);
+            case "MoneyIsPower": return new MoneyisPower(this);
             case "Ballad": return new Ballad(this);
             case "Solo": return new Solo(this);
-            case "SongOfCourage": return new SongOfCourage(this);
-            case "ChorusOfDeath": return new ChorusOfDeath(this);
+            case "SongOfCourage": return new SongofCourage(this);
+            case "ChorusOfDeath": return new ChorusofDeath(this);
             case "ImpactStab": return new ImpactStab(this);
             case "Whirlwind": return new Whirlwind(this);
             case "FinalBlow": return new FinalBlow(this);
@@ -70,7 +70,7 @@ export class SkillFactory implements ISkillFactory {
             case "Matrix": return new Matrix(this);
             case "FocusShot": return new FocusShot(this);
             case "TriangleFire": return new TriangleFire(this);
-            case "AuraOfAccuracy": return new AuraOfAccuracy(this);
+            case "AuraOfAccuracy": return new AuraofAccuracy(this);
             case "SuperiorPerception": return new SuperiorPerception(this);
             case "Lance": return new Lance(this);
             case "IndraBlessing": return new IndraBlessing(this);
