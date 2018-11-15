@@ -117,7 +117,7 @@ export class Storage implements IStorage {
                 this.CurrentUnit.ReceiveDamage(damage);
                 damage = damage - health;
             }
-            this.RefinerTrainerArr.forEach(x => x.UpdateFeedback(currentTime));
+            this.RefinerTrainerArr.forEach(x => x.Convert(currentTime));
             this.CurrentEnemyArr[0].Regenerate(currentTime);
         }
 

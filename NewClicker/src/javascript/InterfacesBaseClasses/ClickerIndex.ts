@@ -33,7 +33,7 @@ export class ClickerIndex {
             let isEmpty: boolean = true;
             for (let i = 0; i < this.CurrentStorage.UnitArr.length && isEmpty; i++) {
                 for (let j = 0; j < this.CurrentStorage.UnitArr[i].length && isEmpty; j++) {
-                    if (this.CurrentStorage.UnitArr[i][j].Count > 0 && !this.CurrentStorage.UnitArr[i][j].isDead) {
+                    if (this.CurrentStorage.UnitArr[i][j].Count > 0 && !this.CurrentStorage.UnitArr[i][j].isDead && this.CurrentStorage.UnitArr[i][j].isUnlocked) {
                         isEmpty = false;
                         this.CurrentStorage.UnitArr[i][j].Birth();
                         this.CurrentStorage.CurrentUnit = this.CurrentStorage.UnitArr[i][j];
@@ -41,7 +41,7 @@ export class ClickerIndex {
                 }
             }
             if (isEmpty) {
-                alert("GG");
+                console.log("GG");
             }
 
         } else if (type == "Enemy") {
@@ -79,9 +79,9 @@ export class ClickerIndex {
             for (let j = 0; j < this.CurrentStorage.PureUnitArr.length && isEmpty; j++) {
                 if (this.CurrentStorage.PureUnitArr[j].Count > 0 && !this.CurrentStorage.PureUnitArr[j].isDead) {
                     isEmpty = false;
-                    this.CurrentStorage.CurrentUnit.Die();
-                    this.CurrentStorage.PureUnitArr[j].Birth();
                     this.CurrentStorage.CurrentUnit = this.CurrentStorage.PureUnitArr[j];
+                    this.CurrentStorage.CurrentUnit.Birth();
+                    this.CurrentStorage.HeroArr[0].Die();
                     return true;
                 }
         }

@@ -635,7 +635,7 @@
                     </div>
                 </div>
                 <div id="heroes-selected">
-                    <div class="heroes-block">
+                    <div id="Charles-hero-block" class="heroes-block" style="display:none;">
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
@@ -666,7 +666,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="heroes-block">
+                    <div id="Yusie-hero-block" class="heroes-block" style="display:none;">
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
@@ -696,7 +696,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="heroes-block">
+                    <div id="Halley-hero-block" class="heroes-block" style="display:none;">
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
@@ -726,7 +726,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="heroes-block">
+                    <div id="Helmuth-hero-block" class="heroes-block" style="display:none;">
                         <div class="heroes-background">
                             <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                         </div>
@@ -789,7 +789,7 @@
                 </div>
                 <div id="manpower-count-separator"></div>
                 <div id="refiner-repo">
-                    <div class="refiner-block">
+                    <div id="Recruiter-block" class="refiner-block" style="display:none;">
                         <div id="Recruiter-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
                             <div class="refiner-name">Recruiters</div>
@@ -807,7 +807,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="refiner-block">
+                    <div id="Woodworker-block" class="refiner-block" style="display:none;">
                         <div id="Woodworker-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
                             <div class="refiner-name">Woodworkers</div>
@@ -825,7 +825,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="refiner-block">
+                    <div id="Ironsmith-block" class="refiner-block" style="display:none;">
+                        <div id="Ironsmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Ironsmiths</div>
+                            <div id="Ironsmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-2"></div>
+                                <div id="refinerCalibration-2" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-2"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-2">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-2">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Couturier-block" class="refiner-block" style="display:none;">
                         <div id="Couturier-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
                             <div class="refiner-name">Couturiers</div>
@@ -843,7 +861,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="refiner-block">
+                    <div id="Bladesmith-block" class="refiner-block" style="display:none;">
+                        <div id="Bladesmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Bladesmiths</div>
+                            <div id="Bladesmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-4"></div>
+                                <div id="refinerCalibration-4" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-4"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-4">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-4">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ManaRefiner-block" class="refiner-block" style="display:none;">
                         <div id="ManaRefiner-sprite" class="refiner-sprite"></div>
                         <div class="refiner-desc">
                             <div class="refiner-name">Mana Refiners</div>
@@ -861,22 +897,562 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="trainer-repo">
-                    <div class="trainer-block">
-                        <div class="trainer-sprite"></div>
-                        <div class="trainer-desc">
-                            <div class="trainer-name">Courtiers</div>
-                            <div class="trainer-count">X 4235</div>
-                            <div class="trainer-calibrator">
-                                <div class="trainer-calibrator-left-arrow"></div>
-                                <div class="trainer-calibrator-text">X 1000</div>
-                                <div class="trainer-calibrator-right-arrow"></div>
+                    <div id="PyrotechnicExpert-block" class="refiner-block" style="display:none;">
+                        <div id="PyrotechnicExpert-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Pyrotechnic Experts</div>
+                            <div id="PyrotechnicExpert-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-6"></div>
+                                <div id="refinerCalibration-6" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-6"></div>
                             </div>
-                            <div class="trainer-train">
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-6">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
-                            <div class="trainer-untrain">
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-6">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="SteelWorker-block" class="refiner-block" style="display:none;">
+                        <div id="SteelWorker-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Steel Workers</div>
+                            <div id="SteelWorker-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-7"></div>
+                                <div id="refinerCalibration-7" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-7"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-7">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-7">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Fletcher-block" class="refiner-block" style="display:none;">
+                        <div id="Fletcher-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Fletchers</div>
+                            <div id="Fletcher-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-8"></div>
+                                <div id="refinerCalibration-8" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-8"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-8">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-8">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Metallurgist-block" class="refiner-block" style="display:none;">
+                        <div id="Metallurgist-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Metallurgists</div>
+                            <div id="Metallurgist-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-9"></div>
+                                <div id="refinerCalibration-9" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-9"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-9">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-9">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="SpearCrafter-block" class="refiner-block" style="display:none;">
+                        <div id="SpearCrafter-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Spear Crafters</div>
+                            <div id="SpearCrafter-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-10"></div>
+                                <div id="refinerCalibration-10" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-10"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-10">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-10">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Blacksmith-block" class="refiner-block" style="display:none;">
+                        <div id="Blacksmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Blacksmiths</div>
+                            <div id="Blacksmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-11"></div>
+                                <div id="refinerCalibration-11" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-11"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-11">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-11">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Bowyer-block" class="refiner-block" style="display:none;">
+                        <div id="Bowyer-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Bowyers</div>
+                            <div id="Bowyer-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-12"></div>
+                                <div id="refinerCalibration-12" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-12"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-12">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-12">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="WoodenShieldSmith-block" class="refiner-block" style="display:none;">
+                        <div id="WoodenShieldSmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Wooden Shield Smiths</div>
+                            <div id="WoodenShieldSmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-13"></div>
+                                <div id="refinerCalibration-13" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-13"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-13">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-13">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="IronShieldSmith-block" class="refiner-block" style="display:none;">
+                        <div id="IronShieldSmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Iron Shield Smiths</div>
+                            <div id="IronShieldSmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-14"></div>
+                                <div id="refinerCalibration-14" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-14"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-14">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-14">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Armorer-block" class="refiner-block" style="display:none;">
+                        <div id="Armorer-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Armorers</div>
+                            <div id="Armorer-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-15"></div>
+                                <div id="refinerCalibration-15" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-15"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-15">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-15">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Gunsmith-block" class="refiner-block" style="display:none;">
+                        <div id="Gunsmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Gunsmiths</div>
+                            <div id="Gunsmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-16"></div>
+                                <div id="refinerCalibration-16" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-16"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-16">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-16">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Crossbowyer-block" class="refiner-block" style="display:none;">
+                        <div id="Crossbowyer-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Crossbowyers</div>
+                            <div id="Crossbowyer-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-17"></div>
+                                <div id="refinerCalibration-17" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-17"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-17">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-17">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Wandmaker-block" class="refiner-block" style="display:none;">
+                        <div id="Wandmaker-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Wandmakers</div>
+                            <div id="ManaRefiner-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-18"></div>
+                                <div id="refinerCalibration-18" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-18"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-18">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-18">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="StaffCrafter-block" class="refiner-block" style="display:none;">
+                        <div id="StaffCrafter-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Staff Crafters</div>
+                            <div id="StaffCrafter-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-19"></div>
+                                <div id="refinerCalibration-19" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-19"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-19">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-19">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="EnchantedBladeSmith-block" class="refiner-block" style="display:none;">
+                        <div id="EnchantedBladeSmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Enchanted Blade Smiths</div>
+                            <div id="EnchantedBladeSmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-20"></div>
+                                <div id="refinerCalibration-20" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-20"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-20">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-20">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MysticBowyer-block" class="refiner-block" style="display:none;">
+                        <div id="MysticBowyer-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Mystic Bowyers</div>
+                            <div id="MysticBowyer-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-21"></div>
+                                <div id="refinerCalibration-21" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-21"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-21">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-21">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ArcaneGunsmith-block" class="refiner-block" style="display:none;">
+                        <div id="ArcaneGunsmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Arcane Gunsmiths</div>
+                            <div id="ArcaneGunsmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-22"></div>
+                                <div id="refinerCalibration-22" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-22"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-22">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-22">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="LanceSmith-block" class="refiner-block" style="display:none;">
+                        <div id="LanceSmith-sprite" class="refiner-sprite"></div>
+                        <div class="refiner-desc">
+                            <div class="refiner-name">Lance Smiths</div>
+                            <div id="LanceSmith-quantity" class="refiner-count">X 0</div>
+                            <div class="refiner-calibrator">
+                                <div class="refiner-calibrator-left-arrow" refinerCalibration="refinerCalibration-23"></div>
+                                <div id="refinerCalibration-23" class="refiner-calibrator-text">X 1</div>
+                                <div class="refiner-calibrator-right-arrow" refinerCalibration="refinerCalibration-23"></div>
+                            </div>
+                            <div class="refiner-train" refinerCalibration="refinerCalibration-23">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="refiner-untrain" refinerCalibration="refinerCalibration-23">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="trainer-repo">
+                    <div id="SpearmanInstructor-block" class="trainer-block">
+                        <div id="SpearmanInstructor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Spearman Instructors</div>
+                            <div id="SpearmanInstructor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-24"></div>
+                                <div id="trainerCalibration-24" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-24"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-24">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-24">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="SwordsmanInstructor-block" class="trainer-block" style="display:none;">
+                        <div id="SwordsmanInstructor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Swordsman Instructors</div>
+                            <div id="SwordsmanInstructor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-25"></div>
+                                <div id="trainerCalibration-25" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-25"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-25">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-25">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="BowmanInstructor-block" class="trainer-block" style="display:none;">
+                        <div id="BowmanInstructor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Bowman Instructors</div>
+                            <div id="BowmanInstructor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-26"></div>
+                                <div id="trainerCalibration-26" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-26"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-26">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-26">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="RiflemanInstructor-block" class="trainer-block" style="display:none;">
+                        <div id="RiflemanInstructor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Rifleman Instructors</div>
+                            <div id="RiflemanInstructor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-27"></div>
+                                <div id="trainerCalibration-27" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-27"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-27">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-27">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ChanterInstructor-block" class="trainer-block" style="display:none;">
+                        <div id="ChanterInstructor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Chanter Instructors</div>
+                            <div id="ChanterInstructor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-28"></div>
+                                <div id="trainerCalibration-28" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-28"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-28">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-28">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="PikemanTrainer-block" class="trainer-block" style="display:none;">
+                        <div id="PikemanTrainer-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Pikeman Trainers</div>
+                            <div id="PikemanTrainer-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-29"></div>
+                                <div id="trainerCalibration-29" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-29"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-29">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-29">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="WarriorTrainer-block" class="trainer-block" style="display:none;">
+                        <div id="WarriorTrainer-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Warrior Trainers</div>
+                            <div id="WarriorTrainer-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-30"></div>
+                                <div id="trainerCalibration-30" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-30"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-30">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-30">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="KnightMentor-block" class="trainer-block" style="display:none;">
+                        <div id="KnightMentor-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Knight Mentors</div>
+                            <div id="KnightMentor-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-31"></div>
+                                <div id="trainerCalibration-31" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-31"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-31">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-31">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="CrossArcherTrainer-block" class="trainer-block" style="display:none;">
+                        <div id="CrossArcherTrainer-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Cross Archer Trainers</div>
+                            <div id="CrossArcherTrainer-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-32"></div>
+                                <div id="trainerCalibration-32" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-32"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-32">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-32">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MagusMaster-block" class="trainer-block" style="display:none;">
+                        <div id="MagusMaster-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Magus Masters</div>
+                            <div id="MagusMaster-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-33"></div>
+                                <div id="trainerCalibration-33" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-33"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-33">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-33">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="PaladinMaster-block" class="trainer-block" style="display:none;">
+                        <div id="PaladinMaster-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Paladin Masters</div>
+                            <div id="PaladinMaster-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-34"></div>
+                                <div id="trainerCalibration-34" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-34"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-34">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-34">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ArcaneGunslingerMaster-block" class="trainer-block" style="display:none;">
+                        <div id="ArcaneGunslingerMaster-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Arcane Gunslinger Masters</div>
+                            <div id="ArcaneGunslingerMaster-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-35"></div>
+                                <div id="trainerCalibration-35" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-35"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-35">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-35">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="MysticRangerMaster-block" class="trainer-block" style="display:none;">
+                        <div id="MysticRangerMaster-sprite" class="trainer-sprite"></div>
+                        <div class="trainer-desc">
+                            <div class="trainer-name">Mystic Ranger Masters</div>
+                            <div id="MysticRangerMaster-quantity" class="trainer-count">X 0</div>
+                            <div class="trainer-calibrator">
+                                <div class="trainer-calibrator-left-arrow" trainerCalibration="trainerCalibration-36"></div>
+                                <div id="trainerCalibration-36" class="trainer-calibrator-text">X 1</div>
+                                <div class="trainer-calibrator-right-arrow" trainerCalibration="trainerCalibration-36"></div>
+                            </div>
+                            <div class="trainer-train" trainerCalibration="trainerCalibration-36">
+                                <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
+                            </div>
+                            <div class="trainer-untrain" trainerCalibration="trainerCalibration-36">
                                 <img style="position:absolute;height:90%; width:90%; top:3%; left:4%;" src="style/images/Layout/Converters/RemoveButton.png" />
                             </div>
                         </div>

@@ -25,6 +25,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private readonly baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
      stage: IStageLevel;
     public isDead: boolean;
+    public isUnlocked: boolean;
     public readonly isBoss: boolean;
     private resourceArray: number[];
     private readonly baseExperience: number;
@@ -53,6 +54,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.ability = ability;
         this.abilityFrequency = abilityFrequency;
         this.isBoss = isBoss;
+        this.isUnlocked = true;
     }
 
     AddValueUpdateEvent(event: (e: EnemyValueUpdateEvent) => void) {
@@ -178,8 +180,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     private currentHP: number;
     private baseDamage: number; //Use counter to adjust DPS cos different units different damage in different seconds
     private readonly range: number;
+    private producedHistory: number;
     private count: number;
-    private isUnlocked: boolean;
+    public isUnlocked: boolean;
     public isDead: boolean;
     public readonly damageFrequency: number;
     private player: IPlayer;
@@ -204,13 +207,18 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         this.damageFrequency = damageFrequency;
         this.isImmune = false;
         this.canEvade = false;
+        this.producedHistory = 0;
     }
 
     UpdateFeedback(counter: number): number {
-        if ((counter + 5) % this.damageFrequency == 0 && this.isDead == false) {
+        if ((counter + 5) % this.damageFrequency == 0 && !this.isDead && this.isUnlocked) {
             return this.CurrentDamage;
         }
         return 0;
+    }
+
+    get ProducedHistory(): number {
+        return this.producedHistory;
     }
 
     get IsImmune(): boolean {
@@ -312,6 +320,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         if (!this.isUnlocked) { this.Unlocked() };
         this.count += count;
         $("#" + this.name + "-count").html(this.name + "<br />X " + this.Count);
+        this.producedHistory += 1;
         this.Update();
     }
 
@@ -344,6 +353,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         $("#" + id + "-normal").fadeOut(100);
         //CSS animation for removing unit off the screen and reducing count of unit
         this.isDead = true;
+        console.log(this.name, this.Count);
         this.Update();
     }
 
@@ -370,6 +380,7 @@ export class Resource implements ICountable {
 
     readonly id: number;
     readonly image: string;
+    private producedHistory: number;
     private readonly name: string;
     private count: number;
     private isUnlocked: boolean;
@@ -382,6 +393,7 @@ export class Resource implements ICountable {
         this.count = 0;
         this.isUnlocked = false;
         this.count = 0;
+        this.producedHistory = 0;
     }
 
     AddValueUpdateEvent(e: (e: ResourceValueUpdateEvent) => void) {
@@ -400,6 +412,10 @@ export class Resource implements ICountable {
         this.count = this.count * multiplier;
     }
 
+    get ProducedHistory():number {
+        return this.producedHistory;
+    }
+
     Unlocked(): void {
         alert("You have unlocked " + this.name);
         this.isUnlocked = true;
@@ -411,7 +427,8 @@ export class Resource implements ICountable {
         if (!this.isUnlocked && count != 0) { this.Unlocked() };
         this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count +count);
         $("#" + id + "-quantity").text("X " + this.Count);
-        if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + this.Count);}
+        if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + this.Count); }
+        this.producedHistory += (typeof count === "undefined") ? (this.producedHistory + 1) : (this.producedHistory + count);
         this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
@@ -429,13 +446,14 @@ export class Resource implements ICountable {
     }
 }
 
-export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
+export class RefinerTrainer implements ICountable, IConverter {
 
     readonly id: number;
     readonly image: string;
     private readonly name: string;
     private count: number;
     private isUnlocked: boolean;
+    private producedHistory: number;
     private toBeRefined: ICountable[];
     private toBeRefinedQuantity: number[];
     private refinedProduct: ICountable[];
@@ -454,6 +472,7 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         this.toBeRefinedQuantity = toBeRefinedQuantity;
         this.refinedProductQuantity = refinedProductQuantity;
         this.productionFrequency = productionFrequency;
+        this.producedHistory = 0;
     }
 
     AddValueUpdateEvent(e: (e: RefinerTrainerValueUpdateEvent) => void) {
@@ -464,6 +483,10 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         this.valueUpdateEvents.forEach(x => x(new RefinerTrainerValueUpdateEvent(this.id, this.Count, this.isUnlocked)));
     }
 
+    get ProducedHistory(): number {
+        return this.producedHistory;
+    }
+
     get Count(): number {
         return this.count;
     }
@@ -472,26 +495,22 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         this.count = this.count * multiplier;
     }
 
-    UpdateFeedback(currentTime: number): number {
-        if (currentTime % this.productionFrequency == 0) {
-            this.Convert();
-        }
-        return 0;
-    }
-
     Unlocked(): void {
         alert("You have unlocked " + this.name);
         this.isUnlocked = true;
+        $("#" + this.name.replace(/\s+/g, '') + "-block").fadeIn(100);
         this.Update();
     }
 
     Increase(count: number): void {
-        if (!this.isUnlocked) { this.Unlocked() };
-        this.count += count;
-        let id: string = this.name.replace(/\s+/g, '');
-        $("#" + id + "-quantity").text("X " + this.Count);
-        this.Update();
-        //CSS animation for appearance on screen, including refreshing of health and name bars;
+        if (this.isUnlocked) {
+            this.count += count;
+            let id: string = this.name.replace(/\s+/g, '');
+            $("#" + id + "-quantity").text("X " + this.Count);
+            this.Update();
+            this.producedHistory += 1;
+            //CSS animation for appearance on screen, including refreshing of health and name bars;
+        }
     }
 
     Decrease(count: number): void {
@@ -505,23 +524,48 @@ export class RefinerTrainer implements ICountable, IConverter, IFeedbackLoop {
         //CSS animation for removing unit off the screen and reducing count of unit
     }
 
-    Convert(): void {
-        if (this.Count > 0) {
-        let maxQuotient: number[] = [0];
-        for (let i = 0; i < this.toBeRefined.length; i++) {
-            let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
-            maxQuotient[0] = (i == 0) ? currentQuotient : Math.min(maxQuotient[0], currentQuotient);
-        }
-        if (this.id != 0) {
-            let maxConvert: number = Math.min(maxQuotient[0], this.Count);
+    Convert(currentTime:number): void {
+        if (this.Count > 0 && this.isUnlocked && currentTime % this.productionFrequency == 0) {
+            let maxQuotient: number[] = [0];
             for (let i = 0; i < this.toBeRefined.length; i++) {
-                this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
+                let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
+                maxQuotient[0] = (i == 0) ? currentQuotient : Math.max(0, Math.min(maxQuotient[0], currentQuotient));
             }
-            for (let i = 0; i < this.refinedProduct.length; i++) {
-                this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+            if (this.id != 0) {
+                let maxConvert: number = Math.min(maxQuotient[0], this.Count);
+                for (let i = 0; i < this.toBeRefined.length; i++) {
+                    this.toBeRefined[i].Decrease(this.toBeRefinedQuantity[i] * maxConvert);
+                }
+                for (let i = 0; i < this.refinedProduct.length; i++) {
+                    this.refinedProduct[i].Increase(this.refinedProductQuantity[i] * maxConvert);
+                }
+            } else {
+                this.refinedProduct[0].Increase(this.Count);
             }
-        } else {
-            this.refinedProduct[0].Increase(this.Count);
+        } else if (this.id == 0 && !this.isUnlocked) {
+            if (this.refinedProduct[0].Count > 0) {
+                this.Unlocked();
+            }
+        } else if (this.id < 24 && !this.isUnlocked) {
+            let maxQuotient: number[] = [0];
+            for (let i = 0; i < this.toBeRefined.length; i++) {
+                let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
+                maxQuotient[0] = (i == 0) ? currentQuotient : Math.max(0, Math.min(maxQuotient[0], currentQuotient));
+            }
+            if (maxQuotient[0] > 10) {
+                for (let i = 0; i < this.toBeRefined.length; i++) {
+                    this.toBeRefined[i].Decrease(10);
+                }
+                this.Unlocked();
+            }
+        } else if (this.id >= 24 && this.id < 29 && !this.isUnlocked) {
+            if (this.toBeRefined[0].Count > 10) {
+                    this.toBeRefined[0].Decrease(10);
+                this.Unlocked();
+            }
+        } else if (this.id >= 29 && this.id < 37 && !this.isUnlocked) {
+            if (this.toBeRefined[0].ProducedHistory >= 1000) {
+                this.Unlocked();
             }
         }
     }
@@ -540,7 +584,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     private readonly baseExperience: number;
     private currentExperience: number;
     private currentLevel: number;
-    private isUnlocked: boolean;
+    public isUnlocked: boolean;
     public isDead: boolean;
     public isRogue: boolean;
     private player:IPlayer;
@@ -569,7 +613,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     UpdateFeedback(counter: number): number {
-        if ((counter +5) % 20 == 0 && this.isDead == false) {
+        if ((counter +5) % 20 == 0 && !this.isDead && this.isUnlocked) {
             return this.CurrentDamage;
         }
         return 0;
@@ -657,7 +701,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     Unlocked(): void {
-        //alert("You have unlocked " + this.name);
+        alert("You have unlocked " + this.name.split(" ")[0]);
+        $("#" + this.name.split(" ")[0] + "-hero-block").fadeIn(100);
         this.isUnlocked = true;
         this.Update();
     }

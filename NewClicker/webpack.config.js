@@ -36,7 +36,9 @@ config = {
     output: {
         filename: filename,
         path: path.resolve(__dirname, outputDir),
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        library: "clicker"
+        
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js']

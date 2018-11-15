@@ -294,7 +294,7 @@ export class VitalContract extends HeroPassiveSkill {
             let skill = this;
            setTimeout(function () {
                skill.SkillFactory.Storage.HeroArr[0].RegenerateMax();
-            }, 1500); 
+            }, 200); 
         }
     }
 }

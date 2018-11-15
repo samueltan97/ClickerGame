@@ -77,7 +77,7 @@ var Magus: Unit = new Unit(11, "abc", "Magus", 12.5, 100000, 6, 0, thePlayer, 40
 var ArcaneGunslinger: Unit = new Unit(12, "abc", "Arcane Gunslinger", 6, 55000, 6, 0, thePlayer, 80);
 var MysticRanger: Unit = new Unit(13, "abc", "MysticRanger", 7.5, 320000, 5, 0, thePlayer, 160);
 
-RefinerTrainer
+//RefinerTrainer
 var Recruiter: RefinerTrainer = new RefinerTrainer(0, "abc", "Recruiter", [Coin], [1], [Man], [1], 1200);
 var Woodworker: RefinerTrainer = new RefinerTrainer(1, "abc", "Woodworker", [Wood], [1], [Plank], [2], 100);
 var Ironsmith: RefinerTrainer = new RefinerTrainer(2, "abc", "Ironsmith", [Iron], [5], [IronBar], [1], 60);
@@ -102,15 +102,15 @@ var EnchantedBladeSmith: RefinerTrainer = new RefinerTrainer(20, "abc", "Enchant
 var MysticBowyer: RefinerTrainer = new RefinerTrainer(21, "abc", "Mystic Bowyer", [Manacyte, Bow], [5, 1], [MysticBow], [1], 1200);
 var ArcaneGunsmith: RefinerTrainer = new RefinerTrainer(22, "abc", "Arcane Gunsmith", [Manacyte, Rifle], [5, 1], [ArcaneRifle], [1], 1200);
 var LanceSmith: RefinerTrainer = new RefinerTrainer(23, "abc", "Lance Smith", [Manacyte, Spear], [5, 1], [HolyLance], [1], 1200);
-var SpearmanInstructor: RefinerTrainer = new RefinerTrainer(24, "abc", "Spearman Instructor", [Man, Coin, Spear], [1, 3, 1], [Spearman], [1], 40);
-var SwordsmanInstructor: RefinerTrainer = new RefinerTrainer(25, "abc", "Swordsman Instructor", [Man, Coin, Sword], [1, 3, 1], [Swordsman], [1], 70);
+var SpearmanInstructor: RefinerTrainer = new RefinerTrainer(24, "abc", "Spearman Instructor", [Spear, Man, Coin], [1, 3, 1], [Spearman], [1], 40);
+var SwordsmanInstructor: RefinerTrainer = new RefinerTrainer(25, "abc", "Swordsman Instructor", [Sword, Man, Coin], [1, 3, 1], [Swordsman], [1], 70);
 var BowmanInstructor: RefinerTrainer = new RefinerTrainer(26, "abc", "Bowman Instructor", [Bow, Man, Coin, Arrow], [1, 1, 5, 10], [Archer], [1], 70);
-var PikemanTrainer: RefinerTrainer = new RefinerTrainer(27, "abc", "Pikeman Trainer", [Spearman, Coin, WoodenShield], [1, 10, 1], [Pikeman], [1], 160);
-var WarriorTrainer: RefinerTrainer = new RefinerTrainer(28, "abc", "Warrior Trainer", [Swordsman, Coin, WoodenShield], [1, 10, 1], [Warrior], [1], 240);
-var RiflemanInstructor: RefinerTrainer = new RefinerTrainer(29, "abc", "Rifleman Instructor", [Rifle, Coin, Bullet, Man], [1, 30, 10, 1], [Rifleman], [1], 160);
-var KnightMentor: RefinerTrainer = new RefinerTrainer(30, "abc", "Knight Mentor", [Warrior, SteelArmor, IronShield, Coin], [1, 1, 1, 75], [Knight], [1], 400);
-var CrossArcherTrainer: RefinerTrainer = new RefinerTrainer(31, "abc", "Cross Archer Trainer", [Archer, Crossbow, Coin], [1, 1, 120], [CrossArcher], [1], 240);
-var ChanterInstructor: RefinerTrainer = new RefinerTrainer(32, "abc", "Chanter Instructor", [Wand, Man, Coin], [1, 1, 200], [Chanter], [1], 400);
+var RiflemanInstructor: RefinerTrainer = new RefinerTrainer(27, "abc", "Rifleman Instructor", [Rifle, Coin, Bullet, Man], [1, 30, 10, 1], [Rifleman], [1], 160);
+var ChanterInstructor: RefinerTrainer = new RefinerTrainer(28, "abc", "Chanter Instructor", [Wand, Man, Coin], [1, 1, 200], [Chanter], [1], 400);
+var PikemanTrainer: RefinerTrainer = new RefinerTrainer(29, "abc", "Pikeman Trainer", [Spearman, Coin, WoodenShield], [1, 10, 1], [Pikeman], [1], 160);
+var WarriorTrainer: RefinerTrainer = new RefinerTrainer(30, "abc", "Warrior Trainer", [Swordsman, Coin, WoodenShield], [1, 10, 1], [Warrior], [1], 240);
+var KnightMentor: RefinerTrainer = new RefinerTrainer(31, "abc", "Knight Mentor", [Warrior, SteelArmor, IronShield, Coin], [1, 1, 1, 75], [Knight], [1], 400);
+var CrossArcherTrainer: RefinerTrainer = new RefinerTrainer(32, "abc", "Cross Archer Trainer", [Archer, Crossbow, Coin], [1, 1, 120], [CrossArcher], [1], 240);
 var MagusMaster: RefinerTrainer = new RefinerTrainer(33, "abc", "Magus Master", [Chanter, Staff, Coin], [1, 1, 2500], [Magus], [1], 900);
 var PaladinMaster: RefinerTrainer = new RefinerTrainer(34, "abc", "Paladin Master", [Pikeman, HolyLance, SteelArmor, Coin], [1, 1, 1, 500], [Paladin], [1], 900);
 var ArcaneGunslingerMaster: RefinerTrainer = new RefinerTrainer(35, "abc", "Arcane Gunslinger Master", [Rifleman, ArcaneRifle, Coin], [1, 1, 5500], [ArcaneGunslinger], [1], 900);
@@ -118,7 +118,7 @@ var MysticRangerMaster: RefinerTrainer = new RefinerTrainer(36, "abc", "Mystic R
 var RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Couturier, BladeSmith, ManaRefiner, PyrotechnicExpert,
     SteelWorker, Fletcher, Metallurgist, SpearCrafter, Blacksmith, Bowyer, WoodenShieldSmith, IronShieldSmith, Armorer, Gunsmith, Crossbowyer,
     Wandmaker, StaffCrafter, EnchantedBladeSmith, MysticBowyer, ArcaneGunsmith, LanceSmith, SpearmanInstructor, SwordsmanInstructor,
-    BowmanInstructor, PikemanTrainer, WarriorTrainer, RiflemanInstructor, KnightMentor, CrossArcherTrainer, ChanterInstructor,
+    BowmanInstructor, RiflemanInstructor, ChanterInstructor, PikemanTrainer, WarriorTrainer, KnightMentor, CrossArcherTrainer,
     MagusMaster, PaladinMaster, ArcaneGunslingerMaster, MysticRangerMaster];
 
 //Heroes
@@ -126,8 +126,12 @@ var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1
 var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
 var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
 var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
-var HeroArr: Hero[] = [Charles/*, Yusie*//*, Halley, Helmuth*/];
+var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
+function HeroUnlock(index: number): void {
+    HeroArr[index].Unlocked();
+    SkillArray[(index * 5) + 19].Unlock(); //Hero's basic skill
+}
 
 function HeroKillMechanics(damage: number, count: number): void {
     let index: number = Math.round(Math.random() * (HeroArr.length - 1));
@@ -368,7 +372,6 @@ $(document).ready(function () {
 
     clickerIndex.AddSkillUnlockFunction(UnlockSkill); //Initialize event listeners for skills
     Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
-    SkillArray[19].Unlock(); //Initialize Charles's skill
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
     clickerIndex.CurrentStorage.PureUnitArr[7].Birth();
 
@@ -440,6 +443,48 @@ $(document).ready(function () {
             clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Decrease(currentQuantity);
             clickerIndex.CurrentStorage.ResourceArr[0].Increase(currentQuantity);
         }
+    });
+
+    $(".trainer-calibrator-left-arrow").click(function () {
+        let id = $(this).attr("trainerCalibration");
+        let currentQuantity: string = $("#" + id).text();
+        if (currentQuantity != "X 1") {
+            let newQuantity: string = currentQuantity.RemoveLast();
+            $("#" + id).text(newQuantity);
+        }
+    });
+
+    $(".trainer-calibrator-right-arrow").click(function () {
+        let id = $(this).attr("trainerCalibration");
+        let currentQuantity: string = $("#" + id).text();
+        let newQuantity: string = currentQuantity.concat("0");
+        $("#" + id).text(newQuantity);
+    });
+
+    $(".trainer-train").click(function () {
+        let id = $(this).attr("trainerCalibration");
+        let displayNumber: string = $("#" + id).text();
+        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
+        if (typeof id === "string" && currentQuantity <= clickerIndex.CurrentStorage.ResourceArr[0].Count) {
+            let refinerIndex: number = parseInt(id.split("-")[1]);
+            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Increase(currentQuantity);
+            clickerIndex.CurrentStorage.ResourceArr[0].Decrease(currentQuantity);
+        }
+    });
+
+    $(".trainer-untrain").click(function () {
+        let id = $(this).attr("trainerCalibration");
+        let displayNumber: string = $("#" + id).text();
+        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
+        let refinerIndex: number = (typeof id === "string")? parseInt(id.split("-")[1]) : 0;
+        if (currentQuantity <= clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Count) {
+            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Decrease(currentQuantity);
+            clickerIndex.CurrentStorage.ResourceArr[0].Increase(currentQuantity);
+        }
+    });
+
+    $("#map-button").click(function () {
+
     });
 
     setInterval(function () {

@@ -11,6 +11,7 @@ export interface IMortality extends IRegeneration, IFeedbackLoop {
     Die(): void;
     Birth(): void;
     isDead: boolean;
+    isUnlocked: boolean;
     Count: number;
     AddValueUpdateEvent(e: (e: ValueUpdateEvent) => void);
     UpdateSource(e: ValueUpdateEvent): void;
