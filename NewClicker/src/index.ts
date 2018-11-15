@@ -78,7 +78,7 @@ var ArcaneGunslinger: Unit = new Unit(12, "abc", "Arcane Gunslinger", 6, 55000, 
 var MysticRanger: Unit = new Unit(13, "abc", "MysticRanger", 7.5, 320000, 5, 0, thePlayer, 160);
 
 //RefinerTrainer
-var Recruiter: RefinerTrainer = new RefinerTrainer(0, "abc", "Recruiter", [Coin], [1], [Man], [1], 1200);
+var Recruiter: RefinerTrainer = new RefinerTrainer(0, "abc", "Recruiter", [Coin], [1], [Man], [1], 200);
 var Woodworker: RefinerTrainer = new RefinerTrainer(1, "abc", "Woodworker", [Wood], [1], [Plank], [2], 100);
 var Ironsmith: RefinerTrainer = new RefinerTrainer(2, "abc", "Ironsmith", [Iron], [5], [IronBar], [1], 60);
 var Couturier: RefinerTrainer = new RefinerTrainer(3, "abc", "Couturier", [Thread], [8], [Nylon], [1], 50);
@@ -98,10 +98,10 @@ var Gunsmith: RefinerTrainer = new RefinerTrainer(16, "abc", "Gunsmith", [SteelB
 var Crossbowyer: RefinerTrainer = new RefinerTrainer(17, "abc", "Crossbowyer", [Bow, Steel], [1, 1], [Crossbow], [1], 200);
 var Wandmaker: RefinerTrainer = new RefinerTrainer(18, "abc", "Wandmaker", [Manacyte, Plank], [1, 1], [Wand], [1], 200);
 var StaffCrafter: RefinerTrainer = new RefinerTrainer(19, "abc", "Staff Crafter", [Wand, Steel], [1, 1], [Staff], [1], 200);
-var EnchantedBladeSmith: RefinerTrainer = new RefinerTrainer(20, "abc", "Enchanted Blade Smith", [Manacyte, Sword], [5, 1], [EnchantedBlade], [1], 1200);
-var MysticBowyer: RefinerTrainer = new RefinerTrainer(21, "abc", "Mystic Bowyer", [Manacyte, Bow], [5, 1], [MysticBow], [1], 1200);
-var ArcaneGunsmith: RefinerTrainer = new RefinerTrainer(22, "abc", "Arcane Gunsmith", [Manacyte, Rifle], [5, 1], [ArcaneRifle], [1], 1200);
-var LanceSmith: RefinerTrainer = new RefinerTrainer(23, "abc", "Lance Smith", [Manacyte, Spear], [5, 1], [HolyLance], [1], 1200);
+var EnchantedBladeSmith: RefinerTrainer = new RefinerTrainer(20, "abc", "Enchanted Blade Smith", [Sword, Manacyte], [5, 1], [EnchantedBlade], [1], 1200);
+var MysticBowyer: RefinerTrainer = new RefinerTrainer(21, "abc", "Mystic Bowyer", [Bow, Manacyte], [5, 1], [MysticBow], [1], 1200);
+var ArcaneGunsmith: RefinerTrainer = new RefinerTrainer(22, "abc", "Arcane Gunsmith", [Rifle, Manacyte], [5, 1], [ArcaneRifle], [1], 1200);
+var LanceSmith: RefinerTrainer = new RefinerTrainer(23, "abc", "Lance Smith", [Spear, Manacyte], [5, 1], [HolyLance], [1], 1200);
 var SpearmanInstructor: RefinerTrainer = new RefinerTrainer(24, "abc", "Spearman Instructor", [Spear, Man, Coin], [1, 3, 1], [Spearman], [1], 40);
 var SwordsmanInstructor: RefinerTrainer = new RefinerTrainer(25, "abc", "Swordsman Instructor", [Sword, Man, Coin], [1, 3, 1], [Swordsman], [1], 70);
 var BowmanInstructor: RefinerTrainer = new RefinerTrainer(26, "abc", "Bowman Instructor", [Bow, Man, Coin, Arrow], [1, 1, 5, 10], [Archer], [1], 70);
@@ -126,7 +126,7 @@ var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1
 var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
 var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
 var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
-var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
+var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth, new Hero(100, "", "", 99999999999999999, 0, 9999999999, 9999999, [], thePlayer)];
 
 function HeroUnlock(index: number): void {
     HeroArr[index].Unlocked();
@@ -334,7 +334,7 @@ $(document).ready(function () {
             $("#refiner-trainer-title-text").text("Trainers");
         }
         $("#" + id).fadeIn(0);
-        $("#manpower-count-div, #manpower-count-separator").fadeIn(0);
+        $("#manpower-count-div, #manpower-count-separator, #Recruit-button").fadeIn(0);
     });
     $(".map-stats-skills-heroes-button").click(function () {
         var id = $(this).attr('name');
@@ -373,7 +373,6 @@ $(document).ready(function () {
     clickerIndex.AddSkillUnlockFunction(UnlockSkill); //Initialize event listeners for skills
     Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
-    clickerIndex.CurrentStorage.PureUnitArr[7].Birth();
 
     $("#monster-div").click(function () {
         clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
@@ -489,8 +488,10 @@ $(document).ready(function () {
 
     setInterval(function () {
         $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
+        $("#monster-div").click();
     }, 50);
 
+    clickerIndex.CurrentStorage.HeroArr[4].Unlocked();
     clickerIndex.SetUpClicker();
 
 });

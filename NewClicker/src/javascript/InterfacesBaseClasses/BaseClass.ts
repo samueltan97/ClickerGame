@@ -341,6 +341,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     Birth(): void {
         let id: string = this.name.replace(/\s+/g, '');
         $("#" + id).fadeIn(100);
+        $("#fighter-hp-div").fadeIn(100);
         $("#fighter-description-text").text("Current Unit: " + this.name);
         //CSS animation for appearance on screen, including refreshing of health and name bars
         this.isDead = false;
@@ -350,7 +351,8 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     Die(): void {
         let id: string = this.name.replace(/\s+/g, '');
-        $("#" + id + "-normal").fadeOut(100);
+        $("#" + id).fadeOut(100);
+        $("#fighter-hp-div").fadeOut(100);
         //CSS animation for removing unit off the screen and reducing count of unit
         this.isDead = true;
         console.log(this.name, this.Count);
@@ -546,24 +548,11 @@ export class RefinerTrainer implements ICountable, IConverter {
             if (this.refinedProduct[0].Count > 0) {
                 this.Unlocked();
             }
-        } else if (this.id < 24 && !this.isUnlocked) {
-            let maxQuotient: number[] = [0];
-            for (let i = 0; i < this.toBeRefined.length; i++) {
-                let currentQuotient: number = Math.floor(this.toBeRefined[i].Count / this.toBeRefinedQuantity[i]);
-                maxQuotient[0] = (i == 0) ? currentQuotient : Math.max(0, Math.min(maxQuotient[0], currentQuotient));
-            }
-            if (maxQuotient[0] > 10) {
-                for (let i = 0; i < this.toBeRefined.length; i++) {
-                    this.toBeRefined[i].Decrease(10);
-                }
+        } else if (this.id < 29 && !this.isUnlocked) {
+            if (this.toBeRefined[0].ProducedHistory >= 10) {
                 this.Unlocked();
             }
-        } else if (this.id >= 24 && this.id < 29 && !this.isUnlocked) {
-            if (this.toBeRefined[0].Count > 10) {
-                    this.toBeRefined[0].Decrease(10);
-                this.Unlocked();
-            }
-        } else if (this.id >= 29 && this.id < 37 && !this.isUnlocked) {
+        }  else if (this.id >= 29 && this.id < 37 && !this.isUnlocked) {
             if (this.toBeRefined[0].ProducedHistory >= 1000) {
                 this.Unlocked();
             }
@@ -578,6 +567,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     readonly name: string;
     private baseHP: number;
     private maxHP: number;
+    private onStage: boolean;
     private currentHP: number;
     private baseDamage: number; 
     private readonly range: number;
@@ -610,6 +600,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.isImmune = false;
         this.skillArray = skillArray;
         this.isRogue = false;
+        this.onStage = false;
     }
 
     UpdateFeedback(counter: number): number {
@@ -630,6 +621,10 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
    }
@@ -649,6 +644,10 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set MaxHP(multiplier: number) {
         this.baseHP = this.baseHP * multiplier;
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
     }
@@ -659,12 +658,19 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set CurrentHP(multiplier: number) {
         this.currentHP = this.currentHP * multiplier;
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
     }
 
     get CurrentDamage(): number {
+        if (this.isUnlocked) {
         return this.baseDamage * this.CurrentLevel * this.player.CurrentArmyVitality; //Placeholder algorithm for damage value
+        }
+        return 0;
     }
 
     set CurrentDamage(multiplier:number) {
@@ -688,12 +694,16 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     ReceiveDamage(damage: number): void {
-        if (!this.IsImmune && damage > 0) {
+        if (!this.IsImmune && damage > 0 && this.isUnlocked) {
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
-       if (this.currentHP == 0) {
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
+        if (this.currentHP == 0) {
             this.Die();
         }
             this.Update();
@@ -701,7 +711,9 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     Unlocked(): void {
-        alert("You have unlocked " + this.name.split(" ")[0]);
+        if (this.id != 100) {
+            alert("You have unlocked " + this.name.split(" ")[0]);
+        }
         $("#" + this.name.split(" ")[0] + "-hero-block").fadeIn(100);
         this.isUnlocked = true;
         this.Update();
@@ -713,6 +725,11 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         if (this.isRogue) {
             //CSS Animation for Rogue Charles birth
         };
+        this.onStage = true;
+        $("#fighter-hp-div").fadeIn(100);
+        $("#fighter-description-text").text("Current Unit: " + this.name);
+        adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+        $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
         this.isDead = false;
         this.Update();
     }
@@ -722,16 +739,26 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         if (this.isRogue) {
         this.isDead = true; //& CSS Animation for dead Charles
         }
+        this.onStage = false;
+        $("#fighter-hp-div").fadeOut(100);
         this.Update();
     }
 
     Regenerate(counter: number):void {
-        if ((counter + 5) % 10 == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
+        if ((counter + 5) % 10 == 0 && !this.isDead && this.CurrentHP < this.MaxHP && this.isUnlocked) {
+            if (this.id == 100) {
+                this.RegenerateMax();
+            } else {
             this.currentHP += 5 * this.player.CurrentArmyVitality;
             this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
+            if (this.onStage) {
+                adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+                $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            }
             adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
-            this.Update();
+                this.Update();
+            }
         }
     }
 
@@ -739,6 +766,10 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.currentHP += (this.MaxHP * percentage /100);
         adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
         this.Update();
     }
 
@@ -746,10 +777,15 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.currentHP = this.MaxHP;
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        if (this.onStage) {
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        }
         this.Update();
     }
 
     GainExperience(experience: number): void {
+        if (this.isUnlocked) {
         let experienceOverflow = this.currentExperience + experience - this.MaxExperience;
         if (experienceOverflow >= 0) {
             this.LevelUp();
@@ -759,7 +795,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         }
         adjustBarAnimation(this.name.split(" ")[0] + "-exp", this.name, this.CurrentExperience, this.MaxExperience);
         $("#" + this.name.split(" ")[0] + "-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
-        this.Update();
+            this.Update();
+        }
     }
 
     LevelUp(): void {

@@ -89,7 +89,7 @@ export class Storage implements IStorage {
         this.HeroArr = heroArr;
         this.UnitArr = [this.RangeOneUnitArr, this.RangeTwoUnitArr, this.RangeThreeUnitArr, this.RangeFourUnitArr, this.RangeFiveUnitArr, this.RangeSixUnitArr, this.HeroArr]; //will have arrays inside organised according to increasing range before Heroes
         this.PureUnitArr = allUnitArr; 
-        this.CurrentUnit = this.UnitArr[0][0];
+        this.CurrentUnit = this.UnitArr[6][4];
         this.counter = 0;
         this.ResourceArr = resourceArr;
         this.RefinerTrainerArr = refinerTrainerArr;

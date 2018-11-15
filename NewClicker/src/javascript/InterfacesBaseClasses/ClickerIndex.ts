@@ -69,7 +69,7 @@ export class ClickerIndex {
         }
         let currentUnit = this.CurrentStorage.CurrentUnit;
         let currentUnitName: string = currentUnit.name.split(" ")[0];
-        if (currentUnitName == "Charles"){
+        if (currentUnitName == "Charles" || currentUnitName == ""){
             this.CheckPureUnitArrForAlive();
         }
     }
