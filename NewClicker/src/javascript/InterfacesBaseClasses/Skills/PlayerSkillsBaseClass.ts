@@ -80,7 +80,7 @@ export class Steal extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.SkillFactory.Storage.ResourceArr[x].Increase(this.SkillFactory.Storage.CurrentStage.CurrentStage));
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ResourceArray.forEach(x => this.SkillFactory.Storage.ResourceArr[x].Increase(this.SkillFactory.Storage.CurrentStage.CurrentStage * this.Level));
         }
     }
 }
@@ -101,8 +101,8 @@ export class Heist extends PlayerActiveSkill {
             this.SkillFactory.Storage.PureUnitArr.forEach(x=>totalDamage += (x.CurrentDamage * 20 / x.damageFrequency * 5));
             this.SkillFactory.Storage.HeroArr.forEach(x => totalDamage += (x.CurrentDamage * 5));
             totalDamage = Math.floor(totalDamage);
-            this.SkillFactory.Storage.ResourceArr.forEach(x => x.Increase(totalDamage));
-            this.SkillFactory.Storage.ResourceArr[7].Increase(totalDamage);
+            this.SkillFactory.Storage.ResourceArr.forEach(x => x.Increase(totalDamage * this.Level));
+            this.SkillFactory.Storage.ResourceArr[7].Increase(totalDamage * this.Level);
         }
     }
 }
@@ -117,9 +117,9 @@ export class MoneyisPower extends PlayerActiveSkill {
        if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
            let multiplier: number = 100 * this.SkillFactory.Storage.ResourceArr[7].Count;
-           this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier;
+           this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier * this.Level;
             let skill = this;
-           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/multiplier; }, 500);
+           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = (1 / multiplier) / this.Level; }, 500);
         }
     }
 }
@@ -133,12 +133,12 @@ export class Ballad extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 2);
-            this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 2);
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 2 * this.Level);
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 2 * this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 0.5);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 0.5);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 0.5 / this.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 0.5 / this.Level);
             }, 500);
         }
     }
@@ -154,10 +154,10 @@ export class Solo extends PlayerActiveSkill {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             let multiplier: number = 100 * this.SkillFactory.Storage.CurrentPlayer.CurrentDamage;
-            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier;
+            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier * this.Level;
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1/multiplier;
+                skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1 / multiplier / this.Level;
             }, 500);
         }
     }
@@ -172,18 +172,18 @@ export class SongofCourage extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 2);
-            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 2);
-            this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 2);
-            this.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 2);
-            this.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 0.5);
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 2 * this.Level);
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 2 * this.Level);
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 2 * this.Level);
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 2 * this.Level);
+            this.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 0.5 / this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 0.5);
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 0.5);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 0.5);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 0.5);
-                skill.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 2);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 0.5 / this.Level);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 0.5 / this.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 0.5 / this.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 0.5 / this.Level);
+                skill.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 2 * this.Level);
             }, 500);
         }
     }
@@ -212,7 +212,7 @@ export class ImpactStab extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 10);
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 10 * this.Level);
         }
     }
 }
@@ -226,12 +226,12 @@ export class Whirlwind extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100);
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
                 setTimeout(function () {
-                    skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100);
+                    skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
                 }, 1000);
             }, 1000);
         }
@@ -252,7 +252,7 @@ export class FinalBlow extends PlayerActiveSkill {
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         this.ClickCount = e.newClickCount;
         if (this.ClickCount == this.MaxCount) {
-            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1 / 1000;
+            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1 / 1000 / this.Level;
         }
     }
 
@@ -260,7 +260,7 @@ export class FinalBlow extends PlayerActiveSkill {
         if (this.isUnlocked && !this.InCooldown && this.ClickCount >= this.MaxCount) {
             super.Action(input);
             this.MaxCount = this.ClickCount + 5;
-            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1000;
+            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1000 * this.Level;
         }
     }
 }

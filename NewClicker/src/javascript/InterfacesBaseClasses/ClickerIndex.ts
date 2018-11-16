@@ -69,20 +69,18 @@ export class ClickerIndex {
         }
         let currentUnit = this.CurrentStorage.CurrentUnit;
         let currentUnitName: string = currentUnit.name.split(" ")[0];
-        if (currentUnitName == "Charles" || currentUnitName == ""){
+        if (["Charles", "Yusie", "Halley", "Helmuth"].indexOf(currentUnitName) >= 0) {
             this.CheckPureUnitArrForAlive();
         }
     }
 
     CheckPureUnitArrForAlive = ():boolean => {
-        let isEmpty: boolean = true;
-            for (let j = 0; j < this.CurrentStorage.PureUnitArr.length && isEmpty; j++) {
+            for (let j = 0; j < this.CurrentStorage.PureUnitArr.length; j++) {
                 if (this.CurrentStorage.PureUnitArr[j].Count > 0 && !this.CurrentStorage.PureUnitArr[j].isDead) {
-                    isEmpty = false;
                     this.CurrentStorage.CurrentUnit = this.CurrentStorage.PureUnitArr[j];
+                    this.CurrentStorage.HeroArr.forEach(x=>x.Die());
                     this.CurrentStorage.CurrentUnit.Birth();
-                    this.CurrentStorage.HeroArr[0].Die();
-                    return true;
+                   return true;
                 }
         }
         return false;
@@ -106,6 +104,23 @@ export class ClickerIndex {
 
     AddSkillUnlockFunction = (f:Function) => {
         this.skillUnlockFunction.push(f);
+    }
+
+    ChangeZone = (isIncrease: boolean): void => {
+        let currentZone: number = this.CurrentStorage.CurrentStage.CurrentZone;
+        if (isIncrease && currentZone < this.CurrentStorage.CurrentStage.MaxZone) {
+            this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
+            this.CurrentStorage.CurrentStage.IncreaseZone(false);
+            this.CurrentStorage.CurrentEnemyArr.splice(0, this.CurrentStorage.CurrentEnemyArr.length);
+            this.PopulateEnemyArr(this.CurrentStorage.CurrentStage.CurrentStage - 1);
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
+        } else if (!isIncrease && currentZone > 1) {
+            this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
+            this.CurrentStorage.CurrentStage.DecreaseZone();
+            this.CurrentStorage.CurrentEnemyArr.splice(0, this.CurrentStorage.CurrentEnemyArr.length);
+            this.PopulateEnemyArr(this.CurrentStorage.CurrentStage.CurrentStage - 1);
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
+        }
     }
 
     UnlockHeroSkill = (e: HeroValueUpdateEvent): void =>{

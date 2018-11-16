@@ -126,7 +126,7 @@ var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1
 var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
 var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
 var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
-var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth, new Hero(100, "", "", 99999999999999999, 0, 9999999999, 9999999, [], thePlayer)];
+var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
 function HeroUnlock(index: number): void {
     HeroArr[index].Unlocked();
@@ -156,7 +156,8 @@ function RefinerTrainerKillMechanics(isCount: boolean, countOrPercentage: number
                     killArray.push(RefinerTrainerArr[i]);
                 }
             }
-            let countShare: number = Math.min(1, Math.floor((countOrPercentage - counter) / killArray.length));
+            if (killArray.length < 1) { counter = countOrPercentage;} 
+            let countShare: number = Math.max(1, Math.floor((countOrPercentage - counter) / killArray.length));
             for (var i = 0; i < killArray.length && counter < countOrPercentage; i++) {
                 let toBeDeducted = Math.min(countShare, RefinerTrainerArr[i].Count);
                 counter += toBeDeducted;
@@ -173,16 +174,12 @@ function RefinerTrainerKillMechanics(isCount: boolean, countOrPercentage: number
 //Enemy (Base Exp and Resource not confirmed)
 let Slime: Enemy = new Enemy(0, 0, "abc", "Slime", 10, 1, 5, [1, 1, 6], 40, 0, 20, function (currentDamage: number, stage: StageLevel): number { return 1; }, 100000, StageOne, false);
 let Boar: Enemy = new Enemy(0, 1, "abc", "Boar", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(2 * currentDamage, 1); return 1; }, 200, StageOne, false);
-let Boar1: Enemy = new Enemy(0, 1, "abc", "Boar2", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(2 * currentDamage, 1); return 1; }, 200, StageOne, false);
-let Boar2: Enemy = new Enemy(0, 1, "abc", "Boar3", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(2 * currentDamage, 1); return 1; }, 200, StageOne, false);
-let Boar3: Enemy = new Enemy(0, 1, "abc", "Boar4", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(2 * currentDamage, 1); return 1; }, 200, StageOne, false);
-let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(2 * currentDamage, 1); return 1; }, 200, StageOne, false);
-// let Ashwinder1: Enemy = new Enemy(0, 2, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1; }, 200, StageOne, false);
-// let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [3, 3, 3, 3, 6, 6], 20, 0, 100, function (currentDamage: number, stage: StageLevel): number { return 1; }, 100000, StageOne, false);
-// let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [2, 2, 2, 2, 4, 4, 7, 7, 6], 10, 0, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1;}, 100, theStage);
-// let Bandit: Enemy = new Enemy(0, 5, "abc", "Bandit", 7, 3, 5, [4, 2, 5, 5, 7, 7, 7, 7, 7, 6, 6, 6], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { return 3; }, 200, theStage);
- let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [4, 4, 4, 4, 2, 2, 2, 2, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(5 * currentDamage, 1); return 1; }, 300, StageOne, false);
-// let RevoltFootman: Enemy = new Enemy(0, 7, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); return 1; }, 160, theStage);
+let Ashwinder1: Enemy = new Enemy(0, 2, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1; }, 200, StageOne, false);
+let Arachne: Enemy = new Enemy(0, 3, "abc", "Arachne", 10, 4, 5, [3, 3, 3, 3, 6, 6], 20, 0, 100, function (currentDamage: number, stage: StageLevel): number { return 1; }, 100000, StageOne, false);
+let Drunkard: Enemy = new Enemy(0, 4, "abc", "Drunkard", 5, 2, 5, [2, 2, 2, 2, 4, 4, 7, 7, 6], 10, 0, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1; }, 100, StageOne, false);
+let Bandit: Enemy = new Enemy(0, 5, "abc", "Bandit", 7, 3, 5, [4, 2, 5, 5, 7, 7, 7, 7, 7, 6, 6, 6], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { return 3; }, 200, StageOne, false);
+let RevoltBrawler: Enemy = new Enemy(0, 6, "abc", "Revolt Brawler", 8, 4, 5, [4, 4, 4, 4, 2, 2, 2, 2, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { HeroKillMechanics(5 * currentDamage, 1); return 1; }, 300, StageOne, false);
+let RevoltFootman: Enemy = new Enemy(0, 7, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); return 1; }, 160, StageOne, true);
 // let Ashwinder2: Enemy = new Enemy(1, 8, "abc", "Ashwinder", 8, 2, 5, [1, 1, 3, 3, 6, 6, 10], 40, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 1); return 1; }, 200, theStage);
 // let RevoltFootman2: Enemy = new Enemy(1, 9, "abc", "Revolt Footman", 10, 5, 5, [4, 4, 4, 4, 2, 2, 2, 2, 5, 5, 5, 7, 7, 7, 7, 9, 14], 20, 1, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); return 1; }, 160, theStage);
 // let Harpy1: Enemy = new Enemy(1, 10, "abc", "Harpy", 100, 55, 5, [1, 1, 2, 3, 3, 4, 5, 6, 6, 6, 7, 7, 7, 8, 10], 40, 5, 100, function (currentDamage: number, stage: StageLevel): number { RefinerTrainerKillMechanics(true, 2); HeroKillMechanics(2 * currentDamage, 2); return 4; }, 300, theStage);
@@ -217,7 +214,7 @@ let Boar4: Enemy = new Enemy(0, 1, "abc", "Boar5", 15, 4, 5, [1, 1, 1, 1, 6, 6],
 //let RevoltSummoner: Enemy = new Enemy(4, 39, "abc", "Revolt Lancer", 750000, 400000, 5, [1, 1], 80, 0, 100, theStage);
 // let Manticore: Enemy = new Enemy(5, 40, "abc", "Manticore", 1200000, 900000, 5, [1, 1], 60, 100000, 160, theStage);
 
-var StageOneEnemyArr: Enemy[] = [Slime, RevoltBrawler];
+var StageOneEnemyArr: Enemy[] = [Slime, Boar, Ashwinder1, Arachne, Drunkard, Bandit, RevoltBrawler, RevoltFootman];
 var StageTwoEnemyArr: Enemy[] = [];
 var StageThreeEnemyArr: Enemy[] = [];
 var StageFourEnemyArr: Enemy[] = [];
@@ -379,11 +376,11 @@ $(document).ready(function () {
     });
 
     $("#village-zone-arrow-left").click(function () {
-        clickerIndex.CurrentStorage.CurrentStage.DecreaseZone();
+        clickerIndex.ChangeZone(false);
     });
 
     $("#village-zone-arrow-right").click(function () {
-        clickerIndex.CurrentStorage.CurrentStage.IncreaseZone(false);
+        clickerIndex.ChangeZone(true);
     });
 
     $(".skill-button").click(function () {
@@ -483,15 +480,19 @@ $(document).ready(function () {
     });
 
     $("#map-button").click(function () {
-
+        HeroArr[0].Unlocked();
     });
 
     setInterval(function () {
         $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
-        $("#monster-div").click();
     }, 50);
 
-    clickerIndex.CurrentStorage.HeroArr[4].Unlocked();
+    setInterval(function () {
+        $("#monster-div").click();
+    }, 300);
+
+    HeroUnlock(0);
+    clickerIndex.CurrentStorage.HeroArr[0].Birth();
     clickerIndex.SetUpClicker();
 
 });

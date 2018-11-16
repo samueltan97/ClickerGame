@@ -145,11 +145,14 @@
                     <div id="MysticRanger" class="fighter">
                         <img id="MysticRanger-normal" style="max-height:100%; max-width:100%;" src="style/images/Actual/Ally/Magical Archer.png" />
                     </div>
+                    <div id="Charles" class="fighter">
+                        <img id="Charles-normal" style="max-height:100%; max-width:100%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                    </div>
                 </div>
                 <div id="fighter-description-text">
                     Current Unit: Warrior
                 </div>
-                <div id="fighter-hp-div" style="display:none;">
+                <div id="fighter-hp-div">
                     <div id="fighter-hp-bar-background">
                         <div id="fighter-hp-bar"></div>
                             <div id="fighter-hp-text">
@@ -178,10 +181,75 @@
                 <div id="unit-area">
                     <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Units/UnitBackground.png" />
                     <div id="unit-repo">
-                        <div class="unit-cell">
-                            <div id="Warrior-count" class="unit-desc">Warrior<br />X 23</div>
+                        <div id="Spearman-cell" class="unit-cell" style="display:none;">
+                            <div id="Spearman-count" class="unit-desc">Spearman<br />X 0</div>
                             <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
-                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Sample/UnitResource/Unit/Warrior.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Spearman.png" />
+                        </div>
+                        <div id="Swordsman-cell" class="unit-cell" style="display:none;">
+                            <div id="Swordsman-count" class="unit-desc">Swordsman<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Swordsman.png" />
+                        </div>
+                        <div id="Archer-cell" class="unit-cell" style="display:none;">
+                            <div id="Archer-count" class="unit-desc">Archer<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Archers.png" />
+                        </div>
+                        <div id="Pikeman-cell" class="unit-cell" style="display:none;">
+                            <div id="Pikeman-count" class="unit-desc">Pikeman<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Pikeman.png" />
+                        </div>
+                        <div id="Warrior-cell" class="unit-cell" style="display:none;">
+                            <div id="Warrior-count" class="unit-desc">Warrior<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Warrior.png" />
+                        </div>
+                        <div id="Rifleman-cell" class="unit-cell" style="display:none;">
+                            <div id="Rifleman-count" class="unit-desc">Rifleman<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Rifleman.png" />
+                        </div>
+                        <div id="Knight-cell" class="unit-cell" style="display:none;">
+                            <div id="Knight-count" class="unit-desc">Knight<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Knight.png" />
+                        </div>
+                        <div id="CrossArcher-cell" class="unit-cell" style="display:none;">
+                            <div id="CrossArcher-count" class="unit-desc">Cross Archer<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Crossbow Archers.png" />
+                        </div>
+                        <div id="Chanter-cell" class="unit-cell" style="display:none;">
+                            <div id="Chanter-count" class="unit-desc">Chanter<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Chanter.png" />
+                        </div>
+                        <div id="Paladin-cell" class="unit-cell" style="display:none;">
+                            <div id="Paladin-count" class="unit-desc">Paladin<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Paladin.png" />
+                        </div>
+                        <div id="Gladiator-cell" class="unit-cell" style="display:none;">
+                            <div id="Gladiator-count" class="unit-desc">Gladiator<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Paladin.png" />
+                        </div>
+                        <div id="Magus-cell" class="unit-cell" style="display:none;">
+                            <div id="Magus-count" class="unit-desc">Magus<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Mage.png" />
+                        </div>
+                        <div id="ArcaneGunslinger-cell" class="unit-cell" style="display:none;">
+                            <div id="ArcaneGunslinger-count" class="unit-desc">Arcane Gunslinger<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Gunslinger.png" />
+                        </div>
+                        <div id="MysticRanger-cell" class="unit-cell" style="display:none;">
+                            <div id="MysticRanger-count" class="unit-desc">Mystic Ranger<br />X 0</div>
+                            <img style="position:absolute; max-width:20%;" src="style/images/Layout/UnitResource/Units/UnitCubicle.png" />
+                            <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Magical Archer.png" />
                         </div>
                     </div>
                 </div>
@@ -548,9 +616,6 @@
                             <div class="skills-stats">
                                 <div class="skills-stats-name">Chorus of Death</div>
                                 <div id="ChorusofDeath-lvl" class="skills-stats-lvl">Level 1</div>
-                            </div>
-                            <div class="skills-level-up-button-frame">
-                                <img class="skill-point-button" skillTag=10 style="position: absolute; left: 6%; top: 6%; max-height:90%; max-width:90%;" src="style/images/Layout/Player/Skills/AddSkillPointButton.png" />
                             </div>
                         </div>
                         <div id="ImpactStab-skill-block" class="skills-block" style="display:none;">
@@ -1223,7 +1288,7 @@
                     </div>
                 </div>
                 <div id="trainer-repo">
-                    <div id="SpearmanInstructor-block" class="trainer-block">
+                    <div id="SpearmanInstructor-block" class="trainer-block" style="display:none;">
                         <div id="SpearmanInstructor-sprite" class="trainer-sprite"></div>
                         <div class="trainer-desc">
                             <div class="trainer-name">Spearman Instructors</div>

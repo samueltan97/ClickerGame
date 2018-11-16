@@ -78,11 +78,11 @@ export class Heal extends HeroActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
-            this.SkillFactory.Storage.HeroArr.forEach(x=>x.Regenerate(15));
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.Regenerate(15 * this.SkillFactory.Storage.HeroArr[0].CurrentLevel));
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.Regenerate(15 * this.SkillFactory.Storage.HeroArr[0].CurrentLevel));
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.Regenerate(15 * this.SkillFactory.Storage.HeroArr[0].CurrentLevel));
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.Regenerate(15 * this.SkillFactory.Storage.HeroArr[0].CurrentLevel));
+            this.SkillFactory.Storage.HeroArr.forEach(x => x.Regenerate(15 * this.SkillFactory.Storage.HeroArr[0].CurrentLevel));
         }
     }
 }
@@ -116,7 +116,7 @@ export class ArcaneShelter extends HeroActiveSkill {
             setTimeout(function () {
                 skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.IsImmune = false);
                 skill.SkillFactory.Storage.HeroArr.forEach(x => x.IsImmune = false);
-            }, 500);
+            }, 500 * Math.max(1, this.SkillFactory.Storage.HeroArr[0].CurrentLevel / 1000));
         }
     }
 }
@@ -130,7 +130,7 @@ export class StrafingRun extends HeroActiveSkill {
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
-            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel);
         }, 1 * count);
     }
 
@@ -154,7 +154,7 @@ export class Hurricane extends HeroActiveSkill {
     doTimeOut(count: number) {
         let skill = this;
         setTimeout(function () {
-            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage * skill.SkillFactory.Storage.HeroArr[2].CurrentLevel);
         }, 1 * count);
     }
 
@@ -178,10 +178,10 @@ export class CrossCut extends HeroActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2/5);
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2 / 5 * this.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2/5);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 2 / 5 * skill.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             }, 100);
         }
     }
@@ -196,10 +196,10 @@ export class LanceDance extends HeroActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
-            [this.SkillFactory.Storage.PureUnitArr[0], this.SkillFactory.Storage.PureUnitArr[3], this.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 6);
+            [this.SkillFactory.Storage.PureUnitArr[0], this.SkillFactory.Storage.PureUnitArr[3], this.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 6 * this.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             let skill = this;
            setTimeout(function () {
-               [skill.SkillFactory.Storage.PureUnitArr[0], skill.SkillFactory.Storage.PureUnitArr[3], skill.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 1/6);
+               [skill.SkillFactory.Storage.PureUnitArr[0], skill.SkillFactory.Storage.PureUnitArr[3], skill.SkillFactory.Storage.PureUnitArr[9]].forEach(x => x.CurrentDamage = 1 / 6 / skill.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             }, 500);
         }
     }
@@ -214,10 +214,10 @@ export class UnlimitedLanceWork extends HeroActiveSkill {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);     
             let count: number = this.SkillFactory.Storage.PureUnitArr[0].Count + this.SkillFactory.Storage.PureUnitArr[3].Count + this.SkillFactory.Storage.PureUnitArr[9].Count + 1;
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count);
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count * this.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[3].CurrentDamage * 10 * count * skill.SkillFactory.Storage.HeroArr[3].CurrentLevel);
             }, 500);
         }
     }

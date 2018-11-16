@@ -2,7 +2,7 @@
 import { StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
 
 export class StageLevel implements IStageLevel {
-    private MaxZone: number;
+    private maxZone: number;
     public readonly StageName: string;
     private Zone: number;
     public readonly CurrentStage: number;
@@ -12,9 +12,13 @@ export class StageLevel implements IStageLevel {
     constructor(stage: number, name: string) {
         this.StageName = name;
         this.Zone = 1;
-        this.MaxZone = 1;
+        this.maxZone = 1;
         this.CurrentStage = stage;
         this.enemyDefeated = 0;
+    }
+
+    get MaxZone(): number {
+        return this.maxZone;
     }
 
     AddValueUpdateEvent(event: (e: StageLevelValueUpdateEvent) => void) {
@@ -26,16 +30,18 @@ export class StageLevel implements IStageLevel {
     }
 
     IncreaseZone(isAuto:boolean): void {
-        if (isAuto && this.Zone == this.MaxZone) {
-            this.MaxZone += 1;            
+        if (isAuto && this.Zone == this.maxZone) {
+            this.maxZone += 1;            
             this.Zone += 1;
             this.enemyDefeated = 0;
             $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
-        } else if (isAuto || this.Zone != this.MaxZone) {
+        } else if (isAuto || this.Zone != this.maxZone) {
             this.Zone += 1;
             this.enemyDefeated = 0;
             $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
         }
     } 
@@ -45,6 +51,7 @@ export class StageLevel implements IStageLevel {
             this.Zone -= 1;
             this.enemyDefeated = 0;
             $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
         }
     } 
