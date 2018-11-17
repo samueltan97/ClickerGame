@@ -7,9 +7,9 @@ export interface IMortality extends IRegeneration, IFeedbackLoop {
     readonly name: string;
     readonly MaxHP: number;
     readonly CurrentHP: number;
-    inDeathAnimation: boolean;
+    //inDeathAnimation: boolean;
     ReceiveDamage(damage: number): void;
-    DamageAnimation(): void;
+    //DamageAnimation(): void;
     Die(): void;
     Birth(): void;
     isDead: boolean;

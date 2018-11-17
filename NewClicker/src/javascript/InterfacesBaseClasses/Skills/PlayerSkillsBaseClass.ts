@@ -58,7 +58,25 @@ export class PlayerActiveSkill implements IActiveSkill {
     CooldownCounter(): void {
         let skill = this;
         skill.inCooldown = true;
-        setTimeout(function () { skill.inCooldown = false; }, skill.cooldown);
+        $("#" + this.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 1 });
+        $("#" + this.name.replace(/\s+/g, '') + "-cooldown-half-rotator-right").css({
+            "transform": "rotate(180deg)",
+            "transition": "transform " + (skill.cooldown / 2000) + "s",
+            "transition-timing-function": "linear"
+        });
+        setTimeout(function () {
+            $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-left").css({
+                "transform": "rotate(180deg)",
+                "transition": "transform " + (skill.cooldown / 2000) + "s",
+                "transition-timing-function": "linear"
+            });
+            setTimeout(function () {
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-right").css({ "transform": "rotate(0deg)", "transition": "transform 0s" });
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-left").css({ "transform": "rotate(0deg)", "transition": "transform 0s" });
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 0 });
+                skill.inCooldown = false; 
+            }, skill.cooldown / 2);
+        }, skill.cooldown / 2);
     }
 
     Action(input?:number): void {
@@ -119,7 +137,7 @@ export class MoneyisPower extends PlayerActiveSkill {
            let multiplier: number = 100 * this.SkillFactory.Storage.ResourceArr[7].Count;
            this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier * this.Level;
             let skill = this;
-           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = (1 / multiplier) / this.Level; }, 500);
+           setTimeout(function () { skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = (1 / multiplier) / skill.Level; }, 500);
         }
     }
 }
@@ -137,8 +155,8 @@ export class Ballad extends PlayerActiveSkill {
             this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 2 * this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 0.5 / this.Level);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 0.5 / this.Level);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentDamage = 0.5 / skill.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentDamage = 0.5 / skill.Level);
             }, 500);
         }
     }
@@ -157,7 +175,7 @@ export class Solo extends PlayerActiveSkill {
             this.SkillFactory.Storage.CurrentPlayer.CurrentDamage = multiplier * this.Level;
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1 / multiplier / this.Level;
+                skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage = 1 / multiplier / skill.Level;
             }, 500);
         }
     }
@@ -179,11 +197,11 @@ export class SongofCourage extends PlayerActiveSkill {
             this.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 0.5 / this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 0.5 / this.Level);
-                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 0.5 / this.Level);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 0.5 / this.Level);
-                skill.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 0.5 / this.Level);
-                skill.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 2 * this.Level);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 0.5 / skill.Level);
+                skill.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 0.5 / skill.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 0.5 / skill.Level);
+                skill.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 0.5 / skill.Level);
+                skill.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 2 * skill.Level);
             }, 500);
         }
     }
@@ -229,9 +247,9 @@ export class Whirlwind extends PlayerActiveSkill {
             this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
             let skill = this;
             setTimeout(function () {
-                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
+                skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * skill.Level);
                 setTimeout(function () {
-                    skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * this.Level);
+                    skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.CurrentPlayer.CurrentDamage * 100 * skill.Level);
                 }, 1000);
             }, 1000);
         }

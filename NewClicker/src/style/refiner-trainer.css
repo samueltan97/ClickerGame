@@ -120,7 +120,7 @@
             margin-top: 2%;
             left: 45%;
             transform: translateX(-50%);
-            font-size: 3.5vh;
+            font-size: 2vh;
             font-weight: 800;
             width: max-content; }
           #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-count {
@@ -219,7 +219,7 @@
             margin-top: 2%;
             left: 45%;
             transform: translateX(-50%);
-            font-size: 3.5vh;
+            font-size: 2vh;
             font-weight: 800;
             width: max-content; }
           #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-count {

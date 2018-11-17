@@ -34,7 +34,6 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     private regenFrequency: number;
     private ability: Function;
     private abilityFrequency: number;
-    inDeathAnimation: boolean;
     private valueUpdateEvents: ((e: EnemyValueUpdateEvent) => void)[] = [];
 
     constructor(arrayId: number, id: number, image: string, name: string, baseHP: number, baseDamage: number, baseExperience: number, resourceArray: number[], damageFrequency: number, regen: number, regenFrequency: number, ability: Function, abilityFrequency: number, stage: IStageLevel, isBoss:boolean) {
@@ -56,7 +55,6 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
         this.abilityFrequency = abilityFrequency;
         this.isBoss = isBoss;
         this.isUnlocked = true;
-        this.inDeathAnimation = false;
     }
 
     AddValueUpdateEvent(event: (e: EnemyValueUpdateEvent) => void) {
@@ -72,14 +70,14 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
             if (counter % this.abilityFrequency == 0) {
                 if (this.id == 18) {this.currentHP = Math.min((this.currentHP + this.MaxHP * 0.2), this.MaxHP)} // hack for Siren regen
                 let monster = this;
-                $("#" + monster.name + "-normal").animate({ top: "+=50" }, 150, function () {
-                    $("#" + monster.name + "-normal").animate({ top: "-=50" }, 50);
+                $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 150, function () {
+                    $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "-=50" }, 50);
                 });
                 return this.ability(this.CurrentDamage, this.stage) * this.CurrentDamage;
              }
              let monster = this;
-             $("#" + monster.name + "-normal").animate({ top: "+=50" }, 350, function () {
-                 $("#" + monster.name + "-normal").animate({ top: "-=50" }, 50);
+             $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 350, function () {
+                 $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "-=50" }, 50);
              });
             return this.CurrentDamage;
         }       
@@ -121,23 +119,17 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
 
     ReceiveDamage(damage: number): void {
         if (damage > 0) {
-        this.currentHP -= damage;
+            let enemy = this;
+            this.currentHP -= damage;
             this.currentHP = Math.max(this.currentHP, 0);
-            this.DamageAnimation();
-        if (this.currentHP == 0) {
+            $("#" + enemy.name.replace(/\s+/g, '') + "-hurt").fadeIn(40, "linear").fadeOut(40, "linear");
+            adjustBarAnimation("monster-hp", this.name.replace(/\s+/g, ''), this.CurrentHP, this.MaxHP);
+            $("#monster-hp-text-right").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            if (this.currentHP == 0) {
             this.Die();
         }
             this.Update();
         }
-    }
-
-    DamageAnimation(): void {
-        this.inDeathAnimation = true;
-        let enemy = this;
-        $("#" + enemy.name + "-hurt").fadeIn(40, "linear").fadeOut(40, "linear");
-        adjustBarAnimation("monster-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#monster-hp-text-right").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
-        this.inDeathAnimation = true;
     }
 
     Birth(): void {
@@ -318,6 +310,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
             this.currentHP = Math.max(this.currentHP, 0);
             adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            $("#" + this.name.replace(/\s+/g, '')).delay(100).fadeOut(50).fadeIn(50);
             if (this.currentHP == 0) {
                 this.Unexist(1);
                 this.Die();
@@ -447,7 +440,7 @@ export class Resource implements ICountable {
         this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count +count);
         $("#" + id + "-quantity").text("X " + this.Count);
         if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + this.Count); }
-        this.producedHistory += (typeof count === "undefined") ? (this.producedHistory + 1) : (this.producedHistory + count);
+        this.producedHistory += (typeof count === "undefined") ? (1) : (count);
         this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
     }
@@ -716,7 +709,8 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         this.currentHP = Math.max(this.currentHP, 0);
         adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
-        if (this.onStage) {
+            if (this.onStage) {
+                $("#" + this.name.split(" ")[0]).delay(100).fadeOut(50).fadeIn(50);
             adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
         }

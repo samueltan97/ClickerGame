@@ -82,9 +82,9 @@ var Recruiter: RefinerTrainer = new RefinerTrainer(0, "abc", "Recruiter", [Coin]
 var Woodworker: RefinerTrainer = new RefinerTrainer(1, "abc", "Woodworker", [Wood], [1], [Plank], [2], 100);
 var Ironsmith: RefinerTrainer = new RefinerTrainer(2, "abc", "Ironsmith", [Iron], [5], [IronBar], [1], 60);
 var Couturier: RefinerTrainer = new RefinerTrainer(3, "abc", "Couturier", [Thread], [8], [Nylon], [1], 50);
-var BladeSmith: RefinerTrainer = new RefinerTrainer(4, "abc", "Blade Smith", [IronBar], [2], [IronBlade], [1], 100);
+var BladeSmith: RefinerTrainer = new RefinerTrainer(4, "abc", "Bladesmith", [IronBar], [2], [IronBlade], [1], 100);
 var ManaRefiner: RefinerTrainer = new RefinerTrainer(5, "abc", "Mana Refiner", [ManaShard], [1], [Manacyte], [1], 80);
-var PyrotechnicExpert: RefinerTrainer = new RefinerTrainer(6, "abc", "Pyrotechnic Expert", [IronBlade], [1], [Bullet], [10], 30);
+var PyrotechnicExpert: RefinerTrainer = new RefinerTrainer(6, "abc", "Pyrotechnic Expert", [IronBar], [1], [Bullet], [10], 30);
 var SteelWorker: RefinerTrainer = new RefinerTrainer(7, "abc", "Steel Worker", [Steel], [5], [SteelBar], [1], 60);
 var Fletcher: RefinerTrainer = new RefinerTrainer(8, "abc", "Fletcher", [Plank, Iron], [5, 1], [Arrow], [20], 80);
 var Metallurgist: RefinerTrainer = new RefinerTrainer(9, "abc", "Metallurgist", [SteelBar], [2], [SteelPlate], [1], 200);
@@ -369,9 +369,13 @@ $(document).ready(function () {
 
     clickerIndex.AddSkillUnlockFunction(UnlockSkill); //Initialize event listeners for skills
     Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
+    Steal.Unlock(); //Trial skill and to gain resources faster to see effects
+    CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
+    Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
 
     $("#monster-div").click(function () {
+        $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
         clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
     });
 
@@ -384,6 +388,15 @@ $(document).ready(function () {
     });
 
     $(".skill-button").click(function () {
+        let string = $(this).attr("skillIndex");
+        if (typeof (string) === "string" && string != "18") {
+            let id: number = parseInt(string);
+            console.log("Skill clicked");
+            SkillArray[id].Action();
+        }
+        //For Cursed Contract, use an event listener        
+    });
+    $(".skills-icon").click(function () {
         let string = $(this).attr("skillIndex");
         if (typeof (string) === "string" && string != "18") {
             let id: number = parseInt(string);
@@ -484,12 +497,12 @@ $(document).ready(function () {
     });
 
     setInterval(function () {
-        $("#player-avg-dps").text("Average DPS: " + clickerIndex.CurrentDPS);
+        $("#player-avg-dps").text("Average DPS: " + Math.floor(clickerIndex.CurrentDPS));
     }, 50);
 
-    setInterval(function () {
-        $("#monster-div").click();
-    }, 300);
+    //setInterval(function () {
+    //    $("#monster-div").click();
+    //}, 150);
 
     HeroUnlock(0);
     clickerIndex.CurrentStorage.HeroArr[0].Birth();

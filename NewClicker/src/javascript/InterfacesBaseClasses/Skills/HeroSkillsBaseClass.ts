@@ -55,9 +55,26 @@ export class HeroActiveSkill implements IActiveSkill {
 
     CooldownCounter(): void {
         let skill = this;
-        this.inCooldown = true;
-        setTimeout(function () { skill.inCooldown = false;}
-            , this.cooldown);
+        skill.inCooldown = true;
+        $("#" + this.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 1 });
+        $("#" + this.name.replace(/\s+/g, '') + "-cooldown-half-rotator-right").css({
+            "transform": "rotate(180deg)",
+            "transition": "transform " + (skill.cooldown / 2000) + "s",
+            "transition-timing-function": "linear"
+        });
+        setTimeout(function () {
+            $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-left").css({
+                "transform": "rotate(180deg)",
+                "transition": "transform " + (skill.cooldown / 2000) + "s",
+                "transition-timing-function": "linear"
+            });
+            setTimeout(function () {
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-right").css({ "transform": "rotate(0deg)", "transition": "transform 0s" });
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-half-rotator-left").css({ "transform": "rotate(0deg)", "transition": "transform 0s" });
+                $("#" + skill.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 0 });
+                skill.inCooldown = false;
+            }, skill.cooldown / 2);
+        }, skill.cooldown / 2);
     }
 
     Action(input?: number): void {
