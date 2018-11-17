@@ -373,6 +373,12 @@ $(document).ready(function () {
     CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
     Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
+    HeroUnlock(1);
+    HeroUnlock(2);
+    HeroUnlock(3);
+    for (var i = 0; i < SkillArray.length; i++) {
+        UnlockSkill(i);
+    }
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();

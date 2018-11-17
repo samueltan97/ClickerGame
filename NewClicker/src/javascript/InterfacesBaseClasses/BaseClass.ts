@@ -70,13 +70,13 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
             if (counter % this.abilityFrequency == 0) {
                 if (this.id == 18) {this.currentHP = Math.min((this.currentHP + this.MaxHP * 0.2), this.MaxHP)} // hack for Siren regen
                 let monster = this;
-                $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 150, function () {
+                $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 80, function () {
                     $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "-=50" }, 50);
                 });
                 return this.ability(this.CurrentDamage, this.stage) * this.CurrentDamage;
              }
              let monster = this;
-             $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 350, function () {
+             $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "+=50" }, 80, function () {
                  $("#" + monster.name.replace(/\s+/g, '') + "-normal").animate({ top: "-=50" }, 50);
              });
             return this.CurrentDamage;
@@ -310,7 +310,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
             this.currentHP = Math.max(this.currentHP, 0);
             adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
             $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
-            $("#" + this.name.replace(/\s+/g, '')).delay(100).fadeOut(50).fadeIn(50);
+            $("#" + this.name.replace(/\s+/g, '')).delay(150).fadeOut(50).fadeIn(50);
             if (this.currentHP == 0) {
                 this.Unexist(1);
                 this.Die();

@@ -291,6 +291,9 @@ export class DarkRitual extends PlayerActiveSkill {
 
     public Action() {
         //Needs to be filled in
+        if (this.isUnlocked && !this.InCooldown) {
+            super.Action();
+        }
     }
 }
 

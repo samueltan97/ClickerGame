@@ -75,6 +75,25 @@ export class HeroActiveSkill implements IActiveSkill {
                 skill.inCooldown = false;
             }, skill.cooldown / 2);
         }, skill.cooldown / 2);
+        let cooldownTimer: number = this.cooldown;
+        let displayTime: string = cooldownTimer.toString();
+        for (var i = skill.cooldown / 100; i > -1; i--) {
+            let currentCounter: string = i.toString();
+            if (currentCounter.length == 1) {
+                let finalCounter = "0." + currentCounter;
+                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
+            } else {
+               let finalCounter = currentCounter.slice(0, currentCounter.length - 2) + "." + currentCounter[currentCounter.length - 1];
+                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
+            }            
+        }
+    }
+
+    CooldownTimerCountdown(timer: number, number: string): void {
+        let skill = this;
+        setTimeout(function () {
+            $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-counter").text(number);
+        }, timer);
     }
 
     Action(input?: number): void {
@@ -168,20 +187,11 @@ export class Hurricane extends HeroActiveSkill {
         super(33, "Hurricane", 1000, playerSkillFactory);
     }
 
-    doTimeOut(count: number) {
-        let skill = this;
-        setTimeout(function () {
-            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[2].CurrentDamage * skill.SkillFactory.Storage.HeroArr[2].CurrentLevel);
-        }, 1 * count);
-    }
-
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             //Reference current enemy array to Enemy
-            for (var i = 1; i < 601; i++) {
-                this.doTimeOut(i);
-            }          
+            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(600* this.SkillFactory.Storage.HeroArr[2].CurrentDamage * this.SkillFactory.Storage.HeroArr[2].CurrentLevel);
         }
     }
 }
@@ -328,7 +338,7 @@ export class RecoveryMantra extends HeroPassiveSkill {
         if (this.isUnlocked && !this.isUsed) {
             let skill = this;
             setInterval(function () {
-                skill.SkillFactory.Storage.HeroArr.forEach(x=>x.RegeneratePercentage(5));
+                skill.SkillFactory.Storage.HeroArr.forEach(x=>x.RegeneratePercentage(5 * skill.SkillFactory.Storage.HeroArr[0].CurrentLevel));
             }, 1000);
             this.isUsed = true;
        }
@@ -459,7 +469,7 @@ export class AuraofAccuracy extends HeroPassiveSkill {
     isUsed: boolean;
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(31, "Aura of Accuracy", playerSkillFactory);
+        super(31, "Aura Of Accuracy", playerSkillFactory);
         this.isUsed = false;
     }
 
