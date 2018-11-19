@@ -382,6 +382,7 @@ $(document).ready(function () {
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
+        $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-normal").stop(true).css("top", "0");
         clickerIndex.CurrentStorage.CurrentEnemyArr[0].ReceiveDamage(clickerIndex.CurrentStorage.CurrentPlayer.CurrentDamage);
     });
 

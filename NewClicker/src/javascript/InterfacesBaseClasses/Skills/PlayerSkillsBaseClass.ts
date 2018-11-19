@@ -190,10 +190,10 @@ export class SongofCourage extends PlayerActiveSkill {
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
-            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 2 * this.Level);
             this.SkillFactory.Storage.PureUnitArr.forEach(x => x.MaxHP = 2 * this.Level);
-            this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 2 * this.Level);
+            this.SkillFactory.Storage.PureUnitArr.forEach(x => x.CurrentHP = 2 * this.Level);
             this.SkillFactory.Storage.HeroArr.forEach(x => x.MaxHP = 2 * this.Level);
+           this.SkillFactory.Storage.HeroArr.forEach(x => x.CurrentHP = 2 * this.Level);
             this.SkillFactory.HeroActiveSkill.forEach(x => x.Cooldown = 0.5 / this.Level);
             let skill = this;
             setTimeout(function () {

@@ -253,8 +253,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     set MaxHP(multiplier: number) {
         this.baseHP = this.baseHP * multiplier;
-        adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality * this.player.CurrentArmyVitality;
+        adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.maxHP);
+        $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.maxHP);
         this.Update();
     }
 
@@ -264,8 +265,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     set CurrentHP(multiplier: number) {
         this.currentHP = this.currentHP * multiplier; 
-        adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        this.currentHP = Math.min(this.currentHP, this.MaxHP);
+        adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+        $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
        this.Update();
     }
 
@@ -297,8 +299,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
-        adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+        this.currentHP = Math.min(this.currentHP, this.MaxHP);
+        adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+        $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
     }
 
     ReceiveDamage(damage: number): void {
@@ -308,8 +311,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
             }
             this.currentHP -= damage;
             this.currentHP = Math.max(this.currentHP, 0);
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            this.currentHP = Math.min(this.currentHP, this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
             $("#" + this.name.replace(/\s+/g, '')).delay(150).fadeOut(50).fadeIn(50);
             if (this.currentHP == 0) {
                 this.Unexist(1);
@@ -365,14 +369,13 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         $("#" + id).fadeOut(100);
         //CSS animation for removing unit off the screen and reducing count of unit
         this.isDead = true;
-        console.log(this.name, this.Count);
         this.Update();
     }
 
     Regenerate(counter: number) {
         if ((counter + 5) % 20 == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
             this.currentHP += Math.floor(0.05 * this.MaxHP);
-        this.currentHP = Math.min(this.MaxHP, this.CurrentHP);
+            this.currentHP = Math.min(this.MaxHP, this.currentHP);
         adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
         this.Update();
@@ -382,6 +385,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
 
     RegenerateMax(): void {
         this.currentHP = this.MaxHP;
+        this.currentHP = Math.min(this.MaxHP, this.currentHP);
         adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
         $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
         this.Update();
@@ -631,12 +635,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     UpdateSource = (e: PlayerValueUpdateEvent): void => {
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
+        this.currentHP = Math.min(this.MaxHP, this.currentHP);
         if (this.onStage) {
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
         }
-        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.currentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP + " (" + Math.floor(this.currentHP / this.MaxHP * 100) + "%)");
    }
 
     get IsImmune(): boolean {
@@ -654,12 +659,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set MaxHP(multiplier: number) {
         this.baseHP = this.baseHP * multiplier;
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality * this.CurrentLevel;
         if (this.onStage) {
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.maxHP);
+            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.maxHP);
         }
-        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.maxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.maxHP + " (" + Math.floor(this.CurrentHP / this.maxHP * 100) + "%)");
     }
 
     get CurrentHP(): number {
@@ -668,12 +674,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     set CurrentHP(multiplier: number) {
         this.currentHP = this.currentHP * multiplier;
+        this.currentHP = Math.min(this.currentHP, this.MaxHP);
         if (this.onStage) {
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
         }
-        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.currentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP + " (" + Math.floor(this.currentHP / this.MaxHP * 100) + "%)");
     }
 
     get CurrentDamage(): number {
@@ -707,12 +714,13 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
         if (!this.IsImmune && damage > 0 && this.isUnlocked) {
         this.currentHP -= damage;
         this.currentHP = Math.max(this.currentHP, 0);
-        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        this.currentHP = Math.min(this.currentHP, this.MaxHP);
+            adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.currentHP, this.MaxHP);
+            $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP + " (" + Math.floor(this.currentHP / this.MaxHP * 100) + "%)");
             if (this.onStage) {
                 $("#" + this.name.split(" ")[0]).delay(100).fadeOut(50).fadeIn(50);
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+                adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+                $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
         }
         if (this.currentHP == 0) {
             this.Die();
@@ -774,22 +782,24 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     RegeneratePercentage(percentage: number): void {
         this.currentHP += (this.MaxHP * percentage /100);
-        adjustBarAnimation(this.name + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        this.currentHP = Math.min(this.MaxHP, this.currentHP);
+        adjustBarAnimation(this.name + "-hp", this.name, this.currentHP, this.MaxHP);
+        $("#" + this.name + "-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP + " (" + Math.floor(this.currentHP / this.MaxHP * 100) + "%)");
         if (this.onStage) {
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
         }
         this.Update();
     }
 
     RegenerateMax(): void {
         this.currentHP = this.MaxHP;
-        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.CurrentHP, this.MaxHP);
-        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP + " (" + Math.floor(this.CurrentHP / this.MaxHP * 100) + "%)");
+        this.currentHP = Math.min(this.MaxHP, this.currentHP);
+        adjustBarAnimation(this.name.split(" ")[0] + "-hp", this.name, this.currentHP, this.MaxHP);
+        $("#" + this.name.split(" ")[0] + "-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP + " (" + Math.floor(this.currentHP / this.MaxHP * 100) + "%)");
         if (this.onStage) {
-            adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
-            $("#fighter-hp-text").text("HP: " + this.CurrentHP + "/" + this.MaxHP);
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + this.currentHP + "/" + this.MaxHP);
         }
         this.Update();
     }

@@ -75,6 +75,7 @@ export class HeroActiveSkill implements IActiveSkill {
                 skill.inCooldown = false;
             }, skill.cooldown / 2);
         }, skill.cooldown / 2);
+
         let cooldownTimer: number = this.cooldown;
         let displayTime: string = cooldownTimer.toString();
         for (var i = skill.cooldown / 100; i > -1; i--) {
