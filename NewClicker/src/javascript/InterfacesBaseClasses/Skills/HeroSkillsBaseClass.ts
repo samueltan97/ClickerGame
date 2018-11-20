@@ -100,8 +100,8 @@ export class HeroActiveSkill implements IActiveSkill {
     }
 
     Action(input?: number): void {
-        this.CooldownCounter(this.currentCounter);
         this.startCounter = this.currentCounter;
+        this.CooldownCounter(this.currentCounter);
         this.UpdateTimeCounter(this.currentCounter);
     }
 
@@ -165,23 +165,19 @@ export class ArcaneShelter extends HeroActiveSkill {
 export class StrafingRun extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(26, "Strafing Run", 1000, playerSkillFactory);
-    }
-
-    doTimeOut(count: number) {
-        let skill = this;
-        setTimeout(function () {
-            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel);
-        }, 1 * count);
+        super(26, "Strafing Run", 10000, playerSkillFactory);
     }
 
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);
             //Reference current enemy array to Enemy
-            for (var i = 1; i < 51; i++) {
-                this.doTimeOut(i);
-            }          
+            let skill = this;
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel * 10);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel * 10);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel * 10);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel * 10);
+            skill.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(skill.SkillFactory.Storage.HeroArr[1].CurrentDamage * skill.SkillFactory.Storage.HeroArr[1].CurrentLevel * 10);
         }
     }
 }
@@ -189,15 +185,15 @@ export class StrafingRun extends HeroActiveSkill {
 export class Hurricane extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(33, "Hurricane", 1000, playerSkillFactory);
+        super(33, "Hurricane", 10000, playerSkillFactory);
     }
 
     public Action(input?: number) {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             //Reference current enemy array to Enemy
-            for (var i = 0; i < 600; i++) {
-                this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[2].CurrentDamage * this.SkillFactory.Storage.HeroArr[2].CurrentLevel);
+            for (var i = 0; i < 10; i++) {
+                this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(60*this.SkillFactory.Storage.HeroArr[2].CurrentDamage * this.SkillFactory.Storage.HeroArr[2].CurrentLevel);
             }
         }
     }
