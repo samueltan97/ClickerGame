@@ -5,6 +5,7 @@ import { IPlayer } from "../IPlayer";
 import { EnemyValueUpdateEvent, HeroValueUpdateEvent } from "../ValueUpdateEvent";
 import { setTimeout, setInterval } from "timers";
 import { ISkillFactory } from "./ISkillFactory";
+import { adjustValueToExponential } from "../../CSSAnimation/CSSAnimation";
 
 export class HeroActiveSkill implements IActiveSkill {
     public readonly name: string;
@@ -14,6 +15,8 @@ export class HeroActiveSkill implements IActiveSkill {
     isUnlocked: boolean;
     inCooldown: boolean;
     cooldown: number;
+    startCounter: number;
+    currentCounter: number;
 
     constructor(id: number, name: string, cooldown: number, heroSkillFactory: ISkillFactory) {
         this.name = name;
@@ -23,6 +26,8 @@ export class HeroActiveSkill implements IActiveSkill {
         this.level = 1;
         this.isUnlocked = false;
         this.SkillFactory = heroSkillFactory;
+        this.startCounter = 1;
+        this.currentCounter = 1;
     }
 
     get Level(): number {
@@ -45,6 +50,23 @@ export class HeroActiveSkill implements IActiveSkill {
         this.cooldown = this.cooldown * multiplier;
     }
 
+    UpdateTimeCounter = (counter: number): void => {
+        this.currentCounter = counter;
+        if (this.isUnlocked && this.InCooldown) {
+            let counterDifference: number = this.currentCounter + 2 - this.startCounter;
+            let timeDifference: number = counterDifference * 100 / 2;
+            if (timeDifference % 100 == 0) {
+                let newTime: string = ((this.cooldown - timeDifference) / 100).toString();
+                let partOneFinalTime: string = (newTime.length > 1) ? newTime.Take(newTime.length - 1) : "0";
+                let partTwoFinalTime: string = newTime.TakeLast(1);
+                $("#" + this.name.replace(/\s+/g, '') + "-cooldown-counter").text(partOneFinalTime + "." + partTwoFinalTime);
+                        //DarkRitual's timer is an issue
+            }
+        } else {       
+        $("#" + this.name.replace(/\s+/g, '') + "-cooldown-counter").text(adjustValueToExponential(this.cooldown / 1000) + ".0");
+        }
+    }
+
     Unlock(): void {
         if (!this.isUnlocked) {
         this.isUnlocked = true;
@@ -53,7 +75,7 @@ export class HeroActiveSkill implements IActiveSkill {
         }
     }
 
-    CooldownCounter(): void {
+    CooldownCounter(currentCounter:number): void {
         let skill = this;
         skill.inCooldown = true;
         $("#" + this.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 1 });
@@ -75,30 +97,12 @@ export class HeroActiveSkill implements IActiveSkill {
                 skill.inCooldown = false;
             }, skill.cooldown / 2);
         }, skill.cooldown / 2);
-
-        let cooldownTimer: number = this.cooldown;
-        let displayTime: string = cooldownTimer.toString();
-        for (var i = skill.cooldown / 100; i > -1; i--) {
-            let currentCounter: string = i.toString();
-            if (currentCounter.length == 1) {
-                let finalCounter = "0." + currentCounter;
-                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
-            } else {
-               let finalCounter = currentCounter.slice(0, currentCounter.length - 2) + "." + currentCounter[currentCounter.length - 1];
-                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
-            }            
-        }
-    }
-
-    CooldownTimerCountdown(timer: number, number: string): void {
-        let skill = this;
-        setTimeout(function () {
-            $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-counter").text(number);
-        }, timer);
     }
 
     Action(input?: number): void {
-        this.CooldownCounter();
+        this.CooldownCounter(this.currentCounter);
+        this.startCounter = this.currentCounter;
+        this.UpdateTimeCounter(this.currentCounter);
     }
 
     LevelUp(): void {
@@ -192,7 +196,9 @@ export class Hurricane extends HeroActiveSkill {
         if (this.isUnlocked && !this.InCooldown) {
             super.Action(input);           
             //Reference current enemy array to Enemy
-            this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(600* this.SkillFactory.Storage.HeroArr[2].CurrentDamage * this.SkillFactory.Storage.HeroArr[2].CurrentLevel);
+            for (var i = 0; i < 600; i++) {
+                this.SkillFactory.Storage.CurrentEnemyArr[0].ReceiveDamage(this.SkillFactory.Storage.HeroArr[2].CurrentDamage * this.SkillFactory.Storage.HeroArr[2].CurrentLevel);
+            }
         }
     }
 }
@@ -200,7 +206,7 @@ export class Hurricane extends HeroActiveSkill {
 export class CrossCut extends HeroActiveSkill {
 
     constructor(playerSkillFactory: ISkillFactory) {
-        super(35, "Cross Cut", 1000, playerSkillFactory);
+        super(35, "Cross Cut", 10000, playerSkillFactory);
     }
 
     public Action(input?: number) {

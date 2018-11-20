@@ -11,7 +11,8 @@ export interface IActiveSkill{
     readonly inCooldown: boolean;
     Cooldown: number;
     SkillFactory: ISkillFactory;
-    CooldownCounter(): void;
+    UpdateTimeCounter(counter: number):void;
+    CooldownCounter(currentCounter:number): void;
     Action(input?: number): void;
     LevelUp(): void;
     Unlock(): void;

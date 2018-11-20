@@ -10,11 +10,13 @@ export class ClickerIndex {
     private counter: number;
     private skillFactory: ISkillFactory;
     private skillUnlockFunction: Function[];
+    private skillUpdateTimeFunction: Function[];
 
     constructor(skillfactory: ISkillFactory) {
         this.skillFactory = skillfactory;
         this.counter = 1;
         this.skillUnlockFunction = [];
+        this.skillUpdateTimeFunction = [];
     }
 
     get CurrentStorage() {
@@ -26,6 +28,14 @@ export class ClickerIndex {
         this.skillFactory.Storage.PureUnitArr.forEach(x => total += (x.CurrentDamage / x.damageFrequency * 20));
         this.skillFactory.Storage.HeroArr.forEach(x => total += x.CurrentDamage);
         return total;
+    }
+
+    UpdateTimeCounter = (): void => {
+        this.skillUpdateTimeFunction.forEach(x => x(this.counter));
+    }
+
+    AddTimeCounterFunction = (f:Function): void => {
+        this.skillUpdateTimeFunction.push(f);
     }
 
     RemoveByDeath = (type: string): void => {
@@ -215,8 +225,9 @@ export class ClickerIndex {
         }
         let index = this;
         setInterval(function () {
+            index.counter+=1;
+            index.skillUpdateTimeFunction.forEach(x => x(index.counter));
             index.CurrentStorage.MainGameCycle(index.counter)
-            index.counter++;
        }, 50);
    }
 }

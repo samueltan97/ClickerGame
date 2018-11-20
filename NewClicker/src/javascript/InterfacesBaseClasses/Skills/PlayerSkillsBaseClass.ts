@@ -16,6 +16,7 @@ export class PlayerActiveSkill implements IActiveSkill {
     isUnlocked: boolean;
     inCooldown: boolean;
     cooldown: number;
+    timeCounter: number;
 
     constructor(id: number, name: string, cooldown: number, playerSkillFactory: ISkillFactory) {
         this.name = name;
@@ -25,6 +26,7 @@ export class PlayerActiveSkill implements IActiveSkill {
         this.level = 1;
         this.isUnlocked = false;
         this.SkillFactory = playerSkillFactory;
+        this.timeCounter = 1;
     }
 
     get Level(): number {
@@ -47,6 +49,10 @@ export class PlayerActiveSkill implements IActiveSkill {
         this.cooldown = this.cooldown * multiplier;
     }
 
+    UpdateTimeCounter = (counter: number): void => {
+        this.timeCounter = counter;
+    }
+
     Unlock(): void {
         if (!this.isUnlocked) {
             this.isUnlocked = true;
@@ -55,7 +61,7 @@ export class PlayerActiveSkill implements IActiveSkill {
         }
     }
 
-    CooldownCounter(): void {
+    CooldownCounter(currentCounter:number): void {
         let skill = this;
         skill.inCooldown = true;
         $("#" + this.name.replace(/\s+/g, '') + "-cooldown").css({ "opacity": 1 });
@@ -77,10 +83,31 @@ export class PlayerActiveSkill implements IActiveSkill {
                 skill.inCooldown = false; 
             }, skill.cooldown / 2);
         }, skill.cooldown / 2);
+
+        let cooldownTimer: number = this.cooldown;
+        let displayTime: string = cooldownTimer.toString();
+        for (var i = skill.cooldown / 100; i > -1; i--) {
+            let currentCounter: string = i.toString();
+            if (currentCounter.length == 1) {
+                let finalCounter = "0." + currentCounter;
+                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
+            } else {
+                let finalCounter = currentCounter.slice(0, currentCounter.length - 2) + "." + currentCounter[currentCounter.length - 1];
+                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
+            }
+        }
+    }
+
+    CooldownTimerCountdown(timer: number, number: string): void {
+        let skill = this;
+        setTimeout(function () {
+            $("#" + skill.name.replace(/\s+/g, '') + "-cooldown-counter").text(number);
+        }, timer);
+        //DarkRitual's timer is an issue
     }
 
     Action(input?:number): void {
-        this.CooldownCounter();
+        this.CooldownCounter(this.timeCounter);
     }
 
     LevelUp(): void {

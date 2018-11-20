@@ -1,5 +1,6 @@
 ﻿import { IStageLevel } from "./IStageLevel";
 import { StageLevelValueUpdateEvent } from "./ValueUpdateEvent";
+import { adjustValueToExponential } from "../CSSAnimation/CSSAnimation";
 
 export class StageLevel implements IStageLevel {
     private maxZone: number;
@@ -34,13 +35,13 @@ export class StageLevel implements IStageLevel {
             this.maxZone += 1;            
             this.Zone += 1;
             this.enemyDefeated = 0;
-            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#village-zone-text").text(this.StageName + " - Zone " + adjustValueToExponential(this.Zone));
             $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
         } else if (isAuto || this.Zone != this.maxZone) {
             this.Zone += 1;
             this.enemyDefeated = 0;
-            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#village-zone-text").text(this.StageName + " - Zone " + adjustValueToExponential(this.Zone));
             $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
         }
@@ -50,7 +51,7 @@ export class StageLevel implements IStageLevel {
         if (this.Zone > 1) {
             this.Zone -= 1;
             this.enemyDefeated = 0;
-            $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+            $("#village-zone-text").text(this.StageName + " - Zone " + adjustValueToExponential(this.Zone));
             $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
             this.Update();
         }
@@ -68,7 +69,7 @@ export class StageLevel implements IStageLevel {
     }
 
     Birth(): void {
-        $("#village-zone-text").text(this.StageName + " - Zone " + this.Zone);
+        $("#village-zone-text").text(this.StageName + " - Zone " + adjustValueToExponential(this.Zone));
         $("#combat-text-left").text("Zone Status: " + (this.EnemyDefeated + 1) + "/10")
     }
 

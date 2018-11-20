@@ -1,6 +1,6 @@
 ﻿import { IPlayer } from "./IPlayer";
 import { IMortality } from "./IMortality";
-import { adjustBarAnimation } from "../CSSAnimation/CSSAnimation";
+import { adjustBarAnimation, adjustValueToExponential } from "../CSSAnimation/CSSAnimation";
 import { ILevelProgression } from "./ILevelProgression";
 import { IRegeneration } from "./IRegeneration";
 import { PlayerValueUpdateEvent } from "./ValueUpdateEvent";
@@ -50,7 +50,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentArmyVitality(count:number) {
         this.armyVitality = count;
-        $("#player-army-vitality").text("Army Vitality: " + this.CurrentArmyVitality);
+        $("#player-army-vitality").text("Army Vitality: " + adjustValueToExponential(this.CurrentArmyVitality));
         this.Update();
     }
 
@@ -77,7 +77,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     set CurrentDamage(multiplier: number) {
         this.baseDamage = this.baseDamage * multiplier;
-        $("#player-click-damage").text("Click Damage: " + this.CurrentDamage);
+        $("#player-click-damage").text("Click Damage: " + adjustValueToExponential(this.CurrentDamage));
     }
 
     get ClickCount(): number {
@@ -101,7 +101,7 @@ export class Player implements IPlayer, ILevelProgression{
 
     IncreaseArmyVitality():void {
         this.armyVitality += 1;
-        $("#player-army-vitality").text("Army Vitality: " + this.CurrentArmyVitality);
+        $("#player-army-vitality").text("Army Vitality: " + adjustValueToExponential(this.CurrentArmyVitality));
         this.Update();
     }
 
@@ -114,7 +114,7 @@ export class Player implements IPlayer, ILevelProgression{
             this.currentExperience += experience;
         }
         adjustBarAnimation("player-exp", "EXP", this.CurrentExperience, this.MaxExperience);
-        $("#player-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        $("#player-exp-text").text("EXP: " + adjustValueToExponential(this.CurrentExperience) + "/" + adjustValueToExponential(this.MaxExperience) + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
         this.Update();
     }
 
@@ -124,19 +124,19 @@ export class Player implements IPlayer, ILevelProgression{
         this.IncreaseArmyVitality();
         this.IncreaseSkillPoint();
         adjustBarAnimation("player-exp", "EXP", this.CurrentExperience, this.MaxExperience);
-        $("#player-exp-text").text("EXP: " + this.CurrentExperience + "/" + this.MaxExperience + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
-        $("#stats-desc-lvl").text("LVL: " + this.CurrentLevel);
-        $("#player-click-damage").text("Click Damage: " + this.CurrentDamage);
+        $("#player-exp-text").text("EXP: " + adjustValueToExponential(this.CurrentExperience) + "/" + adjustValueToExponential(this.MaxExperience) + " (" + Math.floor(this.CurrentExperience / this.MaxExperience * 100) + "%)");
+        $("#stats-desc-lvl").text("LVL: " + adjustValueToExponential(this.CurrentLevel));
+        $("#player-click-damage").text("Click Damage: " + adjustValueToExponential(this.CurrentDamage));
         this.Update();
     }
 
     IncreaseSkillPoint(): void {
         this.skillPoint += 1;
-        $("#skill-points-repo").text("Skill Points: " + this.skillPoint);
+        $("#skill-points-repo").text("Skill Points: " + adjustValueToExponential(this.skillPoint));
     }
 
     DecreaseSkillPoint(): void {
         this.skillPoint -= 1;
-        $("#skill-points-repo").text("Skill Points: " + this.skillPoint);
+        $("#skill-points-repo").text("Skill Points: " + adjustValueToExponential(this.skillPoint));
     }
 }

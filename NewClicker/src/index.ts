@@ -276,6 +276,9 @@ var Valor: IPassiveSkill = skillFactory.CreatePlayerPassive("Valor");
 var WarCry: IPassiveSkill = skillFactory.CreatePlayerPassive("WarCry");
 
 var SkillArray: any = [Recruit, Pickpocket, Steal, CoinAffinity, Heist, MoneyIsPower, Ballad, Solo, MelodicAura, SongOfCourage, ChorusOfDeath, ImpactStab, Valor, Whirlwind, WarCry, FinalBlow, DarkRitual, Biohack, CursedContract, VitalContract, Heal, Purify, RecoveryMantra, ArcaneShelter, Bang, DoubleTap, StrafingRun, Marksman, Matrix, FocusShot, TriangleFire, AuraOfAccuracy, SuperiorPerception, Hurricane, Lance, CrossCut, LanceDance, IndraBlessing, UnlimitedLanceWork]; 
+var ActiveSkillArray: IActiveSkill[] = [Recruit, Steal, Heist, MoneyIsPower, Ballad, Solo, SongOfCourage, ChorusOfDeath,
+    ImpactStab, Whirlwind, FinalBlow, DarkRitual, Biohack, CursedContract, Heal, Purify, ArcaneShelter,
+    StrafingRun, Hurricane, CrossCut, LanceDance, UnlimitedLanceWork];
 
 function UnlockSkill(index: number):void {
     SkillArray[index].Unlock();
@@ -367,7 +370,8 @@ $(document).ready(function () {
 
     //NEW
 
-    clickerIndex.AddSkillUnlockFunction(UnlockSkill); //Initialize event listeners for skills
+    clickerIndex.AddSkillUnlockFunction(UnlockSkill);//Initialize event listeners for skills
+    ActiveSkillArray.forEach(x => clickerIndex.AddTimeCounterFunction(x.UpdateTimeCounter));//Initialize event listeners for skills
     Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
     Steal.Unlock(); //Trial skill and to gain resources faster to see effects
     CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
