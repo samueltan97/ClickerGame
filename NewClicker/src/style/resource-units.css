@@ -1,14 +1,14 @@
 .resource-cell {
   display: inline-block;
-  max-height: 6vh;
-  max-width: 12vh; }
+  max-height: 100%;
+  max-width: 18.5%; }
 
 .resource-desc {
-  height: 6vh;
-  width: 6vh;
+  height: 96%;
+  width: 48%;
   position: absolute;
   transform: translate(110%, -100%);
-  font-size: 2vh; }
+  font-size: 100%; }
 
 #unit-repo {
   top: 6%;
@@ -64,15 +64,16 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 1; }
-      #resource-unit-div #resource-unit-area #resource-unit-title #resource-unit-title-text {
-        position: absolute;
-        font-size: 4.5vh;
-        font-weight: 800;
-        height: 7.12vh;
-        line-height: 7.12vh;
-        left: 50%;
-        transform: translateX(-50%);
-        top: -2%; }
+        #resource-unit-div #resource-unit-area #resource-unit-title #resource-unit-title-text {
+            position: absolute;
+            font-size: 200%;
+            font-weight: 800;
+            height: 23.5%;
+            line-height: 150%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -2%;
+        }
     #resource-unit-div #resource-unit-area #unit-area {
       position: absolute;
       width: 95%;
@@ -96,7 +97,7 @@
         top: 10%; }
         #resource-unit-div #resource-unit-area #primary-resource #primary-resource-logo #primary-resource-logo-text {
           position: absolute;
-          font-size: 4vh;
+          font-size: 200%;
           font-weight: 400;
           left: 50%;
           transform: translate(-50%, -50%);
@@ -125,7 +126,7 @@
         top: 10%; }
         #resource-unit-div #resource-unit-area #secondary-resource #secondary-resource-logo #secondary-resource-logo-text {
           position: absolute;
-          font-size: 4vh;
+          font-size: 200%;
           font-weight: 400;
           left: 50%;
           transform: translate(-50%, -50%);
@@ -155,7 +156,7 @@
         top: 10%; }
         #resource-unit-div #resource-unit-area #tertiary-resource #tertiary-resource-logo #tertiary-resource-logo-text {
           position: absolute;
-          font-size: 4vh;
+          font-size: 200%;
           font-weight: 400;
           left: 50%;
           transform: translate(-50%, -50%);

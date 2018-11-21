@@ -13,6 +13,7 @@ import { IActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IActiveS
 import { ClickerIndex } from "./javascript/InterfacesBaseClasses/ClickerIndex";
 import { PlayerActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/PlayerSkillsBaseClass";
 import { IPassiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IPassiveSkill";
+import { adjustValueToExponential } from "./javascript/CSSAnimation/CSSAnimation";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
@@ -372,8 +373,8 @@ $(document).ready(function () {
 
     clickerIndex.AddSkillUnlockFunction(UnlockSkill);//Initialize event listeners for skills
     ActiveSkillArray.forEach(x => clickerIndex.AddTimeCounterFunction(x.UpdateTimeCounter));//Initialize event listeners for skills
-    //Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
-    //Steal.Unlock(); //Trial skill and to gain resources faster to see effects
+    Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
+    Steal.Unlock(); //Trial skill and to gain resources faster to see effects
     //CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
     //Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
@@ -429,18 +430,42 @@ $(document).ready(function () {
 
     $(".refiner-calibrator-left-arrow").click(function () {
         let id = $(this).attr("refinerCalibration");
-        let currentQuantity: string = $("#" + id).text();
-        if (currentQuantity != "X 1") {
-            let newQuantity: string = currentQuantity.RemoveLast();
+        let readQuantity: string = $("#" + id).text();
+        let checkExponential: string = readQuantity[4];
+        if (checkExponential == "e") {
+            let realQuantity: string = readQuantity.split(" ")[1];
+            let numberOfZero: number = parseInt(realQuantity.split("e")[1]);
+            let currentQuantity: number = parseInt(realQuantity.split("e")[0]);
+            for (var i = 0; i < numberOfZero; i++) {
+                currentQuantity = parseInt(currentQuantity.toString().concat("0"));
+            }
+            let newQuantity: string = "X " + adjustValueToExponential(currentQuantity / 10);
+            $("#" + id).text(newQuantity);
+        } else {
+            let currentQuantity: number = parseInt(readQuantity.split(" ")[1]);
+            let newQuantity: string = "X " + adjustValueToExponential(currentQuantity / 10);
             $("#" + id).text(newQuantity);
         }
     });
 
     $(".refiner-calibrator-right-arrow").click(function () {
         let id = $(this).attr("refinerCalibration");
-        let currentQuantity: string = $("#" + id).text();
-        let newQuantity: string = currentQuantity.concat("0");
-        $("#" + id).text(newQuantity);
+        let readQuantity: string = $("#" + id).text();
+        let checkExponential: string = readQuantity[4];
+        if (checkExponential == "e") {
+            let realQuantity: string = readQuantity.split(" ")[1];
+            let numberOfZero: number = parseInt(realQuantity.split("e")[1]);
+            let currentQuantity: number = parseInt(realQuantity.split("e")[0]);
+            for (var i = 0; i < numberOfZero; i++) {
+                currentQuantity = parseInt(currentQuantity.toString().concat("0"));
+            }
+            let newQuantity: string = "X " + adjustValueToExponential(currentQuantity * 10);
+            $("#" + id).text(newQuantity);
+        } else {
+        let currentQuantity: number = parseInt(readQuantity.split(" ")[1]);
+        let newQuantity: string = "X " + adjustValueToExponential(currentQuantity * 10);
+            $("#" + id).text(newQuantity);
+        }
     });
 
     $(".refiner-train").click(function () {
@@ -516,7 +541,7 @@ $(document).ready(function () {
     //}, 150);
 
     HeroUnlock(0);
-    clickerIndex.CurrentStorage.HeroArr[0].Birth();
+    //clickerIndex.CurrentStorage.HeroArr[0].Birth();
     clickerIndex.SetUpClicker();
 
 });

@@ -15,7 +15,7 @@ export function adjustValueToExponential(value: number):string {
     let valueString: string = value.toString();
     if (valueString.length > 7) {
         let partOne: string = valueString.slice(0, 2);
-        let partTwo: string = valueString.slice(3, valueString.length - 1);
+        let partTwo: string = valueString.slice(2, valueString.length);
         return partOne + "e" + (partTwo.length).toString();
     } else {
         return valueString;
@@ -23,7 +23,7 @@ export function adjustValueToExponential(value: number):string {
 }
 
 export function popOutMessage(type: string, title: string, message: string, time: number): void {
-    let id: string = (type + title + message).replace(/\s+/g, '');
+    let id: string = (type + title + (Math.random()*10).toString()).replace(/\s+/g, '');
     $("#pop-out-message-repo").append("<div " + "id='" + id + "' class='pop-out-message-block' type='" + type + "'><div id = 'pop-out-message-title'>" + title + "</div><div id ='pop-out-message-text'>" + message + "</div></div>");
     if ($("#pop-out-message-repo").children.length < 3) {
         $("#" + id).fadeIn(100);

@@ -43,14 +43,14 @@
           top: 5%;
           left: 50%;
           transform: translate(-50%, 0%);
-          font-size: 5vh;
+          font-size: 240%;
           font-weight: 800; }
         #map-div #map-div-area #stats-selected #stats-desc #stats-desc-lvl {
           position: absolute;
           top: 25%;
           left: 50%;
           transform: translate(-50%, 0%);
-          font-size: 3vh;
+          font-size: 144%;
           font-weight: 400; }
         #map-div #map-div-area #stats-selected #stats-desc #player-exp-div {
           height: 10%;
@@ -81,40 +81,39 @@
                 top: 50%;
                 width: max-content;
                 transform: translate(-50%, -50%);
-                font-size: 1.7vh;
+                font-size: 70%;
                 font-weight: 800;
                 color: #000000;
-                height: 2vh;
-                line-height: 2vh;
+                height: 70%;
+                line-height: 140%;
             }
         #map-div #map-div-area #stats-selected #stats-desc #player-class {
           position: absolute;
-          width: max-content;
+          width: 100%;
           top: 55%;
-          left: 50%;
-          transform: translate(-50%, 0%);
-          font-size: 2.5vh; }
+          text-align:center;
+          font-size: 100%; }
         #map-div #map-div-area #stats-selected #stats-desc #player-army-vitality {
-          position: absolute;
-          width: max-content;
-          top: 65%;
-          left: 50%;
-          transform: translate(-50%, 0%);
-          font-size: 2.5vh; }
+            position: absolute;
+            width: 100%;
+            top: 65%;
+            text-align: center;
+            font-size: 100%;
+        }
         #map-div #map-div-area #stats-selected #stats-desc #player-click-damage {
-          position: absolute;
-          width: max-content;
-          top: 75%;
-          left: 50%;
-          transform: translate(-50%, 0%);
-          font-size: 2.5vh; }
+            position: absolute;
+            width: 100%;
+            top: 75%;
+            text-align: center;
+            font-size: 100%;
+        }
         #map-div #map-div-area #stats-selected #stats-desc #player-avg-dps {
-          position: absolute;
-          width: max-content;
-          top: 85%;
-          left: 50%;
-          transform: translate(-50%, 0%);
-          font-size: 2.5vh; }
+            position: absolute;
+            width: 100%;
+            top: 85%;
+            text-align: center;
+            font-size: 100%;
+        }
     #map-div #map-div-area #skills-selected {
       position: absolute;
       top: 5%;
@@ -132,13 +131,14 @@
         background-image: url(images/Layout/Player/Skills/SkillPointBackground.png);
         background-size: 100% 100%; }
         #map-div #map-div-area #skills-selected #skill-points-div #skill-points-repo {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: max-content;
-          font-size: 3vh;
-          font-weight: 800; }
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            text-align: center;
+            font-size: 3vh;
+            font-weight: 800;
+        }
       #map-div #map-div-area #skills-selected #skills-separator {
         position: absolute;
         height: 10%;
@@ -182,31 +182,33 @@
             width: 45%; }
             #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-name {
                 position: absolute;
-                width: max-content;
+                width: 100%;
                 top: 50%;
-                font-size: 1.5vw;
+                font-size: 140%;
                 font-weight: 600;
-                left: 50%;
+                text-align: center;
                 height: 50%;
-                transform: translate(-50%, -70%);
+                transform: translateY(-70%);
             }
             #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-name-only {
+                
                 position: absolute;
-                width: max-content;
+                width: 100%;
                 top: 50%;
-                left: 50%;
-                font-size: 1.5vw;
+                text-align: center;
+                font-size: 140%;
                 font-weight: 600;
                 height: 50%;
-                transform: translate(-50%, -50%);
+                transform: translateY(-50%);
             }
             #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-lvl {
-              position: absolute;
-              width: max-content;
-              top: 50%;
-              left: 50%;
-              height: 50%;
-              transform: translate(-50%, 10%); }
+                position: absolute;
+                width: 100%;
+                top: 50%;
+                text-align: center;
+                height: 50%;
+                transform: translateY(10%);
+            }
           #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-level-up-button-frame {
             position: absolute;
             top: 50%;
@@ -238,21 +240,21 @@
           position: absolute;
           left: 65%;
           transform: translate(-50%, 0%);
-          font-size: 3.5vh;
+          font-size: 170%;
           font-weight: 800; }
         #map-div #map-div-area #heroes-selected .heroes-block .heroes-lvl {
           position: absolute;
           top: 11%;
           left: 65%;
           transform: translate(-50%, 0%);
-          font-size: 2.5vh;
+          font-size: 120%;
           font-weight: 400; }
         #map-div #map-div-area #heroes-selected .heroes-block .heroes-dps {
           position: absolute;
           top: 18%;
           left: 65%;
           transform: translate(-50%, 0%);
-          font-size: 2.5vh;
+          font-size: 120%;
           font-weight: 400; }
         #map-div #map-div-area #heroes-selected .heroes-block .heroes-exp-div {
           height: 12.8%;
@@ -263,7 +265,7 @@
           #map-div #map-div-area #heroes-selected .heroes-block .heroes-exp-div .heroes-exp-bar-background {
             position: absolute;
             width: 70%;
-            height: 85%;
+            height: 75%;
             top: 85%;
             left: 66%;
             transform: translate(-50%, -50%);
@@ -282,14 +284,14 @@
                 position: absolute;
                 top: 50%;
                 z-index: 1;
-                left: 50%;
-                width: max-content;
-                transform: translate(-50%, -50%);
-                font-size: 1.7vh;
+                width: 100%;
+                text-align:center;
+                transform: translateY(-50%);
+                font-size: 80%;
                 font-weight: 800;
                 color: #000000;
-                height: 2vh;
-                line-height: 2vh; }
+                height: 50%;
+                line-height: 100%; }
         #map-div #map-div-area #heroes-selected .heroes-block .heroes-hp-div {
           height: 12.8%;
           top: 22%;
@@ -314,18 +316,19 @@
               transform: translateY(-50%);
               background-image: url(images/Layout/Player/Heroes/HP_Bar.png);
               background-size: 100% 100%; }
-              #map-div #map-div-area #heroes-selected .heroes-block .heroes-hp-div .heroes-hp-bar-background .heroes-hp-text {
+            #map-div #map-div-area #heroes-selected .heroes-block .heroes-hp-div .heroes-hp-bar-background .heroes-hp-text {
                 position: absolute;
-                z-index:1;
-                left: 50%;
                 top: 50%;
-                width: max-content;
-                transform: translate(-50%, -50%);
-                font-size: 1.7vh;
+                z-index: 1;
+                width: 100%;
+                text-align: center;
+                transform: translateY(-50%);
+                font-size: 80%;
                 font-weight: 800;
                 color: #000000;
-                height: 2vh;
-                line-height: 2vh; }
+                height: 50%;
+                line-height: 100%;
+            }
         #map-div #map-div-area #heroes-selected .heroes-block .heroes-skills-repo {
           position: absolute;
           width: 55%;
@@ -354,10 +357,10 @@
     background-image: url(images/Layout/Player/Title.png); }
     #map-div #map-div-title #map-title-text {
       position: absolute;
-      font-size: 6vh;
+      font-size: 300%;
       font-weight: 800;
-      height: 7.12vh;
-      line-height: 7.12vh;
+      height: 300%;
+      line-height: 120%;
       left: 50%;
       transform: translateX(-50%);
       top: 10%; }
