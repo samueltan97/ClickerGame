@@ -181,12 +181,25 @@
             height: 100%;
             width: 45%; }
             #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-name {
-              position: absolute;
-              width: max-content;
-              top: 50%;
-              left: 50%;
-              height: 50%;
-              transform: translate(-50%, -70%); }
+                position: absolute;
+                width: max-content;
+                top: 50%;
+                font-size: 1.5vw;
+                font-weight: 600;
+                left: 50%;
+                height: 50%;
+                transform: translate(-50%, -70%);
+            }
+            #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-name-only {
+                position: absolute;
+                width: max-content;
+                top: 50%;
+                left: 50%;
+                font-size: 1.5vw;
+                font-weight: 600;
+                height: 50%;
+                transform: translate(-50%, -50%);
+            }
             #map-div #map-div-area #skills-selected #skills-repo .skills-block .skills-stats .skills-stats-lvl {
               position: absolute;
               width: max-content;

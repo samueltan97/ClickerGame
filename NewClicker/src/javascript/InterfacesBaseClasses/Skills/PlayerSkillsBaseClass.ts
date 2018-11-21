@@ -7,6 +7,7 @@ import { IStageLevel } from "../IStageLevel";
 import { HeroActiveSkill } from "./HeroSkillsBaseClass";
 import { SkillFactory } from "./PlayerSkill";
 import { ISkillFactory } from "./ISkillFactory";
+import { adjustValueToExponential } from "../../CSSAnimation/CSSAnimation";
 
 export class PlayerActiveSkill implements IActiveSkill {
     public readonly name: string;
@@ -16,7 +17,8 @@ export class PlayerActiveSkill implements IActiveSkill {
     isUnlocked: boolean;
     inCooldown: boolean;
     cooldown: number;
-    timeCounter: number;
+    startCounter: number;
+    currentCounter: number;
 
     constructor(id: number, name: string, cooldown: number, playerSkillFactory: ISkillFactory) {
         this.name = name;
@@ -26,7 +28,8 @@ export class PlayerActiveSkill implements IActiveSkill {
         this.level = 1;
         this.isUnlocked = false;
         this.SkillFactory = playerSkillFactory;
-        this.timeCounter = 1;
+        this.startCounter = 1;
+        this.currentCounter = 1;
     }
 
     get Level(): number {
@@ -50,7 +53,20 @@ export class PlayerActiveSkill implements IActiveSkill {
     }
 
     UpdateTimeCounter = (counter: number): void => {
-        this.timeCounter = counter;
+        this.currentCounter = counter;
+        if (this.isUnlocked && this.InCooldown) {
+            let counterDifference: number = this.currentCounter + 2 - this.startCounter;
+            let timeDifference: number = counterDifference * 100 / 2;
+            if (timeDifference % 100 == 0) {
+                let newTime: string = (Math.min(0, (this.cooldown - timeDifference)) / 100).toString();
+                let partOneFinalTime: string = (newTime.length > 1) ? newTime.Take(newTime.length - 1) : "0";
+                let partTwoFinalTime: string = newTime.TakeLast(1);
+                $("#" + this.name.replace(/\s+/g, '') + "-cooldown-counter").text(partOneFinalTime + "." + partTwoFinalTime);
+                //DarkRitual's timer is an issue
+            }
+        } else {
+            $("#" + this.name.replace(/\s+/g, '') + "-cooldown-counter").text(adjustValueToExponential(this.cooldown / 1000) + ".0");
+        }
     }
 
     Unlock(): void {
@@ -83,19 +99,6 @@ export class PlayerActiveSkill implements IActiveSkill {
                 skill.inCooldown = false; 
             }, skill.cooldown / 2);
         }, skill.cooldown / 2);
-
-        let cooldownTimer: number = this.cooldown;
-        let displayTime: string = cooldownTimer.toString();
-        for (var i = skill.cooldown / 100; i > -1; i--) {
-            let currentCounter: string = i.toString();
-            if (currentCounter.length == 1) {
-                let finalCounter = "0." + currentCounter;
-                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
-            } else {
-                let finalCounter = currentCounter.slice(0, currentCounter.length - 2) + "." + currentCounter[currentCounter.length - 1];
-                this.CooldownTimerCountdown(skill.cooldown - (i * 100), finalCounter);
-            }
-        }
     }
 
     CooldownTimerCountdown(timer: number, number: string): void {
@@ -106,8 +109,10 @@ export class PlayerActiveSkill implements IActiveSkill {
         //DarkRitual's timer is an issue
     }
 
-    Action(input?:number): void {
-        this.CooldownCounter(this.timeCounter);
+    Action(input?: number): void {
+        this.startCounter = this.currentCounter;
+        this.CooldownCounter(this.currentCounter);
+        this.UpdateTimeCounter(this.currentCounter);
     }
 
     LevelUp(): void {

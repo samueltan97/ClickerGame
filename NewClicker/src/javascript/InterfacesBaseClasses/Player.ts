@@ -24,7 +24,7 @@ export class Player implements IPlayer, ILevelProgression{
         this.job = job;
         this.skillPoint = 0;
         this.armyVitality = 1;
-        this.baseExperience = 5; //temporary formula
+        this.baseExperience = 20; //temporary formula
         this.baseDamage = baseDamage;
         this.currentLevel = 1;
         this.currentExperience = 0;

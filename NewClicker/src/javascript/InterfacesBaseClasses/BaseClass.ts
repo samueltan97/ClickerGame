@@ -7,7 +7,7 @@ import $ from "jquery";
 import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
-import { adjustBarAnimation, adjustValueToExponential } from "../CSSAnimation/CSSAnimation";
+import { adjustBarAnimation, adjustValueToExponential, popOutMessage } from "../CSSAnimation/CSSAnimation";
 import { isDate, isBoolean } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
@@ -85,7 +85,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get MaxHP(): number {         
-        return this.baseHP * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
+        return this.baseHP * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone* this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     get Count(): number {
@@ -97,7 +97,7 @@ export class Enemy implements IMortality, ICombative, IFeedbackLoop, IRegenerati
     }
 
     get CurrentDamage(): number {
-        return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
+        return this.baseDamage * this.stage.CurrentStage * this.stage.CurrentStage * this.stage.CurrentZone * this.stage.CurrentZone; //Placeholder algorithm for maxhp value
     }
 
     set ResourceArray(array: number[]) {
@@ -247,13 +247,13 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get MaxHP(): number {
-        this.maxHP = this.baseHP * this.player.CurrentArmyVitality* this.player.CurrentArmyVitality;
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality* 10;
         return this.maxHP; //Placeholder algorithm for maxhp value
     }
 
     set MaxHP(multiplier: number) {
         this.baseHP = this.baseHP * multiplier;
-        this.maxHP = this.baseHP * this.player.CurrentArmyVitality * this.player.CurrentArmyVitality;
+        this.maxHP = this.baseHP * this.player.CurrentArmyVitality * 10;
         adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.maxHP);
         $("#fighter-hp-text").text("HP: " + adjustValueToExponential(this.CurrentHP) + "/" + adjustValueToExponential(this.maxHP));
         this.Update();
@@ -272,7 +272,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     get CurrentDamage(): number {
-        return this.baseDamage * this.player.CurrentArmyVitality * this.player.CurrentArmyVitality * this.Count; //Placeholder algorithm for damage value
+        return this.baseDamage * this.player.CurrentArmyVitality * 10 * this.Count; //Placeholder algorithm for damage value
     }
 
     set CurrentDamage(multiplier: number) {
@@ -618,9 +618,6 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     UpdateFeedback(counter: number): number {
-        if ((counter +5) % 20 == 0 && !this.isDead && this.isUnlocked) {
-            return this.CurrentDamage;
-        }
         return 0;
     }
 
@@ -731,6 +728,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     Unlocked(): void {
         if (!this.isUnlocked) {
+            popOutMessage("hero", "Hero Unlocked", "You have unlocked Charles!", 1000);
             alert("You have unlocked " + this.name.split(" ")[0]);
        
         $("#" + this.name.split(" ")[0] + "-hero-block").fadeIn(100);

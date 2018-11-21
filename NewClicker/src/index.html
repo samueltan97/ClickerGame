@@ -100,7 +100,7 @@
                         <img id="RevoltWarrior-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/rev-warriorhurt.png" />
                         <img id="Siren-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Siren-hurt.png" />
                         <img id="Slime-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Slime-hurt.png" />
-                        <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Harpy-hurt.png" />
+                        <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Arachne-tattoo.png" />
                         <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Harpy-hurt.png" />
                         <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Harpy-hurt.png" />
                         <img id="Arachne-hurt" class="monster-hurt" style="max-height:100%; max-width:100%;" src="style/images/Actual/Enemy/Harpy-hurt.png" />
@@ -517,7 +517,7 @@
                             </div>
                             <div class="skills-icon"></div>
                             <div class="skills-stats">
-                                <div class="skills-stats-name">Pickpocket</div>
+                                <div class="skills-stats-name-only">Pickpocket</div>
                             </div>
                         </div>
                         <div id="Steal-skill-block" class="skills-block" style="display:none;">
@@ -1833,7 +1833,7 @@
                     <div class="side-panel-info-card-title-text">Achievements</div>
                 </div>
                 <div class="side-panel-info-card-separator"></div>
-                <div id="achievements-repo" class="side-panel-repo">
+                <div id="achievement-repo" class="side-panel-repo">
                     <div class="side-panel-block">
                     </div>
                     <div class="side-panel-block">
@@ -1872,39 +1872,66 @@
                 </div>
                 <div class="side-panel-info-card-separator"></div>
                 <div id="inventory-repo" class="side-panel-repo">
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-                    <div class="inventory-cubicle"></div>
-
+                    <div id="inventory-repo-bkgd">
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                        <div class="inventory-cubicle"></div>
+                    </div>
+                    <div id="inventory-cubicle-repo">
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                        <div class="inventory-cubicle-item">
+                            <img src="./style/images/Actual/Resources/Product/bow.png" style="max-height:100%;width:100%;" />
+                        </div>
+                    </div>
 
                 </div>
 
@@ -1926,6 +1953,12 @@
             <div id="sophie-name-box"><div id="sophie-name-box-text">Sophie</div></div>
         </div>
         <div id="side-panel-black-overlay"></div>
+        <div id="pop-out-message-repo">
+            <div class="pop-out-message-block">
+                <div id="pop-out-message-title"> Achievement Unlocked</div>
+                <div id="pop-out-message-text">First Taste of Charisma</div>
+            </div>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>

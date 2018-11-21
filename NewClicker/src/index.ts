@@ -122,10 +122,10 @@ var RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
     MagusMaster, PaladinMaster, ArcaneGunslingerMaster, MysticRangerMaster];
 
 //Heroes
-var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 15, 1, [19, 20, 21, 22, 23], thePlayer);
-var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 15, 1, [24, 25, 26, 27, 28], thePlayer);
-var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 15, 1, [29, 30, 31, 32, 33], thePlayer);
-var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 15, 1, [34, 35, 36, 37, 38], thePlayer);
+var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 50, 1, [19, 20, 21, 22, 23], thePlayer);
+var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 50, 1, [24, 25, 26, 27, 28], thePlayer);
+var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 50, 1, [29, 30, 31, 32, 33], thePlayer);
+var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 50, 1, [34, 35, 36, 37, 38], thePlayer);
 var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
 function HeroUnlock(index: number): void {
@@ -372,17 +372,17 @@ $(document).ready(function () {
 
     clickerIndex.AddSkillUnlockFunction(UnlockSkill);//Initialize event listeners for skills
     ActiveSkillArray.forEach(x => clickerIndex.AddTimeCounterFunction(x.UpdateTimeCounter));//Initialize event listeners for skills
-    Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
-    Steal.Unlock(); //Trial skill and to gain resources faster to see effects
-    CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
-    Heal.Unlock(); //Trial skill and to gain resources faster to see effects
+    //Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
+    //Steal.Unlock(); //Trial skill and to gain resources faster to see effects
+    //CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
+    //Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
-    HeroUnlock(1);
-    HeroUnlock(2);
-    HeroUnlock(3);
-    for (var i = 0; i < SkillArray.length; i++) {
-        UnlockSkill(i);
-    }
+    //HeroUnlock(1);
+    //HeroUnlock(2);
+    //HeroUnlock(3);
+    //for (var i = 0; i < SkillArray.length; i++) {
+    //    UnlockSkill(i);
+    //}
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
