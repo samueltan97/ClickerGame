@@ -252,6 +252,7 @@
                             <img style="position:absolute; top: 30%; transform: translateX(12%); max-width:16%;" src="style/images/Actual/Ally/Magical Archer.png" />
                         </div>
                     </div>
+                    <div id="unit-repo-slider" slideTab="unit-repo"></div>
                 </div>
                 <div id="resource-area">
                     <div id="primary-resource">
@@ -313,12 +314,13 @@
                                     <div class="resource-desc">Coin<br /><div id="Coin-quantity">X 0</div></div>
                                 </div>
                             </div>
+                            <div id="primary-resource-repo-slider" slideTab="primary-resource-repo"></div>
                         </div>
                     </div>
                     <div id="secondary-resource">
                         <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/ResourceStrip.png" />
                         <div id="secondary-resource-logo">
-                            <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/SecondaryWindow.png" />
+                            <img style="max-height:100%; max-width:120%; position:relative;left:-10%;" src="style/images/Layout/UnitResource/Resource/SecondaryWindow.png" />
                             <div id="secondary-resource-logo-text">
                                 II
                             </div>
@@ -373,19 +375,20 @@
                                     <img style="position:absolute; width: 40%; height: 80%; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/arrow.png" />
                                     <div class="resource-desc">Arrow<br /><div id="Arrow-quantity">X 0</div></div>
                                 </div>
-                            <div class="tooltip resource-cell ">
+                                <div class="tooltip resource-cell ">
                                     <span style="white-space:normal;" class="tooltiptext-right">Wood is a useful resource. It can be used to build many different things like wepaons, armor, stove etc. We should learn to love the environment.</span>
                                     <img style="display:inline-block; max-height:100%; max-width: 50%;" src="style/images/Layout/UnitResource/Resource/ResourceCubicle.png" />
                                     <img style="position:absolute; width: 40%; height: 80%; transform: translateX(-110%); top: 0.5vh;" src="style/images/Actual/Resources/Intermediate/steel plate.png" />
                                     <div class="resource-desc">Steel Plate<br /><div id="SteelPlate-quantity">X 0</div></div>
                                 </div>
                             </div>
+                            <div id="secondary-resource-repo-slider" slideTab="secondary-resource-repo"></div>
                         </div>
                     </div>
                     <div id="tertiary-resource">
                         <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/ResourceStrip.png" />
                         <div id="tertiary-resource-logo">
-                            <img style="max-height:100%; max-width:100%;" src="style/images/Layout/UnitResource/Resource/TertiaryWindow.png" />
+                            <img style="max-height:100%; max-width:160%; position:relative;left:-30%;" src="style/images/Layout/UnitResource/Resource/TertiaryWindow.png" />
                             <div id="tertiary-resource-logo-text">
                                 III
                             </div>
@@ -477,6 +480,7 @@
                                     <div class="resource-desc">Holy Lance<br /><div id="HolyLance-quantity">X 0</div></div>
                                 </div>
                             </div>
+                            <div id="tertiary-resource-repo-slider" slideTab="tertiary-resource-repo"></div>
                         </div>
                     </div>
                 </div>
@@ -869,237 +873,240 @@
                     </div>
                 </div>
                 <div id="heroes-selected">
-                    <div id="Charles-hero-block" class="heroes-block" style="display:none;">
-                        <div class="heroes-background">
-                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
-                        </div>
-                        <div class="heroes-name">Charles</div>
-                        <div id="Charles-lvl" class="heroes-lvl">LVL: 1</div>
-                        <div class="heroes-dps">DPS: 0</div>
-                        <div class="heroes-hp-div">
-                            <div class="heroes-hp-bar-background">
-                                <div id="Charles-hp-text" class="heroes-hp-text">HP: 1000/1000 (100%)</div>
-                                <div id="Charles-hp-bar" class="heroes-hp-bar">
-                                </div>
+                    <div id="heroes-repo">
+                        <div id="Charles-hero-block" class="heroes-block" style="display:none;">
+                            <div class="heroes-background">
+                                <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
                             </div>
-                        </div>
-                        <div class="heroes-exp-div">
-                            <div class="heroes-exp-bar-background">
-                                <div id="Charles-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
-                                <div id="Charles-exp-bar" class="heroes-exp-bar">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="heroes-skills-repo">
-                            <div class="hero-skills">
-                                <img id="VitalContract-normal" class="skill-button" skillIndex=19 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="Heal-normal" class="skill-button" skillIndex=20 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="Heal-cooldown" class='cooldown' style="top: 5%;left: 36.5%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="Heal-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=20>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="Heal-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right skills-icon' skillIndex=20>
-                                            </div>
-                                        </div>
-                                        <div id="Heal-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=20 style="top:80%; cursor:default;"></div>
-                                    </div>
-                                </div>
-                                <div class="skills-cell">
-                                    <img id="Purify-normal" class="skill-button" skillIndex=21 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="Purify-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="Purify-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=21>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="Purify-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=21>
-                                            </div>
-                                        </div>
-                                        <div id="Purify-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=21 style="top:80%; cursor:default;"></div>
-                                    </div>
-                                </div>
-                                <img id="RecoveryMantra-normal" class="skill-button" skillIndex=22 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="ArcaneShelter-normal" class="skill-button" skillIndex=23 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="ArcaneShelter-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="ArcaneShelter-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=23>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="ArcaneShelter-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=23>
-                                            </div>
-                                        </div>
-                                        <div id="ArcaneShelter-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=23 style="top:80%; cursor:default;"></div>
+                            <div class="heroes-name">Charles</div>
+                            <div id="Charles-lvl" class="heroes-lvl">LVL: 1</div>
+                            <div class="heroes-dps">DPS: 0</div>
+                            <div class="heroes-hp-div">
+                                <div class="heroes-hp-bar-background">
+                                    <div id="Charles-hp-text" class="heroes-hp-text">HP: 1000/1000 (100%)</div>
+                                    <div id="Charles-hp-bar" class="heroes-hp-bar">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div id="Yusie-hero-block" class="heroes-block" style="display:none;">
-                        <div class="heroes-background">
-                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
-                        </div>
-                        <div class="heroes-name">Yusie</div>
-                        <div id="Yusie-lvl" class="heroes-lvl">LVL: 1</div>
-                        <div class="heroes-dps">DPS: 50</div>
-                        <div class="heroes-hp-div">
-                            <div class="heroes-hp-bar-background">
-                                <div id="Yusie-hp-text" class="heroes-hp-text">HP: 1500/1500 (100%)</div>
-                                <div id="Yusie-hp-bar" class="heroes-hp-bar"></div>
-                            </div>
-                        </div>
-                        <div class="heroes-exp-div">
-                            <div class="heroes-exp-bar-background">
-                                <div id="Yusie-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
-                                <div id="Yusie-exp-bar" class="heroes-exp-bar"></div>
-                            </div>
-                        </div>
-                        <div class="heroes-skills-repo">
-                            <div class="hero-skills">
-                                <img id="Bang-normal" class="skill-button" skillIndex=24 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="DoubleTap-normal" class="skill-button" skillIndex=25 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="StrafingRun-normal" class="skill-button" skillIndex=26 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="StrafingRun-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="StrafingRun-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=26>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="StrafingRun-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=26>
-                                            </div>
-                                        </div>
-                                        <div id="StrafingRun-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=26 style="top:80%; cursor:default;"></div>
+                            <div class="heroes-exp-div">
+                                <div class="heroes-exp-bar-background">
+                                    <div id="Charles-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                                    <div id="Charles-exp-bar" class="heroes-exp-bar">
                                     </div>
                                 </div>
-                                <img id="Marksman-normal" class="skill-button" skillIndex=27 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="Matrix-normal" class="skill-button" skillIndex=28 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
                             </div>
-                        </div>
-                    </div>
-                    <div id="Halley-hero-block" class="heroes-block" style="display:none;">
-                        <div class="heroes-background">
-                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
-                        </div>
-                        <div class="heroes-name">Halley</div>
-                        <div id="Halley-lvl" class="heroes-lvl">LVL: 1</div>
-                        <div class="heroes-dps">DPS: 30</div>
-                        <div class="heroes-hp-div">
-                            <div class="heroes-hp-bar-background">
-                                <div id="Halley-hp-text" class="heroes-hp-text">HP: 3500/3500 (100%)</div>
-                                <div id="Halley-hp-bar" class="heroes-hp-bar"></div>
-                            </div>
-                        </div>
-                        <div class="heroes-exp-div">
-                            <div class="heroes-exp-bar-background">
-                                <div id="Halley-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
-                                <div id="Halley-exp-bar" class="heroes-exp-bar"></div>
-                            </div>
-                        </div>
-                        <div class="heroes-skills-repo">
-                            <div class="hero-skills">
-                                <img id="FocusShot-normal" class="skill-button" skillIndex=29 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="TriangleFire-normal" class="skill-button" skillIndex=30 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="AuraOfAccuracy-normal" class="skill-button" skillIndex=31 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <img id="SuperiorPerception-normal" class="skill-button" skillIndex=32 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="Hurricane-normal" class="skill-button" skillIndex=33 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="Hurricane-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
+                            <div class="heroes-skills-repo">
+                                <div class="hero-skills">
+                                    <img id="VitalContract-normal" class="skill-button" skillIndex=19 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="Heal-normal" class="skill-button" skillIndex=20 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="Heal-cooldown" class='cooldown' style="top: 5%;left: 36.5%;width: 28%; height: 41%;">
 
-                                        <div class='cooldown-half'>
-                                            <div id="Hurricane-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=33>
+                                            <div class='cooldown-half'>
+                                                <div id="Heal-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=20>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="Hurricane-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=33>
+                                            <div class='cooldown-half'>
+                                                <div id="Heal-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right skills-icon' skillIndex=20>
+                                                </div>
                                             </div>
+                                            <div id="Heal-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=20 style="top:80%; cursor:default;"></div>
                                         </div>
-                                        <div id="Hurricane-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=33 style="top:80%; cursor:default;"></div>
+                                    </div>
+                                    <div class="skills-cell">
+                                        <img id="Purify-normal" class="skill-button" skillIndex=21 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="Purify-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="Purify-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=21>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="Purify-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=21>
+                                                </div>
+                                            </div>
+                                            <div id="Purify-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=21 style="top:80%; cursor:default;"></div>
+                                        </div>
+                                    </div>
+                                    <img id="RecoveryMantra-normal" class="skill-button" skillIndex=22 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="ArcaneShelter-normal" class="skill-button" skillIndex=23 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="ArcaneShelter-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="ArcaneShelter-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=23>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="ArcaneShelter-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=23>
+                                                </div>
+                                            </div>
+                                            <div id="ArcaneShelter-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=23 style="top:80%; cursor:default;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="Helmuth-hero-block" class="heroes-block" style="display:none;">
-                        <div class="heroes-background">
-                            <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
-                        </div>
-                        <div class="heroes-name">Helmuth</div>
-                        <div id="Helmuth-lvl" class="heroes-lvl">LVL: 1</div>
-                        <div class="heroes-dps">DPS: 10</div>
-                        <div class="heroes-hp-div">
-                            <div class="heroes-hp-bar-background">
-                                <div id="Helmuth-hp-text" class="heroes-hp-text">HP: 10000/10000 (100%)</div>
-                                <div id="Helmuth-hp-bar" class="heroes-hp-bar"></div>
+                        <div id="Yusie-hero-block" class="heroes-block" style="display:none;">
+                            <div class="heroes-background">
+                                <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                            </div>
+                            <div class="heroes-name">Yusie</div>
+                            <div id="Yusie-lvl" class="heroes-lvl">LVL: 1</div>
+                            <div class="heroes-dps">DPS: 50</div>
+                            <div class="heroes-hp-div">
+                                <div class="heroes-hp-bar-background">
+                                    <div id="Yusie-hp-text" class="heroes-hp-text">HP: 1500/1500 (100%)</div>
+                                    <div id="Yusie-hp-bar" class="heroes-hp-bar"></div>
+                                </div>
+                            </div>
+                            <div class="heroes-exp-div">
+                                <div class="heroes-exp-bar-background">
+                                    <div id="Yusie-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                                    <div id="Yusie-exp-bar" class="heroes-exp-bar"></div>
+                                </div>
+                            </div>
+                            <div class="heroes-skills-repo">
+                                <div class="hero-skills">
+                                    <img id="Bang-normal" class="skill-button" skillIndex=24 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <img id="DoubleTap-normal" class="skill-button" skillIndex=25 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="StrafingRun-normal" class="skill-button" skillIndex=26 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="StrafingRun-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="StrafingRun-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=26>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="StrafingRun-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=26>
+                                                </div>
+                                            </div>
+                                            <div id="StrafingRun-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=26 style="top:80%; cursor:default;"></div>
+                                        </div>
+                                    </div>
+                                    <img id="Marksman-normal" class="skill-button" skillIndex=27 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <img id="Matrix-normal" class="skill-button" skillIndex=28 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                </div>
                             </div>
                         </div>
-                        <div class="heroes-exp-div">
-                            <div class="heroes-exp-bar-background">
-                                <div id="Helmuth-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
-                                <div id="Helmuth-exp-bar" class="heroes-exp-bar"></div>
+                        <div id="Halley-hero-block" class="heroes-block" style="display:none;">
+                            <div class="heroes-background">
+                                <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                            </div>
+                            <div class="heroes-name">Halley</div>
+                            <div id="Halley-lvl" class="heroes-lvl">LVL: 1</div>
+                            <div class="heroes-dps">DPS: 30</div>
+                            <div class="heroes-hp-div">
+                                <div class="heroes-hp-bar-background">
+                                    <div id="Halley-hp-text" class="heroes-hp-text">HP: 3500/3500 (100%)</div>
+                                    <div id="Halley-hp-bar" class="heroes-hp-bar"></div>
+                                </div>
+                            </div>
+                            <div class="heroes-exp-div">
+                                <div class="heroes-exp-bar-background">
+                                    <div id="Halley-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                                    <div id="Halley-exp-bar" class="heroes-exp-bar"></div>
+                                </div>
+                            </div>
+                            <div class="heroes-skills-repo">
+                                <div class="hero-skills">
+                                    <img id="FocusShot-normal" class="skill-button" skillIndex=29 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <img id="TriangleFire-normal" class="skill-button" skillIndex=30 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <img id="AuraOfAccuracy-normal" class="skill-button" skillIndex=31 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <img id="SuperiorPerception-normal" class="skill-button" skillIndex=32 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="Hurricane-normal" class="skill-button" skillIndex=33 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="Hurricane-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="Hurricane-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=33>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="Hurricane-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=33>
+                                                </div>
+                                            </div>
+                                            <div id="Hurricane-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=33 style="top:80%; cursor:default;"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="heroes-skills-repo">
-                            <div class="hero-skills">
-                                <img id="Lance-normal" class="skill-button" skillIndex=34 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="CrossCut-normal" class="skill-button" skillIndex=35 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="CrossCut-cooldown" class='cooldown' style="top: 5%;left: 36.5%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="CrossCut-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=35>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="CrossCut-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=35>
-                                            </div>
-                                        </div>
-                                        <div id="CrossCut-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=35 style="top:80%; cursor:default;"></div>
-                                    </div>
+                        <div id="Helmuth-hero-block" class="heroes-block" style="display:none;">
+                            <div class="heroes-background">
+                                <img style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);max-height: 90%;max-width: 90%;" src="style/images/Sample/Player/Heroes/Hero.png" />
+                            </div>
+                            <div class="heroes-name">Helmuth</div>
+                            <div id="Helmuth-lvl" class="heroes-lvl">LVL: 1</div>
+                            <div class="heroes-dps">DPS: 10</div>
+                            <div class="heroes-hp-div">
+                                <div class="heroes-hp-bar-background">
+                                    <div id="Helmuth-hp-text" class="heroes-hp-text">HP: 10000/10000 (100%)</div>
+                                    <div id="Helmuth-hp-bar" class="heroes-hp-bar"></div>
                                 </div>
-                                <div class="skills-cell">
-                                    <img id="LanceDance-normal" class="skill-button" skillIndex=36 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="LanceDance-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
-
-                                        <div class='cooldown-half'>
-                                            <div id="LanceDance-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=36>
-                                            </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="LanceDance-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=36>
-                                            </div>
-                                        </div>
-                                        <div id="LanceDance-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=36 style="top:80%; cursor:default;"></div>
-                                    </div>
+                            </div>
+                            <div class="heroes-exp-div">
+                                <div class="heroes-exp-bar-background">
+                                    <div id="Helmuth-exp-text" class="heroes-exp-text">EXP: 0/15 (0%)</div>
+                                    <div id="Helmuth-exp-bar" class="heroes-exp-bar"></div>
                                 </div>
-                                <img id="IndraBlessing-normal" class="skill-button" skillIndex=37 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                <div class="skills-cell">
-                                    <img id="UnlimitedLanceWork-normal" class="skill-button" skillIndex=38 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
-                                    <div id="UnlimitedLanceWork-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
+                            </div>
+                            <div class="heroes-skills-repo">
+                                <div class="hero-skills">
+                                    <img id="Lance-normal" class="skill-button" skillIndex=34 style="display:none;position: absolute;left: 3%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="CrossCut-normal" class="skill-button" skillIndex=35 style="display:none;position: absolute;left: 36.5%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="CrossCut-cooldown" class='cooldown' style="top: 5%;left: 36.5%;width: 28%; height: 41%;">
 
-                                        <div class='cooldown-half'>
-                                            <div id="UnlimitedLanceWork-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=38>
+                                            <div class='cooldown-half'>
+                                                <div id="CrossCut-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=35>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class='cooldown-half'>
-                                            <div id="UnlimitedLanceWork-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=38>
+                                            <div class='cooldown-half'>
+                                                <div id="CrossCut-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=35>
+                                                </div>
                                             </div>
+                                            <div id="CrossCut-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=35 style="top:80%; cursor:default;"></div>
                                         </div>
-                                        <div id="UnlimitedLanceWork-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=38 style="top:80%; cursor:default;"></div>
+                                    </div>
+                                    <div class="skills-cell">
+                                        <img id="LanceDance-normal" class="skill-button" skillIndex=36 style="display:none;position: absolute;left: 70%;top: 5%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="LanceDance-cooldown" class='cooldown' style="top: 5%;left: 70%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="LanceDance-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=36>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="LanceDance-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=36>
+                                                </div>
+                                            </div>
+                                            <div id="LanceDance-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=36 style="top:80%; cursor:default;"></div>
+                                        </div>
+                                    </div>
+                                    <img id="IndraBlessing-normal" class="skill-button" skillIndex=37 style="display:none;position: absolute;left: 19.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                    <div class="skills-cell">
+                                        <img id="UnlimitedLanceWork-normal" class="skill-button" skillIndex=38 style="display:none;position: absolute;left: 52.7%;top: 55%;max-height: 41%;max-width: 41%;" src="style/images/Sample/Player/Skills/Skill.png" />
+                                        <div id="UnlimitedLanceWork-cooldown" class='cooldown' style="top: 55%;left: 52.7%;width: 28%; height: 41%;">
+
+                                            <div class='cooldown-half'>
+                                                <div id="UnlimitedLanceWork-cooldown-half-rotator-left" class='cooldown-half-rotator cooldown-half-rotator-left  skills-icon' skillIndex=38>
+                                                </div>
+                                            </div>
+                                            <div class='cooldown-half'>
+                                                <div id="UnlimitedLanceWork-cooldown-half-rotator-right" class='cooldown-half-rotator cooldown-half-rotator-right  skills-icon' skillIndex=38>
+                                                </div>
+                                            </div>
+                                            <div id="UnlimitedLanceWork-cooldown-counter" class="cooldown-counter skills-icon" skillIndex=38 style="top:80%; cursor:default;"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div id="map-div-slider" slideTab="stats-selected"></div>
 
             </div>
             <div id="map-div-title">

@@ -17,10 +17,10 @@
     background-size: 100% 100%; }
     #refiner-trainer-div #refiner-trainer-title #refiner-trainer-title-text {
       position: absolute;
-      font-size: 300%;
+      font-size: 6vh;
       font-weight: 800;
-      height: 300%;
-      line-height: 120%;
+      height: 7.12vh;
+      line-height: 7.12vh;
       left: 50%;
       transform: translateX(-50%);
       top: 10%; }
@@ -66,7 +66,7 @@
             text-align:center;
             transform: translateY(-50%);
             width: 100%;
-            font-size: 150%;
+            font-size: 3vh;
             font-weight: 800;
         }
     
@@ -119,14 +119,14 @@
                 position: relative;
                 margin-top: 8%;
                 text-align: center;
-                font-size: 110%;
+                font-size: 1.8vh;
                 font-weight: 800;
                 width: 100%;
             }
             #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-count {
                 position: relative;
                 text-align: center;
-                font-size: 130%;
+                font-size: 2vh;
                 width: 100%;
             }
             #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator {
@@ -150,7 +150,7 @@
               width: 55%;
               text-align: center;
               display: inline-block;
-              font-size: 110%;
+              font-size: 1.5vw;
               font-weight: 800;
               text-overflow: ellipsis; }
             #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-right-arrow {
@@ -220,14 +220,14 @@
                 position: relative;
                 margin-top: 8%;
                 text-align: center;
-                font-size: 110%;
+                font-size: 2vh;
                 font-weight: 800;
                 width: 100%;
             }
             #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-count {
                 position: relative;
                 text-align: center;
-                font-size: 130%;
+                font-size: 2vh;
                 width: 100%;
             }
           #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator {
@@ -250,7 +250,7 @@
               width: 55%;
               text-align: center;
               display: inline-block;
-              font-size: 110%;
+              font-size: 1.5vh;
               font-weight: 800;
               text-overflow: ellipsis; }
             #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator .refiner-calibrator-right-arrow {

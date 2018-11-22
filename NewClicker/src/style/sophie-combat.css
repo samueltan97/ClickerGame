@@ -1,11 +1,11 @@
 .text-left {
-    padding-left: 19.5%;
+    padding-left: 12vh;
     float: left;
 }
 
 .text-right {
     float: right;
-    padding-right: 19.5%;
+    padding-right: 12vh;
 }
 
 body {
@@ -14,6 +14,17 @@ body {
     border: 0;
     overflow: hidden;
     background-color: black;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display:none;
+    width: 0px; /* remove scrollbar space */
+    background: transparent; /* optional: just make scrollbar invisible */
 }
 
     body #clickable-screen {
@@ -91,10 +102,10 @@ body {
                             text-align: center;
                             /* padding-left: 2vh; */
                             /* padding-right: 2vh; */
-                            font-size: 160%;
+                            font-size: 4vh;
                             color: white;
                             height: 95.3%;
-                            line-height: 155.3%;
+                            line-height: 6.33vh;
                             -webkit-text-stroke: 1px #000000;
                         }
 
@@ -134,10 +145,10 @@ body {
                         }
 
                         body #backdrop #fight-div #combat-area #monster-hp-div #monster-hp-bar-background #monster-hp-text {
-                            font-size: 80%;
+                            font-size: 2vh;
                             z-index: 1;
                             height: 50%;
-                            line-height: 95%;
+                            line-height: 2vh;
                             position: absolute;
                             top: 50%;
                             width: 100%;
@@ -149,11 +160,11 @@ body {
                 body #backdrop #fight-div #combat-area #combat-text-div {
                     position: relative;
                     width: 100%;
-                    font-size: 110%;
+                    font-size: 3vh;
                     font-weight: 800;
                     color: white;
                     height: 5%;
-                    line-height: 150%;
+                    line-height: 4.75vh;
                     left: 50%;
                     transform: translateX(-50%);
                     /* top: 0.5%; */
@@ -206,11 +217,11 @@ body {
                 body #backdrop #fight-div #combat-area #fighter-description-text {
                     position: relative;
                     width: 100%;
-                    font-size: 130%;
+                    font-size: 3vh;
                     font-weight: 800;
                     color: white;
                     height: 4%;
-                    line-height: 140%;
+                    line-height: 4.75vh;
                     left: 50%;
                     text-align: center;
                     /* top: 63.5%; */
@@ -249,15 +260,15 @@ body {
                         body #backdrop #fight-div #combat-area #fighter-hp-div #fighter-hp-bar-background #fighter-hp-text {
                             z-index: 1;
                             text-align: center;
-                            font-size: 80%;
+                            font-size: 2vh;
                             z-index: 1;
                             height: 50%;
-                            line-height: 100%;
+                            line-height: 2vh;
                             position: absolute;
-                            left: 50%;
+                            text-align:center;
                             top: 50%;
-                            width: max-content;
-                            transform: translate(-50%, -50%);
+                            width: 100%;
+                            transform: translateY(-50%);
                             font-weight: 800;
                             color: #000000;
                         }
@@ -289,7 +300,7 @@ body {
             height: 80%;
             top: 15%;
             left: 5%;
-            font-size: 170%;
+            font-size: 3vh;
         }
 
     body #sophie-speech {
@@ -344,19 +355,17 @@ body {
         body #pop-out-message-repo .pop-out-message-block #pop-out-message-title {
             position: relative;
             margin-top: 1%;
-            width: max-content;
-            left: 50%;
+            width: 100%;
             padding-top: 8%;
-            transform: translateX(-50%);
-            font-size: 150%;
+            text-align:center;
+            font-size: 3vh;
             font-weight: 800;
         }
         body #pop-out-message-repo .pop-out-message-block #pop-out-message-text {
             position: relative;
             margin-top: 1%;
-            width: max-content;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
             padding-top: 4%;
-            font-size: 120%;
+            font-size: 2.2vh;
         }

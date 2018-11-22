@@ -353,19 +353,24 @@ $(document).ready(function () {
             $("#map-title-text").text("Map");
         }
         $("#" + id).fadeIn(0);
+        if (typeof id === 'string') {
+            let repoId: string = id.split("-")[0] + "-repo";
+            $("#map-div-slider").attr("slideTab", repoId);
+        }
+        $("#map-div-slider").fadeIn(0);
     });
     $("#toggle-button").click(function () {
         if (!($("#toggle-button").hasClass("toggle-button-switched"))) {
             $("#toggle-button").addClass("toggle-button-switched").animate({ "right": "2%" }, 300);
             $("#resource-unit-title-text").text("Units");
-            $("#unit-area").fadeIn(200);
-            $("#resource-area").fadeOut(200);
+            $("#unit-area,#unit-repo-slider").fadeIn(200);
+            $("#resource-area,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider").fadeOut(200);
         }
         else {
             $("#toggle-button").removeClass("toggle-button-switched").animate({ "right": "7%" }, 300);
             $("#resource-unit-title-text").text("Resources");
-            $("#unit-area").fadeOut(200);
-            $("#resource-area").fadeIn(200);
+            $("#unit-area,#unit-repo-slider").fadeOut(200);
+            $("#resource-area,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider").fadeIn(200);
         }
     });
 
@@ -376,14 +381,15 @@ $(document).ready(function () {
     Pickpocket.Unlock(); //Trial skill and to gain resources faster to see effects
     Steal.Unlock(); //Trial skill and to gain resources faster to see effects
     //CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
-    //Heal.Unlock(); //Trial skill and to gain resources faster to see effects
+    Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
-    //HeroUnlock(1);
-    //HeroUnlock(2);
+    clickerIndex.CurrentStorage.PureUnitArr[0].Unlocked();
+    HeroUnlock(1);
+    HeroUnlock(2);
     //HeroUnlock(3);
-    //for (var i = 0; i < SkillArray.length; i++) {
-    //    UnlockSkill(i);
-    //}
+    for (var i = 0; i < SkillArray.length; i++) {
+        UnlockSkill(i);
+    }
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
@@ -542,6 +548,35 @@ $(document).ready(function () {
 
     HeroUnlock(0);
     //clickerIndex.CurrentStorage.HeroArr[0].Birth();
-    clickerIndex.SetUpClicker();
+    //clickerIndex.SetUpClicker();
 
+});
+
+var curYPos = 0;
+var curXPos = 0;
+var curDown = false;
+
+$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousemove", function (event) {
+    let tab = $(this).attr("slideTab");
+    //alert("Detected");
+    if (curDown === true && typeof tab === "string") {
+        //alert("Detected1");
+        let scrollTop: any = $("#" + tab).scrollTop();
+        let scrollLeft: any = $("#" + tab).scrollLeft();
+        if (typeof scrollTop === "number" || typeof scrollLeft === "number") {
+            //alert("Detected2");
+            $("#" + tab).scrollTop(scrollTop + (curYPos - (event.pageY*1.1)));
+            $("#" + tab).scrollLeft(scrollLeft + (curXPos - (event.pageX*1.1)));
+        }
+    }
+});
+
+$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousedown", function (e) {
+    curDown = true; 
+curYPos = e.pageY; curXPos = e.pageX; e.preventDefault(); });
+$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseup", function (e) {
+    curDown = false; 
+});
+$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseout", function (e) {
+    curDown = false;
 });
