@@ -1,4 +1,4 @@
-﻿import { setInterval } from "timers";
+﻿import { setInterval, setTimeout } from "timers";
 
 export function adjustBarAnimation(type: string, name:string, currentValue:number, maxValue:number, otherStats?:string): void {
     $("#" + type + "-bar").stop(true);
@@ -23,22 +23,22 @@ export function adjustValueToExponential(value: number):string {
 }
 
 export function popOutMessage(type: string, title: string, message: string, time: number): void {
-    let id: string = (type + title + (Math.random()*10).toString()).replace(/\s+/g, '');
-    $("#pop-out-message-repo").append("<div " + "id='" + id + "' class='pop-out-message-block' type='" + type + "'><div id = 'pop-out-message-title'>" + title + "</div><div id ='pop-out-message-text'>" + message + "</div></div>");
-    if ($("#pop-out-message-repo").children.length < 3) {
+    let id: string = ((Math.random()*10).toString()).slice(3, 7).replace(/\s+/g, '');
+    $("#pop-out-message-repo").append("<div " + "id='" + id + "' class='pop-out-message-block' style='display:none;' type='" + type + "'><div id = 'pop-out-message-title'>" + title + "</div><div id ='pop-out-message-text'>" + message + "</div></div>");
+    if ($("#pop-out-message-repo").children().length < 3) {
         $("#" + id).fadeIn(100);
     } else {
         $("#" + id).delay(700).fadeIn(100);
     }
-    setInterval(function () {
-        if ($("#pop-out-message-repo").children.length < 3) {
-            setInterval(function () {
+    setTimeout(function () {
+        if ($("#pop-out-message-repo").children().length < 3) {
+            setTimeout(function () {
                 $("#" + id).fadeOut(100);
-                $("#pop-out-message-repo").remove("#" + id);
+                $("#" + id).remove();
             }, time / 2);
         } else {
             $("#" + id).fadeOut(100);
-            $("#pop-out-message-repo").remove("#" + id);
+            $("#" + id).remove();
         }
     }, time / 2);
 }

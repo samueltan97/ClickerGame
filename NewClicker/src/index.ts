@@ -330,12 +330,14 @@ $(document).ready(function () {
         $("#refiner-trainer-area").children().fadeOut(0);
         if (id === "refiner-repo") {
             $("#refiner-trainer-title-text").text("Refiners");
+            $("#refiner-trainer-slider").attr("slideIndex", id)
         }
-        else {
+        else if (id === "trainer-repo") {
             $("#refiner-trainer-title-text").text("Trainers");
+            $("#refiner-trainer-slider").attr("slideIndex", id)
         }
         $("#" + id).fadeIn(0);
-        $("#manpower-count-div, #manpower-count-separator, #Recruit-button").fadeIn(0);
+        $("#manpower-count-div, #manpower-count-separator, #Recruit-button, #refiner-trainer-slider").fadeIn(0);
     });
     $(".map-stats-skills-heroes-button").click(function () {
         var id = $(this).attr('name');
@@ -385,11 +387,11 @@ $(document).ready(function () {
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
     clickerIndex.CurrentStorage.PureUnitArr[0].Unlocked();
     HeroUnlock(1);
-    HeroUnlock(2);
+    //HeroUnlock(2);
     //HeroUnlock(3);
-    for (var i = 0; i < SkillArray.length; i++) {
-        UnlockSkill(i);
-    }
+    //for (var i = 0; i < SkillArray.length; i++) {
+    //    UnlockSkill(i);
+    //}
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
@@ -547,8 +549,8 @@ $(document).ready(function () {
     //}, 150);
 
     HeroUnlock(0);
-    //clickerIndex.CurrentStorage.HeroArr[0].Birth();
-    //clickerIndex.SetUpClicker();
+    clickerIndex.CurrentStorage.HeroArr[0].Birth();
+    clickerIndex.SetUpClicker();
 
 });
 
@@ -556,7 +558,20 @@ var curYPos = 0;
 var curXPos = 0;
 var curDown = false;
 
-$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousemove", function (event) {
+$("#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousemove", function (event) {
+    let tab = $(this).attr("slideTab");
+    //alert("Detected");
+    if (curDown === true && typeof tab === "string") {
+        //alert("Detected1");
+        let scrollLeft: any = $("#" + tab).scrollLeft();
+        if (typeof scrollLeft === "number") {
+            //alert("Detected2");
+            $("#" + tab).scrollLeft(scrollLeft + (curXPos - (event.pageX)));
+        }
+    }
+});
+
+$("#map-div-slider, #refiner-trainer-slider").on("mousemove", function (event) {
     let tab = $(this).attr("slideTab");
     //alert("Detected");
     if (curDown === true && typeof tab === "string") {
@@ -565,18 +580,18 @@ $("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider
         let scrollLeft: any = $("#" + tab).scrollLeft();
         if (typeof scrollTop === "number" || typeof scrollLeft === "number") {
             //alert("Detected2");
-            $("#" + tab).scrollTop(scrollTop + (curYPos - (event.pageY*1.1)));
-            $("#" + tab).scrollLeft(scrollLeft + (curXPos - (event.pageX*1.1)));
+            $("#" + tab).scrollTop(scrollTop + (curYPos - (event.pageY)));
+            $("#" + tab).scrollLeft(scrollLeft + (curXPos - (event.pageX)));
         }
     }
 });
 
-$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousedown", function (e) {
+$("#refiner-trainer-slider, #map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mousedown", function (e) {
     curDown = true; 
 curYPos = e.pageY; curXPos = e.pageX; e.preventDefault(); });
-$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseup", function (e) {
+$("#refiner-trainer-slider, #map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseup", function (e) {
     curDown = false; 
 });
-$("#map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseout", function (e) {
+$("#refiner-trainer-slider, #map-div-slider,#primary-resource-repo-slider,#secondary-resource-repo-slider,#tertiary-resource-repo-slider,#unit-repo-slider").on("mouseout", function (e) {
     curDown = false;
 });

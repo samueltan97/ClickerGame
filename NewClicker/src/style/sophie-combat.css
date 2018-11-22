@@ -345,7 +345,6 @@ body {
         overflow:hidden;
     }
     body #pop-out-message-repo .pop-out-message-block {
-        display: none;
         background-image: url("../style/images/Layout/Converters/Cubicle.png");
         background-size: 100% 100%;
         width: 100%;

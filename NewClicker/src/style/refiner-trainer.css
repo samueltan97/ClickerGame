@@ -141,6 +141,7 @@
               margin-left: 7%;
               height: 100%;
               width: 11%;
+              z-index:3;
               display: inline-block;
               background-size: 100% 100%;
               background-image: url(images/Layout/Converters/arrow_left.png); }
@@ -159,6 +160,7 @@
               left: 60%;
               height: 100%;
               width: 11%;
+              z-index:3;
               display: inline-block;
               background-size: 100% 100%;
               background-image: url(images/Layout/Converters/arrow_right.png); }
@@ -168,6 +170,7 @@
                 left: 25%;
                 height: 30%;
                 width: 22.15%;
+                z-index:3;
                 margin-right: 30%;
                 background-size: 100% 100%;
                 background-image: url(images/Layout/Converters/ButtonFrame.png);
@@ -177,6 +180,7 @@
             display: inline-block;
             height: 30%;
             width: 22.15%;
+            z-index:3;
             background-size: 100% 100%;
             background-image: url(images/Layout/Converters/ButtonFrame.png); }
     #refiner-trainer-div #refiner-trainer-area #refiner-repo {
@@ -186,6 +190,13 @@
         left: 2.5%;
         top: 35%;
         overflow-y: scroll;
+    }
+      #refiner-trainer-div #refiner-trainer-area #refiner-trainer-slider {
+        position: absolute;
+        width: 95%;
+        height: 65%;
+        left: 2.5%;
+        top: 35%;
     }
       #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block {
         position: relative;
@@ -241,6 +252,7 @@
               margin-left: 7%;
               height: 100%;
               width: 11%;
+              z-index:3;
               display: inline-block;
               background-size: 100% 100%;
               background-image: url(images/Layout/Converters/arrow_left.png); }
@@ -258,6 +270,7 @@
               margin-right: 7%;
               left: 60%;
               height: 100%;
+              z-index:3;
               width: 11%;
               display: inline-block;
               background-size: 100% 100%;
@@ -267,6 +280,7 @@
                 position: relative;
                 left: 25%;
                 height: 30%;
+                z-index:3;
                 width: 22.15%;
                 margin-right: 30%;
                 background-size: 100% 100%;
@@ -276,6 +290,7 @@
             position: relative;
             display: inline-block;
             height: 30%;
+            z-index:3;
             width: 22.15%;
             background-size: 100% 100%;
             background-image: url(images/Layout/Converters/ButtonFrame.png); }

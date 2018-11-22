@@ -324,7 +324,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Unlocked(): void {
-        alert("You have unlocked " + this.name);
+        popOutMessage("unit", "Unit Unlocked", "You have unlocked " + this.name, 1500);
         $("#" + this.name + "-cell").fadeIn(100);
         this.isUnlocked = true;
         this.Update();
@@ -433,7 +433,7 @@ export class Resource implements ICountable {
     }
 
     Unlocked(): void {
-        alert("You have unlocked " + this.name);
+        popOutMessage("resource", "Resource Unlocked", "You have unlocked " + this.name, 1500);
         this.isUnlocked = true;
         this.Update();
     }
@@ -512,7 +512,7 @@ export class RefinerTrainer implements ICountable, IConverter {
     }
 
     Unlocked(): void {
-        alert("You have unlocked " + this.name);
+        popOutMessage("producer", "Producer Unlocked", "You have unlocked " + this.name, 1500);
         this.isUnlocked = true;
         $("#" + this.name.replace(/\s+/g, '') + "-block").fadeIn(100);
         this.Update();
@@ -728,8 +728,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
 
     Unlocked(): void {
         if (!this.isUnlocked) {
-            popOutMessage("hero", "Hero Unlocked", "You have unlocked Charles!", 1000);
-            alert("You have unlocked " + this.name.split(" ")[0]);
+            popOutMessage("hero", "Hero Unlocked", "You have unlocked " + this.name.split(" ")[0], 1500);
        
         $("#" + this.name.split(" ")[0] + "-hero-block").fadeIn(100);
         this.isUnlocked = true;

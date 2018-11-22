@@ -58,7 +58,7 @@ export class PlayerActiveSkill implements IActiveSkill {
             let counterDifference: number = this.currentCounter + 2 - this.startCounter;
             let timeDifference: number = counterDifference * 100 / 2;
             if (timeDifference % 100 == 0) {
-                let newTime: string = (Math.min(0, (this.cooldown - timeDifference)) / 100).toString();
+                let newTime: string = (Math.max(0, (this.cooldown - timeDifference)) / 100).toString();
                 let partOneFinalTime: string = (newTime.length > 1) ? newTime.Take(newTime.length - 1) : "0";
                 let partTwoFinalTime: string = newTime.TakeLast(1);
                 $("#" + this.name.replace(/\s+/g, '') + "-cooldown-counter").text(partOneFinalTime + "." + partTwoFinalTime);
