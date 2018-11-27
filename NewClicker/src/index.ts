@@ -387,8 +387,6 @@ $(document).ready(function () {
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
     clickerIndex.CurrentStorage.PureUnitArr[0].Unlocked();
     HeroUnlock(1);
-    HeroUnlock(2);
-    HeroUnlock(3);
     for (var i = 0; i < SkillArray.length; i++) {
         UnlockSkill(i);
     }

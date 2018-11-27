@@ -300,9 +300,9 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
         this.currentHP = Math.min(this.currentHP, this.MaxHP);
-        if (!this.isDead) {
-        adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
-        $("#fighter-hp-text").text("HP: " + adjustValueToExponential(this.currentHP) + "/" + adjustValueToExponential(this.MaxHP));
+        if (!this.isDead && this.Count > 0) {
+            adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
+            $("#fighter-hp-text").text("HP: " + adjustValueToExponential(this.currentHP) + "/" + adjustValueToExponential(this.MaxHP));
         }
     }
 
@@ -375,7 +375,7 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
     }
 
     Regenerate(counter: number) {
-        if ((counter + 5) % 20 == 0 && !this.isDead && this.CurrentHP < this.MaxHP) {
+        if ((counter + 5) % 20 == 0 && !this.isDead && this.CurrentHP < this.MaxHP && this.Count > 0) {
             this.currentHP += Math.floor(0.05 * this.MaxHP);
             this.currentHP = Math.min(this.MaxHP, this.currentHP);
         adjustBarAnimation("fighter-hp", this.name, this.CurrentHP, this.MaxHP);
