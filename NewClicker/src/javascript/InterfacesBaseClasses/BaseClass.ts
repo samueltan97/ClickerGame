@@ -300,8 +300,10 @@ export class Unit implements IMortality, ICombative, IFeedbackLoop, IExistence, 
         let difference: number = this.maxHP - this.CurrentHP;
         this.currentHP = this.MaxHP - difference;
         this.currentHP = Math.min(this.currentHP, this.MaxHP);
+        if (!this.isDead) {
         adjustBarAnimation("fighter-hp", this.name, this.currentHP, this.MaxHP);
         $("#fighter-hp-text").text("HP: " + adjustValueToExponential(this.currentHP) + "/" + adjustValueToExponential(this.MaxHP));
+        }
     }
 
     ReceiveDamage(damage: number): void {

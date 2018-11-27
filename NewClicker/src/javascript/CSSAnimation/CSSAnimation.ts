@@ -51,14 +51,18 @@ export function addSidePanelBlock(type: string, message: string, elaboration: st
             + currentDate.getFullYear() + " @ "
             + currentDate.getHours() + ":"
             + currentDate.getMinutes();
+        popOutMessage(type, "Achievement Unlocked", message, 1500);
         $("#" + type + "-repo").append("<div class='side-panel-block'>" + message + " " + elaboration + " Time: " + displayDateTime + "</div>");
     } else if (type == "news") {
+        popOutMessage(type, "Latest News", message, 1500);
         $("#" + type + "-repo").append("<div class='side-panel-block'>" + message + " " + elaboration + "</div>");
     } else if (type == "carofle") {
+        popOutMessage(type, "Carofle Unlocked", message, 1500);
         $("#" + type + "-repo").append("<div class='side-panel-block'>" + message + " " + elaboration + "</div>");
     }
 }
 
-export function addInventoryItem(imageURI: string) {
-    $("#inventory-cubicle-repo").append("<img src='"+ imageURI + "' style='max-height:100%; width:100%;'/>");
+export function addInventoryItem(imageURI: string, message:string) {
+    popOutMessage("item", "Item Acquired", message, 1500);
+    $("#inventory-cubicle-repo").append("<div class='inventory-cubicle-item'><img src='"+ imageURI + "' style='max-height:100%; width:100%;'/></div>");
 }
