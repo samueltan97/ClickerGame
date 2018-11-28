@@ -4,6 +4,7 @@ import { EnemyValueUpdateEvent, UnitValueUpdateEvent, HeroValueUpdateEvent, Play
 import { SkillFactory } from "./Skills/PlayerSkill";
 import { ISkillFactory } from "./Skills/ISkillFactory";
 import { IMortality } from "./IMortality";
+import { slotMachineEffect, adjustValueToExponential } from "../CSSAnimation/CSSAnimation";
 
 export class ClickerIndex {
 
@@ -244,6 +245,7 @@ export class ClickerIndex {
            if (index.counter % 20 == 0) {
                index.enemyTimerCounter -= 1;
                index.UpdateEnemyTimeCounter();
+               if ($("#player-avg-dps").text() != "Average DPS: " + adjustValueToExponential(Math.floor(index.CurrentDPS))) slotMachineEffect("player-avg-dps", adjustValueToExponential(Math.floor(index.CurrentDPS)), "Average DPS: ");
            }
            if (index.enemyTimerCounter == 0) {
                index.ChangeZone(false);

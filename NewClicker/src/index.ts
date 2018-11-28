@@ -13,7 +13,7 @@ import { IActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IActiveS
 import { ClickerIndex } from "./javascript/InterfacesBaseClasses/ClickerIndex";
 import { PlayerActiveSkill } from "./javascript/InterfacesBaseClasses/Skills/PlayerSkillsBaseClass";
 import { IPassiveSkill } from "./javascript/InterfacesBaseClasses/Skills/IPassiveSkill";
-import { adjustValueToExponential } from "./javascript/CSSAnimation/CSSAnimation";
+import { adjustValueToExponential, slotMachineEffect } from "./javascript/CSSAnimation/CSSAnimation";
 let core: Core = new Kore();
 core.ExtendPrimitives();
 
@@ -386,10 +386,10 @@ $(document).ready(function () {
     Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
     clickerIndex.CurrentStorage.RefinerTrainerArr[24].Unlocked();
-    //HeroUnlock(1);
-    //for (var i = 0; i < SkillArray.length; i++) {
-    //    UnlockSkill(i);
-    //}
+    HeroUnlock(1);
+    for (var i = 0; i < SkillArray.length; i++) {
+        UnlockSkill(i);
+    }
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
@@ -500,13 +500,10 @@ $(document).ready(function () {
         HeroArr[0].Unlocked();
     });
 
-    setInterval(function () {
-        $("#player-avg-dps").text("Average DPS: " + Math.floor(clickerIndex.CurrentDPS));
-    }, 50);
-
     //setInterval(function () {
     //    $("#monster-div").click();
     //}, 150);
+
 
     HeroUnlock(0);
     clickerIndex.CurrentStorage.HeroArr[0].Birth();

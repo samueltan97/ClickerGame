@@ -7,7 +7,7 @@ import $ from "jquery";
 import { IRepository } from "./IRepository";
 import { IStageLevel } from "./IStageLevel";
 import { IPlayer } from "./IPlayer";
-import { adjustBarAnimation, adjustValueToExponential, popOutMessage } from "../CSSAnimation/CSSAnimation";
+import { adjustBarAnimation, adjustValueToExponential, popOutMessage, slotMachineEffect } from "../CSSAnimation/CSSAnimation";
 import { isDate, isBoolean } from "util";
 import { ICountable } from "./ICountable";
 import { IConverter } from "./IConverter";
@@ -443,9 +443,11 @@ export class Resource implements ICountable {
     Increase = (count?: number): void => {
         let id: string = this.name.replace(/\s+/g, '');
         if (!this.isUnlocked && count != 0) { this.Unlocked() };
-        this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count +count);
-        $("#" + id + "-quantity").text("X " + this.Count);
-        if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + adjustValueToExponential(this.Count)); }
+        this.count = (typeof count === "undefined") ? (this.count + 1) : (this.count + count);
+        slotMachineEffect(id + "-quantity", adjustValueToExponential(this.Count), "X ");
+        if (this.id == 0) {
+            slotMachineEffect("manpower-count-repo", adjustValueToExponential(this.Count), "Manpower: ");
+        }
         this.producedHistory += (typeof count === "undefined") ? (1) : (count);
         this.Update();
         //CSS animation for appearance on screen, including refreshing of health and name bars;
@@ -456,8 +458,10 @@ export class Resource implements ICountable {
         if (this.Count >= count) {
             this.count -= count;
             this.count = Math.max(this.count, 0);
-            $("#" + id + "-quantity").text("X " + this.Count);
-            if (this.id == 0) { $("#manpower-count-repo").text("Manpower: " + adjustValueToExponential(this.Count)); }
+            slotMachineEffect(id + "-quantity", adjustValueToExponential(this.Count), "X ");
+            if (this.id == 0) {
+                slotMachineEffect("manpower-count-repo", adjustValueToExponential(this.Count), "Manpower: ");
+            }
                 this.Update();
         }
         //CSS animation for removing unit off the screen and reducing count of unit

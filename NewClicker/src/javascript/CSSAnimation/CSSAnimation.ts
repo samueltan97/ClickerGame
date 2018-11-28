@@ -1,4 +1,4 @@
-﻿import { setInterval, setTimeout } from "timers";
+﻿import { setInterval, setTimeout, clearInterval } from "timers";
 
 export function adjustBarAnimation(type: string, name:string, currentValue:number, maxValue:number, otherStats?:string): void {
     $("#" + type + "-bar").stop(true);
@@ -65,4 +65,26 @@ export function addSidePanelBlock(type: string, message: string, elaboration: st
 export function addInventoryItem(imageURI: string, message:string) {
     popOutMessage("item", "Item Acquired", message, 1500);
     $("#inventory-cubicle-repo").append("<div class='inventory-cubicle-item'><img src='"+ imageURI + "' style='max-height:100%; width:100%;'/></div>");
+}
+
+export function slotMachineEffect(id:string, finalValue:string, preString?:string):void {
+    $("#" + id).css('opacity', '.3');
+    let spin = function():number {
+        return Math.floor(Math.random() * 10);
+    };
+    let counter: number = 0;
+    let startSpin = setInterval( ()=> {
+        $("#" + id).text(function x() {
+            let result:string = (typeof preString === "string") ? preString : '';
+            for (let i = 0; i < finalValue.length; i++) {
+                result += spin().toString();
+            }
+            return result;
+        });
+        counter++;
+        if (counter === 7) {
+            clearInterval(startSpin);
+            $("#" + id).text(preString + finalValue).css('opacity', '1');
+        }
+    }, 100);
 }
