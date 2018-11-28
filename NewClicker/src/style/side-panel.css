@@ -4,17 +4,20 @@
   top: 0%;
   width: 5%;
   height: 100%; }
-  #side-panel-div .side-panel-button {
-    position: relative;
-    width: 100%;
-    height: 20%;
-    background-size: 100% 100%; }
+    #side-panel-div .side-panel-button {
+        position: relative;
+        width: 100%;
+        height: 20%;
+        z-index: 51;
+        background-size: 100% 100%;
+    }
   #side-panel-div .side-panel-info-card {
     width: 600%;
     top: 2%;
     height: 100%;
     position: absolute;
     right: -600%;
+    z-index: 50;
     background-image: url(images/Layout/SidePanel/Background.png);
     background-size: 100% 100%; }
     #side-panel-div .side-panel-info-card .side-panel-info-card-title {
@@ -44,6 +47,7 @@
       background-size: 100% 100%; }
 
 #side-panel-black-overlay {
+   position:absolute;
   height: 100vh;
   width: 178vh;
   background-color: black;

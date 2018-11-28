@@ -133,8 +133,8 @@
                 position: relative;
                 width: 100%;
                 height: 20%;
-                z-index:3;
                 left: 52%;
+                z-index:3;
                 transform: translateX(-50%);
             }
             #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-left-arrow {
@@ -146,15 +146,16 @@
               display: inline-block;
               background-size: 100% 100%;
               background-image: url(images/Layout/Converters/arrow_left.png); }
-            #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-text {
-              position: absolute;
-              height: 100%;
-              width: 55%;
-              text-align: center;
-              display: inline-block;
-              font-size: 1.5vw;
-              font-weight: 800;
-              text-overflow: ellipsis; }
+                #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-text {
+                    position: absolute;
+                    height: 100%;
+                    width: 55%;
+                    text-align: center;
+                    display: inline-block;
+                    font-size: 1.5vh;
+                    font-weight: 800;
+                    text-overflow: ellipsis;
+            }
             #refiner-trainer-div #refiner-trainer-area #trainer-repo .trainer-block .trainer-desc .trainer-calibrator .trainer-calibrator-right-arrow {
               position: relative;
               margin-right: 7%;
@@ -247,6 +248,7 @@
             width: 100%;
             height: 20%;
             left: 52%;
+            z-index:3;
             transform: translateX(-50%); }
             #refiner-trainer-div #refiner-trainer-area #refiner-repo .refiner-block .refiner-desc .refiner-calibrator .refiner-calibrator-left-arrow {
               position: relative;

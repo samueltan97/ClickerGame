@@ -8,6 +8,7 @@ import { IMortality } from "./IMortality";
 export class ClickerIndex {
 
     private counter: number;
+    private enemyTimerCounter: number;
     private skillFactory: ISkillFactory;
     private skillUnlockFunction: Function[];
     private skillUpdateTimeFunction: Function[];
@@ -15,6 +16,7 @@ export class ClickerIndex {
     constructor(skillfactory: ISkillFactory) {
         this.skillFactory = skillfactory;
         this.counter = 1;
+        this.enemyTimerCounter = 30;
         this.skillUnlockFunction = [];
         this.skillUpdateTimeFunction = [];
     }
@@ -76,6 +78,8 @@ export class ClickerIndex {
             this.CurrentStorage.CurrentPlayer.GainExperience(this.CurrentStorage.CurrentEnemyArr[0].CurrentExp);
             this.CurrentStorage.CurrentStage.IncreaseEnemyDefeated();
             this.RemoveByDeath("Enemy");
+            this.enemyTimerCounter = 30;
+            this.UpdateEnemyTimeCounter();
         }
         let currentUnit = this.CurrentStorage.CurrentUnit;
         let currentUnitName: string = currentUnit.name.split(" ")[0];
@@ -127,6 +131,11 @@ export class ClickerIndex {
         } else if (!isIncrease && currentZone > 1) {
             this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
             this.CurrentStorage.CurrentStage.DecreaseZone();
+            this.CurrentStorage.CurrentEnemyArr.splice(0, this.CurrentStorage.CurrentEnemyArr.length);
+            this.PopulateEnemyArr(this.CurrentStorage.CurrentStage.CurrentStage - 1);
+            this.CurrentStorage.CurrentEnemyArr[0].Birth();
+        } else if (!isIncrease && currentZone == 1) {
+            this.CurrentStorage.CurrentEnemyArr[0].Fadeout();
             this.CurrentStorage.CurrentEnemyArr.splice(0, this.CurrentStorage.CurrentEnemyArr.length);
             this.PopulateEnemyArr(this.CurrentStorage.CurrentStage.CurrentStage - 1);
             this.CurrentStorage.CurrentEnemyArr[0].Birth();
@@ -211,6 +220,13 @@ export class ClickerIndex {
         this.CurrentStorage.CopyStageFiveEnemyArr.forEach(x => x.isDead = false);
     }
 
+    UpdateEnemyTimeCounter = () => {
+        let currentTimeString: string = this.enemyTimerCounter.toString();
+        let currentTime: string = (currentTimeString.length > 1) ? currentTimeString : "0".concat(currentTimeString);
+        let timeFormat: string = $("#combat-text-right").text().split("0:")[0];
+        $("#combat-text-right").text(timeFormat + "0:" + currentTime);
+    }
+
    SetUpClicker=(): void=> {
         //Add listener
        this.CurrentStorage.UnitArr.forEach(x => x.forEach(y => y.AddValueUpdateEvent(this.DeathLogic)));
@@ -224,7 +240,17 @@ export class ClickerIndex {
            this.CurrentStorage.CopyEnemyArr.forEach(x => x.forEach(x => this.CurrentStorage.StageArray[i].AddValueUpdateEvent(x.UpdateSource)));
         }
         let index = this;
-        setInterval(function () {
+       setInterval(function () {
+           if (index.counter % 20 == 0) {
+               index.enemyTimerCounter -= 1;
+               index.UpdateEnemyTimeCounter();
+           }
+           if (index.enemyTimerCounter == 0) {
+               index.ChangeZone(false);
+               index.ChangeZone(true);
+               index.enemyTimerCounter = 30;
+               index.UpdateEnemyTimeCounter();
+           }
             index.counter+=1;
             index.skillUpdateTimeFunction.forEach(x => x(index.counter));
             index.CurrentStorage.MainGameCycle(index.counter)

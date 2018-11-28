@@ -124,9 +124,9 @@ var RefinerTrainerArr: RefinerTrainer[] = [Recruiter, Woodworker, Ironsmith, Cou
 
 //Heroes
 var Charles: Hero = new Hero(0, "abc", "Charles the Mage Doctor", 1000, 0, 50, 1, [19, 20, 21, 22, 23], thePlayer);
-var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 50, 50, 1, [24, 25, 26, 27, 28], thePlayer);
-var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 30, 50, 1, [29, 30, 31, 32, 33], thePlayer);
-var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 10, 50, 1, [34, 35, 36, 37, 38], thePlayer);
+var Yusie: Hero = new Hero(1, "abc", "Yusie the Gunslinger", 1500, 20, 50, 1, [24, 25, 26, 27, 28], thePlayer);
+var Halley: Hero = new Hero(2, "abc", "Halley the Ranger", 3500, 12, 50, 1, [29, 30, 31, 32, 33], thePlayer);
+var Helmuth: Hero = new Hero(3, "abc", "Helmuth the Lancer", 10000, 4, 50, 1, [34, 35, 36, 37, 38], thePlayer);
 var HeroArr: Hero[] = [Charles, Yusie, Halley, Helmuth];
 
 function HeroUnlock(index: number): void {
@@ -330,11 +330,11 @@ $(document).ready(function () {
         $("#refiner-trainer-area").children().fadeOut(0);
         if (id === "refiner-repo") {
             $("#refiner-trainer-title-text").text("Refiners");
-            $("#refiner-trainer-slider").attr("slideIndex", id)
+            $("#refiner-trainer-slider").attr("slideTab", id)
         }
         else if (id === "trainer-repo") {
             $("#refiner-trainer-title-text").text("Trainers");
-            $("#refiner-trainer-slider").attr("slideIndex", id)
+            $("#refiner-trainer-slider").attr("slideTab", id)
         }
         $("#" + id).fadeIn(0);
         $("#manpower-count-div, #manpower-count-separator, #Recruit-button, #refiner-trainer-slider").fadeIn(0);
@@ -385,11 +385,11 @@ $(document).ready(function () {
     //CoinAffinity.Unlock(); //Trial skill and to gain resources faster to see effects
     Heal.Unlock(); //Trial skill and to gain resources faster to see effects
     clickerIndex.CurrentStorage.CurrentEnemyArr[0].Birth();
-    clickerIndex.CurrentStorage.PureUnitArr[0].Unlocked();
-    HeroUnlock(1);
-    for (var i = 0; i < SkillArray.length; i++) {
-        UnlockSkill(i);
-    }
+    clickerIndex.CurrentStorage.RefinerTrainerArr[24].Unlocked();
+    //HeroUnlock(1);
+    //for (var i = 0; i < SkillArray.length; i++) {
+    //    UnlockSkill(i);
+    //}
 
     $("#monster-div").click(function () {
         $("#" + clickerIndex.CurrentStorage.CurrentEnemyArr[0].name.replace(/\s+/g, '') + "-hurt").stop(true).fadeOut();
@@ -434,8 +434,8 @@ $(document).ready(function () {
         //For Cursed Contract, use an event listener        
     });
 
-    $(".refiner-calibrator-left-arrow").click(function () {
-        let id = $(this).attr("refinerCalibration");
+    $(".refiner-calibrator-left-arrow,.trainer-calibrator-left-arrow").click(function () {
+        let id = ($(this).hasClass("refiner-calibrator-left-arrow")) ? $(this).attr("refinerCalibration") : $(this).attr("trainerCalibration");
         let readQuantity: string = $("#" + id).text();
         let checkExponential: string = readQuantity[4];
         if (checkExponential == "e") {
@@ -449,13 +449,13 @@ $(document).ready(function () {
             $("#" + id).text(newQuantity);
         } else {
             let currentQuantity: number = parseInt(readQuantity.split(" ")[1]);
-            let newQuantity: string = "X " + adjustValueToExponential(currentQuantity / 10);
+            let newQuantity: string = "X " + adjustValueToExponential(Math.max(10, currentQuantity) / 10);
             $("#" + id).text(newQuantity);
         }
     });
 
-    $(".refiner-calibrator-right-arrow").click(function () {
-        let id = $(this).attr("refinerCalibration");
+    $(".refiner-calibrator-right-arrow,.trainer-calibrator-right-arrow").click(function () {
+        let id = ($(this).hasClass("refiner-calibrator-right-arrow")) ? $(this).attr("refinerCalibration") : $(this).attr("trainerCalibration");
         let readQuantity: string = $("#" + id).text();
         let checkExponential: string = readQuantity[4];
         if (checkExponential == "e") {
@@ -474,8 +474,8 @@ $(document).ready(function () {
         }
     });
 
-    $(".refiner-train").click(function () {
-        let id = $(this).attr("refinerCalibration");
+    $(".refiner-train,.trainer-train").click(function () {
+        let id = ($(this).hasClass("refiner-train")) ? $(this).attr("refinerCalibration") : $(this).attr("trainerCalibration");
         let displayNumber: string = $("#" + id).text();
         let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
         if (typeof id === "string" && currentQuantity <= clickerIndex.CurrentStorage.ResourceArr[0].Count) {
@@ -485,46 +485,8 @@ $(document).ready(function () {
         }
     });
 
-    $(".refiner-untrain").click(function () {
-        let id = $(this).attr("refinerCalibration");
-        let displayNumber: string = $("#" + id).text();
-        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
-        let refinerIndex: number = (typeof id === "string")? parseInt(id.split("-")[1]) : 0;
-        if (currentQuantity <= clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Count) {
-            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Decrease(currentQuantity);
-            clickerIndex.CurrentStorage.ResourceArr[0].Increase(currentQuantity);
-        }
-    });
-
-    $(".trainer-calibrator-left-arrow").click(function () {
-        let id = $(this).attr("trainerCalibration");
-        let currentQuantity: string = $("#" + id).text();
-        if (currentQuantity != "X 1") {
-            let newQuantity: string = currentQuantity.RemoveLast();
-            $("#" + id).text(newQuantity);
-        }
-    });
-
-    $(".trainer-calibrator-right-arrow").click(function () {
-        let id = $(this).attr("trainerCalibration");
-        let currentQuantity: string = $("#" + id).text();
-        let newQuantity: string = currentQuantity.concat("0");
-        $("#" + id).text(newQuantity);
-    });
-
-    $(".trainer-train").click(function () {
-        let id = $(this).attr("trainerCalibration");
-        let displayNumber: string = $("#" + id).text();
-        let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
-        if (typeof id === "string" && currentQuantity <= clickerIndex.CurrentStorage.ResourceArr[0].Count) {
-            let refinerIndex: number = parseInt(id.split("-")[1]);
-            clickerIndex.CurrentStorage.RefinerTrainerArr[refinerIndex].Increase(currentQuantity);
-            clickerIndex.CurrentStorage.ResourceArr[0].Decrease(currentQuantity);
-        }
-    });
-
-    $(".trainer-untrain").click(function () {
-        let id = $(this).attr("trainerCalibration");
+    $(".refiner-untrain,.trainer-untrain").click(function () {
+        let id = ($(this).hasClass("refiner-untrain")) ? $(this).attr("refinerCalibration") : $(this).attr("trainerCalibration");
         let displayNumber: string = $("#" + id).text();
         let currentQuantity: number = parseInt(displayNumber.split(" ")[1]);
         let refinerIndex: number = (typeof id === "string")? parseInt(id.split("-")[1]) : 0;

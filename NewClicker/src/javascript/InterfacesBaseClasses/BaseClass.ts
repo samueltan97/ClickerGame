@@ -698,7 +698,7 @@ export class Hero implements IMortality, ICombative, IFeedbackLoop, IRegeneratio
     }
 
     get MaxExperience(): number {
-        return this.baseExperience * this.CurrentLevel; //Temporary formula
+        return this.baseExperience * this.CurrentLevel * this.CurrentLevel; //Temporary formula
     }
 
     get CurrentLevel(): number {
