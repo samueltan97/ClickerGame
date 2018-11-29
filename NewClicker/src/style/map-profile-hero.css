@@ -12,13 +12,14 @@
     overflow:hidden;
   }
     #map-div #map-div-area #map-selected {
-      position: absolute;
-      width: 80%;
-      height: 58%;
-      top: 27%;
-      left: 10%;
-      overflow:hidden;
-      display: none; }
+        position: absolute;
+        width: 80%;
+        height: 58%;
+        top: 20%;
+        left: 8%;
+        overflow: hidden;
+        display: none;
+    }
     #map-div #map-div-area #stats-selected {
       position: absolute;
       width: 75%;
@@ -367,6 +368,7 @@
             position: absolute;
             width: 55%;
             height: 43.58%;
+            z-index:3;
             left: 68%;
             top: 52.5%;
             transform: translateX(-50%);
