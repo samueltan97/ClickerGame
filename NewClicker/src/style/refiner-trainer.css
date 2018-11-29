@@ -79,13 +79,16 @@
         background-size: 100% 100%;
     }
     #refiner-trainer-div #refiner-trainer-area #trainer-repo {
-        display:none;
+        display: none;
         position: absolute;
         width: 95%;
         height: 65%;
         left: 2.5%;
         top: 35%;
         overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 28px;
+        box-sizing: content-box;
     }
     #refiner-trainer-div #refiner-trainer-area #Recruit-button {
         position: absolute;
@@ -192,6 +195,9 @@
         left: 2.5%;
         top: 35%;
         overflow-y: scroll;
+        overflow-x: hidden;
+        padding-right: 28px;
+        box-sizing: content-box;
     }
       #refiner-trainer-div #refiner-trainer-area #refiner-trainer-slider {
         position: absolute;

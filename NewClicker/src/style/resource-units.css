@@ -114,14 +114,18 @@
           width:100%;
           transform: translateY(-50%);
           top: 50%; }
-      #resource-unit-div #resource-unit-area #primary-resource #primary-resource-repo {
-        top: 10%;
-        position: absolute;
-        left: 10%;
-        width: 85%;
-        height: 100%;
-        overflow-x: scroll;
-        white-space: nowrap; }
+        #resource-unit-div #resource-unit-area #primary-resource #primary-resource-repo {
+            top: 10%;
+            position: absolute;
+            left: 10%;
+            width: 85%;
+            height: 100%;
+            overflow-x: scroll;
+            overflow-y:hidden;
+            padding-bottom: 17px;
+            box-sizing: content-box;
+            white-space: nowrap;
+        }
         #resource-unit-div #resource-unit-area #primary-resource #primary-resource-repo .resource-cell {
             display: inline-block;
             max-height: 100%;
@@ -173,6 +177,8 @@
             height: 100%;
             overflow-x: scroll;
             overflow-y: hidden;
+            padding-bottom: 17px;
+            box-sizing: content-box;
             white-space: nowrap;
         }
         #resource-unit-div #resource-unit-area #secondary-resource #secondary-resource-repo-slider {
@@ -213,6 +219,8 @@
             height: 100%;
             overflow-x: scroll;
             overflow-y: hidden;
+            padding-bottom: 17px;
+            box-sizing: content-box;
             white-space: nowrap;
         }
         #resource-unit-div #resource-unit-area #tertiary-resource #tertiary-resource-repo-slider {
